@@ -5,8 +5,8 @@ A Less library for smarter component styling
 
 ## Compiling the Less
 
-1. Run 'lessc src/index.less docs/caveman.css'.
-2. If JS is enabled for randomness, use 'lessc --js src/index.less docs/caveman.css'
+1. Run 'lessc cavepaint.less caveman.css'.
+2. If JS is enabled for randomness, use 'lessc --js cavepaint.less caveman.css'
 
 ## Dev settings
 
