@@ -1,0 +1,35 @@
+.button {
+    .default(border-style);
+    .default(border-radius);
+    .default(box-shadow);
+  
+    display: inline;
+    position: relative;
+    font: inherit;
+    padding: @text-padding;
+    color: .set-tone(@default)[];
+    background: @default;
+    border-color: darken(@default, 16%);
+    border-width: 1px;
+    line-height: @golden-ratio;
+    text-align: center;
+    vertical-align: middle;
+    outline: none;
+    white-space: nowrap;
+    text-decoration: none;
+    touch-action: manipulation;
+    cursor: pointer;
+    transform: scale(1);
+    transition: .08s linear;
+    .no-user-select;
+
+    &:active {
+      transform: scale(.99);
+      box-shadow: none;
+    }
+
+    &.border {
+      &:extend(.border-width);
+      &:extend(.border-style);
+    }
+}

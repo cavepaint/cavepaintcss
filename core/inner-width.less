@@ -1,0 +1,96 @@
+// .inner-*-width classes set a faux-inner-width using padding and calc()
+
+.inner-aside-width {
+
+    .rules() {
+      @half-aside-width: @aside-width/2;
+      @padding: ~"calc(50% - @{half-aside-width})";
+      // position: relative;
+      padding-left: @padding;
+      padding-right: @padding;
+    }
+  
+    .rules();
+  
+    > .right {
+      right: @padding;
+    }
+  
+    > .left {
+      left: @padding;
+    }
+  
+    &.mobile {
+        & { padding-left: initial; padding-right: initial;}
+        .on-mobile({
+            .rules();
+        });
+    }
+  
+    &.tablet {
+        & { padding-left: initial; padding-right: initial;}
+        .on-tablet({
+            .rules();
+        });
+    }
+  
+    &.desktop {
+        & { padding-left: initial; padding-right: initial;}
+        .on-desktop({
+            .rules();
+        });
+    }
+}
+
+.inner-text-width {
+  
+    .rules() {
+      @half-text-width: @text-width/2;
+      @padding: ~"calc(50% - @{half-text-width})";
+      // position: relative;
+      padding-left: @padding;
+      padding-right: @padding;
+    }
+  
+    .rules();
+  
+    > .right {
+      right: @padding;
+    }
+  
+    > .left {
+      left: @padding;
+    }
+  
+    &.tablet {
+        & { padding-left: initial; padding-right: initial;}
+        .on-tablet({
+            .rules();
+        });
+    }
+  
+    &.desktop {
+        & { padding-left: initial; padding-right: initial;}
+        .on-desktop({
+            .rules();
+        });
+    }
+}
+
+.inner-page-width {
+    .on-desktop({ 
+      @half-page-width: @page-width/2;
+      @padding: ~"calc(50% - @{half-page-width})";
+      // position: relative;
+      padding-left: @padding;
+      padding-right: @padding;
+
+      > .right {
+        right: @padding;
+      }
+    
+      > .left {
+        left: @padding;
+      }
+    });
+}

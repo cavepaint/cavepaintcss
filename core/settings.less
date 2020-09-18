@@ -1,0 +1,308 @@
+// dev
+@debug: true;
+@randomness: true; 
+.set-random-color();
+@base-color: @random-color;
+@output-patterns: false;
+@output-color-classes: true;
+@output-text-color-classes: false;
+@output-css-variables: false;
+@output-expanded-colors: false;
+// @base-color: #628a91;
+
+// @base-color: rgb(83, 94, 74);
+
+// @border-image: 10 round url("data:image/svg+xml,@{border-image-base}");
+
+// @border-image-base: "%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%202.646%202.646%22%20height%3D%2210%22%20width%3D%2210%22%3E%3Cpath%20fill%3D%22@{fg}%22%20fill-opacity%3D%22@{fill-opacity}%22%20d%3D%22M0%200h2.646v2.646H0z%22%2F%3E%3C%2Fsvg%3E";
+
+// basics
+// @base-color: #83a9dd;
+@body-background: @background-color;
+@main-background: @white;
+@line-height: 1.8;
+@font-family: @font-family-sans-serif;
+@padding: 1rem;
+@margin: 2rem;
+@gutter: 4rem;
+
+@text-measure: 65;
+@text-width: floor(@text-measure * .6rem);
+@aside-width: floor(@text-width / @golden-ratio);
+@page-width: floor(@text-width * @golden-ratio);
+
+@full-width: 100%;
+
+// patterns
+@body-pattern: anchors-away;
+@well-pattern: texture;
+
+// design variables
+@text-contrast: 3; // 4.5 is level II, 7 is level III per WCAG standards for body text
+@golden-ratio: 1.618;
+@shadow-color: fade(mix(@black, difference(@ambient, white), 67%), 16%);
+@shadow-position: @shadow-positions[top];
+@shadow-blur: sqrt(2)*1px;
+
+@shadow-positions: { 
+    top left: 1px 1px;
+    left top: 1px 1px;
+    top right: -1px 1px;
+    right top: -1px 1px;
+    top center: 0 1px;
+    center top: 0 1px;
+    top: 0 1px;
+    top left: 1px 0;
+    left top: 1px 0;
+    left: 1px 0;
+}
+
+// color mixing settings
+@color-strength: 80% + 15%*(unit(luma(@base-color))/100);
+@ambient-mix: 84%;
+
+// text settings
+@text-padding: @text-padding-top @text-padding-right @text-padding-bottom @text-padding-left;
+@text-padding-top: .18em;
+@text-padding-right: .2em*@golden-ratio;
+@text-padding-bottom: .22em;
+@text-padding-left: @text-padding-right;
+
+
+// font stacks
+@font-family-monospace: 
+    "SFMono-Regular",
+    Consolas,
+    "Liberation Mono",
+    Menlo,
+    Courier,
+    monospace;
+
+@font-family-serif: 
+    Constantia, 
+    "Lucida Bright", 
+    Lucidabright, 
+    "Lucida Serif", 
+    Lucida, 
+    "DejaVu Serif", 
+    "Bitstream Vera Serif", 
+    "Liberation Serif", 
+    Georgia,
+    serif;
+
+@font-family-sans-serif:  
+    "Helvetica Neue",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen-Sans,
+    Ubuntu,
+    Cantarell,
+    sans-serif;
+
+
+
+@yeaahhhh: .button,
+    .grid,
+    .grid-width-two,
+    .grid-width-three,
+    .grid-width-four,
+    .grid-width-five,
+    .grid-width-six,
+    .grid-width-seven,
+    .grid-width-eight,
+    .grid-width-nine,
+    .grid-width-ten,
+    .grid-width-eleven,
+    .grid-width-twelve,
+    .two-column,
+    .three-column,
+    .group,
+    .bar,
+    .card,
+    .light,
+    .dark,
+    .modal,
+    .feature,
+    .overlay,
+    .badge,
+    .ambient,
+    .white,
+    .black,
+    .red,
+    .failure,
+    .orange,
+    .warning,
+    .yellow,
+    .olive,
+    .green,
+    .success,
+    .teal,
+    .cyan,
+    .skyblue,
+    .info,
+    .blue,
+    .indigo,
+    .purple,
+    .violet,
+    .gray,
+    .action,
+    .reaction,
+    .default,
+    .no-padding,
+    .no-padding-top,
+    .no-padding-right,
+    .no-padding-bottom,
+    .no-padding-left,
+    .no-margin,
+    .no-margin-top,
+    .no-margin-right,
+    .no-margin-bottom,
+    .no-margin-left,
+    .no-box-shadow,
+    .no-shadow,
+    .no-shadows,
+    .no-text-shadow,
+    .no-shadow,
+    .no-shadows,
+    .no-border,
+    .no-borders,
+    .no-background,
+    .no-text-indent,
+    .no-text-align,
+    .no-user-select,
+    .background,
+    .background-color,
+    .border,
+    .border-radius,
+    .border-bottom,
+    .border-image,
+    .border-left,
+    .border-right,
+    .border-style,
+    .button.border,
+    .border-top,
+    .border-width,
+    .button.border,
+    .opacity,
+    .max-width,
+    .min-width,
+    .quotes,
+    .align-content,
+    .align-items,
+    .align-self,
+    .flex,
+    .flex-basis,
+    .flex-direction,
+    .flex-flow,
+    .flex-grow,
+    .flex-shrink,
+    .flex-wrap,
+    .justify-content,
+    .font-family,
+    .font-size,
+    .font-weight,
+    .list-style,
+    .list-style-type,
+    .margin,
+    .margin-bottom,
+    .margin-left,
+    .margin-right,
+    .margin-top,
+    .column-gap,
+    .column-rule,
+    .outline,
+    .padding,
+    .padding-bottom,
+    .padding-left,
+    .padding-right,
+    .padding-top,
+    .table-layout,
+    .text-align,
+    .text-align-last,
+    .text-decoration,
+    .text-indent,
+    .text-justify,
+    .text-overflow,
+    .text-shadow,
+    .text-transform,
+    .line-height,
+    .vertical-align,
+    .letter-spacing,
+    .word-spacing,
+    .white-space,
+    .word-break,
+    .word-wrap,
+    .transform,
+    .transition,
+    .display,
+    .position,
+    .top,
+    .right,
+    .bottom,
+    .left,
+    .float,
+    .clear,
+    .z-index,
+    .overflow,
+    .overflow-x,
+    .cursor,
+    .box-shadow,
+    .box-sizing,
+    .gutter,
+    .gutter-top,
+    .gutter-right,
+    .gutter-bottom,
+    .gutter-left,
+    .inner-aside-width,
+    .inner-text-width,
+    .inner-page-width,
+    .aside-width,
+    .text-width,
+    .page-width,
+    .full-width,
+    .inner-gutter,
+    .reset,
+    .big,
+    .small,
+    .huge,
+    .text-padding,
+    .block,
+    .inline,
+    .initial,
+    .table,
+    .flex,
+    .text-outline,
+    .grid-gap,
+    .inline-block,
+    .static,
+    .absolute,
+    .relative,
+    .fixed,
+    .transparent,
+    .float-right,
+    .float-left,
+    .margin-auto,
+    .inset,
+    .viewport-height,
+    .overflow-hidden,
+    .border.dashed,
+    .border.dotted,
+    .fade,
+    .serif,
+    .font-family-serif,
+    .monospace,
+    .font-family-monospace,
+    .sans-serif,
+    .font-family-sans-serif,
+    .placeholder,
+    .texture,
+    .ascii,
+    .text-align-center,
+    .text-align-left,
+    .text-align-right,
+    .text-align-justify,
+    .hidden,
+    .clearfix,
+    .clear;

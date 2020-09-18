@@ -1,0 +1,34 @@
+.two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: @padding;
+
+    &.golden {
+        grid-template-columns: 1fr*@golden-ratio 1fr;
+
+        &.reverse {
+            grid-template-columns: 1fr 1fr*@golden-ratio;
+        }
+    }
+
+    &.mobile {
+        & { display: initial;}
+        .on-mobile({
+            display: grid;
+        });
+    }
+
+    &.tablet {
+        & { display: initial;}
+        .on-tablet({
+            display: grid;
+        });
+    }
+
+    &.desktop {
+        & { display: initial;}
+        .on-desktop({
+            display: grid;
+        });
+    }
+}

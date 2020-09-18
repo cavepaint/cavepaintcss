@@ -1,0 +1,141 @@
+.random-fontfamily();
+@font-family: @font-family-random;
+.random-background();
+
+.random-padding();
+@padding: @padding-random;
+.random-margin();
+@margin: @margin-random;
+.random-textmeasure();
+@text-measure: @text-measure-random;
+.random-fontsize();
+@font-size: @font-size-random;
+.random-borderradius();
+@border-radius: @border-radius-random;
+
+.random-fontfamily() {
+    
+    @potentials:    @font-family-serif,
+                    @font-family-sans-serif,
+                    @font-family-sans-serif,
+                    @font-family-sans-serif,
+                    @font-family-monospace;
+
+    @length: length(@potentials);
+
+    @random: `Math.random()`;
+    @ff: ceil(@length*@random);
+    @font-family-random: extract(@potentials, @ff);
+}
+
+
+.random-background() {
+    
+    @potentials: @action, @action, @reaction, @ambient, @ambient, @white, @white, @black;
+
+    @length: length(@potentials);
+
+    @random: `Math.random()`;
+    @bg: ceil(@length*@random);
+    @background-random: extract(@potentials, @bg);
+}
+
+
+.random-base-color() {
+    @randomColor: `Math.floor(Math.random()*16777215).toString(16)`;
+    @escape: e(@randomColor);
+    @base-color: color('#@{escape}');
+
+    .correct-it() when not (isColor(@base-color)) {
+        .random-base-color();
+    }
+    .correct-it();
+    .correct-it();
+    .correct-it();
+}
+
+.set-random-color() {
+    @randomColor: `Math.floor(Math.random()*16777215).toString(16)`;
+    @escape: e(@randomColor);
+    @random-color: color('#@{escape}');
+}
+
+.random-padding() {
+    @random: `Math.random()`;
+    @plusPadding: floor(@random*1.4rem);
+    @basePadding: 1.6rem;
+    @padding-random: @plusPadding + @basePadding;
+}
+
+.random-margin() {
+    @random: `Math.random()`;
+    @plusMargin: floor(@random*1.25rem);
+    @baseMargin: @padding;
+    @margin-random: @plusMargin + @baseMargin;
+}
+
+.random-textmeasure() {
+    @random: `Math.random()`;
+    @plustextmeasure: floor(@random*20);
+    @basetextmeasure: 45;
+    @text-measure-random: @plustextmeasure + @basetextmeasure;
+}
+
+.random-borderradius() {
+    @random: `Math.random()`;
+    @plusborderradius: floor(@random*16);
+    @baseborderradius: 0px;
+    @border-radius-random: @plusborderradius + @baseborderradius;
+}
+
+.random-fontsize() {
+    @randomfontsize: `Math.random()`;
+    @plusfontsize: floor(@randomfontsize*6);
+    @basefontsize: 16px;
+    @font-size-random: @basefontsize + @plusfontsize;
+}
+
+// .random-shadowcolor() {
+//     @randomshadowfade: `Math.random()`;
+//     @shadow-color-random: fade(difference(white, @ambient), 8% + @randomshadowfade*25);
+// }
+
+.random-shadowposition() {
+    
+    @potentials:    0 1px,
+                    1px 1px,
+                    1px 1px,
+                    1px 1px,
+                    1px 1px,
+                    1px 1px,
+                    1px 0,
+                    2px 2px,
+                    1px 2px,
+                    1px 0,
+                    0 1px,
+                    0 1px;
+
+    @length: length(@potentials);
+
+    @random: `Math.random()`;
+    @ff: ceil(@length*@random);
+    @shadow-position-random: extract(@potentials, @ff);
+}
+
+.random-shadowblur() {
+    @randomshadowblur: `Math.random()`;
+    @shadow-blur-random: floor(@randomshadowblur*8px);
+}
+
+
+// .random-shadowcolor();
+
+.random-shadowposition();
+
+.random-shadowblur();
+
+
+
+// @shadow-color: @shadow-color-random;
+@shadow-position: @shadow-position-random;
+@shadow-blur: @shadow-blur-random;

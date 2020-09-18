@@ -1,0 +1,20 @@
+// sets variable @distance to distance between two colors
+// distance is RGB space units
+
+// RGB space model isn't perfectly cubic, but instead
+// adjusted for human perception
+
+
+.set-distance(@a, @b) {
+    
+    @r-adjust: 2;
+    @g-adjust: 4;
+    @b-adjust: 3;
+  
+    @r-values-a-b: @r-adjust*(red(@b) - red(@a))*(red(@b) - red(@a));
+    @g-values-a-b: @g-adjust*(green(@b) - green(@a))*(green(@b) - green(@a));
+    @b-values-a-b: @b-adjust*(blue(@b) - blue(@a))*(blue(@b) - blue(@a));
+  
+    @distance: round((sqrt(@r-values-a-b + @g-values-a-b + @b-values-a-b)),2);
+  }
+  

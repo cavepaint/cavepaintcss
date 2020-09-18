@@ -1,0 +1,189 @@
+.reset {
+  // all: unset;
+  all: initial;
+}
+
+.big {
+  font-size: 125%;
+}
+
+.small {
+  font-size: 87.5%;
+  line-height: @line-height*.875;
+}
+
+.huge {
+  font-size: 160%;
+}
+
+.text-padding {
+  padding: @text-padding;
+}
+
+.block {
+  display: block;
+}
+
+.inline {
+  display: inline;
+}
+
+.initial {
+  display: initial;
+}
+
+.table {
+  display: table;
+}
+
+.flex {
+  display: flex;
+}
+
+.text-outline {
+  -webkit-text-stroke: @border-width currentColor;
+  -webkit-text-fill-color: transparent;
+  -webkit-font-smoothing: antialiased;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.static {
+  position: static;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.relative {
+  position: relative;
+}
+
+.fixed {
+  position: fixed;
+}
+
+.float-right {
+  float: right;
+}
+
+.float-left {
+  float: left;
+}
+
+.margin-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.inset {
+  box-shadow: inset @box-shadow;
+}
+
+.viewport-height {
+  height: 100vh;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.border.dashed {
+  border-style: dashed;
+}
+
+.border.dotted {
+  border-style: dotted;
+}
+
+.border.thick {
+  border-width: @border-width*2;
+}
+
+.border.thin {
+  border-width: @border-width/2;
+}
+
+.fade {
+  opacity: .8;
+}
+
+.serif, .font-family-serif {
+  font-family: @font-family-serif;
+}
+
+.monospace, .font-family-monospace {
+  font-family: @font-family-monospace;
+}
+
+.sans-serif, .font-family-sans-serif {
+  font-family: @font-family-sans-serif;
+}
+
+.placeholder {
+  &::before { content: " "; white-space: pre;}
+}
+
+// .texture {
+//   @pattern-texture: .set-pattern(texture)[@pattern];
+//   background-image+: @pattern-texture;
+
+//   &.light {
+//     background-image+: @pattern-texture;
+//     .light;
+//   }
+
+//   &.dark {
+//     background-image+: @pattern-texture;
+//     .dark;
+//   }
+// }
+
+.ascii {
+  font-family: @font-family-monospace;
+  padding: @text-padding;
+  padding-left: 1ch;
+  padding-right: 1ch;
+}
+
+.padded {
+  padding: @padding - (@padding / @golden-ratio);
+  
+  .on-tablet({
+    padding: @padding / @golden-ratio;
+  });
+  
+  .on-desktop({
+    padding: @padding;
+  });
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.text-align-left {
+  text-align: left;
+}
+
+.text-align-right {
+  text-align: right;
+}
+
+.text-align-justify {
+  text-align: justify;
+}
+
+.hidden { display: none !important;}
+
+.clearfix, .clear {
+  clear: both;
+  &::after {
+    display: block;
+    clear: both;
+    content: "";
+  }
+}

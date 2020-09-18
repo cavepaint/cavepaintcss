@@ -1,0 +1,18 @@
+// sets variable @contrast-ratio to contrast ratio between two colors
+// it uses the WCAG standards for determining contrast ratio
+
+.set-contrast-ratio(@x, @y) when (luma(@x) > luma(@y)) {
+    @contrast-l1: unit(luma(@x))/100; // luma is expressed as a % which needs to be un-%ed
+    @contrast-l2: unit(luma(@y))/100;
+    @contrast-ratio: round((@contrast-l1 + .05)/(@contrast-l2 + .05), 2);
+}
+
+.set-contrast-ratio(@x, @y) when (luma(@x) < luma(@y)) {
+    @contrast-l1: unit(luma(@y))/100;
+    @contrast-l2: unit(luma(@x))/100;
+    @contrast-ratio: round((@contrast-l1 + .05)/(@contrast-l2 + .05), 2);
+}
+
+.set-contrast-ratio(@x, @y) when (luma(@x) = luma(@y)) {
+    @contrast-ratio: 1;
+}
