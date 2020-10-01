@@ -29,11 +29,7 @@
   // averages a list of colors
   // sets result to @average
 
-  @iterations: length(@colors);
-
-  @average: .find-average(extract(@colors, 1), 1)[];
-
-  .find-average(@color, @index) when (@index <= @iterations) {
+  .find-average(@color, @index) when (@index <= length(@colors)) {
       @this-color: extract(@colors, @index);
       @last-color: @color;
       @weight: 100% * (1/@index);
@@ -45,4 +41,8 @@
   .find-average(@color, @index) when (default()) {
       @average: @color;
   }
+
+  @average: .find-average(extract(@colors, 1), 1)[@average];
+
+  
 }

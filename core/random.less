@@ -1,84 +1,88 @@
-.random-fontfamily();
-@font-family: @font-family-random;
-.random-background();
+// random pattern
 
-.random-padding();
-@padding: @padding-random;
-.random-margin();
-@margin: @margin-random;
-.random-textmeasure();
-@text-measure: @text-measure-random;
-.random-fontsize();
-@font-size: @font-size-random;
-.random-borderradius();
-@border-radius: @border-radius-random;
-
-.random-fontfamily() {
-    
-    @potentials:    @font-family-serif,
-                    @font-family-sans-serif,
-                    @font-family-sans-serif,
-                    @font-family-sans-serif,
-                    @font-family-monospace;
-
-    @length: length(@potentials);
-
-    @random: `Math.random()`;
-    @ff: ceil(@length*@random);
-    @font-family-random: extract(@potentials, @ff);
+.set-random-pattern() {
+    @patterns-all-length: length(@patterns-all);
+    @random-pattern-base: e(`Math.ceil(Math.random() * (@{patterns-all-length}))`);
+    @default-pattern: extract(@patterns-all, @random-pattern-base);
 }
 
+.set-random-texture() {
+    @subtle-patterns-length: length(@subtle-patterns);
+    @random-texture-base: e(`Math.ceil(Math.random() * (@{subtle-patterns-length}))`);
+    @default-texture: extract(@subtle-patterns, @random-texture-base);
+}
+
+// random texture
+
+// @randomColor: `(Math.random()*0xFFFFFF<<0).toString(16)`;
+//   @colorHex: e(@randomColor);
+//   @color: ~"#@{colorHex}";
+
+// @default-texture: .random-texture()[];
+
+// random font-family
+.set-random-font-family() {
+    @font-family-potentials:    @font-family-sans-serif,
+                    @font-family-sans-serif,
+                    @font-family-sans-serif,
+                    @font-family-sans-serif,
+                    @font-family-serif,
+                    @font-family-monospace,
+                    @font-family-monospace;
+
+    @ff-length: length(@font-family-potentials);
+    @random-ff: e(`Math.ceil(Math.random() * (@{ff-length}))`);
+    @font-family: extract(@font-family-potentials, @random-ff);
+}
+
+// random background color
+
+// @background-color: .random-background()[];
+
+
+// .random-texture() {
+//     @texture-num: `Math.random()`;
+//     @texture-num-base: floor(@texture-num*@subtle-patterns-length);
+//     @subtle-patterns-length: length(@subtle-patterns);
+//     @random-texture: extract(@subtle-patterns, @texture-num-base);
+//     @done: e(@random-texture);
+// }
 
 .random-background() {
     
-    @potentials: @action, @action, @reaction, @ambient, @ambient, @white, @white, @black;
+    @potentials: @default, @default, @default, @default;
 
     @length: length(@potentials);
 
-    @random: `Math.random()`;
-    @bg: ceil(@length*@random);
+    @bg-random: `Math.random()`;
+    @bg: ceil(@length*@bg-random);
     @background-random: extract(@potentials, @bg);
 }
 
-
-.random-base-color() {
-    @randomColor: `Math.floor(Math.random()*16777215).toString(16)`;
-    @escape: e(@randomColor);
-    @base-color: color('#@{escape}');
-
-    .correct-it() when not (isColor(@base-color)) {
-        .random-base-color();
-    }
-    .correct-it();
-    .correct-it();
-    .correct-it();
-}
-
 .set-random-color() {
-    @randomColor: `Math.floor(Math.random()*16777215).toString(16)`;
-    @escape: e(@randomColor);
-    @random-color: color('#@{escape}');
+    @random-base: `'#'+(Math.random()*0xFFFFFF<<0).toString(16)`;
+    @random-color: color(@random-base);
 }
 
-.random-padding() {
+.set-random-padding() {
     @random: `Math.random()`;
-    @plusPadding: floor(@random*1.4rem);
-    @basePadding: 1.6rem;
-    @padding-random: @plusPadding + @basePadding;
+    @plusPadding: floor(@random*1.5rem);
+    @basePadding: 1rem;
+    @padding: @plusPadding + @basePadding;
 }
 
-.random-margin() {
+.set-random-margin() {
     @random: `Math.random()`;
-    @plusMargin: floor(@random*1.25rem);
+    @plusMargin: round(@random*1rem, 2);
     @baseMargin: @padding;
-    @margin-random: @plusMargin + @baseMargin;
+    @margin: @plusMargin + @baseMargin;
 }
 
-.random-textmeasure() {
+.set-random-text-measure() {
     @random: `Math.random()`;
-    @plustextmeasure: floor(@random*20);
-    @basetextmeasure: 45;
-    @text-measure-random: @plustextmeasure + @basetextmeasure;
+    @plustextmeasure: floor(@random*25);
+    @basetextmeasure: 55;
+    @text-measure: @plustextmeasure + @basetextmeasure;
 }
 
 .random-borderradius() {
@@ -88,11 +92,11 @@
     @border-radius-random: @plusborderradius + @baseborderradius;
 }
 
-.random-fontsize() {
+.set-random-font-size() {
     @randomfontsize: `Math.random()`;
-    @plusfontsize: floor(@randomfontsize*6);
-    @basefontsize: 16px;
-    @font-size-random: @basefontsize + @plusfontsize;
+    @plusfontsize: ceil(@randomfontsize*10);
+    @basefontsize: 15px;
+    @font-size: @basefontsize + @plusfontsize;
 }
 
 // .random-shadowcolor() {
@@ -124,18 +128,7 @@
 
 .random-shadowblur() {
     @randomshadowblur: `Math.random()`;
-    @shadow-blur-random: floor(@randomshadowblur*8px);
+    @shadow-blur-random: 1 + floor(@randomshadowblur*4px);
 }
 
 
-// .random-shadowcolor();
-
-.random-shadowposition();
-
-.random-shadowblur();
-
-
-
-// @shadow-color: @shadow-color-random;
-@shadow-position: @shadow-position-random;
-@shadow-blur: @shadow-blur-random;

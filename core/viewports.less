@@ -9,6 +9,11 @@
  }
  
  .on-desktop(@rules) {
-    @desktop: @page-width + @gutter;
+    @desktop: @page-width;
     @media screen and (min-width: @desktop) { @rules();}
+ }
+
+ .under-desktop(@rules) {
+   @desktop: @page-width;
+   @media screen and (max-width: ~"calc(@{desktop} - 1px)") { @rules();}
  }

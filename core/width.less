@@ -1,15 +1,35 @@
 // width classes
 
-.aside-width { width: @aside-width; max-width: @aside-width;}
+.golden-width { max-width: ~"calc(62% - @{gutter})";}
+
+.golden-width.reverse { max-width: 38%;}
+
+.aside-width { 
+  max-width: @aside-width;
+
+  .aside-width {
+    &:extend(.full-width);
+  }
+}
 
 .text-width { 
   // max-width: @text-width;
 
+  .text-width {
+    &:extend(.full-width);
+  }
+
   .on-tablet({
-    width: @text-width; 
+    max-width: @text-width; 
   });
 }
 
-.page-width { max-width: @page-width;}
+.page-width { 
+  max-width: @page-width;
 
-.full-width { width: 100%; max-width: @full-width;}
+  .page-width {
+    &:extend(.full-width);
+  }
+}
+
+.full-width { display: block; width: @full-width;}

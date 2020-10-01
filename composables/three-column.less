@@ -1,6 +1,10 @@
 .three-column {
     .three-column();
 
+    > * {
+        margin-bottom: 0;
+    }
+
     &.mobile {
         & { display: initial;}
         .on-mobile({
@@ -11,6 +15,13 @@
     &.tablet {
         & { display: initial;}
         .on-tablet({
+            .three-column;
+        });
+    }
+
+    &.mobile.tablet {
+        & { display: initial;}
+        .under-desktop({
             .three-column;
         });
     }

@@ -1,27 +1,21 @@
 .overlay {
-    width: 100%;
-    max-width: none;
     margin: 0;
     padding: 0;
-    position: absolute;
+    position: relative;
 
     .top, .bottom, .left, .right {
         position: absolute;
     }
 
-    .top { top: 0;}
-    .bottom { bottom: 0;}
-    .left { left: 0;}
-    .right { right: 0;}
+    .top { top: @text-padding-right;}
+    .bottom { bottom: @text-padding-right;}
+    .left { left: @text-padding-right;}
+    .right { right: @text-padding-right;}
 
-    &.stretch { position: absolute; .top; .bottom; .left; .right;}
+    &.stretch { position: absolute; top: 0; left: 0; right: 0;}
 
-    &:last-child {
-        margin-bottom: 0;
-    }
-
-    > * {
-        position: absolute;
-        padding: @padding;
+    * {
+        margin: 0;
+        display: block;
     }
 }

@@ -1,96 +1,93 @@
 // .inner-*-width classes set a faux-inner-width using padding and calc()
+// composability rules are considered for padding and responsive padding
+
+.inner-padding(@buffer) {
+  @buffer-rounded: round(@buffer, 2);
+  @inner-padding: ~"calc(50% - @{buffer-rounded})";
+  padding-left: @inner-padding;
+  padding-right: @inner-padding;
+}
 
 .inner-aside-width {
-
-    .rules() {
-      @half-aside-width: @aside-width/2;
-      @padding: ~"calc(50% - @{half-aside-width})";
-      // position: relative;
-      padding-left: @padding;
-      padding-right: @padding;
-    }
-  
-    .rules();
-  
-    > .right {
-      right: @padding;
-    }
-  
-    > .left {
-      left: @padding;
-    }
-  
-    &.mobile {
-        & { padding-left: initial; padding-right: initial;}
-        .on-mobile({
-            .rules();
-        });
-    }
-  
-    &.tablet {
-        & { padding-left: initial; padding-right: initial;}
-        .on-tablet({
-            .rules();
-        });
-    }
-  
-    &.desktop {
-        & { padding-left: initial; padding-right: initial;}
-        .on-desktop({
-            .rules();
-        });
-    }
+    .inner-padding(@aside-width/2);
+    &.padding { .inner-padding(@aside-width/2 - @padding);}
+    &.responsive.padding { .inner-padding(@aside-width/2 - @mobile-padding);}
 }
 
 .inner-text-width {
-  
-    .rules() {
-      @half-text-width: @text-width/2;
-      @padding: ~"calc(50% - @{half-text-width})";
-      // position: relative;
-      padding-left: @padding;
-      padding-right: @padding;
-    }
-  
-    .rules();
-  
-    > .right {
-      right: @padding;
-    }
-  
-    > .left {
-      left: @padding;
-    }
-  
-    &.tablet {
-        & { padding-left: initial; padding-right: initial;}
-        .on-tablet({
-            .rules();
-        });
-    }
-  
-    &.desktop {
-        & { padding-left: initial; padding-right: initial;}
-        .on-desktop({
-            .rules();
-        });
-    }
+  .inner-padding(@text-width/2);
+  &.padding { .inner-padding(@text-width/2 - @padding);}
+  &.responsive.padding { .inner-padding(@text-width/2 - @mobile-padding);}
 }
 
 .inner-page-width {
-    .on-desktop({ 
-      @half-page-width: @page-width/2;
-      @padding: ~"calc(50% - @{half-page-width})";
-      // position: relative;
+  .inner-padding(@page-width/2);
+  &.padding { .inner-padding(@page-width/2 - @padding);}
+  &.responsive.padding { .inner-padding(@page-width/2 - @mobile-padding);}
+}
+
+.on-mobile({
+  .inner-text-width {
+    padding-left: initial;
+    padding-right: initial;
+
+    &.padding { 
       padding-left: @padding;
       padding-right: @padding;
+    }
+    &.responsive.padding { 
+      padding-left: @mobile-padding;
+      padding-right: @mobile-padding;
+    }
+  }
+});
 
-      > .right {
-        right: @padding;
-      }
-    
-      > .left {
-        left: @padding;
-      }
-    });
-}
+.on-tablet({
+  .inner-aside-width.tablet {
+    &.padding { .inner-padding(@aside-width/2 - @padding);}
+    &.responsive.padding { .inner-padding(@aside-width/2 - @tablet-padding);}
+  }
+
+  .inner-text-width.tablet {
+    &.padding { .inner-padding(@text-width/2 - @padding);}
+    &.responsive.padding { .inner-padding(@text-width/2 - @tablet-padding);}
+  }
+
+  .inner-page-width.tablet {
+    &.padding { .inner-padding(@page-width/2 - @padding);}
+    &.responsive.padding { .inner-padding(@page-width/2 - @tablet-padding);}
+  }
+});
+
+.on-desktop({
+  .inner-aside-width.desktop {
+    &.padding { .inner-padding(@aside-width/2 - @padding);}
+    &.responsive.padding { .inner-padding(@aside-width/2 - @desktop-padding);}
+  }
+
+  .inner-text-width.desktop {
+    &.padding { .inner-padding(@text-width/2 - @padding);}
+    &.responsive.padding { .inner-padding(@text-width/2 - @desktop-padding);}
+  }
+
+  .inner-page-width.desktop {
+    &.padding { .inner-padding(@page-width/2 - @padding);}
+    &.responsive.padding { .inner-padding(@page-width/2 - @desktop-padding);}
+  }
+});
+
+.under-desktop({
+  .inner-page-width {
+    padding-left: initial;
+    padding-right: initial;
+
+    &.padding { 
+      padding-left: @padding;
+      padding-right: @padding;
+    }
+    &.responsive.padding { 
+      padding-left: @mobile-padding;
+      padding-right: @mobile-padding;
+    }
+  }
+});

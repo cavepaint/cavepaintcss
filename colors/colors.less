@@ -1,118 +1,76 @@
 .set-color(@color-name, @base, @luma-modifier: 1/2, @ambient-modifier: 1, @outputs: false) {
 	// @color-name: the name of the color, which will be the class name
 	// @base: the base representative color
-	// @luma-modifier: how much the color is luma-matched to @base-color
-	// @ambient-modifier: [.9 - 1.1] how much the ambient light affects the color
-	
+	// @luma-modifier: [0 - 1] how much the color is luma-matched to @base-color
+	// @ambient-modifier: [.9 - 1.1 works best] how much the ambient light affects the color
+
 	// generate the color
-	@lumafix: .set-lumafix(@base; @strength: @color-strength*@luma-modifier;)[];
-	@base-contrast-ceiling: .set-contrast-ratio(@color, white)[];
+	@color-base: .set-lumafix(@base; @strength: @color-strength*@luma-modifier;)[];
+	@base-contrast-ceiling: .set-contrast-ratio(@color, @white)[];
 
-	// we can use this to slice up the theme [experimental TODO: take out]
-	@distance: .set-distance(orange, @color)[]; // used for singling out colors
-	@distance-threshold: 12000; 
+	// figure out if we're tinting or shading for the base color
+	@white-text: boolean(@base-contrast-ceiling >= 3);
+	@black-text: boolean(@base-contrast-ceiling < 3);
 
-	.l() {
-		@compare: if((@base-contrast-ceiling < 3), black, white);
-		@contrast-ceiling: .set-contrast-ratio(lighten(@color, 16%), white)[];
+	@faux-overlay-white: mix(@color, white, 16%);
+	@faux-overlay-black: mix(@color, black, 16%);
 
-		.output-color() when (@contrast-ceiling < 3)
-						and not (@compare = black) {
-			&.light { 
-				color: black;
-			}
-		}
+	// find ceilings for .light and .dark variants
+	@light-ceiling: .set-contrast-ratio(@faux-overlay-white, @white)[];
+	@dark-ceiling: .set-contrast-ratio(@faux-overlay-black, @white)[];
 
-		.output-color() when (@contrast-ceiling >= 3)
-						and not (@compare = white) {
-			&.dark {
-				color: white;
-			}
-		}
+	// sometimes it needs white text when darkened
+	@white-text-dark: boolean(@dark-ceiling < 3);
 
-		.output-color();
-	}
+	// or black text when lightened
+	@black-text-light: boolean(@light-ceiling >= 3);
 
-	.d() {
-		@compare: if((@base-contrast-ceiling < 3), white, black);
-		@contrast-ceiling: .set-contrast-ratio(darken(@color, 16%), black)[];
+	@color: mix(@color-base, overlay(@ambient, @color-base), @ambient-mix*@ambient-modifier);
 
-		.output-color() when (@contrast-ceiling < 3)
-						and not (@compare = black) {
-			&.light { 
-				color: black;
-			}
-		}
+	
 
-		.output-color() when (@contrast-ceiling >= 3)
-						and not (@compare = white) {
-			&.dark {
-				color: white;
-			}
-		}
-		
-		.output-color();
-	}
-
-	.finalize() when (@output-color-classes = true) 
-	and (@base-contrast-ceiling < 3) 
-	and (@distance < @distance-threshold)
+	// finalize the color
+	.finalize() when (@black-text) 
+	and (@output-color-classes = true) 
 	and (@outputs = true) {
         .@{color-name} { 
-			color: black; 
+			&:extend(.shade);
 			background-color: @color;
-			@border-color: .set-lumafix(@color, @black, 50%)[];
-			border-color: @border-color;
+			border-color: .set-lumafix(@color, @black, 50%)[];
 
-			.l();
-			.d();
+			& when (@white-text-dark) { 
+				&.dark { 
+					&:extend(.tint);
+				}
+			}
 		}
 	}
 
-	.finalize() when (@output-color-classes = true) 
-	and (@base-contrast-ceiling >= 3)
-	and (@distance < @distance-threshold)
-	and (@outputs = true) {
-        .@{color-name} { 
-			color: white; 
+	.finalize() when (@white-text) 
+	and (@output-color-classes = true) 
+	and (@outputs = true) {		
+		.@{color-name} { 
+			&:extend(.tint);
 			background-color: @color;
-			@border-color: .set-lumafix(@color, @black, 50%)[];
-			border-color: @border-color;
+			border-color: .set-lumafix(@color, @black, 50%)[];
 
-			.l();
-			.d();
+			& when (@black-text-light) { 
+				&.light { 
+					&:extend(.shade);
+					// color: @black;
+				}
+			}
 		}
 	}
+
 
 	.finalize();
-
-	@color: mix(@lumafix, overlay(@ambient, @lumafix), @ambient-mix*@ambient-modifier);
 }
 
 // used in building other colors
-// @import "white";
-// @import "black";
+@import "white";
+@import "black";
 @import "ambient";
-@white: mix(white, @base-color, 95%);
-@black: mix(black, @base-color, 90%);
-
-.white {.contrast(color, @white); background-color: @white;}
-.black {.contrast(color, @black); background-color: @black;}
-
-// color wheel colors
-// @import "red";
-// @import "orange";
-// @import "yellow";
-// @import "olive";
-// @import "green";
-// @import "teal";
-// @import "cyan";
-// @import "skyblue";
-// @import "blue";
-// @import "indigo";
-// @import "purple";
-// @import "violet";
-
 @import "core";
 
 // // default colors
@@ -147,108 +105,3 @@
 @import "success";
 @import "failure";
 @import "default";
-
-// expanded colors
-
-& when (@output-expanded-colors = true) {
-	
-	@import "navy";
-	@import "drab";
-	@import "aquamarine";
-	@import "charcoal";
-	@import "crimson";
-	@import "clover";
-	@import "iron";
-	@import "lavender";
-	@import "salmon";
-	@import "khaki";
-	@import "gold";
-	@import "silver";
-	@import "bronze";
-	@import "cobalt";
-	@import "copper";
-	@import "coral";
-	@import "peach";
-	@import "turquoise";
-	@import "midnight";
-	@import "ultramarine";
-	@import "army";
-	@import "scarlet";
-	@import "pink";
-	@import "cornhusk";
-	@import "seagreen";
-	@import "plum";
-	@import "seafoam";
-	@import "mist";
-	@import "snow";
-	@import "twilight";
-	@import "platinum";
-	@import "bacon";
-	@import "steel";
-	@import "slate";
-	@import "mint";
-	@import "wheat";
-	@import "graphite";
-	@import "goldenrod";
-	@import "periwinkle";
-	@import "sand";
-	@import "chocolate";
-	@import "vanilla";
-	@import "strawberry";
-	@import "olivedrab";
-	@import "evergreen";
-	@import "sunset";
-	@import "moonlight";
-	@import "sapphire";
-	@import "emerald";
-	@import "garnet";
-	@import "amethyst";
-	@import "lily";
-	@import "nightshade";
-	@import "raspberry";
-	@import "blueberry";
-	@import "blackberry";
-	@import "cranberry";
-	@import "barnred";
-	@import "saddlebrown";
-	@import "bubbles";
-	@import "steam";
-	@import "manganese";
-	@import "sandstone";
-	@import "granite";
-	@import "clay";
-	@import "cinnamon";
-	@import "pumpkin";
-	@import "eggplant";
-	@import "butter";
-	@import "sunflower";
-	@import "rust";
-	@import "leafgreen";
-	@import "rose";
-	@import "lilac";
-	@import "raven";
-	@import "flamingo";
-	@import "robin";
-	@import "bluejay";
-	@import "mango";
-	@import "coconut";
-	@import "kiwi";
-	@import "banana";
-}
-
-
-// denim
-// canvas
-// velvet
-// wool
-
-// reno 
-// chicago
-// fargo
-// minnesota
-
-
-// moss
-// parsley
-// honey
-// periwinkle

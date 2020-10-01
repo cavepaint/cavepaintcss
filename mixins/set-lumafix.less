@@ -1,56 +1,9 @@
 // sets @lumafix to a version of @color with luma similar to @compare
+// currently using HSL
 
 .set-lumafix(@color; @compare: @base-color; @strength: 100%;) {
-
-    @iterations: 50;
-
-    @tint: white;
-    @shade: black;
-
-    @tone: if(luma(@compare) > luma(@color), white, black);
-
-    @ceiling: .set-contrast-ratio(@color, @tint)[];
-    @floor: .set-contrast-ratio(@color, @shade)[];
-
-    @target: if((luma(@tone) > 50%), @ceiling, @floor);
-    @target-luma: luma(@compare);
-    @target-range: range(1, @target, .1);
-
-    .refine(@refine-color, @count) when (@count < @iterations)
-        and (luma(@refine-color) < @target-luma)
-        and (@tone = white) {
-
-        @refined: mix(@color, @tone, @count*2%);
-        .refine(@refined, @count + 1);
-    }
-
-    .refine(@refine-color, @count) when 
-            (luma(@refine-color) >= @target-luma)
-            and (@tone = white) {
-
-        @refined-final: @refine-color;
-    }
-
-    .refine(@refine-color, @count) when (@count < @iterations)
-        and (luma(@refine-color) > @target-luma)
-        and (@tone = black) {
-
-        @refined: mix(@color, @tone, @count*2%);
-        .refine(@refined, @count + 1);
-    }
-
-    .refine(@refine-color, @count) when 
-            (luma(@refine-color) <= @target-luma)
-            and (@tone = black) {
-
-        @refined-final: @refine-color;
-    }
-
-    .refine(@refine-color, @count) when 
-            (@count >= @iterations) {
-        @refined-final: @refine-color;
-    }
-
-    @premix: .refine(@color, 1)[@refined-final];
-    @lumafix: mix(@premix, @color, @strength);
+    @h: hue(@color);
+    @s: (saturation(@color)*1.5 + saturation(@compare)*.5)/2;
+    @l: (luma(@compare) + lightness(@compare))/2;
+    @lumafix: mix(hsl(@h, @s, @l), @color, @strength);
 }

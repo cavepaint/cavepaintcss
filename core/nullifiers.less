@@ -1,14 +1,29 @@
-.no-directional(@property, @value: 0) {
-    @{property}: @value;
+// margin/padding rules need !important to override responsive.padding rules
+.no-padding-top { padding-top: 0 !important;}
+.no-padding-right { padding-right: 0 !important;}
+.no-padding-bottom { padding-bottom: 0 !important;}
+.no-padding-left { padding-left: 0 !important;}
 
-    &-top { @{property}-top: @value;}
-    &-right { @{property}-right: @value;}
-    &-bottom { @{property}-bottom: @value;}
-    &-left { @{property}-left: @value;}
+.no-margin-top { margin-top: 0 !important;}
+.no-margin-right { margin-right: 0 !important;}
+.no-margin-bottom { margin-bottom: 0 !important;}
+.no-margin-left { margin-left: 0 !important;}
+
+.no-padding { padding: 0;}
+.no-margin, .no-gutter { margin: 0;}
+
+.no-side-margin, .no-side-margins {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
 }
 
-.no-padding { .no-directional(padding);}
-.no-margin { .no-directional(margin);}
+.no-margins {
+    margin: 0 !important;
+
+    * {
+        margin: 0 !important;
+    }
+}
 
 .no-box-shadow { box-shadow: unset;}
 .no-text-shadow { text-shadow: unset;}
@@ -16,12 +31,12 @@
 .no-shadow {
     &:extend(.no-box-shadow);
     &:extend(.no-text-shadow);
+}
 
-    &s {
+.no-shadows {
+    &:extend(.no-shadow);
+    * {
         &:extend(.no-shadow);
-        * {
-            &:extend(.no-shadow);
-        }
     }
 }
 
@@ -51,4 +66,18 @@
     -khtml-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
+}
+
+.no-pointer-events {
+    pointer-events: none;
+}
+
+.no-list-style {
+    list-style-type: none;
+    margin-left: 0;
+}
+
+.no-grid-gap, .no-column-gap {
+    grid-gap: 0;
+    column-gap: 0;
 }
