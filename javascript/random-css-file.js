@@ -8,7 +8,7 @@
         var stored_css = sessionStorage.getItem('randomCSS');
         var sheet = document.createElement('link');
         sheet.rel  = 'stylesheet';
-        sheet.href = '/css/cavepaint_' + stored_css + '.css';
+        sheet.href = 'css/cavepaint_' + stored_css + '.css';
         if (document.getElementById('download_it')) {
             var download_button = document.getElementById('download_it');
             download_button.href = sheet.href;
@@ -25,7 +25,7 @@ function newCSS() {
 
     var sheet = document.createElement('link');
     sheet.rel  = 'stylesheet';
-    sheet.href = '/css/cavepaint_' + random_css_filenumber + '.css';
+    sheet.href = 'css/cavepaint_' + random_css_filenumber + '.css';
     if (document.getElementById('download_it')) {
         var download_button = document.getElementById('download_it');
         download_button.href = sheet.href;
