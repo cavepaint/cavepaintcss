@@ -1,9 +1,0 @@
-// sets @lumafix to a version of @color with luma similar to @compare
-// currently using HSL
-
-.set-lumafix(@color; @compare: @base-color; @strength: 100%;) {
-    @h: hue(@color);
-    @s: (saturation(@color)*1.5 + saturation(@compare)*.5)/2;
-    @l: (luma(@compare) + lightness(@compare))/2;
-    @lumafix: mix(hsl(@h, @s, @l), @color, @strength);
-}
