@@ -74,8 +74,171 @@ z-index,
 overflow,
 overflow-x,
 cursor,
-box-shadow,
-box-sizing;
+box-shadow;
+
+// this outputs every CSS property as a class, with its
+// value as the default value found in properties.less
+
+each(@css-property-names, {   
+    .@{value} { 
+      @{value}: @@value;
+    };
+});
+
+.gutter { margin: @gutter;}
+
+.gutter-top { margin-top: @gutter;}
+
+.gutter-right { margin-right: @gutter;}
+
+.gutter-bottom { margin-bottom: @gutter;}
+
+.gutter-left { margin-left: @gutter;}
+
+
+.text-padding {
+  padding: @text-padding;
+}
+
+.text-padding-top { padding-top: @text-padding-top;}
+.text-padding-right { padding-right: @text-padding-right;}
+.text-padding-bottom { padding-bottom: @text-padding-bottom;}
+.text-padding-left { padding-left: @text-padding-left;}
+
+.text-margin {
+  margin: @text-padding;
+}
+
+.text-margin-top { margin-top: @text-padding-top;}
+.text-margin-right { margin-right: @text-padding-right;}
+.text-margin-bottom { margin-bottom: @text-padding-bottom;}
+.text-margin-left { margin-left: @text-padding-left;}
+
+.block {
+  display: block;
+}
+
+.inline {
+  display: inline;
+}
+
+.initial {
+  display: initial;
+}
+
+.table {
+  display: table;
+}
+
+.flex {
+  display: flex;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.static {
+  position: static;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.relative {
+  position: relative;
+}
+
+.fixed {
+  position: fixed;
+}
+
+.float-right {
+  float: right;
+}
+
+.float-left {
+  float: left;
+}
+
+.margin-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.width-auto {
+  width: auto;
+}
+
+.inset {
+  box-shadow: inset @box-shadow;
+}
+
+.viewport-height {
+  height: 100vh;
+}
+
+.min-viewport-height {
+  min-height: 100vh;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.rounded {
+  &:extend(.border-radius all);
+}
+
+.dashed {
+  border-style: dashed;
+}
+
+.dotted {
+  border-style: dotted;
+}
+
+.thick {
+  border-width: @border-width*2;
+}
+
+.thin {
+  border-width: @border-width/2;
+}
+
+.current-color {
+  border-color: currentColor;
+}
+
+.fade {
+  opacity: .65;
+}
+
+.serif, .font-family-serif {
+  font-family: @font-family-serif;
+}
+
+.monospace, .font-family-monospace {
+  font-family: @font-family-monospace;
+}
+
+.sans-serif, .font-family-sans-serif {
+  font-family: @font-family-sans-serif;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.text-transparent {
+  color: transparent;
+}
+
 
 // Animation Properties
 @animation: @animation-name @animation-duration @animation-timing-function; // Specifies the keyframe-based animations.
@@ -112,8 +275,6 @@ box-sizing;
 @border-image-outset: none; // Specifies the amount by which the border image area extends beyond the border box.
 @border-image-repeat: round; // Specifies whether the image-border should be repeated, rounded or stretched.
 @border-image-slice: 10; // Specifies the inward offsets of the image-border.
-@border-image-fg: black;
-@border-image-fill-opacity: .17;
 @border-image-source: none; // Specifies the location of the image to be used as a border.
 @border-image-width: 10; // Specifies the width of the image-border.
 @border-left: @border; // Sets the width, style, and color of the left border of an element.
@@ -136,7 +297,7 @@ box-sizing;
 
 // Color Properties
 
-@color: #494949; // Specify the color of the text of an element.
+@color: @black; // Specify the color of the text of an element.
 @opacity: 1; // Specifies the transparency of an element.
 
 // Dimension Properties
@@ -169,7 +330,7 @@ box-sizing;
 
 // Font Properties
 @font: @font-style @font-variant @font-weight @font-size @font-family; // Defines a variety of font properties within one declaration.
-// @font-family: @font-family-sans-serif; // Defines a list of fonts for element.
+@font-family: @font-family-sans-serif; // Defines a list of fonts for element.
 @font-size: 20px; // Defines the font size for the text.
 @font-size-adjust: none; // Preserves the readability of text when font fallback occurs.
 @font-stretch: normal; // Selects a normal, condensed, or expanded face from a font.

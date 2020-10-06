@@ -4,4 +4,18 @@
     .contrast(color, @action);
     background: @action;
     border-color: .set-lumafix(@action, @black, 50%)[];
+
+    &.light { 
+        @light: lighten(@action, 8%);
+        .contrast(color, @light);
+        background: @light;
+        border-color: .set-lumafix(@light, @black, 50%)[];
+    }
+    
+    &.dark { 
+        @dark: darken(@action, 8%);
+        .contrast(color, @dark);
+        background: @dark;
+        border-color: .set-lumafix(@dark, @black, 50%)[];
+    }
 }

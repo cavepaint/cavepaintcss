@@ -4,10 +4,6 @@
 @tint: @white;
 @shade: @black;
 
-// .set-tone(@color) {
-//   @tone: contrast(@color, @shade, @tint, 50%);
-// }
-
 .set-tone(@color) {
   .set-contrast-ceiling() {
     .set-contrast-ratio(@color, @tint);
@@ -26,7 +22,7 @@
   .finalize-tone();
 }
 
-.set-tone(@color, @compare) {
+.set-tone(@color, @compare) { // two arguments
   .set-contrast-ceiling-color() {
     .set-contrast-ratio(@color, @white);
     @contrast-ceiling-color: @contrast-ratio;

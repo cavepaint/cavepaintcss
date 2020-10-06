@@ -1,4 +1,4 @@
-@base-color: dodgerblue;
+@base-color: chartreuse;
 
 // override properties
 @line-height: 1.8;
@@ -9,28 +9,29 @@
 @gutter: @margin*2;
 
 // cavepaint widths
-@text-measure: 62;
+@text-measure: 62; // an estimate of intended characters per line
 @text-width: floor(@text-measure * .6rem);
 @aside-width: floor(@text-width / @golden-ratio);
 @page-width: floor(@text-width * @golden-ratio);
 @feature-width: floor(@page-width * @golden-ratio);
 @full-width: 100%;
 
-// patterns
-@default-texture: bamboo;
-@default-pattern: jupiter;
+// patterns (see patterns.less for supported variable names)
+// these are variable *names* and don't start with @
+@default-texture: dot-texture;
+@default-pattern: rain;
 
 // design variabless
 @golden-ratio: 1.618;
-@shadow-color-base: spin(@black, 180);
-@shadow-color: fade(@shadow-color-base, 16%);
-@shadow-length: round(sqrt(2)*1px, 2);
+@shadow-color-base: @black;
+@shadow-color: fade(@shadow-color-base, 20%);
+@shadow-length: 1px;
 @shadow-blur: @shadow-length;
 @light-source-position: @shadow-length @shadow-length; // top left
 
 // color mixing settings
-@color-strength: 80% + 15%*(unit(luma(@base-color))/100);
-@ambient-mix: 84%;
+@color-strength: 80% + 15%*(unit(luma(@base-color))/100); // how much of original color stays in
+@ambient-mix: 84%; // mix of ambient lighting
 @tone: .set-tone(@base-color)[];
 
 // text settings

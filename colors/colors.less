@@ -12,57 +12,51 @@
 	@white-text: boolean(@base-contrast-ceiling >= 3);
 	@black-text: boolean(@base-contrast-ceiling < 3);
 
-	@faux-overlay-white: mix(@color, white, 16%);
-	@faux-overlay-black: mix(@color, black, 16%);
+	@faux-lighten: lighten(@color, 8%);
+	@faux-darken: darken(@color, 8%);
 
 	// find ceilings for .light and .dark variants
-	@light-ceiling: .set-contrast-ratio(@faux-overlay-white, @white)[];
-	@dark-ceiling: .set-contrast-ratio(@faux-overlay-black, @white)[];
+	@light-ceiling: .set-contrast-ratio(@faux-lighten, @white)[];
+	@dark-ceiling: .set-contrast-ratio(@faux-darken, @white)[];
 
 	// sometimes it needs white text when darkened
-	@white-text-dark: boolean(@dark-ceiling < 3);
+	@white-text-dark: boolean(@dark-ceiling >= 3);
 
 	// or black text when lightened
-	@black-text-light: boolean(@light-ceiling >= 3);
+	@black-text-light: boolean(@light-ceiling < 3);
 
 	@color: mix(@color-base, overlay(@ambient, @color-base), @ambient-mix*@ambient-modifier);
 
-	
+	.@{color-name} when (@outputs = true) {
+		background-color: @color;
+		border-color: .set-lumafix(@color, @black, 50%)[];
 
-	// finalize the color
-	.finalize() when (@black-text) 
-	and (@outputs = true) {
-        .@{color-name} { 
-			&:extend(.shade);
-			background-color: @color;
-			border-color: .set-lumafix(@color, @black, 50%)[];
-
-			& when (@white-text-dark) { 
-				&.dark { 
-					&:extend(.tint);
-				}
-			}
-		}
-	}
-
-	.finalize() when (@white-text) 
-	and (@outputs = true) {		
-		.@{color-name} { 
+		& when (@white-text) { 
 			&:extend(.tint);
-			background-color: @color;
-			border-color: .set-lumafix(@color, @black, 50%)[];
+		}
 
-			& when (@black-text-light) { 
-				&.light { 
-					&:extend(.shade);
-					// color: @black;
-				}
-			}
+		& when (@black-text) { 
+			&:extend(.shade);
 		}
 	}
 
+	.light.@{color-name} when (@outputs = true) {
+		background-color: @faux-lighten;
+		border-color: .set-lumafix(@faux-lighten, @black, 50%)[];
 
-	.finalize();
+		& when (@black-text-light) and not (@black-text) { 
+			&:extend(.shade);
+		}
+	}
+
+	.dark.@{color-name} when (@outputs = true) {
+		background-color: @faux-darken;
+		border-color: .set-lumafix(@faux-darken, @black, 50%)[];
+
+		& when (@white-text-dark)  and not (@white-text) { 
+			&:extend(.tint);
+		}
+	}
 }
 
 // used in building other colors

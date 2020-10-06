@@ -1,19 +1,19 @@
 .on-mobile(@rules) {
    @tablet: @text-width + @gutter;
-    @media screen and (max-width: ~"calc(@{tablet} - 1px)") { @rules();}
- }
- 
- .on-tablet(@rules) {
-   @tablet: @text-width + @gutter;
-    @media screen and (min-width: @tablet) { @rules();}
- }
- 
- .on-desktop(@rules) {
-    @desktop: @page-width;
-    @media screen and (min-width: @desktop) { @rules();}
- }
+   @media screen and (max-width: ~"calc(@{tablet} - 1px)") { @rules();}
+}
 
- .under-desktop(@rules) {
+.on-tablet(@rules) {
+   @tablet: @text-width + @gutter;
+   @media screen and (min-width: @tablet) { @rules();}
+}
+
+.on-desktop(@rules) {
+   @desktop: @page-width;
+   @media screen and (min-width: @desktop) { @rules();}
+}
+
+.under-desktop(@rules) {
    @desktop: @page-width;
    @media screen and (max-width: ~"calc(@{desktop} - 1px)") { @rules();}
- }
+}

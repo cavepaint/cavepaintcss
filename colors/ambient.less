@@ -3,5 +3,19 @@
 .ambient { 
     .contrast(color, @ambient);
     background: @ambient;
-    border-color: .set-lumafix(@action, @black, 50%)[];
+    border-color: .set-lumafix(@ambient, @black, 50%)[];
+}
+
+.ambient.light { 
+    @light: lighten(@ambient, 8%);
+    .contrast(color, @light);
+    background: @light;
+    border-color: .set-lumafix(@light, @black, 50%)[];
+}
+
+.ambient.dark { 
+    @dark: darken(@ambient, 8%);
+    .contrast(color, @dark);
+    background: @dark;
+    border-color: .set-lumafix(@dark, @black, 50%)[];
 }

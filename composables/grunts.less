@@ -1,0 +1,145 @@
+.reset {
+  // all: unset;
+  all: initial;
+}
+
+.big {
+  font-size: 125%;
+  line-height: @line-height*1.25;
+
+  &.font-size {
+    font-size: 1.25*@font-size;
+  }
+}
+
+.small {
+  font-size: 87.5%;
+  line-height: @line-height*.875;
+
+  &.font-size {
+    font-size: .875*@font-size;
+  }
+}
+
+.huge {
+  font-size: 160%;
+
+  &.font-size {
+    font-size: 1.6*@font-size;
+  }
+}
+
+.vertical-center, .center-vertical {
+  &:extend(.flex);
+  &:extend(.flex-direction);
+  &:extend(.justify-content);
+}
+
+.container {
+  &:extend(.page-width);
+  &:extend(.margin-auto);
+  &:extend(.responsive.padding);
+  &:extend(.responsive.margin);
+}
+
+.text-trim {
+  line-height: 1;
+}
+
+.text-align-center, .text-center {
+  text-align: center;
+}
+
+.text-align-left, .text-left {
+  text-align: left;
+}
+
+.text-align-right, .text-right {
+  text-align: right;
+}
+
+.text-align-justify, .text-justify {
+  text-align: justify;
+}
+
+.grid-gap-margin {
+  grid-gap: @margin;
+}
+
+.grid-gap-border-width {
+  grid-gap: @border-width;
+}
+
+.grid-gap-text-padding, .grid-gap-text-margin {
+  grid-gap: @text-padding-right;
+}
+
+.shade {
+  color: @black;
+}
+
+.tint {
+  color: @white;
+}
+
+.transparent {
+  background-color: transparent;
+  color: inherit;
+  border-color: inherit;
+
+  @light-fill-opacity: .16;
+  @dark-fill-opacity: .25;
+
+  &.light {
+      background-image: @light;
+
+      @light-base: "%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%202.646%202.646%22%20height%3D%2210%22%20width%3D%2210%22%3E%3Cpath%20fill%3D%22@{light-fg}%22%20fill-opacity%3D%22@{light-fill-opacity}%22%20d%3D%22M0%200h2.646v2.646H0z%22%2F%3E%3C%2Fsvg%3E";
+      @light-fg: escape(#FFF);
+      @light: url("data:image/svg+xml,@{light-base}");
+  }
+
+  &.dark {
+      background-image: @dark;
+
+      @dark-base: "%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%202.646%202.646%22%20height%3D%2210%22%20width%3D%2210%22%3E%3Cpath%20fill%3D%22@{dark-fg}%22%20fill-opacity%3D%22@{dark-fill-opacity}%22%20d%3D%22M0%200h2.646v2.646H0z%22%2F%3E%3C%2Fsvg%3E";
+      @dark-fg: escape(#000);
+      @dark: url("data:image/svg+xml,@{dark-base}");
+  }
+}
+
+.trim {
+  margin-bottom: 0;
+}
+
+.trim-inner {
+  * {
+    &:extend(.trim);
+  }
+}
+
+.trim-all {
+  &:extend(.trim);
+
+  * {
+    &:extend(.trim);
+  }
+}
+
+.flatten {
+  &:extend(.no-shadows);
+
+  * {
+    &:extend(.no-shadows);
+  }
+}
+
+.hidden { display: none !important;}
+
+.clearfix, .clear {
+  clear: both;
+  &::after {
+    display: block;
+    clear: both;
+    content: "";
+  }
+}
