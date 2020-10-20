@@ -1,0 +1,23 @@
+@cool-base: .set-cool-base()[];
+
+@cool-lumafix: .set-lumafix(@cool-base, @ambient, 50%)[];
+
+@cool: .set-color(~"cool", @cool-lumafix, 0)[];
+
+.set-color(~"cool", @cool, 0, @outputs: true);
+
+.set-cool-base() when (blue(@base-color) > 64) {
+    @cool-base: @indigo;
+}
+
+.set-cool-base() when (blue(@base-color) > 128) {
+    @cool-base: @cyan;
+}
+
+.set-cool-base() when (blue(@base-color) > 196) {
+    @cool-base: @skyblue;
+}
+
+.set-cool-base() when (default()) {
+    @cool-base: @blue;
+}

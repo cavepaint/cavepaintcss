@@ -14,17 +14,17 @@
     &.responsive.padding { .inner-padding(@aside-width/2 - @mobile-padding);}
 }
 
-.inner-text-width {
-  .inner-padding(@text-width/2);
-  &.padding { .inner-padding(@text-width/2 - @padding);}
-  &.responsive.padding { .inner-padding(@text-width/2 - @mobile-padding);}
-}
+// .inner-text-width {
+//   .inner-padding(@text-width/2);
+//   &.padding { .inner-padding(@text-width/2 - @padding);}
+//   &.responsive.padding { .inner-padding(@text-width/2 - @mobile-padding);}
+// }
 
-.inner-page-width {
-  .inner-padding(@page-width/2);
-  &.padding { .inner-padding(@page-width/2 - @padding);}
-  &.responsive.padding { .inner-padding(@page-width/2 - @mobile-padding);}
-}
+// .inner-page-width {
+//   .inner-padding(@page-width/2);
+//   &.padding { .inner-padding(@page-width/2 - @padding);}
+//   &.responsive.padding { .inner-padding(@page-width/2 - @mobile-padding);}
+// }
 
 .on-mobile({
   .inner-text-width {
@@ -48,15 +48,16 @@
     &.responsive.padding { .inner-padding(@aside-width/2 - @tablet-padding);}
   }
 
-  .inner-text-width.tablet {
+  .inner-text-width {
+    .inner-padding(@text-width/2);
     &.padding { .inner-padding(@text-width/2 - @padding);}
     &.responsive.padding { .inner-padding(@text-width/2 - @tablet-padding);}
   }
 
-  .inner-page-width.tablet {
-    &.padding { .inner-padding(@page-width/2 - @padding);}
-    &.responsive.padding { .inner-padding(@page-width/2 - @tablet-padding);}
-  }
+  // .inner-page-width.tablet {
+  //   &.padding { .inner-padding(@page-width/2 - @padding);}
+  //   &.responsive.padding { .inner-padding(@page-width/2 - @tablet-padding);}
+  // }
 });
 
 .on-desktop({
@@ -70,24 +71,9 @@
     &.responsive.padding { .inner-padding(@text-width/2 - @desktop-padding);}
   }
 
-  .inner-page-width.desktop {
+  .inner-page-width {
+    .inner-padding(@page-width/2);
     &.padding { .inner-padding(@page-width/2 - @padding);}
     &.responsive.padding { .inner-padding(@page-width/2 - @desktop-padding);}
-  }
-});
-
-.under-desktop({
-  .inner-page-width {
-    padding-left: initial;
-    padding-right: initial;
-
-    &.padding { 
-      padding-left: @padding;
-      padding-right: @padding;
-    }
-    &.responsive.padding { 
-      padding-left: @mobile-padding;
-      padding-right: @mobile-padding;
-    }
   }
 });

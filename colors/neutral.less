@@ -1,0 +1,23 @@
+@neutral-base: .set-neutral-base()[];
+
+@neutral-lumafix: .set-lumafix(@neutral-base, @ambient, 50%)[];
+
+@neutral: .set-color(~"neutral", @neutral-lumafix, 0)[];
+
+.set-color(~"neutral", @neutral, 0, @outputs: true);
+
+.set-neutral-base() when (green(@base-color) > 64) {
+    @neutral-base: @teal;
+}
+
+.set-neutral-base() when (green(@base-color) > 128) {
+    @neutral-base: @olive;
+}
+
+.set-neutral-base() when (green(@base-color) > 196) {
+    @neutral-base: @purple;
+}
+
+.set-neutral-base() when (default()) {
+    @neutral-base: @green;
+}

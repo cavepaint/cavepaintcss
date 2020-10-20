@@ -1,0 +1,23 @@
+@warm-base: .set-warm-base()[];
+
+@warm-lumafix: .set-lumafix(@warm-base, @ambient, 50%)[];
+
+@warm: .set-color(~"warm", @warm-lumafix, 0)[];
+
+.set-color(~"warm", @warm, 0, @outputs: true);
+
+.set-warm-base() when (red(@base-color) > 64) {
+    @warm-base: @red;
+}
+
+.set-warm-base() when (red(@base-color) > 128) {
+    @warm-base: @yellow;
+}
+
+.set-warm-base() when (red(@base-color) > 196) {
+    @warm-base: @orange;
+}
+
+.set-warm-base() when (default()) {
+    @warm-base: @violet;
+}

@@ -215,16 +215,38 @@ each(@css-property-names, {
   opacity: .65;
 }
 
-.serif, .font-family-serif {
+.font-family-serif when not (@font-family = @font-family-serif){
   font-family: @font-family-serif;
 }
 
-.monospace, .font-family-monospace {
+.font-family-serif when (@font-family = @font-family-serif){
+  &:extend(.font-family);
+}
+
+.font-family-sans-serif when not (@font-family = @font-family-sans-serif){
+  font-family: @font-family-sans-serif;
+}
+
+.font-family-sans-serif when (@font-family = @font-family-sans-serif){
+  &:extend(.font-family);
+}
+
+.font-family-monospace when not (@font-family = @font-family-monospace){
   font-family: @font-family-monospace;
 }
 
-.sans-serif, .font-family-sans-serif {
-  font-family: @font-family-sans-serif;
+.font-family-monospace when (@font-family = @font-family-monospace){
+  &:extend(.font-family);
+}
+
+.monospace {
+  &:extend(.font-family-monospace);
+}
+.sans-serif {
+  &:extend(.font-family-sans-serif);
+}
+.serif {
+  &:extend(.font-family-serif);
 }
 
 .bold {
