@@ -7,13 +7,15 @@
     var sheet = document.createElement('link');
     sheet.rel  = 'stylesheet';
     sheet.id  = 'random_stylesheet';
-    sheet.href = 'css/cavepaint_' + random_css_filenumber + '.css';
+    // sheet.href = 'css/cavepaint_' + random_css_filenumber + '.css';
+    sheet.href = 'cavepaint.css';
 
     // build the next stylesheet element
     var next_sheet = document.createElement('link');
     next_sheet.rel  = 'stylesheet';
     next_sheet.id  = 'next_stylesheet';
     next_sheet.href = 'css/cavepaint_' + random_css_filenumber2 + '.css';
+    next_sheet.disabled = 'true';
 
     if (document.getElementsByClassName('download_it')) {
         var download_buttons = document.getElementsByClassName('download_it');
@@ -25,9 +27,6 @@
     document.getElementsByTagName('head')[0].appendChild(next_sheet);
     document.getElementsByTagName('head')[0].appendChild(sheet);
 
-    next_sheet.disabled = 'true';
-    
-
     sessionStorage.setItem('randomCSS', random_css_filenumber);
 })();
 
@@ -37,7 +36,6 @@ function newCSS() {
         event.preventDefault();
     }
 
-    
     // base random number 1-256
     var random_css_filenumber = Math.ceil(Math.random()*256);
 

@@ -34,7 +34,7 @@
       </div>
   </nav>
   <div class="bar full-width no-margin-bottom border-bottom placeholder"></div>
-  <header class="default dark pattern inner-page-width text-padding margin-auto">
+  <header class="onyx light pattern inner-page-width text-padding margin-auto border-bottom">
     <div class="graphite box-shadow border padding margin no-margin-right no-margin-left responsive">
       <div class="two-column golden reverse tablet">
         <div class="vertical-center">
@@ -76,7 +76,6 @@
               <li><a href="../grid">grid</a></li>
               <li><a href="../breakpoints">[breakpoints]</a></li>
               <li><a href="../width">[width]</a></li>
-              <li><a href="../inner-width">[inner-width]</a></li>
               <li><a href="../hide">hide</a></li>
               
             </ul>
@@ -107,3 +106,37 @@
     <li><strong>.full-width</strong>: Makes an element full-width</li>
     <li><strong>.golden-width</strong>: Makes an element golden to its container. .reverse reverses.</li>
 </ul>
+
+<aside class="aside-width border thick dashed current-color margin-auto padding responsive">So, <strong>aside-width</strong> is the width of this aside. Then <strong>text-width</strong> is the width of this text, and <strong>page-width</strong> is the width of this page.</aside>
+
+<h3>Inner widths</h3>
+
+<p>Inner-width classes use padding to emulate an inner-width effect.</p>
+
+<ul>
+    <li><strong>.inner-text-width</strong>: The base content width, based on the @text-measure variable.</li>
+    <li><strong>.inner-aside-width</strong>: A smaller supplemental width, golden to text-width</li>
+    <li><strong>.inner-page-width</strong>: The page width, like text-width and aside-width added together</li>
+</ul>
+
+<p>This example page is already set to <strong>inner-text-width</strong>, so we'll use the smallest of the three, <strong>aside-width</strong>, for examples:</p>
+
+<p class="red responsive padding">This is just a regular <strong>red</strong> paragraph with <strong>responsive</strong> and <strong>padding</strong> composables added to it.</p>
+
+<pre class="white-space gutter-bottom">&lt;p class="<strong>red responsive padding</strong>"&gt;
+    This is just a regular &lt;strong&gt;red&lt;/strong&gt; paragraph with &lt;strong&gt;responsive&lt;/strong&gt; and &lt;strong&gt;padding&lt;/strong&gt; composables added to it.
+&lt;/p&gt;</pre>
+
+<p class="red responsive padding inner-aside-width">The same element and composables, but with <strong>inner-aside-width</strong> added.</p>
+
+<pre class="white-space gutter-bottom">&lt;p class="<strong>red responsive padding inner-aside-width</strong>"&gt;
+    The same element and composables, but with &lt;strong&gt;inner-aside-width&lt;/strong&gt; added.
+&lt;/p&gt;</pre>
+
+<p class="red responsive padding aside-width margin-auto">This one instead has <strong>aside-width</strong> and <strong>margin-auto</strong>.</p>
+
+<pre class="white-space gutter-bottom">&lt;p class="<strong>red responsive padding aside-width margin-auto</strong>"&gt;
+    This one instead has &lt;strong&gt;aside-width&lt;/strong&gt; and &lt;strong&gt;margin-auto&lt;/strong&gt;.
+&lt;/p&gt;</pre>
+
+<p>The <strong>inner-x-width</strong> is great for keeping markup simple and using fewer containers.</p>
