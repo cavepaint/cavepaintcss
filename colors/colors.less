@@ -12,12 +12,15 @@
 	@white-text: boolean(@base-contrast-ceiling >= 3);
 	@black-text: boolean(@base-contrast-ceiling < 3);
 
-	@faux-lighten: lighten(@color, 8%);
-	@faux-darken: darken(@color, 8%);
+	@lighten-by: average(softlight(@color, @white), @color);
+	@darken-by: average(softlight(@color, @black), @color);
+
+	// @lighten-by: softlight(@color, @white);
+	// @darken-by: softlight(@color, @black);
 
 	// find ceilings for .light and .dark variants
-	@light-ceiling: .set-contrast-ratio(@faux-lighten, @white)[];
-	@dark-ceiling: .set-contrast-ratio(@faux-darken, @white)[];
+	@light-ceiling: .set-contrast-ratio(@lighten-by, @white)[];
+	@dark-ceiling: .set-contrast-ratio(@darken-by, @white)[];
 
 	// sometimes it needs white text when darkened
 	@white-text-dark: boolean(@dark-ceiling >= 3);
@@ -41,24 +44,23 @@
 	}
 
 	.light.@{color-name} when (@outputs = true) {
-		background-color: @faux-lighten;
-		border-color: .set-lumafix(@faux-lighten, @black, 50%)[];
+		background-color: @lighten-by;
+		border-color: .set-lumafix(@lighten-by, @black, 50%)[];
+	}
 
-		& when (@black-text-light) and not (@black-text) { 
-			&:extend(.shade);
-		}
+	.light.@{color-name} when (@outputs = true) when (@black-text-light) and not (@black-text) { 
+		&:extend(.shade);
 	}
 
 	.dark.@{color-name} when (@outputs = true) {
-		background-color: @faux-darken;
-		border-color: .set-lumafix(@faux-darken, @black, 50%)[];
+		background-color: @darken-by;
+		border-color: .set-lumafix(@darken-by, @black, 50%)[];
+	}
 
-		& when (@white-text-dark)  and not (@white-text) { 
-			&:extend(.tint);
-		}
+	.dark.@{color-name} when (@outputs = true) when (@white-text-dark) and not (@white-text) { 
+		&:extend(.tint);
 	}
 }
-
 
 
 // used in building other colors
@@ -70,26 +72,26 @@
 // // default colors
 @import "gray";
 @import "brown";
-@import "magenta";
-@import "lavender";
-@import "cream";
-@import "charcoal";
-@import "crimson";
-@import "clover";
-@import "cobalt";
-@import "graphite";
-@import "ruby";
-@import "onyx";
-@import "pewter";
-@import "gunmetal";
-@import "hotpink";
-@import "neongreen";
-@import "electricblue";
-@import "royalpurple";
-@import "lemon";
-@import "lime";
-@import "tangerine";
-@import "grapefruit";
+// @import "magenta";
+// @import "lavender";
+// @import "cream";
+// @import "charcoal";
+// @import "crimson";
+// @import "clover";
+// @import "cobalt";
+// @import "graphite";
+// @import "ruby";
+// @import "onyx";
+// @import "pewter";
+// @import "gunmetal";
+// @import "hotpink";
+// @import "neongreen";
+// @import "electricblue";
+// @import "royalpurple";
+// @import "lemon";
+// @import "lime";
+// @import "tangerine";
+// @import "grapefruit";
 
 // // semantic colors
 @import "action";
@@ -100,9 +102,9 @@
 @import "failure";
 @import "default";
 
-@import "warm";
-@import "cool";
-@import "neutral";
+// @import "warm";
+// @import "cool";
+// @import "neutral";
 @import "accent";
 
-@import "highlight";
+// @import "highlight";

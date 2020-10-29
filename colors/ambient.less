@@ -2,20 +2,20 @@
 
 .ambient { 
     .contrast(color, @ambient);
-    background: @ambient;
+    background-color: @ambient;
     border-color: .set-lumafix(@ambient, @black, 50%)[];
 }
 
 .ambient.light { 
-    @light: lighten(@ambient, 8%);
+    @light: softlight(@ambient, @white);
     .contrast(color, @light);
-    background: @light;
+    background-color: @light;
     border-color: .set-lumafix(@light, @black, 50%)[];
 }
 
 .ambient.dark { 
-    @dark: darken(@ambient, 8%);
+    @dark: softlight(@ambient, @black);
     .contrast(color, @dark);
-    background: @dark;
+    background-color: @dark;
     border-color: .set-lumafix(@dark, @black, 50%)[];
 }

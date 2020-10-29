@@ -1,75 +1,25 @@
 .placeholder {
-    &::before { content: " "; white-space: pre;}
-    &::after { content: "";}
-  
-    &.image, &.video, &.avatar {
-      position: relative;
-  
-      &::before {
-        position: absolute;
-        top: ~"calc(50% - 4rem)";
-        right: 0;
-        bottom: 0;
-        left: 0;
-        display: inline-block;
-        text-align: center;
-        font-size: 4rem;
-        vertical-align: middle;
-      }
-  
-      &.small::before {
-        top: ~"calc(50% - 2rem)";
-        font-size: 2rem;
-      }
-  
-      &.big::before {
-        top: ~"calc(50% - 6rem)";
-        font-size: 6rem;
-      }
-  
-      &.huge::before {
-        top: ~"calc(50% - 8rem)";
-        font-size: 8rem;
-      }
-  
-      &::after {
-        display: block;
-      }
+  &::before { content: " "; white-space: pre;}
+  &::after { content: ""; display: block;}
+
+  &.square, &.one-to-one {
+    &::after {
+      // prop to maintain image dimensions of 4:3
+      padding-top: 100%;
     }
-  
-    &.image {
-      &::before {
-        content: "\1f5bc";
-      }
-      &::after {
-        // prop to maintain image dimensions of 4:3
-        padding-top: 75%;
-      }
+  }
+
+  &.four-to-three {
+    &::after {
+      // prop to maintain image dimensions of 4:3
+      padding-top: 75%;
     }
-  
-    &.video {
-      &::before {
-        content: "\25B6";
-      }
-      &::after {
-        // prop to maintain video dimensions of 16:9
-        padding-top: 56.25%;
-      }
+  }
+
+  &.sixteen-to-nine {
+    &::after {
+      // prop to maintain video dimensions of 16:9
+      padding-top: 56.25%;
     }
-  
-    &.avatar {
-      &::before {
-        content: if(luma(@base-color) > 50%, "\263B", "\263A");
-      }
-      &::after {
-        // prop to maintain video dimensions of 1:1
-        padding-top: 100%;
-      }
-    }
-  
-    &.no-icon {
-      &::before {
-        content: "";
-      }
-    }
+  }
 }

@@ -5,7 +5,6 @@
 
 // this is what it defaults to upon setting, not in the browser
 
-
 @css-property-names: 
 background,
 background-color,
@@ -23,12 +22,7 @@ align-content,
 align-items,
 align-self,
 flex,
-flex-basis,
 flex-direction,
-flex-flow,
-flex-grow,
-flex-shrink,
-flex-wrap,
 justify-content,
 font-family,
 font-size,
@@ -72,7 +66,6 @@ float,
 clear,
 z-index,
 overflow,
-overflow-x,
 cursor,
 box-shadow;
 
@@ -85,181 +78,6 @@ each(@css-property-names, {
     };
 });
 
-.gutter { margin: @gutter;}
-
-.gutter-top { margin-top: @gutter;}
-
-.gutter-right { margin-right: @gutter;}
-
-.gutter-bottom { margin-bottom: @gutter;}
-
-.gutter-left { margin-left: @gutter;}
-
-
-.text-padding {
-  padding: @text-padding;
-}
-
-.text-padding-top { padding-top: @text-padding-top;}
-.text-padding-right { padding-right: @text-padding-right;}
-.text-padding-bottom { padding-bottom: @text-padding-bottom;}
-.text-padding-left { padding-left: @text-padding-left;}
-
-.text-margin {
-  margin: @text-padding;
-}
-
-.text-margin-top { margin-top: @text-padding-top;}
-.text-margin-right { margin-right: @text-padding-right;}
-.text-margin-bottom { margin-bottom: @text-padding-bottom;}
-.text-margin-left { margin-left: @text-padding-left;}
-
-.block {
-  display: block;
-}
-
-.inline {
-  display: inline;
-}
-
-.initial {
-  display: initial;
-}
-
-.table {
-  display: table;
-}
-
-.flex {
-  display: flex;
-}
-
-.inline-block {
-  display: inline-block;
-}
-
-.static {
-  position: static;
-}
-
-.absolute {
-  position: absolute;
-}
-
-.relative {
-  position: relative;
-}
-
-.fixed {
-  position: fixed;
-}
-
-.float-right {
-  float: right;
-}
-
-.float-left {
-  float: left;
-}
-
-.margin-auto {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.width-auto {
-  width: auto;
-}
-
-.inset {
-  box-shadow: inset @box-shadow;
-}
-
-.viewport-height {
-  height: 100vh;
-}
-
-.min-viewport-height {
-  min-height: 100vh;
-}
-
-.overflow-hidden {
-  overflow: hidden;
-}
-
-.rounded {
-  &:extend(.border-radius all);
-}
-
-.dashed {
-  border-style: dashed;
-}
-
-.dotted {
-  border-style: dotted;
-}
-
-.thick {
-  border-width: @border-width*2;
-}
-
-.thin {
-  border-width: @border-width/2;
-}
-
-.current-color {
-  border-color: currentColor;
-}
-
-.fade {
-  opacity: .65;
-}
-
-.font-family-serif when not (@font-family = @font-family-serif){
-  font-family: @font-family-serif;
-}
-
-.font-family-serif when (@font-family = @font-family-serif){
-  &:extend(.font-family);
-}
-
-.font-family-sans-serif when not (@font-family = @font-family-sans-serif){
-  font-family: @font-family-sans-serif;
-}
-
-.font-family-sans-serif when (@font-family = @font-family-sans-serif){
-  &:extend(.font-family);
-}
-
-.font-family-monospace when not (@font-family = @font-family-monospace){
-  font-family: @font-family-monospace;
-}
-
-.font-family-monospace when (@font-family = @font-family-monospace){
-  &:extend(.font-family);
-}
-
-.monospace {
-  &:extend(.font-family-monospace);
-}
-.sans-serif {
-  &:extend(.font-family-sans-serif);
-}
-.serif {
-  &:extend(.font-family-serif);
-}
-
-.bold {
-  font-weight: bold;
-}
-
-.underline {
-  text-decoration: underline;
-}
-
-.text-transparent {
-  color: transparent;
-}
 
 
 // Animation Properties
@@ -422,7 +240,7 @@ each(@css-property-names, {
 @text-decoration-style: solid; // Specifies the style of the lines specified by the text-decoration-line property
 @text-indent: @tab-size * 1ch; // Indent the first line of text.
 @text-justify: justify; // Specifies the justification method to use when the text-align property is set to justify.
-@text-overflow: hidden; // Specifies how the text content will be displayed, when it overflows the block containers.
+@text-overflow: clip; // Specifies how the text content will be displayed, when it overflows the block containers.
 @text-shadow: @box-shadow; // Applies one or more shadows to the text content of an element.
 @text-transform: uppercase; // Transforms the case of the text.
 @line-height: 1.8; // Sets the height between lines of text.

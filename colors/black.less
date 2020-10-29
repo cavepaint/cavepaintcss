@@ -8,4 +8,21 @@
     background-color: @black;
     &:extend(.tint);
     border-color: .set-lumafix(@black, black, 50%)[];
+
+    @lighten-by: softlight(@black, @white);
+	@darken-by: softlight(@black, black);
+
+    &.light { 
+        @light: @lighten-by;
+        .contrast(color, @light);
+        background-color: @light;
+        border-color: .set-lumafix(@light, @black, 50%)[];
+    }
+    
+    &.dark { 
+        @dark: @darken-by;
+        .contrast(color, @dark);
+        background-color: @dark;
+        border-color: .set-lumafix(@dark, @black, 50%)[];
+    }
 }

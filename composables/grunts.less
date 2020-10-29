@@ -1,6 +1,192 @@
-.reset {
-  // all: unset;
-  all: initial;
+// grunts
+// useful classes that usually do one thing but are nonetheless composable
+
+.gutter { margin: @gutter;}
+
+.gutter-top { margin-top: @gutter;}
+
+.gutter-right { margin-right: @gutter;}
+
+.gutter-bottom { margin-bottom: @gutter;}
+
+.gutter-left { margin-left: @gutter;}
+
+
+.text-padding {
+  padding: @text-padding;
+}
+
+.text-padding-top { padding-top: @text-padding-top;}
+.text-padding-right { padding-right: @text-padding-right;}
+.text-padding-bottom { padding-bottom: @text-padding-bottom;}
+.text-padding-left { padding-left: @text-padding-left;}
+
+.text-margin {
+  margin: @text-padding;
+}
+
+.text-margin-top { margin-top: @text-padding-top;}
+.text-margin-right { margin-right: @text-padding-right;}
+.text-margin-bottom { margin-bottom: @text-padding-bottom;}
+.text-margin-left { margin-left: @text-padding-left;}
+
+.bottom-margins * { margin-bottom: @margin;}
+
+.block {
+  display: block;
+}
+
+.inline {
+  display: inline;
+}
+
+.initial {
+  display: initial;
+}
+
+.table {
+  display: table;
+}
+
+.flex {
+  display: flex;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.static {
+  position: static;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.relative {
+  position: relative;
+}
+
+.fixed {
+  position: fixed;
+}
+
+.float-right {
+  float: right;
+}
+
+.float-left {
+  float: left;
+}
+
+.margin-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.width-auto {
+  width: auto;
+}
+
+.inset {
+  box-shadow: inset @box-shadow;
+}
+
+.viewport-height {
+  height: 100vh;
+}
+
+.min-viewport-height {
+  min-height: 100vh;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.rounded {
+  &:extend(.border-radius all);
+}
+
+.dashed {
+  border-style: dashed;
+}
+
+.dotted {
+  border-style: dotted;
+}
+
+.thick {
+  border-width: @border-width*2;
+}
+
+.thin {
+  border-width: @border-width/2;
+}
+
+.current-color {
+  border-color: currentColor;
+}
+
+.fade {
+  opacity: .65;
+}
+
+// .font-family-serif when not (@font-family = @font-family-serif){
+//   font-family: @font-family-serif;
+// }
+
+// .font-family-serif when (@font-family = @font-family-serif){
+//   &:extend(.font-family);
+// }
+
+// .font-family-sans-serif when not (@font-family = @font-family-sans-serif){
+//   font-family: @font-family-sans-serif;
+// }
+
+// .font-family-sans-serif when (@font-family = @font-family-sans-serif){
+//   &:extend(.font-family);
+// }
+
+// .font-family-monospace when not (@font-family = @font-family-monospace){
+//   font-family: @font-family-monospace;
+// }
+
+// .font-family-monospace when (@font-family = @font-family-monospace){
+//   &:extend(.font-family);
+// }
+
+// .monospace {
+//   &:extend(.font-family-monospace);
+// }
+// .sans-serif {
+//   &:extend(.font-family-sans-serif);
+// }
+// .serif {
+//   &:extend(.font-family-serif);
+// }
+
+.monospace {
+  font-family: @font-family-monospace;
+}
+.sans-serif {
+  font-family: @font-family-sans-serif;
+}
+.serif {
+  font-family: @font-family-serif;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.text-transparent {
+  color: transparent;
 }
 
 .big {
@@ -50,16 +236,12 @@
   text-align: center;
 }
 
-.text-align-left, .text-left {
+.text-left {
   text-align: left;
 }
 
-.text-align-right, .text-right {
+.text-right {
   text-align: right;
-}
-
-.text-align-justify, .text-justify {
-  text-align: justify;
 }
 
 .grid-gap-margin {
@@ -91,17 +273,19 @@
   @dark-fill-opacity: .25;
 
   &.light {
-      background-image: @light;
+    background-color: rgba(red(@white), green(@white), blue(@white), @light-fill-opacity);
+    // background-image: @light;
 
-      @light-base: "%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%202.646%202.646%22%20height%3D%2210%22%20width%3D%2210%22%3E%3Cpath%20fill%3D%22@{light-fg}%22%20fill-opacity%3D%22@{light-fill-opacity}%22%20d%3D%22M0%200h2.646v2.646H0z%22%2F%3E%3C%2Fsvg%3E";
+      @light-base: "%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%202.646%202.646%22%20height%3D%2210%22%20width%3D%2210%22%3E%3Cpath%20fill%3D%22@{light-fg}%22%20opacity%3D%22@{light-fill-opacity}%22%20d%3D%22M0%200h2.646v2.646H0z%22%2F%3E%3C%2Fsvg%3E";
       @light-fg: escape(#FFF);
       @light: url("data:image/svg+xml,@{light-base}");
   }
 
   &.dark {
-      background-image: @dark;
+      background-color: rgba(red(@black), green(@black), blue(@black), @dark-fill-opacity);
+      // background-image: @dark;
 
-      @dark-base: "%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%202.646%202.646%22%20height%3D%2210%22%20width%3D%2210%22%3E%3Cpath%20fill%3D%22@{dark-fg}%22%20fill-opacity%3D%22@{dark-fill-opacity}%22%20d%3D%22M0%200h2.646v2.646H0z%22%2F%3E%3C%2Fsvg%3E";
+      @dark-base: "%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%202.646%202.646%22%20height%3D%2210%22%20width%3D%2210%22%3E%3Cpath%20fill%3D%22@{dark-fg}%22%20opacity%3D%22@{dark-fill-opacity}%22%20d%3D%22M0%200h2.646v2.646H0z%22%2F%3E%3C%2Fsvg%3E";
       @dark-fg: escape(#000);
       @dark: url("data:image/svg+xml,@{dark-base}");
   }
@@ -130,6 +314,27 @@
 
   * {
     &:extend(.no-shadows);
+  }
+}
+
+.bump {
+  position: relative;
+
+  &.up {
+    top: -2px;
+  }
+
+  &.down {
+    top: 2px;
+  }
+
+  &.left {
+    left: -2px;
+  }
+
+  &.right {
+    right: initial;
+    left: 2px;
   }
 }
 

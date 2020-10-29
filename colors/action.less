@@ -2,20 +2,23 @@
 
 .action, .base-color { 
     .contrast(color, @action);
-    background: @action;
+    background-color: @action;
     border-color: .set-lumafix(@action, @black, 50%)[];
 
+    @lighten-by: softlight(@base-color, @white);
+	@darken-by: softlight(@base-color, @black);
+
     &.light { 
-        @light: lighten(@action, 8%);
+        @light: @lighten-by;
         .contrast(color, @light);
-        background: @light;
+        background-color: @light;
         border-color: .set-lumafix(@light, @black, 50%)[];
     }
     
     &.dark { 
-        @dark: darken(@action, 8%);
+        @dark: @darken-by;
         .contrast(color, @dark);
-        background: @dark;
+        background-color: @dark;
         border-color: .set-lumafix(@dark, @black, 50%)[];
     }
 }
