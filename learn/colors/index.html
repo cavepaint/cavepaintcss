@@ -1,0 +1,373 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Cavepaint Composables</title>
+  <meta name="description" content="Cavepaint CSS, a composable class and color library for Less/CSS">
+  <meta name="author" content="Cavepaint CSS">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="stylesheet" href="../../cavepaint.css">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+
+</head>
+
+<body class="default">
+
+  <nav class="top box-shadow border-bottom bar default fixed inner-page-width trim-all vertical-align">
+      <h1 class="font-size">
+          <a href="../../" class="inline-block ">
+              Cavepaint<span class="hide mobile"> CSS</span>
+              <img src="../../favicon-32x32.png" class="inline vertical-align text-margin-left no-margin-bottom" alt="Cavepaint logo" style="max-height: 18px;">
+          </a>
+      </h1>
+      <div class="float-right">
+          <a href="../../composables/" class="text-padding text-margin-right text-padding bold">Docs</a>
+          <a href="https://github.com/cavepaint/cavepaintcss" target="_blank" class="new-tab text-padding">Github</a>
+      </div>
+  </nav>
+  <div class="bar full-width no-margin-bottom border-bottom placeholder"></div>
+  <header class="warm black texture inner-page-width text-padding margin-auto border-bottom margin-bottom">
+    <div class="dark info box-shadow border padding margin no-margin-right no-margin-left responsive">
+      <div class="two-column golden reverse tablet">
+        <div class="vertical-center">
+          <img src="../../cavewoman.svg" class="flex flex-direction justify-self block hide mobile padding margin-auto no-margin-bottom">
+        </div>
+        <div>
+          <h1>.[color]</h1>
+          <p class="big">Change the color of an element.</p>
+        </div>
+        
+      </div>
+    </div>
+  </header>
+  
+
+  <main class="page-width margin-auto white padding responsive min-viewport-height">
+    <div class="grid desktop responsive">
+      <div class="grid-width-three">
+        <nav class="small two-column mobile tablet margin-auto text-width gutter-bottom grid-gap-text-padding">
+          
+          <div class="hide mobile tablet">
+            <h6>Cavepaint</h6>
+            <ul class="group">
+              <li><a href="../install">install</a></li>
+              <li><a href="../">overview</a></li>
+            </ul>
+          </div>
+          <div class="responsive">
+            <h6 class="no-margin-top">Look</h6>
+            <ul class="group">
+              <li><a href="../colors">[color]</a></li>
+              <li><a href="../higher-order">[higher order]</a></li>
+            </ul>
+          </div>
+          
+          <div class="responsive margin-bottom">
+            <h6 class="no-margin-top">Layout</h6>
+            <ul class="">
+              <li><a href="../grid">grid</a></li>
+              <li><a href="../breakpoints">[breakpoints]</a></li>
+              <li><a href="../width">[width]</a></li>
+              <li><a href="../hide">hide</a></li>
+              
+            </ul>
+          </div>
+        
+          <div class="responsive">
+            <h6 class="no-margin-top">CSS properties</h6>
+            <ul class=" ">
+              <li><a href="../css-properties">[properties]</a></li>
+              <li><a href="../responsive">responsive</a></li>
+              <li><a href="../text-padding">text-padding</a></li>
+              <li><a href="../grunts">[grunts]</a></li>
+              <li><a href="../nullifiers">[no-]</a></li>
+            </ul>
+          </div>
+        </nav>      </div>
+      <div class="grid-width-nine inner-text-width">
+        
+<section id="reference" class="card gutter responsive light white">
+    <h2 class="">Details</h2>
+    <div id="arguments">
+        <ul>
+            <li><strong>class</strong>: <em>red, green, blue, etc.</em></li>
+            <li><strong>settings</strong>: color-strength, ambient-mix</li>
+            <li><strong>defaults</strong>: none</li>
+        </ul>
+    </div>
+    <div class="margin-auto text-align-center small">
+        <span class="badge info">composable</span> <span class="badge reaction">many classes</span>
+    </div>
+</section>
+          <section id="docs-colors" class="docs-color-palette">
+            <h2>Examples</h2>
+            <p>Give elements color by adding a color class:</p>
+
+            <div class="two-column desktop">
+              <div>
+                <p><button>A button!</button></p>
+
+                <pre class="white-space">&lt;button&gt;
+  A button!
+&lt;/button&gt;</pre>
+              </div>
+              <div>
+                <p><button class="red">A button!</button></p>
+                <pre class="white-space">&lt;button class="red"&gt;
+  A button!
+&lt;/button&gt;</pre>
+              </div>
+            </div>
+
+            <p>Project colors are generated from one parameter, the <strong>@base-color</strong>.</p>
+
+            <div class="aside-width base-color margin-auto text-padding">base-color</div>
+            <p>Here, it's given to you. But in your own project you can define it to be whatever you want.</p>
+            <p class="clearfix"></p>
+            
+            <h2><a href="#colors">Colors</a></h2>
+        
+            <p>Every composable color class is based on the <strong>@base-color</strong>. Here are the basic ROYGBIV colors:</p>
+
+            <div class="margin-bottom">
+              <div class="grid tablet">
+                <div class="grid-width-four text-align-center trim">
+                  <div class="text-padding border border-radius text-margin-bottom red">red</div>
+                  <div class="text-padding border border-radius text-margin-bottom orange">orange</div>
+                  <div class="text-padding border border-radius text-margin-bottom yellow">yellow</div>
+                  <div class="text-padding border border-radius text-margin-bottom olive">olive</div>
+                </div>
+    
+                <div class="grid-width-four text-align-center trim">
+                  <div class="text-padding border border-radius text-margin-bottom green">green</div>
+                  <div class="text-padding border border-radius text-margin-bottom teal">teal</div>
+                  <div class="text-padding border border-radius text-margin-bottom cyan">cyan</div>
+                  <div class="text-padding border border-radius text-margin-bottom skyblue">skyblue</div>
+                </div>
+    
+                <div class="grid-width-four text-align-center trim">
+                  <div class="text-padding border border-radius text-margin-bottom blue">blue</div>
+                  <div class="text-padding border border-radius text-margin-bottom indigo">indigo</div>
+                  <div class="text-padding border border-radius text-margin-bottom purple">purple</div>
+                  <div class="text-padding border border-radius text-margin-bottom violet">violet</div>
+                </div>
+              </div>
+            </div>
+            
+
+            <p>The composable color class <strong>action</strong> is the same color as the base color. The class <strong>ambient</strong> serves as the ambient lighting color for the palette. As you might have guessed from its name, <strong>default</strong> makes for a reliable default color.</p>            
+
+            <div class="margin-bottom">
+              <div class="grid tablet">
+                <div class="placeholder grid-width-four hide mobile"></div>
+                <div id="project_colors" class="grid-width-four text-align-center">
+                  <div class="text-padding border border-radius text-margin-bottom action">action</div>
+                  <div class="text-padding border border-radius text-margin-bottom reaction">reaction</div>
+                  <div class="text-padding border border-radius text-margin-bottom ambient">ambient</div>
+                  <div class="text-padding border border-radius text-margin-bottom default">default</div>
+                </div>
+              </div>
+            </div>
+
+            
+
+            <p>Powering the text colors, <strong>black</strong> and <strong>white</strong> are also included. It wouldn't be a full palette without <strong>brown</strong> and <strong>gray</strong> there to round things out.</p>
+
+            <div class="margin-bottom">
+              <div class="grid tablet">
+                <div class="placeholder grid-width-four hide mobile"></div>
+                <div class="grid-width-four text-align-center trim">
+                  <div class="text-padding border border-radius text-margin-bottom white">white</div>
+                  <div class="text-padding border border-radius text-margin-bottom gray">gray</div>
+                  <div class="text-padding border border-radius text-margin-bottom black">black</div>
+                  <div class="text-padding border border-radius text-margin-bottom brown">brown</div>
+                </div>
+              </div>
+            </div>
+            
+            <p>In addition to the standard colors, which have the same general look palette to palette, Cavepaint has composable color wheel classes too. Since these are based on color wheel rotations, they're drastically different depending on base color.</p>
+
+            <div class="grid tablet">
+              <div class="grid-width-four text-align-center">
+                <div class="text-padding border border-radius text-margin-bottom accent">accent</div>
+                <div class="text-padding border border-radius text-margin-bottom second accent">second accent</div>
+                <div class="text-padding border border-radius text-margin-bottom split">split</div>
+                <div class="text-padding border border-radius text-margin-bottom second split">second split</div>
+              </div>
+
+              <div class="grid-width-four text-align-center">
+                <div class="text-padding border border-radius text-margin-bottom triad">triad</div>
+                <div class="text-padding border border-radius text-margin-bottom second triad">second triad</div>
+                <div class="text-padding border border-radius text-margin-bottom third triad">third triad</div>
+                <div class="text-padding border border-radius text-margin-bottom complement">complement</div>
+              </div>
+
+              <div class="grid-width-four text-align-center">
+                <div class="text-padding border border-radius text-margin-bottom tetrad">tetrad</div>
+                <div class="text-padding border border-radius text-margin-bottom second tetrad">second tetrad</div>
+                <div class="text-padding border border-radius text-margin-bottom third tetrad">third tetrad</div>
+                <div class="text-padding border border-radius text-margin-bottom fourth tetrad">fourth tetrad</div>
+              </div>
+
+            </div>
+
+            <h3>Semantic colors</h3>
+            <p>Four aliased semantic colors are also chosen:</p>
+            <div class="margin-bottom">
+              <div class="grid tablet">
+                <div class="placeholder grid-width-four hide mobile"></div>
+                <div class="grid-width-four text-align-center trim">
+                  <div class="text-padding border border-radius text-margin-bottom info">info</div>
+                  <div class="text-padding border border-radius text-margin-bottom warning">warning</div>
+                  <div class="text-padding border border-radius text-margin-bottom success">success</div>
+                  <div class="text-padding border border-radius text-margin-bottom failure">failure</div>
+                </div>
+              </div>
+            </div>
+
+            <h2>Light and dark</h2>
+            <p>Color classes compose with the .light and .dark classes:</p>
+
+              <div>
+                <p><button class="light green">A button!</button></p>
+                <pre class="white-space">&lt;button class="light green"&gt;
+  A button!
+&lt;/button&gt;</pre>
+              </div>
+              <div>
+                <p><button class="dark green">A button!</button></p>
+                <pre class="white-space">&lt;button class="dark green"&gt;
+  A button!
+&lt;/button&gt;</pre>
+              </div>
+
+            <h2>Color helpers</h2>
+
+            <p>Helper classes <strong>warm</strong>, <strong>neutral</strong>, <strong>cool</strong>, <strong>bright</strong> and <strong>dull</strong> compose with colors to change their feeling:</p>
+
+            <div class="margin-bottom">
+              <div class="grid tablet">
+                <div class="placeholder grid-width-four hide mobile"></div>
+                <div class="grid-width-four text-align-center trim">
+                  <div class="text-padding border border-radius text-margin-bottom violet">violet</div>
+                  <div class="text-padding border border-radius text-margin-bottom warm violet">warm violet</div>
+                  <div class="text-padding border border-radius text-margin-bottom neutral violet">neutral violet</div>
+                  <div class="text-padding border border-radius text-margin-bottom cool violet">cool violet</div>
+                  <div class="text-padding border border-radius text-margin-bottom bright violet">bright violet</div>
+                  <div class="text-padding border border-radius text-margin-bottom dull violet">dull violet</div>
+                </div>
+              </div>
+            </div>
+
+            <p>Because these use <strong>background-image</strong>, only one color helper from this section can be used at a time.</p>
+
+            <h2>.texture</h2>
+            <p>All colors compose with <strong>.texture</strong> too:</p>
+
+            <div>
+              <p><h3 class="red text-padding">A red headline</h3></p>
+              <pre class="white-space">&lt;h3 class="red text-padding"&gt;
+Wow!
+&lt;/h3&gt;</pre>
+            </div>
+            <div>
+              <p><h3 class="red texture text-padding">A textured red headline</h3></p>
+              <pre class="white-space">&lt;h3 class="red texture text-padding"&gt;
+Wow!
+&lt;/h3&gt;</pre>
+            </div>
+            
+          </section>
+        </div>
+      </div>
+
+      <section class="hidden">
+        <p>Patterns can be invoked in any color using the .pattern() mixin.</p>
+        <p>They aren't available out-of-the-box in the CSS version.</p>
+      </section>
+
+      <section id="pattern_library" class="hidden two-column">
+        
+        <div class="pattern-example anchors-away"></div>
+        <div class="pattern-example architect"></div>
+        <div class="pattern-example autumn"></div>
+        <div class="pattern-example bamboo"></div>
+        <div class="pattern-example bathroom-floor"></div>
+        <div class="pattern-example bevel-circle"></div>
+        <div class="pattern-example boxes"></div>
+        <div class="pattern-example brick-wall"></div>
+        <div class="pattern-example bubbles"></div>
+        <div class="pattern-example cage"></div>
+        <div class="pattern-example circuit-board"></div>
+        <div class="pattern-example connections"></div>
+        <div class="pattern-example current"></div>
+        <div class="pattern-example curtain"></div>
+        <div class="pattern-example cutout"></div>
+        <div class="pattern-example death-star"></div>
+        <div class="pattern-example diagonal-lines"></div>
+        <div class="pattern-example diagonal-stripes"></div>
+        <div class="pattern-example dominos"></div>
+        <div class="pattern-example endless-clouds"></div>
+        <div class="pattern-example eyes"></div>
+        <div class="pattern-example falling-triangles"></div>
+        <div class="pattern-example flipped-diamonds"></div>
+        <div class="pattern-example floor-tile"></div>
+        <div class="pattern-example formal-invitation"></div>
+        <div class="pattern-example graph-paper"></div>
+        <div class="pattern-example groovy"></div>
+        <div class="pattern-example heavy-rain"></div>
+        <div class="pattern-example hexagons"></div>
+        <div class="pattern-example hideout"></div>
+        <div class="pattern-example houndstooth"></div>
+        <div class="pattern-example i-like-food"></div>
+        <div class="pattern-example intersecting-circles"></div>
+        <div class="pattern-example jupiter"></div>
+        <div class="pattern-example kiwi"></div>
+        <div class="pattern-example leaf"></div>
+        <div class="pattern-example lips"></div>
+        <div class="pattern-example lisbon"></div>
+        <div class="pattern-example melt"></div>
+        <div class="pattern-example moroccan"></div>
+        <div class="pattern-example morphing-diamonds"></div>
+        <div class="pattern-example overcast"></div>
+        <div class="pattern-example overlapping-circles"></div>
+        <div class="pattern-example overlapping-diamonds"></div>
+        <div class="pattern-example overlapping-hexagons"></div>
+        <div class="pattern-example parkay-floor"></div>
+        <div class="pattern-example piano-man"></div>
+        <div class="pattern-example pie-factory"></div>
+        <div class="pattern-example pixel-dots"></div>
+        <div class="pattern-example plus"></div>
+        <div class="pattern-example polka-dots"></div>
+        <div class="pattern-example rails"></div>
+        <div class="pattern-example rain"></div>
+        <div class="pattern-example random-shapes"></div>
+        <div class="pattern-example rounded-plus-connected"></div>
+        <div class="pattern-example signal"></div>
+        <div class="pattern-example skulls"></div>
+        <div class="pattern-example slanted-stars"></div>
+        <div class="pattern-example squares-in-squares"></div>
+        <div class="pattern-example squares"></div>
+        <div class="pattern-example stamp-collection"></div>
+        <div class="pattern-example steel-beams"></div>
+        <div class="pattern-example stripes"></div>
+        <div class="pattern-example temple"></div>
+        <div class="pattern-example texture"></div>
+        <div class="pattern-example tic-tac-toe"></div>
+        <div class="pattern-example tiny-checkers"></div>
+        <div class="pattern-example topography"></div>
+        <div class="pattern-example volcano-lamp"></div>
+        <div class="pattern-example wallpaper"></div>
+        <div class="pattern-example wiggle"></div>
+        <div class="pattern-example x-equals"></div>
+        <div class="pattern-example yyy"></div>
+        <div class="pattern-example zig-zag"></div>
+      </section>
