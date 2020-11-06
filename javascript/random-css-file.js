@@ -15,8 +15,9 @@
     next_sheet.rel  = 'stylesheet';
     next_sheet.id  = 'next_stylesheet';
     next_sheet.href = 'css/cavepaint_' + random_css_filenumber2 + '.css';
-    next_sheet.disabled = 'true';
+    next_sheet.disabled = 'disabled';
 
+    // set all the download buttons to the stylesheet href
     if (document.getElementsByClassName('download_it')) {
         var download_buttons = document.getElementsByClassName('download_it');
         for (var i = 0; i < download_buttons.length; i++) {
@@ -24,9 +25,11 @@
         }
     }
 
+    // put the stylesheet references in the DOM
     document.getElementsByTagName('head')[0].appendChild(next_sheet);
     document.getElementsByTagName('head')[0].appendChild(sheet);
 
+    // set sessionStorage (not used right now)
     sessionStorage.setItem('randomCSS', random_css_filenumber);
 })();
 
@@ -52,7 +55,7 @@ function newCSS() {
 
     // set up a new next sheet href
     next_sheet.href = 'css/cavepaint_' + random_css_filenumber + '.css';
-    setTimeout(function(){ next_sheet.disabled = 'disabled';}, 2000);
+    setTimeout(function(){ next_sheet.disabled = 'disabled';}, 1000);
 
     // fix download CSS hrefs
     if (document.getElementsByClassName('download_it')) {
