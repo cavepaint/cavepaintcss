@@ -6,7 +6,8 @@
     border-color: .set-lumafix(@action, @black, 50%)[];
 
     @lighten-by: softlight(@base-color, @white);
-	@darken-by: softlight(@base-color, @black);
+    @darken-by: softlight(@base-color, @black);
+    @brighten-by: lighten(saturate(@base-color, 12%), 12%);
 
     &.light { 
         @light: @lighten-by;
@@ -20,5 +21,12 @@
         .contrast(color, @dark);
         background-color: @dark;
         border-color: .set-lumafix(@dark, @black, 50%)[];
+    }
+
+    &.bright { 
+        @bright: @brighten-by;
+        .contrast(color, @bright);
+        background-color: @bright;
+        border-color: .set-lumafix(@bright, @black, 50%)[];
     }
 }

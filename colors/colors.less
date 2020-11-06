@@ -5,22 +5,24 @@
 	// @ambient-modifier: [.9 - 1.1 works best] how much the ambient light affects the color
 
 	// generate the color
-	@color-base: .set-lumafix(@base; @strength: @color-strength*@luma-modifier;)[];
-	@base-contrast-ceiling: .set-contrast-ratio(@color, @white)[];
+	@color-base: .set-lumafix(@base; @strength: @luma-modifier;)[];
+	@contrast-ceiling: .set-contrast-ratio(@color, @white)[];
 
 	// figure out if we're tinting or shading for the base color
-	@white-text: boolean(@base-contrast-ceiling >= 3);
-	@black-text: boolean(@base-contrast-ceiling < 3);
+	@white-text: boolean(@contrast-ceiling >= 3);
+	@black-text: boolean(@contrast-ceiling < 3);
 
-	@lighten-by: average(softlight(@color, @white), @color);
-	@darken-by: average(softlight(@color, @black), @color);
-
-	// @lighten-by: softlight(@color, @white);
-	// @darken-by: softlight(@color, @black);
+	// operations for the color variants
+	// @lightened: softlight(@color, @white);
+	// @darkened: softlight(@color, @black);
+	@lightened: mix(softlight(@white, @color), @color, 30%);
+	@darkened: mix(softlight(@black, @color), @color, 30%);
+	@brightened: lighten(overlay(@color, @color), 5%);
 
 	// find ceilings for .light and .dark variants
-	@light-ceiling: .set-contrast-ratio(@lighten-by, @white)[];
-	@dark-ceiling: .set-contrast-ratio(@darken-by, @white)[];
+	@light-ceiling: .set-contrast-ratio(@lightened, @white)[];
+	@dark-ceiling: .set-contrast-ratio(@darkened, @white)[];
+	@bright-ceiling: .set-contrast-ratio(@brightened, @white)[];
 
 	// sometimes it needs white text when darkened
 	@white-text-dark: boolean(@dark-ceiling >= 3);
@@ -28,6 +30,11 @@
 	// or black text when lightened
 	@black-text-light: boolean(@light-ceiling < 3);
 
+	// bright can go either way
+	@white-text-bright: boolean(@bright-ceiling >= 3);
+	@black-text-bright: boolean(@bright-ceiling < 3);
+
+	// apply ambient lighting
 	@color: mix(@color-base, overlay(@ambient, @color-base), @ambient-mix*@ambient-modifier);
 
 	.@{color-name} when (@outputs = true) {
@@ -44,23 +51,37 @@
 	}
 
 	.light.@{color-name} when (@outputs = true) {
-		background-color: @lighten-by;
-		border-color: .set-lumafix(@lighten-by, @black, 50%)[];
+		background-color: @lightened;
+		border-color: .set-lumafix(@lightened, @black, 50%)[];
 	}
 
-	.light.@{color-name} when (@outputs = true) when (@black-text-light) and not (@black-text) { 
+	.light.@{color-name} when (@outputs = true) and (@black-text-light) and not (@black-text) { 
 		&:extend(.shade);
 	}
 
 	.dark.@{color-name} when (@outputs = true) {
-		background-color: @darken-by;
-		border-color: .set-lumafix(@darken-by, @black, 50%)[];
+		background-color: @darkened;
+		border-color: .set-lumafix(@darkened, @black, 50%)[];
 	}
 
-	.dark.@{color-name} when (@outputs = true) when (@white-text-dark) and not (@white-text) { 
+	.dark.@{color-name} when (@outputs = true) and (@white-text-dark) and not (@white-text) { 
+		&:extend(.tint);
+	}
+
+	.bright.@{color-name} when (@outputs = true) {
+		background-color: @brightened;
+		border-color: .set-lumafix(@brightened, @black, 50%)[];
+	}
+
+	.bright.@{color-name} when (@outputs = true) and (@black-text-bright) { 
+		&:extend(.shade);
+	}
+
+	.bright.@{color-name} when (@outputs = true) and (@white-text-bright) { 
 		&:extend(.tint);
 	}
 }
+
 
 
 // used in building other colors
@@ -71,7 +92,7 @@
 
 // // default colors
 @import "gray";
-@import "brown";
+// @import "brown";
 // @import "magenta";
 // @import "lavender";
 // @import "cream";

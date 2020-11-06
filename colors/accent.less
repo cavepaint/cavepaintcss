@@ -1,52 +1,69 @@
 // accent and all other color wheel colors
 
-@accent-base: .set-lumafix(spin(@base-color, 30), @ambient, 100%)[];
+// very gray colors get a fake rep color for their wheel spins
+.set-rep-color() when (saturation(@base-color) < 5%) {
+    @rep-color: .set-lumafix(tan)[];
+}
+
+.set-rep-color() when (default()) {
+    @rep-color: @base-color;
+}
+
+@rep-color: .set-rep-color()[];
+
+// set up the variables
+// all of the color wheel colors are created through lumafixing/spinning
+
+@accent-base: .set-lumafix(spin(@rep-color, 30), @ambient, 100%)[];
 @accent: .set-color(accent, @accent-base, 0, 1)[];
-@inverted-accent-base: .set-lumafix(spin(@base-color, -30), @ambient, 100%)[];
+@inverted-accent-base: .set-lumafix(spin(@rep-color, -30), @ambient, 100%)[];
 @inverted-accent: .set-color(accent, @inverted-accent-base, 0, 1)[];
 
-@complement-base: .set-lumafix(spin(@base-color, 180), @base-color, 33%)[];
+@complement-base: .set-lumafix(spin(@rep-color, 180), @rep-color, 33%)[];
 @complement: .set-color(complement, @complement-base, 1/2, 1)[];
 
-@split-base: .set-lumafix(spin(@base-color, 90), @base-color, 33%)[];
+@split-base: .set-lumafix(spin(@rep-color, 90), @rep-color, 33%)[];
 @split: .set-color(split, @split-base, 0, 1)[];
 
-@inverted-split-base: .set-lumafix(spin(@base-color, -90), @base-color, 33%)[];
+@inverted-split-base: .set-lumafix(spin(@rep-color, -90), @rep-color, 33%)[];
 @inverted-split: .set-color(inverted-split, @inverted-split-base, 0, 1)[];
 
-@tetrad-base: .set-lumafix(spin(@base-color, 45), @base-color, 33%)[];
+@tetrad-base: .set-lumafix(spin(@rep-color, 45), @rep-color, 33%)[];
 @tetrad: .set-color(tetrad, @tetrad-base, 0, 1)[];
 
-@second-tetrad-base: .set-lumafix(spin(@base-color, 135), @base-color, 33%)[];
+@second-tetrad-base: .set-lumafix(spin(@rep-color, 135), @rep-color, 33%)[];
 @second-tetrad: .set-color(second-tetrad, @second-tetrad-base, 0, 1)[];
 
-@third-tetrad-base: .set-lumafix(spin(@base-color, -135), @base-color, 33%)[];
+@third-tetrad-base: .set-lumafix(spin(@rep-color, -135), @rep-color, 33%)[];
 @third-tetrad: .set-color(third-tetrad, @third-tetrad-base, 0, 1)[];
 
-@fourth-tetrad-base: .set-lumafix(spin(@base-color, -45), @base-color, 33%)[];
+@fourth-tetrad-base: .set-lumafix(spin(@rep-color, -45), @rep-color, 33%)[];
 @fourth-tetrad: .set-color(fourth-tetrad, @fourth-tetrad-base, 0, 1)[];
 
-@triad-base: .set-lumafix(spin(@base-color, 60), @base-color, 33%)[];
+@triad-base: .set-lumafix(spin(@rep-color, 60), @rep-color, 33%)[];
 @triad: .set-color(triad, @triad-base, 0, 1)[];
 
-// @second-triad-base: .set-lumafix(spin(@base-color, 180), @base-color, 33%)[];
+// second triad is the same thing as complement
+// @second-triad-base: .set-lumafix(spin(@rep-color, 180), @rep-color, 33%)[];
 // @second-triad: .set-color(second-triad, @second-triad-base, 0, 1)[];
 
-@third-triad-base: .set-lumafix(spin(@base-color, -60), @base-color, 33%)[];
+@third-triad-base: .set-lumafix(spin(@rep-color, -60), @rep-color, 33%)[];
 @third-triad: .set-color(third-triad, @third-triad-base, 0, 1)[];
 
-.color-helpers(@color) {
-    background-color: @color;
-    border-color: .set-lumafix(@color, @black, 50%)[];
+// this creates all CSS properties and helpers for any color
 
+.color-helpers(@color) {
     // generate the color
-	@color-base: .set-lumafix(@base-color; @strength: 80%;)[];
 	@base-contrast-ceiling: .set-contrast-ratio(@color, @white)[];
 
 	// figure out if we're tinting or shading for the base color
 	@white-text: boolean(@base-contrast-ceiling >= 3);
     @black-text: boolean(@base-contrast-ceiling < 3);
-    
+
+    @brighten-by: lighten(overlay(@color, @color), 5%);
+    @lighten-by: mix(softlight(@white, @color), @color, 30%);
+	@darken-by: mix(softlight(@black, @color), @color, 30%);
+
     .text-color() when (@white-text) {
         &:extend(.tint);
     }
@@ -56,17 +73,32 @@
     }
 
     .text-color();
+    background-color: @color;
+    border-color: .set-lumafix(@color, @black, 50%)[];
 
-    .light& {
-        background-color: lighten(@color, 12%);
-        border-color: .set-lumafix(lighten(@color, 12%), @black, 50%)[];
+    .light& { 
+        @light: @lighten-by;
+        .contrast(color, @light);
+        background-color: @light;
+        border-color: .set-lumafix(@light, @black, 50%)[];
+    }
+    
+    .dark& { 
+        @dark: @darken-by;
+        .contrast(color, @dark);
+        background-color: @dark;
+        border-color: .set-lumafix(@dark, @black, 50%)[];
     }
 
-    .dark& {
-        background-color: darken(@color, 12%);
-        border-color: .set-lumafix(darken(@color, 12%), @black, 50%)[];
+    .bright& { 
+        @bright: @brighten-by;
+        .contrast(color, @bright);
+        background-color: @bright;
+        border-color: .set-lumafix(@bright, @black, 50%)[];
     }
 }
+
+// set up the actual CSS output
 
 .complement {
     .color-helpers(@complement);

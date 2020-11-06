@@ -1,12 +1,12 @@
-@default-texture-source: @@default-texture;
+// @default-texture-source: @@default-texture;
 
-.texture {
-    background-position: top center;
-}
+// .texture {
+//     background-position: top center;
+// }
 
-.texture {
-    background-image: url("data:image/svg+xml,@{default-texture-source}");
-}
+// .texture {
+//     background-image: url("data:image/svg+xml,@{default-texture-source}");
+// }
 
 
 // warm
@@ -17,32 +17,24 @@
 
 @warm-bg: escape(~"@{warm}");
 @warm-bg-base: "%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201%201%22%20height%3D%2210%22%20width%3D%2210%22%3E%3Cpath%20fill%3D%22@{warm-bg}%22%20opacity%3D%22@{warm-bg-fill-opacity}%22%20d%3D%22M0%200h1v1H0z%22%2F%3E%3C%2Fsvg%3E";
-@warm-bg-fill-opacity: .16;
+@warm-bg-fill-opacity: .2;
 
 // .set-color(~"warm", @warm, 0, @outputs: true);
 
-.set-warm-base() when (red(@base-color) > 64) {
-    @warm-base: @orange;
-}
-
 .set-warm-base() when (red(@base-color) > 128) {
-    @warm-base: average(@orange, @red);
-}
-
-.set-warm-base() when (red(@base-color) > 196) {
-    @warm-base: @red;
+    @warm-base: .set-lumafix(@orange, @yellow)[];
 }
 
 .set-warm-base() when (default()) {
-    @warm-base: @yellow;
+    @warm-base: .set-lumafix(@red, @yellow)[];
 }
 
 .warm {
     background-image: url("data:image/svg+xml,@{warm-bg-base}");
 
-    &.texture {
-        background-image: url("data:image/svg+xml,@{warm-bg-base}"), url("data:image/svg+xml,@{default-texture-source}");
-    }
+    // &.texture {
+    //     background-image: url("data:image/svg+xml,@{warm-bg-base}"), url("data:image/svg+xml,@{default-texture-source}");
+    // }
 }
 
 // cool 
@@ -53,32 +45,24 @@
 
 @cool-bg: escape(~"@{cool}");
 @cool-bg-base: "%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201%201%22%20height%3D%2210%22%20width%3D%2210%22%3E%3Cpath%20fill%3D%22@{cool-bg}%22%20opacity%3D%22@{cool-bg-fill-opacity}%22%20d%3D%22M0%200h1v1H0z%22%2F%3E%3C%2Fsvg%3E";
-@cool-bg-fill-opacity: .16;
+@cool-bg-fill-opacity: .2;
 
 // .set-color(~"cool", @cool, 0, @outputs: true);
 
-.set-cool-base() when (blue(@base-color) > 64) {
-    @cool-base: average(@blue, @skyblue);
-}
-
 .set-cool-base() when (blue(@base-color) > 128) {
-    @cool-base: @skyblue;
-}
-
-.set-cool-base() when (blue(@base-color) > 196) {
     @cool-base: @cyan;
 }
 
 .set-cool-base() when (default()) {
-    @cool-base: @blue;
+    @cool-base: .set-lumafix(@blue, @cyan)[];
 }
 
 .cool {
     background-image: url("data:image/svg+xml,@{cool-bg-base}");
 
-    &.texture {
-        background-image: url("data:image/svg+xml,@{cool-bg-base}"), url("data:image/svg+xml,@{default-texture-source}");
-    }
+    // &.texture {
+    //     background-image: url("data:image/svg+xml,@{cool-bg-base}"), url("data:image/svg+xml,@{default-texture-source}");
+    // }
 }
 
 // neutral 
@@ -93,64 +77,56 @@
 
 // .set-color(~"neutral", @neutral, 0, @outputs: true);
 
-.set-neutral-base() when (green(@base-color) > 64) {
-    @neutral-base: @teal;
-}
-
 .set-neutral-base() when (green(@base-color) > 128) {
-    @neutral-base: average(@teal, @olive);
-}
-
-.set-neutral-base() when (green(@base-color) > 196) {
-    @neutral-base: @olive;
+    @neutral-base: .set-lumafix(@teal, @magenta)[];
 }
 
 .set-neutral-base() when (default()) {
-    @neutral-base: @green;
+    @neutral-base: .set-lumafix(@green, @magenta)[];
 }
 
 .neutral {
     background-image: url("data:image/svg+xml,@{neutral-bg-base}");
 
-    &.texture {
-        background-image: url("data:image/svg+xml,@{neutral-bg-base}"), url("data:image/svg+xml,@{default-texture-source}");
-    }
+    // &.texture {
+    //     background-image: url("data:image/svg+xml,@{neutral-bg-base}"), url("data:image/svg+xml,@{default-texture-source}");
+    // }
 }
 
 // bright 
 
-@bright-base: @ambient;
-@bright-lumafix: .set-lumafix(@bright-base, yellow, 80%)[];
-@bright: .set-color(~"bright", @bright-lumafix, 0)[];
+// @bright-base: @ambient;
+// @bright-lumafix: @ambient;
+// @bright: .set-color(~"bright", @bright-lumafix, 0)[];
 
-@bright-bg: escape(~"@{bright}");
-@bright-bg-base: "%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201%201%22%20height%3D%2210%22%20width%3D%2210%22%3E%3Cpath%20fill%3D%22@{bright-bg}%22%20opacity%3D%22@{bright-bg-fill-opacity}%22%20d%3D%22M0%200h1v1H0z%22%2F%3E%3C%2Fsvg%3E";
-@bright-bg-fill-opacity: .3;
+// @bright-bg: escape(~"@{bright}");
+// @bright-bg-base: "%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201%201%22%20height%3D%2210%22%20width%3D%2210%22%3E%3Cpath%20fill%3D%22@{bright-bg}%22%20opacity%3D%22@{bright-bg-fill-opacity}%22%20d%3D%22M0%200h1v1H0z%22%2F%3E%3C%2Fsvg%3E";
+// @bright-bg-fill-opacity: .24;
 
-.bright {
-    background-image: url("data:image/svg+xml,@{bright-bg-base}");
+// .bright {
+//     background-image: url("data:image/svg+xml,@{bright-bg-base}");
 
-    &.texture {
-        background-image: url("data:image/svg+xml,@{bright-bg-base}"), url("data:image/svg+xml,@{default-texture-source}");
-    }
-}
+//     &.texture {
+//         background-image: url("data:image/svg+xml,@{bright-bg-base}"), url("data:image/svg+xml,@{default-texture-source}");
+//     }
+// }
 
 // dull 
 
-@dull-base: average(@gray, desaturate(@base-color, 100%));
-@dull-lumafix: .set-average(@dull-base, @gray;)[];
+@dull-base: @gray;
+@dull-lumafix: .set-average(@dull-base, desaturate(@ambient, 100%);)[];
 @dull: .set-color(~"dull", @dull-lumafix, 0)[];
 
 @dull-bg: escape(~"@{dull}");
 @dull-bg-base: "%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201%201%22%20height%3D%2210%22%20width%3D%2210%22%3E%3Cpath%20fill%3D%22@{dull-bg}%22%20opacity%3D%22@{dull-bg-fill-opacity}%22%20d%3D%22M0%200h1v1H0z%22%2F%3E%3C%2Fsvg%3E";
-@dull-bg-fill-opacity: .28;
+@dull-bg-fill-opacity: .38;
 
 // .set-color(~"dull", @dull, 0, @outputs: true);
 
 .dull {
     background-image: url("data:image/svg+xml,@{dull-bg-base}");
 
-    &.texture {
-        background-image: url("data:image/svg+xml,@{dull-bg-base}"), url("data:image/svg+xml,@{default-texture-source}");
-    }
+    // &.texture {
+    //     background-image: url("data:image/svg+xml,@{dull-bg-base}"), url("data:image/svg+xml,@{default-texture-source}");
+    // }
 }
