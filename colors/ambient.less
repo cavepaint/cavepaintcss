@@ -1,28 +1,5 @@
 @ambient: softlight(screen(@base-color, @base-color), @base-color);
 
-.ambient { 
-    .contrast(color, @ambient);
-    background-color: @ambient;
-    border-color: .set-lumafix(@ambient, @black, 50%)[];
-}
-
-.ambient.light { 
-    @light: softlight(@ambient, @white);
-    .contrast(color, @light);
-    background-color: @light;
-    border-color: .set-lumafix(@light, @black, 50%)[];
-}
-
-.ambient.dark { 
-    @dark: softlight(@ambient, @black);
-    .contrast(color, @dark);
-    background-color: @dark;
-    border-color: .set-lumafix(@dark, @black, 50%)[];
-}
-
-.ambient.bright { 
-    @bright: lighten(saturate(softlight(@ambient, @white), 5%), 5%);
-    .contrast(color, @bright);
-    background-color: @bright;
-    border-color: .set-lumafix(@bright, @black, 50%)[];
+.ambient {
+    .color-helpers(@ambient);
 }

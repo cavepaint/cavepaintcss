@@ -1,18 +1,17 @@
 .button {
-    .default(border-style);
-    .default(border-radius);
-    .default(box-shadow);
+    &:extend(.border);
+    &:extend(.border-radius);
   
     display: inline;
+    box-shadow: var(--box-shadow);
     position: relative;
     font-family: inherit;
     font-size: inherit;
-    padding: @text-padding;
+    padding: var(--text-padding) var(--padding);
     color: inherit;
     background-color: inherit;
-    border-color: darken(@default, 16%);
-    border-width: 1px;
-    line-height: 1.6;
+    border-width: var(--border-width);
+    line-height: 1;
     text-align: center;
     vertical-align: middle;
     outline: none;
@@ -21,16 +20,11 @@
     touch-action: manipulation;
     cursor: pointer;
     transform: scale(1);
-    transition: .08s linear;
+    transition: scale .08s linear;
     .no-user-select;
 
     &:active {
-      transform: scale(.99);
+      transform: scale(.96);
       box-shadow: unset;
-    }
-
-    &.border {
-      &:extend(.border-width);
-      &:extend(.border-style);
     }
 }

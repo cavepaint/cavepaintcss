@@ -1,32 +1,5 @@
 @action: @base-color;
 
 .action, .base-color { 
-    .contrast(color, @action);
-    background-color: @action;
-    border-color: .set-lumafix(@action, @black, 50%)[];
-
-    @lighten-by: softlight(@base-color, @white);
-    @darken-by: softlight(@base-color, @black);
-    @brighten-by: lighten(saturate(@base-color, 12%), 12%);
-
-    &.light { 
-        @light: @lighten-by;
-        .contrast(color, @light);
-        background-color: @light;
-        border-color: .set-lumafix(@light, @black, 50%)[];
-    }
-    
-    &.dark { 
-        @dark: @darken-by;
-        .contrast(color, @dark);
-        background-color: @dark;
-        border-color: .set-lumafix(@dark, @black, 50%)[];
-    }
-
-    &.bright { 
-        @bright: @brighten-by;
-        .contrast(color, @bright);
-        background-color: @bright;
-        border-color: .set-lumafix(@bright, @black, 50%)[];
-    }
+    .color-helpers(@base-color);
 }

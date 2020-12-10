@@ -1,25 +1,19 @@
 .hide {
-    display: none;
-  
-    // &.mobile { & { display: initial;}}
-    &.tablet { & { display: initial;}}
-    &.desktop { & { display: initial;}}
-  
-    .on-mobile({
-      &.mobile { display: none;}
-    });
-  
-    .on-tablet({
-      &.mobile { display: initial;}
-      &.tablet { display: none;}
-    });
-  
-    .on-desktop({
-      &.desktop { display: none;}
-      &.mobile.tablet { display: initial;}
-    });
+  display: none;
 
-    .under-desktop({
-      &.mobile.tablet { display: none;}
-    });
-  }
+  // &.mobile { & { display: initial;}}
+  &.tablet { & { display: initial;}}
+  &.desktop { & { display: initial;}}
+
+  &.mobile { display: none;}
+
+  .on-tablet({
+    &.mobile { display: initial;}
+    &.tablet { display: none;}
+  });
+
+  .on-desktop({
+    &.desktop { display: none;}
+    &.mobile.tablet { display: initial;}
+  });
+}

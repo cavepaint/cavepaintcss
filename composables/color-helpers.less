@@ -1,25 +1,61 @@
-// @default-texture-source: @@default-texture;
+// this creates all CSS properties and helpers for any color
 
-// .texture {
-//     background-position: top center;
-// }
+.color-helpers(@color) {
 
-// .texture {
-//     background-image: url("data:image/svg+xml,@{default-texture-source}");
-// }
+    // how much the color helpers show up, relatively
+    @effect: 90%;
 
+    @brightened: mix(lighten(saturate(@color, 10%), 10%), @color, @effect);
+    @dimmed: mix(desaturate(multiply(@shadow-color, @color), 16%), @color, @effect);
+    
+    @lightened: mix(softlight(@color, @white), @color, @effect);
+    @darkened: mix(softlight(@color, black), @color, @effect);
+    
+    @base-contrast-ceiling: .set-contrast-ratio(@color, @white)[];
+    @border-color: .set-lumafix(@color, @black, 75%)[];
+
+    .text-color(@ceiling) when (@ceiling >= 3) {
+        &:extend(.tint);
+    }
+
+    .text-color(@ceiling) when (default()) {
+        &:extend(.shade);
+    }
+
+    .text-color(@base-contrast-ceiling);
+
+    --h: round(hue(@color), 1);
+    --s: round(saturation(@color), 1);
+    --l: round(lightness(@color), 1);
+
+    .light& { 
+        @light-ceiling: .set-contrast-ratio(@lightened, @white)[];
+        .text-color(@light-ceiling);
+        --l: round(lightness(@lightened), 1);
+    } 
+        
+    .dark& { 
+        @dark-ceiling: .set-contrast-ratio(@darkened, @white)[];
+        .text-color(@dark-ceiling);
+        --l: round(lightness(@darkened), 1);
+    }
+
+    .bright& { 
+        @bright-ceiling: .set-contrast-ratio(@brightened, @white)[];
+        .text-color(@bright-ceiling);
+        --s: round(saturation(@brightened), 1);
+        --l: round(lightness(@brightened), 1);
+    }
+
+    .dim& { 
+        @dim-ceiling: .set-contrast-ratio(@dimmed, @white)[];
+        .text-color(@dim-ceiling);
+        --s: round(saturation(@dimmed), 1);
+        --l: round(lightness(@dimmed), 1);
+    }
+}
 
 // warm
-
-@warm-base: .set-warm-base()[];
-@warm-lumafix: .set-lumafix(@warm-base, @base-color, 25%)[];
-@warm: .set-color(~"warm", @warm-lumafix, 0)[];
-
-@warm-bg: escape(~"@{warm}");
-@warm-bg-base: "%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201%201%22%20height%3D%2210%22%20width%3D%2210%22%3E%3Cpath%20fill%3D%22@{warm-bg}%22%20opacity%3D%22@{warm-bg-fill-opacity}%22%20d%3D%22M0%200h1v1H0z%22%2F%3E%3C%2Fsvg%3E";
-@warm-bg-fill-opacity: .2;
-
-// .set-color(~"warm", @warm, 0, @outputs: true);
 
 .set-warm-base() when (red(@base-color) > 128) {
     @warm-base: .set-lumafix(@orange, @yellow)[];
@@ -29,25 +65,17 @@
     @warm-base: .set-lumafix(@red, @yellow)[];
 }
 
-.warm {
-    background-image: url("data:image/svg+xml,@{warm-bg-base}");
+@warm-base: .set-warm-base()[];
+@warm-lumafix: .set-lumafix(@warm-base, @base-color, 25%)[];
+@warm: .set-color(~"warm", @warm-lumafix, 0)[];
+@warm-gradient: rgba(red(@warm), green(@warm), blue(@warm), @warm-bg-fill-opacity);
+@warm-bg-fill-opacity: .2;
 
-    // &.texture {
-    //     background-image: url("data:image/svg+xml,@{warm-bg-base}"), url("data:image/svg+xml,@{default-texture-source}");
-    // }
+.warm {
+    background-image: linear-gradient(var(--warm), var(--warm));
 }
 
 // cool 
-
-@cool-base: .set-cool-base()[];
-@cool-lumafix: .set-lumafix(@cool-base, @base-color, 50%)[];
-@cool: .set-color(~"cool", @cool-lumafix, 0)[];
-
-@cool-bg: escape(~"@{cool}");
-@cool-bg-base: "%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201%201%22%20height%3D%2210%22%20width%3D%2210%22%3E%3Cpath%20fill%3D%22@{cool-bg}%22%20opacity%3D%22@{cool-bg-fill-opacity}%22%20d%3D%22M0%200h1v1H0z%22%2F%3E%3C%2Fsvg%3E";
-@cool-bg-fill-opacity: .2;
-
-// .set-color(~"cool", @cool, 0, @outputs: true);
 
 .set-cool-base() when (blue(@base-color) > 128) {
     @cool-base: @cyan;
@@ -57,76 +85,44 @@
     @cool-base: .set-lumafix(@blue, @cyan)[];
 }
 
-.cool {
-    background-image: url("data:image/svg+xml,@{cool-bg-base}");
+@cool-base: .set-cool-base()[];
+@cool-lumafix: .set-lumafix(@cool-base, @base-color, 50%)[];
+@cool: .set-color(~"cool", @cool-lumafix, 0)[];
+@cool-gradient: rgba(red(@cool), green(@cool), blue(@cool), @cool-bg-fill-opacity);
+@cool-bg-fill-opacity: .2;
 
-    // &.texture {
-    //     background-image: url("data:image/svg+xml,@{cool-bg-base}"), url("data:image/svg+xml,@{default-texture-source}");
-    // }
+.cool {
+    background-image: linear-gradient(var(--cool), var(--cool));
 }
 
 // neutral 
 
-@neutral-base: .set-neutral-base()[];
-@neutral-lumafix: .set-lumafix(@neutral-base, @base-color, 50%)[];
-@neutral: .set-color(~"neutral", @neutral-lumafix, 0)[];
-
-@neutral-bg: escape(~"@{neutral}");
-@neutral-bg-base: "%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201%201%22%20height%3D%2210%22%20width%3D%2210%22%3E%3Cpath%20fill%3D%22@{neutral-bg}%22%20opacity%3D%22@{neutral-bg-fill-opacity}%22%20d%3D%22M0%200h1v1H0z%22%2F%3E%3C%2Fsvg%3E";
-@neutral-bg-fill-opacity: .16;
-
-// .set-color(~"neutral", @neutral, 0, @outputs: true);
-
 .set-neutral-base() when (green(@base-color) > 128) {
-    @neutral-base: .set-lumafix(@teal, @magenta)[];
+    @neutral-base: .set-lumafix(@action, @cyan)[];
 }
 
 .set-neutral-base() when (default()) {
-    @neutral-base: .set-lumafix(@green, @magenta)[];
+    @neutral-base: .set-lumafix(@action, @cyan)[];
 }
+
+@neutral-base: .set-neutral-base()[];
+@neutral-lumafix: .set-lumafix(@neutral-base, @base-color, 50%)[];
+@neutral: average(@neutral-lumafix, @action);
+@neutral-gradient: rgba(red(@neutral), green(@neutral), blue(@neutral), @neutral-bg-fill-opacity);
+@neutral-bg-fill-opacity: .1;
 
 .neutral {
-    background-image: url("data:image/svg+xml,@{neutral-bg-base}");
-
-    // &.texture {
-    //     background-image: url("data:image/svg+xml,@{neutral-bg-base}"), url("data:image/svg+xml,@{default-texture-source}");
-    // }
+    background-image: linear-gradient(var(--neutral), var(--neutral));
 }
-
-// bright 
-
-// @bright-base: @ambient;
-// @bright-lumafix: @ambient;
-// @bright: .set-color(~"bright", @bright-lumafix, 0)[];
-
-// @bright-bg: escape(~"@{bright}");
-// @bright-bg-base: "%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201%201%22%20height%3D%2210%22%20width%3D%2210%22%3E%3Cpath%20fill%3D%22@{bright-bg}%22%20opacity%3D%22@{bright-bg-fill-opacity}%22%20d%3D%22M0%200h1v1H0z%22%2F%3E%3C%2Fsvg%3E";
-// @bright-bg-fill-opacity: .24;
-
-// .bright {
-//     background-image: url("data:image/svg+xml,@{bright-bg-base}");
-
-//     &.texture {
-//         background-image: url("data:image/svg+xml,@{bright-bg-base}"), url("data:image/svg+xml,@{default-texture-source}");
-//     }
-// }
 
 // dull 
 
 @dull-base: @gray;
-@dull-lumafix: .set-average(@dull-base, desaturate(@ambient, 100%);)[];
+@dull-lumafix: .set-average(@dull-base, desaturate(@action, 100%);)[];
 @dull: .set-color(~"dull", @dull-lumafix, 0)[];
-
-@dull-bg: escape(~"@{dull}");
-@dull-bg-base: "%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201%201%22%20height%3D%2210%22%20width%3D%2210%22%3E%3Cpath%20fill%3D%22@{dull-bg}%22%20opacity%3D%22@{dull-bg-fill-opacity}%22%20d%3D%22M0%200h1v1H0z%22%2F%3E%3C%2Fsvg%3E";
-@dull-bg-fill-opacity: .38;
-
-// .set-color(~"dull", @dull, 0, @outputs: true);
+@dull-bg-fill-opacity: .3;
+@dull-gradient: rgba(red(@dull), green(@dull), blue(@dull), @dull-bg-fill-opacity);
 
 .dull {
-    background-image: url("data:image/svg+xml,@{dull-bg-base}");
-
-    // &.texture {
-    //     background-image: url("data:image/svg+xml,@{dull-bg-base}"), url("data:image/svg+xml,@{default-texture-source}");
-    // }
+    background-image: linear-gradient(var(--dull), var(--dull));
 }

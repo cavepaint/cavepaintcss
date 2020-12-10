@@ -1,19 +1,50 @@
-@grid-columns: 12;
-
-.grid, .two-column, .three-column {
-
+.grid {
     display: grid;
-    grid-gap: @margin;
-    margin-bottom: @margin;
+    grid-gap: var(--grid-gap);
+    grid-template-columns: repeat(@grid-columns, minmax(0, 1fr));
 
-    &.tablet, &.mobile.tablet, &.desktop { 
-        // display: initial;
-        display: unset;
+    &.mobile {    
+        .on-mobile({
+            display: grid;
+        });
+
+        .on-tablet({
+            display: initial;
+        });
     }
+
+    &.mobile.tablet {
+        display: grid;
+    
+        .on-tablet({
+            display: grid;
+        });
+
+        .on-desktop({
+            display: initial;
+        });
+    }
+
+    &.tablet {
+        display: initial;
+    
+        .on-tablet({
+            display: grid;
+        });
+    }
+    
+    &.desktop {
+        display: initial;
+    
+        .on-desktop({
+            display: grid;
+        });
+    }
+
 }
 
-.grid {
-    grid-template-columns: repeat(@grid-columns, minmax(0, 1fr));
+.two-column, .three-column {
+    &:extend(.grid all);
 }
 
 .two-column {
@@ -80,38 +111,3 @@
 .grid-width-twelve when (@grid-columns >= 12) {
   grid-column: auto / span 12;
 }
-
-.on-mobile({
-    .grid, .two-column, .three-column {
-        &.mobile {
-            display: grid;
-        }
-    }
-});
-
-.on-tablet({
-    .grid, .two-column, .three-column {
-        &.mobile {
-            display: initial;
-        }
-        &.tablet {
-            display: grid;
-        }
-    }
-});
-
-.under-desktop({
-    .grid, .two-column, .three-column {
-        &.mobile.tablet {
-            display: grid;
-        }
-    }
-});
-
-.on-desktop({
-    .grid, .two-column, .three-column {
-        &.desktop {
-            display: grid;
-        }
-    } 
-});

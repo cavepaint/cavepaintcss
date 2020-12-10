@@ -3,24 +3,5 @@
 @white: mix(white, @ambient, 94%);
 
 .white { 
-    background-color: @white;
-    &:extend(.shade all);
-    border-color: .set-lumafix(@white, @black, 50%)[];
-
-    @lighten-by: softlight(@white, white);
-	@darken-by: softlight(@white, @black);
-
-    &.light { 
-        @light: @lighten-by;
-        .contrast(color, @light);
-        background-color: @light;
-        border-color: .set-lumafix(@light, @black, 50%)[];
-    }
-    
-    &.dark { 
-        @dark: @darken-by;
-        .contrast(color, @dark);
-        background-color: @dark;
-        border-color: .set-lumafix(@dark, @black, 50%)[];
-    }
+    .color-helpers(@white);
 }

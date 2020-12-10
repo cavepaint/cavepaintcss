@@ -1,287 +1,155 @@
-// All CSS properties have a corresponding variable here
-// Use with '.default(property-name)' to invoke default properties
+@base-color: #acacd6;
 
-// eg '.default(padding);' is equivalent to 'padding: @padding;'
+// important CSS properties
+@line-height: 1.8;
+@font-size: 18px;
+@font-family: @font-family-sans-serif;
+@padding: 1rem;
+@margin: @padding;
+@gutter: @margin*2;
+@border-radius: .5em;
 
-// this is what it defaults to upon setting, not in the browser
+// cavepaint widths
+@text-measure: 62; // an estimate of intended characters per line
+@text-width: floor(@text-measure * .6rem);
+@card-width: floor(@text-width / @golden-ratio);
+@page-width: floor(@text-width * @golden-ratio);
+@feature-width: floor(@page-width * @golden-ratio);
 
-@css-property-names: 
-background,
-background-color,
-border,
-border-radius,
-border-bottom,
-border-left,
-border-right,
-border-style,
-border-top,
-border-width,
-max-width,
-min-width,
-align-content,
-align-items,
-align-self,
-flex,
-flex-direction,
-justify-content,
-font-family,
-font-size,
-font-weight,
-list-style,
-list-style-type,
-margin,
-margin-bottom,
-margin-left,
-margin-right,
-margin-top,
-column-gap,
-column-rule,
-padding,
-padding-bottom,
-padding-left,
-padding-right,
-padding-top,
-text-align,
-text-align-last,
-text-indent,
-text-justify,
-text-overflow,
-text-shadow,
-line-height,
-vertical-align,
-letter-spacing,
-word-spacing,
-white-space,
-word-break,
-word-wrap,
-transform,
-transition,
-display,
-position,
-top,
-right,
-bottom,
-left,
-float,
-clear,
-z-index,
-overflow,
-cursor,
-box-shadow;
+// design variables
+@grid-columns: 12;
+@golden-ratio: 1.618;
+@shadow-color-base: @black;
+@shadow-color: fade(@shadow-color-base, 20%);
+@shadow-length: 1px;
+@shadow-blur: @shadow-length;
+@light-source-position: @shadow-length @shadow-length; // top left
+@shallow-light-source-position: @shadow-length/2 @shadow-length/2; // top left
+@deep-light-source-position: @shadow-length*2 @shadow-length*2; // top left
+@box-shadow: @light-source-position @shadow-blur @shadow-color;
+@shallow-box-shadow: @shallow-light-source-position @shadow-blur/2 @shadow-color;
+@deep-box-shadow: @deep-light-source-position @shadow-blur*2 @shadow-color;
 
-// this outputs every CSS property as a class, with its
-// value as the default value found in properties.less
+// color mixing settings
+@color-strength: 90% + 10%*(unit(luma(@base-color))/100); // how much of original color stays in
+@ambient-mix: 90%; // mix of ambient lighting
+@tone: .set-tone(@base-color)[];
 
-each(@css-property-names, {   
-    .@{value} { 
-      @{value}: @@value;
-    };
-});
+// text settings
+@text-padding: .25em;
+@text-margin: var(--text-padding);
+@text-border-radius: var(--text-padding);
+@text-shadow: @box-shadow;
 
+@margin: @padding;
+@margin-bottom: @margin;
+@margin-left: @margin;
+@margin-right: @margin;
+@margin-top: @margin;
 
-
-// Animation Properties
-@animation: @animation-name @animation-duration @animation-timing-function; // Specifies the keyframe-based animations.
-@animation-delay: 1s; // Specifies when the animation will start.
-@animation-direction: normal; // Specifies whether the animation should play in reverse on alternate cycles or not.
-@animation-duration: 1s; // Specifies the number of seconds or milliseconds an animation should take to complete one cycle.
-@animation-fill-mode: forwards; // Specifies how a CSS animation should apply styles to its target before and after it is executing.
-@animation-iteration-count: 1; // Specifies the number of times an animation cycle should be played before stopping.
-@animation-name: none; // Specifies the name of @keyframes defined animations that should be applied to the selected element.
-@animation-play-state: running; // Specifies whether the animation is running or paused.
-@animation-timing-function: linear; // Specifies how a CSS animation should progress over the duration of each cycle.
-
-// Background Properties
-@background: @background-color; // Defines a variety of background properties within one declaration.
-@background-attachment: scroll; // Specify whether the background image is fixed in the viewport or scrolls.
-@background-clip: border-box; // Specifies the painting area of the background.
-@background-color: @white; // Defines an element's background color.
-@background-image: none; // Defines an element's background image.
-@background-origin: padding-box; // Specifies the positioning area of the background images.
-@background-position: top center; // Defines the origin of a background image.
-@background-repeat: no-repeat; // Specify whether/how the background image is tiled.
-@background-size: auto; // Specifies the size of the background images.
-
-// Border Properties
 @border: @border-width @border-style @border-color; // Sets the width, style, and color for all four sides of an element's border.
-@border-bottom: @border; // Sets the width, style, and color of the bottom border of an element.
-@border-bottom-color: @border-color; // Sets the color of the bottom border of an element.
-@border-bottom-left-radius: @border-radius; // Defines the shape of the bottom-left border corner of an element.
-@border-bottom-right-radius: @border-radius; // Defines the shape of the bottom-right border corner of an element.
-@border-bottom-style: @border-style; // Sets the style of the bottom border of an element.
-@border-bottom-width: @border-width; // Sets the width of the bottom border of an element.
-@border-color: @default; // Sets the color of the border on all the four sides of an element.
-@border-image: @border-image-source @border-image-slice @border-image-repeat; // Specifies how an image is to be used in place of the border styles.
-@border-image-outset: none; // Specifies the amount by which the border image area extends beyond the border box.
-@border-image-repeat: round; // Specifies whether the image-border should be repeated, rounded or stretched.
-@border-image-slice: 10; // Specifies the inward offsets of the image-border.
-@border-image-source: none; // Specifies the location of the image to be used as a border.
-@border-image-width: 10; // Specifies the width of the image-border.
-@border-left: @border; // Sets the width, style, and color of the left border of an element.
-@border-left-color: @border-color; // Sets the color of the left border of an element.
-@border-left-style: @border-style; // Sets the style of the left border of an element.
-@border-left-width: @border-width; // Sets the width of the left border of an element.
-@border-radius: .5em; // Defines the shape of the border corners of an element.
-@border-right: @border; // Sets the width, style, and color of the right border of an element.
-@border-right-color: @border-color; // Sets the color of the right border of an element.
-@border-right-style: @border-style; // Sets the style of the right border of an element.
-@border-right-width: @border-width; // Sets the width of the right border of an element.
 @border-style: solid; // Sets the style of the border on all the four sides of an element.
-@border-top: @border; // Sets the width, style, and color of the top border of an element.
-@border-top-color: @border-color; // Sets the color of the top border of an element.
-@border-top-left-radius: @border-radius; // Defines the shape of the top-left border corner of an element.
-@border-top-right-radius: @border-radius; // Defines the shape of the top-right border corner of an element.
-@border-top-style: @border-style; // Sets the style of the top border of an element.
-@border-top-width: @border-width; // Sets the width of the top border of an element.
-@border-width: 1px; // Sets the width of the border on all the four sides of an element.
+@border-width: 1px;
+@border-color: @gray;
 
-// Color Properties
+// font stacks
+@font-family-monospace: 
+    "SFMono-Regular",
+    Consolas,
+    "Liberation Mono",
+    Menlo,
+    "DejaVu Sans Mono",
+    Courier,
+    monospace;
 
-@color: @black; // Specify the color of the text of an element.
-@opacity: 1; // Specifies the transparency of an element.
+@font-family-serif: 
+    Constantia, 
+    "Lucida Bright", 
+    Lucidabright, 
+    "Lucida Serif", 
+    Lucida, 
+    "Droid Serif",
+    "Bitstream Vera Serif", 
+    "Liberation Serif", 
+    Georgia,
+    serif;
 
-// Dimension Properties
-@height: auto; // Specify the height of an element.
-@max-height: none; // Specify the maximum height of an element.
-@max-width: @page-width; // Specify the maximum width of an element.
-@min-height: 0; // Specify the minimum height of an element.
-@min-width: @aside-width; // Specify the minimum width of an element.
-@width: auto; // Specify the width of an element.
+@font-family-sans-serif:  
+    "Helvetica Neue",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen-Sans,
+    Ubuntu,
+    Cantarell,
+    sans-serif;
 
-// Generated Content Properties
-@content: normal; // Inserts generated content.
-@quotes: inherit; // Specifies quotation marks for embedded quotations.
-@counter-reset: none; // Creates or resets one or more counters.
-@counter-increment: none; // Increments one or more counter values.
+@tablet: @text-width + @gutter;
+@desktop: @page-width + @gutter;
+@mobile-padding: .6*@padding;
+@tablet-padding: .8*@padding;
+@desktop-padding: 1*@padding;
 
-// Flexible Box Layout
-@align-content: stretch; // Specifies the alignment of flexible container's items within the flex container.
-@align-items: stretch; // Specifies the default alignment for items within the flex container.
-@align-self: auto; // Specifies the alignment for selected items within the flex container.
-@flex: @flex-grow @flex-shrink @flex-basis; // Specifies the components of a flexible length.
-@flex-basis: auto; // Specifies the initial main size of the flex item.
-@flex-direction: column; // Specifies the direction of the flexible items.
-@flex-flow: @flex-direction @flex-wrap; // A shorthand property for the flex-direction and the flex-wrap properties.
-@flex-grow: 0; // Specifies how the flex item will grow relative to the other items inside the flex container.
-@flex-shrink: 1; // Specifies how the flex item will shrink relative to the other items inside the flex container.
-@flex-wrap: nowrap; // Specifies whether the flexible items should wrap or not.
-@justify-content: center; // Specifies how flex items are aligned along the main axis of the flex container after any flexible lengths and auto margins have been resolved.
-@order: 0; // Specifies the order in which a flex items are displayed and laid out within a flex container.
+:root {
+    --font-size: 18px;
+    --font-family: var(--sans-serif);
+    --line-height: 1.8;
+    --headline-size: 1em;
+    --spacer: 1rem;
+    --text-padding: .25em;
+    --grid-gap: var(--spacer);
+    --h: round(hue(@white), 1);
+    --s: round(saturation(@white), 1);
+    --l: round(lightness(@white), 1);
+    --border-width: 1px;
+    --border-style: solid;
+    --border-h: var(--h);
+    --border-s: var(--s);
+    --border-l: clamp(0%, calc(var(--l) * .4), 30%);
+    --border-color: hsl(var(--border-h), var(--border-s), var(--border-l));
+    --border: var(--border-width) var(--border-style) var(--border-color);
+    --border-thin: calc(var(--border-width) / 2);
+    --border-thick: calc(var(--border-width) * 2);
+    --border-radius: var(--text-padding);
+    --tablet: ~"calc(var(--text-width) + var(--gutter))";
+    --desktop: ~"calc(var(--page-width) + var(--gutter))";
+    --card-width: @card-width;
+    --text-width: @text-width;
+    --page-width: @page-width;
+    --box-shadow: var(--shadow-position) var(--shadow-position) var(--shadow-blur) var(--shadow-color);
+    --shadow-position: 1px;
+    --shadow-blur: 1px;
+    --shadow-color: @shadow-color;
+    --warm: @warm-gradient;
+    --cool: @cool-gradient;
+    --neutral: @neutral-gradient;
+    --dull: @dull-gradient;
+    --monospace: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, "DejaVu Sans Mono", Courier, monospace;
+    --serif: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "Droid Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
+    --sans-serif: "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, sans-serif;
 
-// Font Properties
-@font: @font-style @font-variant @font-weight @font-size @font-family; // Defines a variety of font properties within one declaration.
-@font-family: @font-family-sans-serif; // Defines a list of fonts for element.
-@font-size: 18px; // Defines the font size for the text.
-@font-size-adjust: none; // Preserves the readability of text when font fallback occurs.
-@font-stretch: normal; // Selects a normal, condensed, or expanded face from a font.
-@font-style: normal; // Defines the font style for the text.
-@font-variant: normal; // Specify the font variant.
-@font-weight: normal; // Specify the font weight of the text.
+    .on-mobile({
+        --padding: calc(.6 * var(--spacer));
+        --margin: calc(.6 * var(--spacer));
+        --gutter: calc(1.2 * var(--spacer));
+        --font-size: 16px;
+        --headline-size: 1em;
+    });
 
-// List Properties
-@list-style: @list-style-type @list-style-position @list-style-image; // Defines the display style for a list and list elements.
-@list-style-image: none; // Specifies the image to be used as a list-item marker.
-@list-style-position: inside; // Specifies the position of the list-item marker.
-@list-style-type: disc; // Specifies the marker style for a list-item.
+    .on-tablet({
+        --padding: calc(.8 * var(--spacer));
+        --margin: calc(.8 * var(--spacer));
+        --gutter: calc(1.6 * var(--spacer));
+        --font-size: 18px;
+        --headline-size: 1.1em;
+    });
 
-//Margin Properties
-@margin: @padding; // Sets the margin on all four sides of the element.
-@margin-bottom: @margin; // Sets the bottom margin of the element.
-@margin-left: @margin; // Sets the left margin of the element.
-@margin-right: @margin; // Sets the right margin of the element.
-@margin-top: @margin; // Sets the top margin of the element.
-
-//Multi-column Layout Properties
-@column-count: auto; // Specifies the number of columns in a multi-column element.
-@column-fill: balance; // Specifies how columns will be filled.
-@column-gap: round(@text-padding-right*6, 2); // Specifies the gap between the columns in a multi-column element.
-@column-rule: @column-rule-width @column-rule-style @column-rule-color; // Specifies a straight line, or "rule", to be drawn between each column in a multi-column element.
-@column-rule-color: @border-color; // Specifies the color of the rules drawn between columns in a multi-column layout.
-@column-rule-style: @border-style; // Specifies the style of the rule drawn between the columns in a multi-column layout.
-@column-rule-width: @border-width; // Specifies the width of the rule drawn between the columns in a multi-column layout.
-@column-span: 2; // Specifies how many columns an element spans across in a multi-column layout.
-@column-width: auto; // Specifies the optimal width of the columns in a multi-column element.
-@columns: @text-width @column-count; // A shorthand property for setting text-width and column-count properties.
-
-// Outline Properties
-@outline: @outline-width @outline-style @outline-color; // Sets the width, style, and color for all four sides of an element's outline.
-@outline-color: @border-color; // Sets the color of the outline.
-@outline-offset: 0; // Set the space between an outline and the border edge of an element.
-@outline-style: @border-style; // Sets a style for an outline.
-@outline-width: @border-width; // Sets the width of the outline.
-
-// Padding Properties
-@padding: round(1rem * @golden-ratio, 2); // Sets the padding on all four sides of the element.
-@padding-bottom: @padding; // Sets the padding to the bottom side of an element.
-@padding-left: @padding; // Sets the padding to the left side of an element.
-@padding-right: @padding; // Sets the padding to the right side of an element.
-@padding-top: @padding; // Sets the padding to the top side of an element.
-
-//Print Properties
-@page-break-after: auto; // Insert a page breaks after an element.
-@page-break-before: auto; // Insert a page breaks before an element.
-@page-break-inside: auto; // Insert a page breaks inside an element.
-
-//Table Properties
-@border-collapse: collapse; // Specifies whether table cell borders are connected or separated.
-@border-spacing: @padding/2; // Sets the spacing between the borders of adjacent table cells.
-@caption-side: left; // Specify the position of table's caption.
-@empty-cells: hide; // Show or hide borders and backgrounds of empty table cells.
-@table-layout: auto; // Specifies a table layout algorithm.
-
-// Text Properties
-@direction: ltr; // Define the text direction/writing direction.
-@tab-size: 2; // Specifies the length of the tab character.
-@text-align: left; // Sets the horizontal alignment of inline content.
-@text-align-last: left; // Specifies how the last line of a block or a line right before a forced line break is aligned when text-align is justify.
-@text-decoration: @text-decoration-line @text-decoration-color @text-decoration-style; // Specifies the decoration added to text.
-@text-decoration-color: @default; // Specifies the color of the text-decoration-line.
-@text-decoration-line: underline; // Specifies what kind of line decorations are added to the element.
-@text-decoration-style: solid; // Specifies the style of the lines specified by the text-decoration-line property
-@text-indent: @tab-size * 1ch; // Indent the first line of text.
-@text-justify: justify; // Specifies the justification method to use when the text-align property is set to justify.
-@text-overflow: clip; // Specifies how the text content will be displayed, when it overflows the block containers.
-@text-shadow: @box-shadow; // Applies one or more shadows to the text content of an element.
-@text-transform: uppercase; // Transforms the case of the text.
-@line-height: 1.8; // Sets the height between lines of text.
-@vertical-align: middle; // Sets the vertical positioning of an element relative to the current text baseline.
-@letter-spacing: 0; // Sets the extra spacing between letters.
-@word-spacing: normal; // Sets the spacing between words.
-@white-space: nowrap; // Specifies how white space inside the element is handled.
-@word-break: break-all; // Specifies how to break lines within words.
-@word-wrap: break-word; // Specifies whether to break words when the content overflows the boundaries of its container.
-
-// Transform Properties
-@backface-visibility: visible; // Specifies whether or not the "back" side of a transformed element is visible when facing the user.
-@perspective: none; // Defines the perspective from which all child elements of the object are viewed.
-@perspective-origin: 50% 50%; // Defines the origin (the vanishing point for the 3D space) for the perspective property.
-@transform: none; // Applies a 2D or 3D transformation to an element.
-@transform-origin: 50% 50% 0; // Defines the origin of transformation for an element.
-@transform-style: flat; // Specifies how nested elements are rendered in 3D space.
-
-// Transitions Properties
-@transition: @transition-property @transition-duration @transition-timing-function @transition-delay; // Defines the transition between two states of an element.
-@transition-delay: 0s; // Specifies when the transition effect will start.
-@transition-duration: 0s; // Specifies the number of seconds or milliseconds a transition effect should take to complete.
-@transition-property: all; // Specifies the names of the CSS properties to which a transition effect should be applied.
-@transition-timing-function: ease; // Specifies the speed curve of the transition effect.
-
-// Visual formatting Properties
-@display: block; // Specifies how an element is displayed onscreen.
-@position: absolute; // Specifies how an element is positioned.
-@top: 0; // Specify the location of the top edge of the positioned element.
-@right: 0; // Specify the location of the right edge of the positioned element.
-@bottom: 0; // Specify the location of the bottom edge of the positioned element.
-@left: 0; // Specify the location of the left edge of the positioned element.
-@float: left; // Specifies whether or not a box should float.
-@clear: both; // Specifies the placement of an element in relation to floating elements.
-@z-index: 10; // Specifies a layering or stacking order for positioned elements.
-@overflow: hidden; // Specifies the treatment of content that overflows the element's box.
-@overflow-x: hidden; // Specifies how to manage the content when it overflows the width of the element's content area.
-@overflow-y: hidden; // Specifies how to manage the content when it overflows the height of the element's content area.
-@resize: none; // Specifies whether or not an element is resizable by the user.
-@clip: auto; // Defines the clipping region.
-@visibility: visible; // Specifies whether or not an element is visible.
-@cursor: pointer; // Specify the type of cursor.
-@box-shadow: @light-source-position @shadow-blur @shadow-color; // Applies one or more drop-shadows to the element's box.
-@box-sizing: border-box; // Alter the default CSS box model.
+    .on-desktop({
+        --padding: calc(1 * var(--spacer));
+        --margin: calc(1 * var(--spacer));
+        --gutter: calc(2 * var(--spacer));
+        --font-size: 20px;
+        --headline-size: 1.2em;
+    });
+}
