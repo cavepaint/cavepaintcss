@@ -1,0 +1,238 @@
+// rep-color works as a stand-in for base color in low sat themes
+.set-rep-color() when (saturation(@base-color) < 5%) {
+    @rep-color: .set-lumafix(tan, @strength: 50%)[];
+}
+
+.set-rep-color() when (default()) {
+    @rep-color: @base-color;
+}
+
+@rep-color: .set-rep-color()[];
+
+// set up the variables
+@accent-str: 40%;
+@white: mix(white, @ambient, 94%);
+@black: mix(black, @ambient, 86%);
+@ambient: softlight(screen(@base-color, @base-color), @base-color);
+@red: .set-color(~"red", rgb(233, 14, 14), 3/4, .85)[];
+@orange: .set-color(~"orange", orange, 1/12, 1)[];
+@yellow: .set-color(~"yellow", yellow, 1/6, .95)[];
+@green: .set-color(~"green", green, 3/4, .9)[];
+@teal: .set-color(~"teal", teal, 1/3)[];
+@cyan: .set-color(~"cyan", rgb(14, 241, 241), 1/2, .9)[];
+@blue: .set-color(~"blue", rgb(16, 16, 236), 1/2, .9)[];
+@purple: .set-color(~"purple", purple, 3/4, .9)[];
+@magenta: .set-color(~"magenta", rgb(231, 17, 231), 7/8, .85)[];
+@gray: .set-color(~"gray", gray, 1/6)[];
+@action: @base-color;
+@reaction-base: .set-lumafix(spin(@base-color, 180))[];
+@reaction: .set-color(reaction, @reaction-base, 1/2, 1)[];
+@info: @cyan;
+@warning: @orange;
+@success: @green;
+@failure: @red;
+@default-base: .set-average(@action, @gray, @tone;)[];
+@default: .set-color(~"default", @default-base, 1/2)[];
+
+@accent-base: .set-lumafix(spin(@rep-color, 30), @ambient, 100%)[];
+@accent: .set-color(accent, @accent-base, 0, .9)[];
+
+@inverted-accent-base: .set-lumafix(spin(@rep-color, -30), @ambient, 100%)[];
+@inverted-accent: .set-color(accent, @inverted-accent-base, 0, .9)[];
+
+@complement-base: .set-lumafix(spin(@rep-color, 180), @rep-color, @accent-str)[];
+@complement: .set-color(complement, @complement-base, 1/2, .9)[];
+
+@split-base: .set-lumafix(spin(@rep-color, 90), @rep-color, @accent-str)[];
+@split: .set-color(split, @split-base, 1/2, .9)[];
+
+@inverted-split-base: .set-lumafix(spin(@rep-color, -90), @rep-color, @accent-str)[];
+@inverted-split: .set-color(inverted-split, @inverted-split-base, 1/2, .9)[];
+
+@tetrad-base: .set-lumafix(spin(@rep-color, 45), @rep-color, @accent-str)[];
+@tetrad: .set-color(tetrad, @tetrad-base, 1/2, .9)[];
+
+@second-tetrad-base: .set-lumafix(spin(@rep-color, 135), @rep-color, @accent-str)[];
+@second-tetrad: .set-color(second-tetrad, @second-tetrad-base, 1/2, .9)[];
+
+@third-tetrad-base: .set-lumafix(spin(@rep-color, -135), @rep-color, @accent-str)[];
+@third-tetrad: .set-color(third-tetrad, @third-tetrad-base, 1/2, .9)[];
+
+@fourth-tetrad-base: .set-lumafix(spin(@rep-color, -45), @rep-color, @accent-str)[];
+@fourth-tetrad: .set-color(fourth-tetrad, @fourth-tetrad-base, 1/2, .9)[];
+
+@triad-base: .set-lumafix(spin(@rep-color, 60), @rep-color, @accent-str)[];
+@triad: .set-color(triad, @triad-base, 1/2, .9)[];
+
+@third-triad-base: .set-lumafix(spin(@rep-color, -60), @rep-color, @accent-str)[];
+@third-triad: .set-color(third-triad, @third-triad-base, 1/2, .9)[];
+
+.white { .color-helpers(@white);}
+.black { .color-helpers(@black);}
+.ambient { .color-helpers(@ambient);}
+.red { .color-helpers(@red);}
+.orange { .color-helpers(@orange);}
+.yellow { .color-helpers(@yellow);}
+.green { .color-helpers(@green);}
+.teal { .color-helpers(@teal);}
+.cyan { .color-helpers(@cyan);}
+.blue { .color-helpers(@blue);}
+.purple { .color-helpers(@purple);}
+.magenta { .color-helpers(@magenta);}
+.gray { .color-helpers(@gray);}
+.action, .base-color { .color-helpers(@action);}
+.reaction { .color-helpers(@reaction);}
+.default { .color-helpers(@default);}
+.info { &:extend(.cyan all);}
+.warning { &:extend(.orange all);}
+.success { &:extend(.green all);}
+.failure { &:extend(.red all);}
+.complement { .color-helpers(@complement);}
+.accent { .color-helpers(@accent);}
+.second.accent { .color-helpers(@inverted-accent);}
+.split { .color-helpers(@split);}
+.second.split { .color-helpers(@inverted-split);}
+.triad { .color-helpers(@triad);}
+.second.triad { &:extend(.complement all);}
+.third.triad { .color-helpers(@third-triad);}
+.tetrad { .color-helpers(@tetrad);}
+.second.tetrad { .color-helpers(@second-tetrad);}
+.third.tetrad { .color-helpers(@third-tetrad);}
+.fourth.tetrad { .color-helpers(@fourth-tetrad);}
+
+// this creates all CSS properties and helpers for any color
+
+.color-helpers(@color) {
+
+    // how much the color helpers show up, relatively
+    @effect: 90%;
+
+    @brightened: mix(lighten(saturate(@color, 24%), 8%), @color, @effect);
+    @dimmed: mix(desaturate(multiply(@shadow-color, @color), 16%), @color, @effect);
+    
+    @lightened: mix(softlight(@color, @white), @color, @effect);
+    @darkened: mix(softlight(@color, @black), @color, @effect);
+    
+    @base-contrast-ceiling: .set-contrast-ratio(@color, @white)[];
+    @border-color: .set-lumafix(@color, @black, 75%)[];
+
+    .text-color(@ceiling) when (@ceiling >= 3) {
+        &:extend(.tint);
+    }
+
+    .text-color(@ceiling) when (@ceiling < 3) {
+        &:extend(.shade);
+    }
+
+    .text-color(@ceiling, @local-ceiling) when (@ceiling < 3) and (@local-ceiling >= 3) {
+        &:extend(.tint);
+    }
+
+    .text-color(@ceiling, @local-ceiling) when (@ceiling >= 3) and (@local-ceiling < 3) {
+        &:extend(.shade);
+    }
+
+    .text-color(@base-contrast-ceiling);
+
+    --h: round(hue(@color), 1);
+    --s: round(saturation(@color), 1);
+    --l: round(lightness(@color), 1);
+
+    .light& { 
+        @light-ceiling: .set-contrast-ratio(@lightened, @white)[];
+        .text-color(@base-contrast-ceiling, @light-ceiling);
+        --l: round(lightness(@lightened), 1);
+    } 
+        
+    .dark& { 
+        @dark-ceiling: .set-contrast-ratio(@darkened, @white)[];
+        .text-color(@base-contrast-ceiling, @dark-ceiling);
+        --l: round(lightness(@darkened), 1);
+    }
+
+    .bright& { 
+        @bright-ceiling: .set-contrast-ratio(@brightened, @white)[];
+        .text-color(@base-contrast-ceiling, @bright-ceiling);
+        --s: round(saturation(@brightened), 1);
+        --l: round(lightness(@brightened), 1);
+    }
+
+    .dim& { 
+        @dim-ceiling: .set-contrast-ratio(@dimmed, @white)[];
+        .text-color(@base-contrast-ceiling, @dim-ceiling);
+        --s: round(saturation(@dimmed), 1);
+        --l: round(lightness(@dimmed), 1);
+    }
+}
+
+// warm
+
+.set-warm-base() when (red(@base-color) > 128) {
+    @warm-base: .set-lumafix(@orange, @yellow)[];
+}
+
+.set-warm-base() when (default()) {
+    @warm-base: .set-lumafix(@red, @yellow)[];
+}
+
+@warm-base: .set-warm-base()[];
+@warm-lumafix: .set-lumafix(@warm-base, @base-color, 25%)[];
+@warm: .set-color(~"warm", @warm-lumafix, 0)[];
+@warm-gradient: rgba(red(@warm), green(@warm), blue(@warm), @warm-bg-fill-opacity);
+@warm-bg-fill-opacity: .2;
+
+.warm {
+    background-image: linear-gradient(var(--warm), var(--warm));
+}
+
+// cool 
+
+.set-cool-base() when (blue(@base-color) > 128) {
+    @cool-base: @cyan;
+}
+
+.set-cool-base() when (default()) {
+    @cool-base: .set-lumafix(@blue, @cyan)[];
+}
+
+@cool-base: .set-cool-base()[];
+@cool-lumafix: .set-lumafix(@cool-base, @base-color, 50%)[];
+@cool: .set-color(~"cool", @cool-lumafix, 0)[];
+@cool-gradient: rgba(red(@cool), green(@cool), blue(@cool), @cool-bg-fill-opacity);
+@cool-bg-fill-opacity: .2;
+
+.cool {
+    background-image: linear-gradient(var(--cool), var(--cool));
+}
+
+// neutral 
+
+.set-neutral-base() when (green(@base-color) > 128) {
+    @neutral-base: .set-lumafix(@action, @cyan)[];
+}
+
+.set-neutral-base() when (default()) {
+    @neutral-base: .set-lumafix(@action, @cyan)[];
+}
+
+@neutral-base: .set-neutral-base()[];
+@neutral-lumafix: .set-lumafix(@neutral-base, @base-color, 50%)[];
+@neutral: average(@neutral-lumafix, @action);
+@neutral-gradient: rgba(red(@neutral), green(@neutral), blue(@neutral), @neutral-bg-fill-opacity);
+@neutral-bg-fill-opacity: .1;
+
+.neutral {
+    background-image: linear-gradient(var(--neutral), var(--neutral));
+}
+
+// dull 
+
+@dull-base: @gray;
+@dull-lumafix: .set-average(@dull-base, desaturate(@action, 100%);)[];
+@dull: .set-color(~"dull", @dull-lumafix, 0)[];
+@dull-bg-fill-opacity: .3;
+@dull-gradient: rgba(red(@dull), green(@dull), blue(@dull), @dull-bg-fill-opacity);
+
+.dull {
+    background-image: linear-gradient(var(--dull), var(--dull));
+}

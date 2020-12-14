@@ -1,5 +1,91 @@
-// grunts
-// useful classes that usually do one thing but are nonetheless composable
+.button {
+  &:extend(.border);
+  &:extend(.border-radius);
+
+  display: inline;
+  box-shadow: var(--box-shadow);
+  position: relative;
+  font-family: inherit;
+  font-size: inherit;
+  padding: var(--text-padding) var(--padding);
+  color: inherit;
+  background-color: inherit;
+  border-width: var(--border-width);
+  line-height: 1;
+  text-align: center;
+  vertical-align: middle;
+  outline: none;
+  white-space: nowrap;
+  text-decoration: none;
+  touch-action: manipulation;
+  cursor: pointer;
+  transform: scale(1);
+  transition: scale .08s linear;
+  .no-user-select;
+
+  &:active {
+    transform: scale(.96);
+    box-shadow: unset;
+  }
+}
+
+.badge {
+  &:extend(.small);
+  border-radius: @text-border-radius;
+  line-height: inherit;
+  padding: var(--text-padding);
+  vertical-align: middle;
+  border-radius: 99px;
+  white-space: nowrap;
+}
+
+.modal {
+  max-width: none;
+  z-index: 99;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: 0;
+
+  .fixed;
+  .bottom;
+  .justify-content;
+  .flex;
+  .flex-direction;
+  .viewport-height;
+}
+
+.overlay {
+  padding: 0;
+  position: relative;
+
+  .top, .bottom, .left, .right {
+      position: absolute;
+      z-index: 10;
+  }
+
+  &.stretch { position: absolute; top: 0; left: 0; right: 0;}
+}
+
+.bar {
+  top: 0;
+  right: 0;
+  left: 0;
+
+  &.bottom {
+    top: auto;
+    bottom: 0;
+  }
+}
+
+.card {
+  &:extend(.border);
+  &:extend(.border-radius);
+  &:extend(.padding);
+  &:extend(.white);
+  &:extend(.box-shadow);
+}
 
 .padding { padding: var(--padding);}
 .margin { margin: var(--margin);}
@@ -32,18 +118,7 @@
 .text-margin-bottom { margin-bottom: var(--text-padding);}
 .text-margin-left { margin-left: var(--text-padding);}
 
-.text-border-radius { border-radius: var(--text-padding);}
-
-.bar {
-  top: 0;
-  right: 0;
-  left: 0;
-
-  &.bottom {
-    top: auto;
-    bottom: 0;
-  }
-}
+.text-border-radius, .text-rounded { border-radius: var(--text-padding);}
 
 .block {
   display: block;
@@ -170,7 +245,7 @@
 }
 
 .border-radius, .rounded {
-  border-radius: @border-radius;
+  border-radius: var(--border-radius);
 }
 
 .dashed {
@@ -239,7 +314,7 @@
 
 .small {
   font-size: 87.5%;
-  line-height: @line-height*.875;
+  line-height: calc(var(--line-height) * .875);
 }
 
 .medium {
@@ -249,15 +324,13 @@
 
 .big {
   font-size: 125%;
-  line-height: @line-height*1.25;
+  line-height: calc(var(--line-height) * 1.25);
+
 }
 
 .huge {
   font-size: 160%;
-
-  &.font-size {
-    font-size: 1.6*@font-size;
-  }
+  line-height: calc(var(--line-height) * 1.6);
 }
 
 .vertical-center, .center-vertical {
@@ -308,22 +381,22 @@
   --grid-gap: var(--text-padding);
 }
 
-.shade {
-  color: @black;
+.color() {
   background-color: hsl(var(--h), var(--s), var(--l));
   border-color: hsl(var(--border-h), var(--border-s), var(--border-l));
   --border-h: var(--h);
   --border-s: var(--s);
-  --border-l: calc(var(--l) * .4);
+  --border-l: clamp(0%, calc(var(--l) * .4), 30%);
+}
+
+.shade {
+  color: var(--black);
+  .color();
 }
 
 .tint {
-  color: @white;
-  background-color: hsl(var(--h), var(--s), var(--l));
-  border-color: hsl(var(--border-h), var(--border-s), var(--border-l));
-  --border-h: var(--h);
-  --border-s: var(--s);
-  --border-l: calc(var(--l) * .4);
+  color: var(--white);
+  .color();
 }
 
 .transparent {
@@ -516,4 +589,41 @@
 }
 .cursor {
   cursor: pointer;
+}
+
+.placeholder {
+  min-height: 10px;
+  &::after { content: " "; white-space: pre;}
+}
+
+.square, .one-to-one, .four-to-three, .sixteen-to-nine, .two-to-one {
+  &::after { content: ""; display: block; width: 0;}
+}
+
+.square, .one-to-one {
+  &::after {
+    // prop to maintain image dimensions of 1:1
+    padding-top: 100%;
+  }
+}
+
+.four-to-three {
+  &::after {
+    // prop to maintain image dimensions of 4:3
+    padding-top: 75%;
+  }
+}
+
+.sixteen-to-nine {
+  &::after {
+    // prop to maintain video dimensions of 16:9
+    padding-top: 56.25%;
+  }
+}
+
+.two-to-one {
+  &::after {
+    // prop to maintain video dimensions of 2:1
+    padding-top: 50%;
+  }
 }

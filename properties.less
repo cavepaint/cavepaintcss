@@ -1,4 +1,7 @@
-@base-color: #acacd6;
+/* This project uses Cavepaint (MIT License) by Rex Riepe */ 
+/* https://github.com/cavepaint/cavepaintCSS */
+
+@base-color: #386ee0;
 
 // important CSS properties
 @line-height: 1.8;
@@ -106,7 +109,7 @@
     --border-style: solid;
     --border-h: var(--h);
     --border-s: var(--s);
-    --border-l: clamp(0%, calc(var(--l) * .4), 30%);
+    --border-l: clamp(0%, calc(var(--l) * .35), 30%);
     --border-color: hsl(var(--border-h), var(--border-s), var(--border-l));
     --border: var(--border-width) var(--border-style) var(--border-color);
     --border-thin: calc(var(--border-width) / 2);
@@ -121,6 +124,8 @@
     --shadow-position: 1px;
     --shadow-blur: 1px;
     --shadow-color: @shadow-color;
+    --white: @white;
+    --black: @black;
     --warm: @warm-gradient;
     --cool: @cool-gradient;
     --neutral: @neutral-gradient;
@@ -152,4 +157,16 @@
         --font-size: 20px;
         --headline-size: 1.2em;
     });
+}
+
+.on-mobile(@rules) {
+    @media screen and (min-width: 1px) { @rules();}
+}
+
+.on-tablet(@rules) {
+    @media screen and (min-width: @tablet) { @rules();}
+}
+
+.on-desktop(@rules) {
+    @media screen and (min-width: @desktop) { @rules();}
 }
