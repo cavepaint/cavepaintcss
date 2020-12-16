@@ -4,7 +4,7 @@
   --font-size: 18px;
   --font-family: var(--sans-serif);
   --line-height: 1.8;
-  --headline-size: 1em;
+  --headline-base: 1em;
   --spacer: 1rem;
   --text-padding: 0.25em;
   --grid-gap: var(--spacer);
@@ -23,9 +23,9 @@
   --border-radius: var(--text-padding);
   --tablet: calc(var(--text-width) + var(--gutter));
   --desktop: calc(var(--page-width) + var(--gutter));
-  --card-width: 22rem;
-  --text-width: 37rem;
-  --page-width: 59rem;
+  --card-width: 24rem;
+  --text-width: 39rem;
+  --page-width: 63rem;
   --box-shadow: var(--shadow-position) var(--shadow-position) var(--shadow-blur) var(--shadow-color);
   --shadow-position: 1px;
   --shadow-blur: 1px;
@@ -49,7 +49,7 @@
     --headline-size: 1em;
   }
 }
-@media screen and (min-width: 39rem) {
+@media screen and (min-width: 41rem) {
   :root {
     --padding: calc(0.8 * var(--spacer));
     --margin: calc(0.8 * var(--spacer));
@@ -58,7 +58,7 @@
     --headline-size: 1.1em;
   }
 }
-@media screen and (min-width: 61rem) {
+@media screen and (min-width: 65rem) {
   :root {
     --padding: calc(1 * var(--spacer));
     --margin: calc(1 * var(--spacer));
@@ -96,22 +96,22 @@ h6 {
   line-height: 1.5;
 }
 h1 {
-  font-size: calc(var(--headline-size) * 2.2);
+  font-size: calc(var(--headline-base) * 2.2);
 }
 h2 {
-  font-size: calc(var(--headline-size) * 1.6);
+  font-size: calc(var(--headline-base) * 1.6);
 }
 h3 {
-  font-size: calc(var(--headline-size) * 1.4);
+  font-size: calc(var(--headline-base) * 1.4);
 }
 h4 {
-  font-size: calc(var(--headline-size) * 1.2);
+  font-size: calc(var(--headline-base) * 1.2);
 }
 h5 {
-  font-size: calc(var(--headline-size) * 1.1);
+  font-size: calc(var(--headline-base) * 1.1);
 }
 h6 {
-  font-size: calc(var(--headline-size) * 1);
+  font-size: calc(var(--headline-base) * 1);
 }
 p {
   margin-bottom: 1em;
@@ -125,6 +125,9 @@ p.gutter {
 img {
   max-width: 100%;
   height: auto;
+}
+nav {
+  z-index: 99;
 }
 a {
   color: inherit;
@@ -207,7 +210,7 @@ button:active {
   box-shadow: unset;
 }
 .badge {
-  border-radius: var(--text-padding);
+  border-radius: 0.25em;
   line-height: inherit;
   padding: var(--text-padding);
   vertical-align: middle;
@@ -871,7 +874,7 @@ textarea {
     display: grid;
   }
 }
-@media screen and (min-width: 39rem) {
+@media screen and (min-width: 41rem) {
   .grid.mobile,
   .two-column.mobile,
   .three-column.mobile {
@@ -883,14 +886,14 @@ textarea {
 .three-column.mobile.tablet {
   display: grid;
 }
-@media screen and (min-width: 39rem) {
+@media screen and (min-width: 41rem) {
   .grid.mobile.tablet,
   .two-column.mobile.tablet,
   .three-column.mobile.tablet {
     display: grid;
   }
 }
-@media screen and (min-width: 61rem) {
+@media screen and (min-width: 65rem) {
   .grid.mobile.tablet,
   .two-column.mobile.tablet,
   .three-column.mobile.tablet {
@@ -902,7 +905,7 @@ textarea {
 .three-column.tablet {
   display: initial;
 }
-@media screen and (min-width: 39rem) {
+@media screen and (min-width: 41rem) {
   .grid.tablet,
   .two-column.tablet,
   .three-column.tablet {
@@ -914,7 +917,7 @@ textarea {
 .three-column.desktop {
   display: initial;
 }
-@media screen and (min-width: 61rem) {
+@media screen and (min-width: 65rem) {
   .grid.desktop,
   .two-column.desktop,
   .three-column.desktop {
@@ -1009,21 +1012,21 @@ textarea {
   width: calc(38% - 1rem);
 }
 .card-width {
-  max-width: 22rem;
+  max-width: 24rem;
 }
-@media screen and (min-width: 39rem) {
+@media screen and (min-width: 41rem) {
   .text-width {
-    max-width: 37rem;
+    max-width: 39rem;
   }
   .text-width.force {
-    width: 37rem;
+    width: 39rem;
   }
 }
 .page-width {
-  max-width: 59rem;
+  max-width: 63rem;
 }
 .page-width.force {
-  width: 59rem;
+  width: 63rem;
 }
 .full-width {
   max-width: 100%;
@@ -1039,7 +1042,7 @@ textarea {
   padding-left: calc(50% - var(--card-width)/2);
   padding-right: calc(50% - var(--card-width)/2);
 }
-@media screen and (min-width: 39rem) {
+@media screen and (min-width: 41rem) {
   .inner-text-width {
     padding-left: calc(50% - var(--text-width)/2 - var(--spacer));
     padding-right: calc(50% - var(--text-width)/2 - var(--spacer));
@@ -1049,7 +1052,7 @@ textarea {
     padding-right: calc(50% - var(--text-width)/2);
   }
 }
-@media screen and (min-width: 61rem) {
+@media screen and (min-width: 65rem) {
   .inner-page-width {
     padding-left: calc(50% - var(--page-width)/2 - var(--spacer));
     padding-right: calc(50% - var(--page-width)/2 - var(--spacer));
@@ -1071,7 +1074,7 @@ textarea {
 .hide.mobile {
   display: none;
 }
-@media screen and (min-width: 39rem) {
+@media screen and (min-width: 41rem) {
   .hide.mobile {
     display: initial;
   }
@@ -1079,7 +1082,7 @@ textarea {
     display: none;
   }
 }
-@media screen and (min-width: 61rem) {
+@media screen and (min-width: 65rem) {
   .hide.desktop {
     display: none;
   }
