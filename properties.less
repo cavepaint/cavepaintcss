@@ -13,7 +13,7 @@
 @border-radius: .5em;
 
 // cavepaint widths
-@text-measure: 62; // an estimate of intended characters per line
+@text-measure: 65; // an estimate of intended characters per line
 @text-width: floor(@text-measure * .6rem);
 @card-width: floor(@text-width / @golden-ratio);
 @page-width: floor(@text-width * @golden-ratio);
@@ -40,8 +40,8 @@
 
 // text settings
 @text-padding: .25em;
-@text-margin: var(--text-padding);
-@text-border-radius: var(--text-padding);
+@text-margin: @text-padding;
+@text-border-radius: @text-padding;
 @text-shadow: @box-shadow;
 
 @margin: @padding;
@@ -95,18 +95,18 @@
 @desktop-padding: 1*@padding;
 
 :root {
-    --font-size: 18px;
+    --font-size: @font-size;
     --font-family: var(--sans-serif);
-    --line-height: 1.8;
-    --headline-size: 1em;
-    --spacer: 1rem;
-    --text-padding: .25em;
+    --line-height: @line-height;
+    --headline-base: 1em;
+    --spacer: @padding;
+    --text-padding: @text-padding;
     --grid-gap: var(--spacer);
     --h: round(hue(@white), 1);
     --s: round(saturation(@white), 1);
     --l: round(lightness(@white), 1);
-    --border-width: 1px;
-    --border-style: solid;
+    --border-width: @border-width;
+    --border-style: @border-style;
     --border-h: var(--h);
     --border-s: var(--s);
     --border-l: clamp(0%, calc(var(--l) * .35), 30%);
