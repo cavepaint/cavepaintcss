@@ -18,7 +18,7 @@
   @average: .find-average(extract(@colors, 1), 1)[@average];
 }
 
-.set-color(@color-name, @base, @luma-modifier: 1/2, @ambient-modifier: 1, @outputs: false) {
+.set-color(@color-name, @base, @luma-modifier: .5, @ambient-modifier: 1, @outputs: false) {
 	// @color-name: the name of the color, which will be the class name
 	// @base: the base representative color
 	// @luma-modifier: [0 - 1] how much the color is luma-matched to @base-color
@@ -30,44 +30,27 @@
 	// output the class and rules if outputs are enabled
 	.@{color-name} when (@outputs = true) {
 		.color-helpers(@color);
-	}
+  }
+  
+  @ambient-adjusted: (@ambient-mix * @ambient-modifier);
 
 	// apply ambient lighting
-	@color: mix(@color-base, overlay(@ambient, @color-base), @ambient-mix*@ambient-modifier);	
+	@color: mix(@color-base, overlay(@ambient, @color-base), @ambient-adjusted);	
 }
-
-// sets variable @contrast-ratio to contrast ratio between two colors
-// it uses the WCAG standards for determining contrast ratio
-
-// .set-contrast-ratio(@x, @y) when (luma(@x) > luma(@y)) {
-//     @contrast-l1: unit(luma(@x))/100; // luma is expressed as a % which needs to be un-%ed
-//     @contrast-l2: unit(luma(@y))/100;
-//     @contrast-ratio: round((@contrast-l1 + .05)/(@contrast-l2 + .05), 2);
-// }
-
-// .set-contrast-ratio(@x, @y) when (luma(@x) < luma(@y)) {
-//     @contrast-l1: unit(luma(@y))/100;
-//     @contrast-l2: unit(luma(@x))/100;
-//     @contrast-ratio: round((@contrast-l1 + .05)/(@contrast-l2 + .05), 2);
-// }
-
-// .set-contrast-ratio(@x, @y) when (luma(@x) = luma(@y)) {
-//     @contrast-ratio: 1;
-// }
 
 // sets variable @contrast-ratio to contrast ratio between two colors
 // it uses the WCAG standards for determining contrast ratio
 
 .set-contrast-ratio(@x, @y) when (luma(@x) > luma(@y)) {
-  @contrast-l1: unit(luma(@x))/100; // luma is expressed as a % which needs to be un-%ed
-  @contrast-l2: unit(luma(@y))/100;
-  @contrast-ratio: round((@contrast-l1 + .05)/(@contrast-l2 + .05), 2);
+  @contrast-l1: (unit(luma(@x)) / 100); // luma is expressed as a % which needs to be un-%ed
+  @contrast-l2: (unit(luma(@y)) / 100);
+  @contrast-ratio: round(((@contrast-l1 + .05) / (@contrast-l2 + .05)), 2);
 }
 
 .set-contrast-ratio(@x, @y) when (luma(@x) < luma(@y)) {
-  @contrast-l1: unit(luma(@y))/100;
-  @contrast-l2: unit(luma(@x))/100;
-  @contrast-ratio: round((@contrast-l1 + .05)/(@contrast-l2 + .05), 2);
+  @contrast-l1: (unit(luma(@y)) / 100);
+  @contrast-l2: (unit(luma(@x)) / 100);
+  @contrast-ratio: round(((@contrast-l1 + .05) / (@contrast-l2 + .05)), 2);
 }
 
 .set-contrast-ratio(@x, @y) when (luma(@x) = luma(@y)) {
@@ -78,8 +61,8 @@
   // sets @lumafix to a version of @color with luma similar to @compare
 
   @h: hue(@color);
-  @s: (saturation(@color)*1.5 + saturation(@compare)*.5)/2;
-  @l: (luma(@compare) + lightness(@compare))/2;
+  @s: (((saturation(@color) * 1.5) + (saturation(@compare) * .5)) / 2);
+  @l: ((luma(@compare) + lightness(@compare)) / 2);
   @lumafix: mix(hsl(@h, @s, @l), @color, @strength);
 }
 
@@ -100,7 +83,7 @@
     @tone: @white;
   }
 
-  .set-contrast-ceiling();
+  @contrast-ceiling: .set-contrast-ceiling()[];
   .finalize-tone();
 }
 

@@ -1,7 +1,7 @@
 .grid {
     display: grid;
-    grid-gap: var(--grid-gap);
-    grid-template-columns: repeat(@grid-columns, minmax(0, 1fr));
+    gap: var(--gap);
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
 
     &.mobile {    
         .on-mobile({
@@ -51,11 +51,11 @@
     grid-template-columns: 1fr 1fr;
 
     &.golden {
-        grid-template-columns: 1fr*@golden-ratio 1fr;
+        grid-template-columns: 1.618fr 1fr;
     }
 
     &.golden.reverse {
-        grid-template-columns: 1fr 1fr*@golden-ratio;
+        grid-template-columns: 1fr 1.618fr;
     }
 }
 
@@ -63,15 +63,15 @@
     grid-template-columns: 1fr 1fr 1fr;
     
     &.golden {
-        grid-template-columns: 1fr 1fr*@golden-ratio 1fr;
+        grid-template-columns: 1fr 1.618fr 1fr;
     }
 
     &.golden.leading {
-        grid-template-columns: 1fr*@golden-ratio 1fr 1fr;
+        grid-template-columns: 1.618fr 1fr 1fr;
     }
 
     &.golden.trailing {
-        grid-template-columns: 1fr 1fr 1fr*@golden-ratio;
+        grid-template-columns: 1fr 1fr 1.618fr;
     }
 }
 
@@ -81,34 +81,34 @@
 .grid-width-two {
     grid-column: auto / span 2;
 }
-.grid-width-three when (@grid-columns >= 3) {
+.grid-width-three {
     grid-column: auto / span 3;
 }
-.grid-width-four when (@grid-columns >= 4) {
+.grid-width-four {
     grid-column: auto / span 4;
 }
-.grid-width-five when (@grid-columns >= 5) {
+.grid-width-five {
     grid-column: auto / span 5;
 }
-.grid-width-six when (@grid-columns >= 6) {
+.grid-width-six {
     grid-column: auto / span 6;
 }
-.grid-width-seven when (@grid-columns >= 7) {
+.grid-width-seven {
     grid-column: auto / span 7;
 }
-.grid-width-eight when (@grid-columns >= 8) {
+.grid-width-eight {
     grid-column: auto / span 8;
 }
-.grid-width-nine when (@grid-columns >= 9) {
+.grid-width-nine {
   grid-column: auto / span 9;
 }
-.grid-width-ten when (@grid-columns >= 10) {
+.grid-width-ten {
   grid-column: auto / span 10;
 }
-.grid-width-eleven when (@grid-columns >= 11) {
+.grid-width-eleven {
   grid-column: auto / span 11;
 }
-.grid-width-twelve when (@grid-columns >= 12) {
+.grid-width-twelve {
   grid-column: auto / span 12;
 }
 
@@ -136,65 +136,65 @@
     width: 16.66%;
 }
 
-.golden-width { max-width: ~"calc(62% - @{margin})";}
-.golden-width.force { width: ~"calc(62% - @{margin})";}
-.golden-width.reverse { max-width: ~"calc(38% - @{margin})";}
-.golden-width.reverse.force { width: ~"calc(38% - @{margin})";}
+.golden-width { max-width: calc(62% - var(--spacer));}
+.golden-width.force { width: calc(62% - var(--spacer));}
+.golden-width.reverse { max-width: calc(38% - var(--spacer));}
+.golden-width.reverse.force { width: calc(38% - var(--spacer));}
 
 .card-width { 
-max-width: @card-width;
+    max-width: var(--card-width);
 }
 
 .on-tablet({
-.text-width { 
-    max-width: @text-width; 
-}
-.text-width.force {
-    width: @text-width;
-}
+    .text-width { 
+        max-width: var(--text-width); 
+    }
+    .text-width.force {
+        width: var(--text-width);
+    }
 });
 
 .page-width { 
-    max-width: @page-width;
+    max-width: var(--page-width);
 }
 
 .page-width.force {
-    width: @page-width;
+    width: var(--page-width);
 }
 
 .full-width { max-width: 100%;}
 .full-width.force { width: 100%;}
 
 .inner-card-width {
-    padding-left: calc(50% - var(--card-width)/2 - var(--spacer));
-    padding-right: calc(50% - var(--card-width)/2 - var(--spacer));
+    padding-left: calc(50% - ((var(--card-width) * .5) - var(--spacer)));
+    padding-right: calc(50% - ((var(--card-width) * .5) - var(--spacer)));
 
     &.padding {
-        padding-left: calc(50% - var(--card-width)/2);
-        padding-right: calc(50% - var(--card-width)/2);
+        padding-left: calc(50% - (var(--card-width) * .5));
+        padding-right: calc(50% - (var(--card-width) * .5));
     }
 }
 
 .on-tablet({
     .inner-text-width {
-        padding-left: calc(50% - var(--text-width)/2 - var(--spacer));
-        padding-right: calc(50% - var(--text-width)/2 - var(--spacer));
+        padding-left: calc(50% - (var(--text-width) * .5) - var(--spacer));
+        padding-right: calc(50% - (var(--text-width) * .5) - var(--spacer));
 
         &.padding {
-        padding-left: calc(50% - var(--text-width)/2);
-        padding-right: calc(50% - var(--text-width)/2);
+            padding-left: calc(50% - (var(--text-width) * .5));
+            padding-right: calc(50% - (var(--text-width) * .5));
         }
     }  
 });
 
 .on-desktop({
     .inner-page-width {
-        padding-left: calc(50% - var(--page-width)/2 - var(--spacer));
-        padding-right: calc(50% - var(--page-width)/2 - var(--spacer));
+        padding-left: calc(50% - (var(--page-width) * .5) - var(--spacer));
+        padding-right: calc(50% - (var(--page-width) * .5) - var(--spacer));
 
         &.padding {
-        padding-left: calc(50% - var(--page-width)/2);
-        padding-right: calc(50% - var(--page-width)/2);
+            padding-left: calc(50% - (var(--page-width) * .5));
+            padding-right: calc(50% - (var(--page-width) * .5));
         }
     }
 });
