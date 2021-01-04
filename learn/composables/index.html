@@ -19,150 +19,41 @@
 
 </head>
 
-<body class="white text-responsive">
+<body class="dull dark gray">
 
   <nav class="bar padding text-padding-top text-padding-bottom box-shadow no-underlines border-bottom action fixed inner-page-width trim-all vertical-align">
       <a class="title bold" href="../../" class="inline-block ">
           Cavepaint CSS
       </a>
       <div class="float-right">
-          <a href="../../learn/" class="text-padding text-margin-right bold"><span class="hide tablet">CSS</span><span class="hide mobile">Learn</span></a>
+          <a href="../../learn/" class="text-padding text-margin-right bold">Docs</a>
           <a href="https://github.com/cavepaint/cavepaintcss" target="_blank" class="new-tab text-padding">Github</a>
       </div>
   </nav>
-  <div class="bar full-width no-margin-bottom border-bottom placeholder"></div>  
-  <main class="container min-viewport-height no-margin-top">
+  <div class="bar full-width gutter-bottom border-bottom placeholder">&nbsp;</div>  
+  <main class="min-viewport-height white padding container gutter-top border current-color shadow deep">
     <div class="grid desktop responsive">
       <div class="grid-width-three">
-        <nav class="small margin-auto card-width gutter-bottom">
-          <ul class="group two-column mobile tablet">
-            <div>
-              <li><a class=" text-padding" href="../">install</a></li>
-              <li><a class=" text-padding" href="../colors">[color]</a></li>
-              <li><a class=" text-padding" href="../grid">grid</a></li>
-              <li><a class=" text-padding" href="../width">[width]</a></li>
-            </div>
-            <div>
-              <li><a class=" text-padding" href="../hide">hide</a></li>
-              <li><a class="bold text-padding" href="../composables">[composables]</a></li>
-              <li><a class=" text-padding" href="../nullifiers">[no-]</a></li>
-            </div>
-          </ul>
-        </nav>      </div>
+        <div class="padding">
+          <nav class="fixed desktop white small margin-auto card-width gutter-bottom">
+            <ul class="two-column mobile tablet no-list-style">
+              <div>
+                <li><a class=" text-padding" href="../">install</a></li>
+                <li><a class=" text-padding" href="../colors">color</a></li>
+                <li><a class=" text-padding" href="../grid">layout</a></li>
+              </div>
+              <div>
+                <li><a class=" text-padding" href="../hide">hide &amp; fixed</a></li>
+                <li><a class="bold text-padding" href="../composables">composables</a></li>
+                <li><a class=" text-padding" href="../nullifiers">nullifiers</a></li>
+              </div>
+            </ul>
+          </nav>        </div>
+        
+      </div>
       <div class="grid-width-nine inner-text-width">
         
-<section id="examples">
-    <h2>Higher order, less typing</h2>
-
-    <p>"Higher order composable" is just a fancy way of describing a composable that's a shortcut for a handful of other composables.</p>
-
-    <h2>Card</h2>
-
-    <h3>Basic cards</h3>
-    <p>Cards are a set of defaults for making content look like a card on the page:</p>
-    <div class="card margin-bottom">
-        <h3>Welcome to the club.</h3>
-        <p>Don't forget to validate parking!</p>
-    </div>
-
-    
-    <pre class="white-space">&lt;div class="card"&gt;
-    &lt;h3&gt;Welcome to the club.&lt;/h3&gt;
-    &lt;p&gt;Don't forget to validate parking!&lt;/p&gt;
-    &lt;/div&gt;</pre>
-
-    <div class="card border margin-bottom">
-        <h3 class="info padding margin-bottom">Welcome to the club.</h3>
-        <p>Don't forget to validate parking!</p>
-    </div>
-
-    <pre class="white-space">&lt;div class="card"&gt;
-    &lt;h3 class="info padding margin-bottom"&gt;Welcome to the club.&lt;/h3&gt;
-    &lt;p&gt;Don't forget to validate parking!&lt;/p&gt;
-    &lt;/div&gt;</pre>
-
-    <p>Cards have an undecorated default look, but classes like <strong>inset</strong>, <strong>dark</strong> and <strong>no-border</strong> can rectify that:</p>
-
-    <div class="two-column">
-        <div>
-        <div class="card dark inset margin-bottom">
-            <h3>Welcome to the club.</h3>
-            <p>Don't forget to validate parking!</p>
-        </div>
-        </div>
-        <div>
-        <div class="card no-border margin-bottom">
-            <h3>Welcome to the club.</h3>
-            <p>Don't forget to validate parking!</p>
-        </div>
-        </div>
-    </div>
-
-    <div class="two-column">
-        <div>
-        <pre class="white-space">&lt;div class="card dark inset"&gt;
-    &lt;h3&gt;Welcome to the club.&lt;/h3&gt;
-    &lt;p&gt;Don't forget to validate parking!&lt;/p&gt;
-    &lt;/div&gt;</pre>
-        </div>
-        <div>
-        <pre class="white-space">&lt;div class="card no-border"&gt;
-    &lt;h3&gt;Welcome to the club.&lt;/h3&gt;
-    &lt;p&gt;Don't forget to validate parking!&lt;/p&gt;
-    &lt;/div&gt;</pre>
-        </div>
-    </div>
-
-    <h2>Modal</h2>
-
-    <p>The .modal composable lets you quickly put together a simple modal:</p>
-    <p>
-    <button onclick="document.getElementById('id01').style.display='flex'">Open modal</button>
-    </p>
-      
-      <div id="id01" class="modal transparent dark hide">
-        <div class="margin-auto">
-          <span onclick="document.getElementById('id01').style.display='none'" 
-            class="huge padding respsonsive top right absolute cursor text-trim no-user-select" title="Close Modal"> &times; </span>
-          <div class="two-column golden desktop">
-            <div>
-              
-              <form>
-                
-                <h3>Delete Account</h3>
-                <p>Are you sure you want to delete your account?</p>
-                
-                <div class="bar text-align-right no-margin-bottom">
-                  <button class="button action border">Cancel</button>
-                  <button class="button red border border-width">Delete</button>
-                </div>        
-              </form>
-            </div>
-            <div>
-              <form class="small">
-                <h3>Change account name</h3>
-                <p>Change your username and lay low instead</p>
-                
-                <div class="bar text-align-right no-margin-bottom">
-                  <button class="button success border border-width">Go</button>
-                </div>        
-              </form>
-            </div>
-          </div>
-        </div>
-      </div> 
-
-    <h2>Badge</h2>
-    <p>Badges are good for drawing attention to values or short words.</p>
-    <p><span class="badge warning">Over limit!</span></p>
-    <p><span class="badge crimson">45</span></p>
-    <p><span class="badge light electricblue"><strong>8</strong></span></p>
-    <p><span class="badge skyblue border">#Cavepaintcss</span></p>
-
-
-</section>
-
-<h2>Other composables</h2>
+<h2>Composables</h2>
 
 <p>Here are some basic composables that didn't fit in anywhere else.</p>
 
@@ -172,6 +63,7 @@
     <li><strong>padding</strong>: Add padding to an element</li>
     <li><strong>margin</strong>: Add margin to an element</li>
     <li><strong>gutter</strong>: Add gutter (2x margin) to an element</li>
+    <li><strong>inner-gutter</strong>: Add gutter-sized padding to an element</li>
     <li><strong>text-padding</strong>: Add text-padding to an element</li>
     <li><strong>text-margin</strong>: Add text-margin to an element</li>
     <li><strong>text-trim</strong>: Set line-height to 1</li>
@@ -181,10 +73,10 @@
     <li><strong>text-rounded</strong>: Like rounded, but smaller for text</li>
     <li><strong>block</strong>: Sets an element to <em>display: block</em></li>
     <li><strong>inline</strong>: Sets an element to <em>display: inline</em></li>
-    <li><strong>grid-gap-margin</strong>: Sets grid-gap to <em>margin</em></li>
-    <li><strong>grid-gap-border-width</strong>: Sets grid-gap to <em>border-width</em></li>
-    <li><strong>grid-gap-text-padding</strong>: Sets grid-gap to <em>text-padding</em></li>
-    <li><strong>grid-gap-text-margin</strong>: Sets grid-gap to <em>text-margin</em></li>
+    <li><strong>gap-margin</strong>: Sets gap to <em>margin</em></li>
+    <li><strong>gap-border-width</strong>: Sets gap to <em>border-width</em></li>
+    <li><strong>gap-text-padding</strong>: Sets gap to <em>text-padding</em></li>
+    <li><strong>gap-text-margin</strong>: Sets gap to <em>text-margin</em></li>
     <li><strong>flatten</strong>: removes shadows of self and children</li>
     <li><strong>rounded</strong>: Sets the border-radius to the default border-radius</li>
     <li><strong>shade</strong>: Makes the text black</li>
@@ -200,3 +92,46 @@
 <h3>Bump</h3>
 
 <p>The <strong>bump</strong> composable moves things around by 2px. Combine it with <strong>up</strong>, <strong>down</strong>, <strong>left</strong> and <strong>right</strong> to specify which direction.</p>
+
+<section id="examples">
+
+  <h2>Modal</h2>
+
+  <p>The .modal composable lets you quickly put together a simple modal:</p>
+  <p>
+  <button onclick="document.getElementById('id01').style.display='flex'">Open modal</button>
+  </p>
+    
+    <div id="id01" class="modal transparent black hide">
+      <div class="white padding border shadow margin-auto">
+        <span onclick="document.getElementById('id01').style.display='none'" 
+          class="huge padding respsonsive top right absolute cursor text-trim no-user-select" title="Close Modal"> &times; </span>
+        <div class="two-column golden desktop">
+          <div>
+            
+            <form>
+              
+              <h3>Delete Account</h3>
+              <p>Are you sure you want to delete your account?</p>
+              
+              <div class="bar text-align-right no-margin-bottom">
+                <button class="button action border">Cancel</button>
+                <button class="button red border border-width">Delete</button>
+              </div>        
+            </form>
+          </div>
+          <div>
+            <form class="small">
+              <h3>Change account name</h3>
+              <p>Change your username and lay low instead</p>
+              
+              <div class="bar text-align-right no-margin-bottom">
+                <button class="button success border border-width">Go</button>
+              </div>        
+            </form>
+          </div>
+        </div>
+      </div>
+    </div> 
+
+</section>
