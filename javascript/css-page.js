@@ -12,6 +12,8 @@ function renderLess() {
     var baseLighting = document.getElementById("baseLighting").value + '%';
     var textBase = document.getElementById("textBase").value;
     var basePadding = document.getElementById("basePadding").value + 'rem';
+    var baseLightenBy = document.getElementById("baseLightenBy").value + '%';
+    var baseDarkenBy = document.getElementById("baseDarkenBy").value + '%';
     var baseMargin = basePadding;
     var baseFontSize = document.getElementById("baseFontSize").value + 'px';
     var baseLineHeight = document.getElementById("baseLineHeight").value;
@@ -24,7 +26,7 @@ function renderLess() {
     if (serif) { var fontFamily = 'var(--serif)';}
     if (monospace) { var fontFamily = 'var(--monospace)';}
 
-    var lessTheme = "@base-color: " + baseColor + ";\n" + "@ambient-mix: " + baseLighting + ";\n" + "@font-size: " + baseFontSize + ";\n" + "@font-family: " + fontFamily + ";\n" + "@text-base: " + textBase + ";\n" + "@padding: " + basePadding + ";\n" + "@margin: " + baseMargin + ";\n" + "@gutter: " + "(2 * @padding)" + ";\n" + "@line-height: " + baseLineHeight + ";\n";
+    var lessTheme = "@base-color: " + baseColor + ";\n" + "@ambient-mix: " + baseLighting + ";\n" + "@font-size: " + baseFontSize + ";\n" + "@font-family: " + fontFamily + ";\n" + "@text-base: " + textBase + ";\n" + "@padding: " + basePadding + ";\n" + "@margin: " + baseMargin + ";\n" + "@gutter: " + "(2 * @padding)" + ";\n" + "@line-height: " + baseLineHeight + ";\n" + "@lighten-by: " + baseLightenBy + ";\n" + "@darken-by: " + baseDarkenBy + ";\n";
 
     var lessInputTheme = lessTheme + headlessLessInput;
 
@@ -39,10 +41,9 @@ function renderLess() {
         .then(function(output) {
             // output.css = string of css
             var theCSS = output.css;
-            console.log(theCSS);
             document.getElementById("css").innerHTML = theCSS;
             document.getElementById("css_textarea").innerHTML = theCSS;
-            document.getElementById("html_textarea").innerHTML = '<style>\n' + theCSS + '</style>';
+            document.getElementById("html_textarea").innerHTML = '<style>\n' + theCSS + '<\/style>';
             document.getElementById("less_textarea").innerHTML = lessInputTheme;
 
             
@@ -75,3 +76,26 @@ function copyLess() {
     document.execCommand("copy");
 }
 
+function saveTextAsFile(textToWrite, fileNameToSaveAs) {
+    var textFileAsBlob = new Blob([textToWrite], {type:'text/plain'}); 
+    var downloadLink = document.createElement("a");
+    downloadLink.download = fileNameToSaveAs;
+    downloadLink.innerHTML = "Download File";
+    if (window.webkitURL != null)
+    {
+        // Chrome allows the link to be clicked
+        // without actually adding it to the DOM.
+        downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+    }
+    else
+    {
+        // Firefox requires the link to be added to the DOM
+        // before it can be clicked.
+        downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+        downloadLink.onclick = destroyClickedElement;
+        downloadLink.style.display = "none";
+        document.body.appendChild(downloadLink);
+    }
+
+    downloadLink.click();
+}

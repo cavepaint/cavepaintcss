@@ -57,9 +57,9 @@
   --direction: 180deg;
   --white: #f1f1fe;
   --black: #040421;
-  --warm: rgba(190, 49, 109, 0.25);
-  --cool: rgba(9, 135, 181, 0.2);
-  --neutral: rgba(28, 29, 167, 0.15);
+  --warm: rgba(200, 61, 102, 0.25);
+  --cool: rgba(10, 147, 177, 0.2);
+  --neutral: rgba(30, 31, 167, 0.15);
   --dull: rgba(103, 103, 103, 0.3);
   --monospace: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, "DejaVu Sans Mono", Courier, monospace;
   --serif: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "Droid Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
@@ -460,6 +460,12 @@ button:active {
   --shadow-position: 2px;
   --box-shadow: var(--shadow-position) var(--shadow-position) var(--shadow-blur) var(--shadow-color);
 }
+.full-height {
+  min-height: 100%;
+}
+.full-height.force {
+  height: 100%;
+}
 .viewport-height {
   min-height: 100vh;
 }
@@ -520,6 +526,9 @@ button:active {
 }
 .bold {
   font-weight: bold;
+}
+.italic {
+  font-style: italic;
 }
 .all-caps {
   text-transform: uppercase;
@@ -597,11 +606,12 @@ button:active {
 .orange,
 .yellow,
 .light.green,
+.bright.green,
 .light.teal,
+.bright.teal,
 .cyan,
 .light.magenta,
 .light.gray,
-.light.reaction,
 .light.complement,
 .bright.complement,
 .light.second.split,
@@ -610,6 +620,7 @@ button:active {
 .bright.third.triad,
 .light.third.tetrad,
 .bright.third.tetrad,
+.light.fourth.tetrad,
 .light.second.triad,
 .bright.second.triad {
   color: var(--black);
@@ -621,10 +632,11 @@ button:active {
 }
 .tint,
 .black,
-.ambient,
 .red,
 .dark.orange,
 .dim.orange,
+.dark.yellow,
+.dim.yellow,
 .green,
 .teal,
 .dark.cyan,
@@ -633,10 +645,7 @@ button:active {
 .purple,
 .magenta,
 .gray,
-.action,
 .base-color,
-.reaction,
-.default,
 .complement,
 .accent,
 .second.accent,
@@ -1203,6 +1212,18 @@ button:active {
 .no-borders * {
   border-width: 0 !important;
 }
+.no-border-top {
+  border-top-width: 0 !important;
+}
+.no-border-right {
+  border-right-width: 0 !important;
+}
+.no-border-bottom {
+  border-bottom-width: 0 !important;
+}
+.no-border-left {
+  border-left-width: 0 !important;
+}
 .no-background {
   background: transparent !important;
 }
@@ -1253,18 +1274,18 @@ button:active {
   --l: 97%;
 }
 .light.white {
-  --l: 99.4%;
+  --l: 100%;
 }
 .dark.white {
-  --l: 81%;
+  --l: 77%;
 }
 .bright.white {
-  --s: 82.6%;
-  --l: 99.4%;
+  --s: 0%;
+  --l: 100%;
 }
 .dim.white {
-  --s: 35.8%;
-  --l: 90.6%;
+  --s: 32.6%;
+  --l: 87%;
 }
 .black {
   --h: 239.6;
@@ -1272,503 +1293,441 @@ button:active {
   --l: 7.1%;
 }
 .light.black {
-  --l: 23.1%;
+  --l: 27.1%;
 }
 .dark.black {
-  --l: 1.4%;
+  --l: 0%;
 }
 .bright.black {
-  --s: 97.9%;
-  --l: 13.5%;
+  --s: 100%;
+  --l: 17.1%;
 }
 .dim.black {
-  --s: 80.2%;
-  --l: 1.4%;
-}
-.ambient {
-  --h: 239.6;
-  --s: 82.6%;
-  --l: 50.8%;
-}
-.light.ambient {
-  --l: 66.8%;
-}
-.dark.ambient {
-  --l: 34.8%;
-}
-.bright.ambient {
-  --s: 96%;
-  --l: 57.2%;
-}
-.dim.ambient {
-  --s: 43.5%;
-  --l: 44.4%;
+  --s: 0%;
+  --l: 0%;
 }
 .red {
-  --h: 343.2;
+  --h: 346.8;
   --s: 88.6%;
-  --l: 39.2%;
+  --l: 40.9%;
 }
 .light.red {
-  --l: 55.2%;
+  --l: 60.9%;
 }
 .dark.red {
-  --l: 23.2%;
+  --l: 20.9%;
 }
 .bright.red {
-  --s: 98%;
-  --l: 45.6%;
+  --s: 100%;
+  --l: 50.9%;
 }
 .dim.red {
-  --s: 50.6%;
-  --l: 32.8%;
+  --s: 38.6%;
+  --l: 30.9%;
 }
 .orange {
-  --h: 36.8;
-  --s: 83.9%;
+  --h: 37.9;
+  --s: 91.9%;
   --l: 50.1%;
 }
 .light.orange {
-  --l: 66.1%;
+  --l: 70.1%;
 }
 .dark.orange {
-  --l: 34.1%;
+  --l: 30.1%;
 }
 .bright.orange {
-  --s: 96.3%;
-  --l: 56.5%;
+  --s: 100%;
+  --l: 60.1%;
 }
 .dim.orange {
-  --s: 45.3%;
-  --l: 43.7%;
+  --s: 41.9%;
+  --l: 40.1%;
 }
 .yellow {
   --h: 60.1;
-  --s: 76.9%;
-  --l: 50.3%;
+  --s: 84.4%;
+  --l: 50.2%;
 }
 .light.yellow {
-  --l: 66.3%;
+  --l: 70.2%;
 }
 .dark.yellow {
-  --l: 34.3%;
+  --l: 30.2%;
 }
 .bright.yellow {
-  --s: 94.7%;
-  --l: 56.7%;
+  --s: 100%;
+  --l: 60.2%;
 }
 .dim.yellow {
-  --s: 38.1%;
-  --l: 43.9%;
+  --s: 34.4%;
+  --l: 40.2%;
 }
 .green {
-  --h: 142.2;
+  --h: 136.2;
   --s: 100%;
-  --l: 21.3%;
+  --l: 22.2%;
 }
 .light.green {
-  --l: 37.3%;
+  --l: 42.2%;
 }
 .dark.green {
-  --l: 5.3%;
+  --l: 2.2%;
 }
 .bright.green {
   --s: 100%;
-  --l: 27.7%;
+  --l: 32.2%;
 }
 .dim.green {
-  --s: 64.3%;
-  --l: 14.9%;
+  --s: 50%;
+  --l: 12.2%;
 }
 .teal {
-  --h: 188.9;
+  --h: 184.6;
   --s: 100%;
-  --l: 27.2%;
+  --l: 26.1%;
 }
 .light.teal {
-  --l: 43.2%;
+  --l: 46.1%;
 }
 .dark.teal {
-  --l: 11.2%;
+  --l: 6.1%;
 }
 .bright.teal {
   --s: 100%;
-  --l: 33.6%;
+  --l: 36.1%;
 }
 .dim.teal {
-  --s: 63.1%;
-  --l: 20.8%;
+  --s: 50%;
+  --l: 16.1%;
 }
 .cyan {
-  --h: 190;
-  --s: 90.7%;
+  --h: 187.6;
+  --s: 90.3%;
   --l: 49.9%;
 }
 .light.cyan {
-  --l: 65.9%;
+  --l: 69.9%;
 }
 .dark.cyan {
-  --l: 33.9%;
+  --l: 29.9%;
 }
 .bright.cyan {
-  --s: 97.8%;
-  --l: 56.3%;
+  --s: 100%;
+  --l: 59.9%;
 }
 .dim.cyan {
-  --s: 52.2%;
-  --l: 43.5%;
+  --s: 40.3%;
+  --l: 39.9%;
 }
 .blue {
   --h: 240;
-  --s: 89.7%;
+  --s: 89.3%;
   --l: 49.4%;
 }
 .light.blue {
-  --l: 65.4%;
+  --l: 69.4%;
 }
 .dark.blue {
-  --l: 33.4%;
+  --l: 29.4%;
 }
 .bright.blue {
-  --s: 97.2%;
-  --l: 55.8%;
+  --s: 100%;
+  --l: 59.4%;
 }
 .dim.blue {
-  --s: 51.2%;
-  --l: 43%;
+  --s: 39.3%;
+  --l: 39.4%;
 }
 .purple {
-  --h: 284;
+  --h: 287.4;
   --s: 100%;
-  --l: 29%;
+  --l: 28.1%;
 }
 .light.purple {
-  --l: 45%;
+  --l: 48.1%;
 }
 .dark.purple {
-  --l: 13%;
+  --l: 8.1%;
 }
 .bright.purple {
   --s: 100%;
-  --l: 35.4%;
+  --l: 38.1%;
 }
 .dim.purple {
-  --s: 62.8%;
-  --l: 22.6%;
+  --s: 50%;
+  --l: 18.1%;
 }
 .magenta {
-  --h: 287;
-  --s: 88.9%;
+  --h: 289.2;
+  --s: 88.4%;
   --l: 48.7%;
 }
 .light.magenta {
-  --l: 64.7%;
+  --l: 68.7%;
 }
 .dark.magenta {
-  --l: 32.7%;
+  --l: 28.7%;
 }
 .bright.magenta {
-  --s: 96.5%;
-  --l: 55.1%;
+  --s: 100%;
+  --l: 58.7%;
 }
 .dim.magenta {
-  --s: 50.4%;
-  --l: 42.3%;
+  --s: 38.4%;
+  --l: 38.7%;
 }
 .gray {
-  --h: 239.7;
-  --s: 8.2%;
+  --h: 239.8;
+  --s: 4.1%;
   --l: 50.2%;
 }
 .light.gray {
-  --l: 66.2%;
+  --l: 70.2%;
 }
 .dark.gray {
-  --l: 34.2%;
+  --l: 30.2%;
 }
 .bright.gray {
-  --s: 27.4%;
-  --l: 56.6%;
+  --s: 29.1%;
+  --l: 60.2%;
 }
 .dim.gray {
-  --s: 1.9%;
-  --l: 43.8%;
+  --s: 0%;
+  --l: 40.2%;
 }
-.action,
 .base-color {
   --h: 239.6;
   --s: 68.8%;
   --l: 40.2%;
 }
-.light.action,
 .light.base-color {
-  --l: 56.2%;
+  --l: 60.2%;
 }
-.dark.action,
 .dark.base-color {
-  --l: 24.2%;
+  --l: 20.2%;
 }
-.bright.action,
 .bright.base-color {
-  --s: 89.5%;
-  --l: 46.6%;
+  --s: 93.8%;
+  --l: 50.2%;
 }
-.dim.action,
 .dim.base-color {
-  --s: 30.7%;
-  --l: 33.8%;
-}
-.reaction {
-  --h: 59.5;
-  --s: 40.5%;
-  --l: 24.7%;
-}
-.light.reaction {
-  --l: 40.7%;
-}
-.dark.reaction {
-  --l: 8.7%;
-}
-.bright.reaction {
-  --s: 61.5%;
-  --l: 31.1%;
-}
-.dim.reaction {
-  --s: 10.9%;
-  --l: 18.3%;
-}
-.default {
-  --h: 239.6;
-  --s: 40.9%;
-  --l: 45.5%;
-}
-.light.default {
-  --l: 61.5%;
-}
-.dark.default {
-  --l: 29.5%;
-}
-.bright.default {
-  --s: 58.7%;
-  --l: 51.9%;
-}
-.dim.default {
-  --s: 9.5%;
-  --l: 39.1%;
+  --s: 18.8%;
+  --l: 30.2%;
 }
 .complement,
 .second.triad {
   --h: 59.6;
-  --s: 47.6%;
-  --l: 32.8%;
+  --s: 57.9%;
+  --l: 32%;
 }
 .light.complement,
 .light.second.triad {
-  --l: 48.8%;
+  --l: 52%;
 }
 .dark.complement,
 .dark.second.triad {
-  --l: 16.8%;
+  --l: 12%;
 }
 .bright.complement,
 .bright.second.triad {
-  --s: 68.4%;
-  --l: 39.2%;
+  --s: 82.9%;
+  --l: 42%;
 }
 .dim.complement,
 .dim.second.triad {
-  --s: 11.8%;
-  --l: 26.4%;
+  --s: 7.9%;
+  --l: 22%;
 }
 .accent {
-  --h: 264.5;
-  --s: 72.6%;
-  --l: 32.8%;
+  --h: 266.9;
+  --s: 70.7%;
+  --l: 32%;
 }
 .light.accent {
-  --l: 48.8%;
+  --l: 52%;
 }
 .dark.accent {
-  --l: 16.8%;
+  --l: 12%;
 }
 .bright.accent {
-  --s: 93.4%;
-  --l: 39.2%;
+  --s: 95.7%;
+  --l: 42%;
 }
 .dim.accent {
-  --s: 35%;
-  --l: 26.4%;
+  --s: 20.7%;
+  --l: 22%;
 }
 .second.accent {
-  --h: 214.7;
-  --s: 72.6%;
-  --l: 32.8%;
+  --h: 212.3;
+  --s: 70.8%;
+  --l: 32%;
 }
 .light.second.accent {
-  --l: 48.8%;
+  --l: 52%;
 }
 .dark.second.accent {
-  --l: 16.8%;
+  --l: 12%;
 }
 .bright.second.accent {
-  --s: 93.5%;
-  --l: 39.2%;
+  --s: 95.8%;
+  --l: 42%;
 }
 .dim.second.accent {
-  --s: 35.1%;
-  --l: 26.4%;
+  --s: 20.8%;
+  --l: 22%;
 }
 .split {
-  --h: 317.1;
-  --s: 68.7%;
-  --l: 28.7%;
+  --h: 323.6;
+  --s: 68.8%;
+  --l: 30%;
 }
 .light.split {
-  --l: 44.7%;
+  --l: 50%;
 }
 .dark.split {
-  --l: 12.7%;
+  --l: 10%;
 }
 .bright.split {
-  --s: 89.7%;
-  --l: 35.1%;
+  --s: 93.8%;
+  --l: 40%;
 }
 .dim.split {
-  --s: 31.6%;
-  --l: 22.3%;
+  --s: 18.8%;
+  --l: 20%;
 }
 .second.split {
-  --h: 162;
+  --h: 155.5;
   --s: 68.8%;
-  --l: 28.7%;
+  --l: 30%;
 }
 .light.second.split {
-  --l: 44.7%;
+  --l: 50%;
 }
 .dark.second.split {
-  --l: 12.7%;
+  --l: 10%;
 }
 .bright.second.split {
-  --s: 89.7%;
-  --l: 35.1%;
+  --s: 93.8%;
+  --l: 40%;
 }
 .dim.second.split {
-  --s: 31.7%;
-  --l: 22.3%;
+  --s: 18.8%;
+  --l: 20%;
 }
 .triad {
-  --h: 289.4;
-  --s: 72.6%;
-  --l: 32.8%;
+  --h: 294.2;
+  --s: 70.7%;
+  --l: 32%;
 }
 .light.triad {
-  --l: 48.8%;
+  --l: 52%;
 }
 .dark.triad {
-  --l: 16.8%;
+  --l: 12%;
 }
 .bright.triad {
-  --s: 93.4%;
-  --l: 39.2%;
+  --s: 95.7%;
+  --l: 42%;
 }
 .dim.triad {
-  --s: 35.1%;
-  --l: 26.4%;
+  --s: 20.7%;
+  --l: 22%;
 }
 .third.triad {
-  --h: 189.9;
-  --s: 72.5%;
-  --l: 32.6%;
+  --h: 185;
+  --s: 70.6%;
+  --l: 31.8%;
 }
 .light.third.triad {
-  --l: 48.6%;
+  --l: 51.8%;
 }
 .dark.third.triad {
-  --l: 16.6%;
+  --l: 11.8%;
 }
 .bright.third.triad {
-  --s: 93.4%;
-  --l: 39%;
+  --s: 95.6%;
+  --l: 41.8%;
 }
 .dim.third.triad {
-  --s: 35%;
-  --l: 26.2%;
+  --s: 20.6%;
+  --l: 21.8%;
 }
 .tetrad {
-  --h: 277;
-  --s: 72.6%;
-  --l: 32.8%;
+  --h: 280.6;
+  --s: 70.7%;
+  --l: 32%;
 }
 .light.tetrad {
-  --l: 48.8%;
+  --l: 52%;
 }
 .dark.tetrad {
-  --l: 16.8%;
+  --l: 12%;
 }
 .bright.tetrad {
-  --s: 93.4%;
-  --l: 39.2%;
+  --s: 95.7%;
+  --l: 42%;
 }
 .dim.tetrad {
-  --s: 35.1%;
-  --l: 26.4%;
+  --s: 20.7%;
+  --l: 22%;
 }
 .second.tetrad {
-  --h: 2.6;
-  --s: 47.6%;
-  --l: 32.8%;
+  --h: 9.5;
+  --s: 57.9%;
+  --l: 32%;
 }
 .light.second.tetrad {
-  --l: 48.8%;
+  --l: 52%;
 }
 .dark.second.tetrad {
-  --l: 16.8%;
+  --l: 12%;
 }
 .bright.second.tetrad {
-  --s: 68.4%;
-  --l: 39.2%;
+  --s: 82.9%;
+  --l: 42%;
 }
 .dim.second.tetrad {
-  --s: 11.8%;
-  --l: 26.4%;
+  --s: 7.9%;
+  --l: 22%;
 }
 .third.tetrad {
-  --h: 116.4;
-  --s: 47.6%;
-  --l: 32.9%;
+  --h: 109.5;
+  --s: 57.9%;
+  --l: 32%;
 }
 .light.third.tetrad {
-  --l: 48.9%;
+  --l: 52%;
 }
 .dark.third.tetrad {
-  --l: 16.9%;
+  --l: 12%;
 }
 .bright.third.tetrad {
-  --s: 68.4%;
-  --l: 39.3%;
+  --s: 82.9%;
+  --l: 42%;
 }
 .dim.third.tetrad {
-  --s: 11.8%;
-  --l: 26.5%;
+  --s: 7.9%;
+  --l: 22%;
 }
 .fourth.tetrad {
-  --h: 202.3;
-  --s: 72.7%;
-  --l: 32.8%;
+  --h: 198.6;
+  --s: 70.8%;
+  --l: 32%;
 }
 .light.fourth.tetrad {
-  --l: 48.8%;
+  --l: 52%;
 }
 .dark.fourth.tetrad {
-  --l: 16.8%;
+  --l: 12%;
 }
 .bright.fourth.tetrad {
-  --s: 93.5%;
-  --l: 39.2%;
+  --s: 95.8%;
+  --l: 42%;
 }
 .dim.fourth.tetrad {
-  --s: 35.1%;
-  --l: 26.4%;
+  --s: 20.8%;
+  --l: 22%;
 }
 .warm {
   background-image: linear-gradient(var(--warm), var(--warm));
@@ -1796,7 +1755,7 @@ button:active {
 </head>
 
 <body class="neutral">
-  <nav class="bar action text-padding shadow no-underlines border-bottom fixed inner-page-width">
+  <nav class="bar base-color text-padding shadow no-underlines border-bottom fixed inner-feature-width">
       <a class="text-margin" href="" class="inline-block ">
           Cavepaint CSS
       </a>
@@ -1806,64 +1765,87 @@ button:active {
       </div>
   </nav>
   <div class="bar text-padding full-width placeholder border-bottom gutter-bottom">&nbsp;</div>    <div class="margin-right margin-left">
-      <div class="two-column desktop golden reverse padding margin-auto page-width gap-gutter">
-        <div>
-          <img src="cavepaint_logo.svg" alt="Cavepaint logo" class="block margin-auto gutter golden-width responsive">
+      <div class="two-column desktop golden reverse padding margin-auto feature-width no-gap">
+        <div class="vertical-center">
+          <img src="cavepaint_logo.svg" alt="Cavepaint logo" class="block margin margin-auto golden-width ">
 
-          <p class="gutter-top gutter-bottom padding text-crunch inner-card-width">This page is running Cavepaint, the no-workflow, no-CSS, custom-property-powered modern CSS framework. Customize it here.</p>
+          <p class="gutter-bottom padding text-crunch card-width margin-auto">This page is running Cavepaint, the no-workflow, no-CSS, custom-property-powered modern CSS framework. Customize it here.</p>
           
         </div>
-        <div>
-          <form class="white padding border border-radius text-width margin-auto margin-bottom shadow">
-            <p class="two-column tablet text-margin-bottom">
+        <div class="light white padding border border-radius full-width force margin-auto margin-bottom shadow">
+          <form class="two-column tablet">
+            <p class="one-column tablet text-padding-right text-padding-left no-margin">
+              <span class="float-right"><span class="character-width base-color padding-right rounded">&nbsp;</span></span>
               <span class="block full-width">base&nbsp;color (<strong><span id="baseColorLabel" for="baseColor">#2021AD</span></strong>)</span>
               
-              <input class="no-padding pointer margin-auto" id="baseColor" type="color" value="#2021AD" oninput="document.getElementById('baseColorLabel').innerHTML = document.getElementById('baseColor').value">
+              <input class="no-padding pointer force full-width" id="baseColor" type="color" value="#2021AD" oninput="document.getElementById('baseColorLabel').innerHTML = document.getElementById('baseColor').value">
             </p>
-            <p class="two-column tablet text-margin-bottom">
+            <p class="one-column tablet text-padding-right text-padding-left no-margin">
+              <span class="float-right fade"><span class="border thick no-border-top no-border-bottom padding-left padding-right"><span class="border thick dashed no-border-top no-border-bottom">&nbsp;&nbsp;&nbsp;</span></span></span>
+              <span class="block full-width">padding (<strong><span id="basePaddingLabel" for="basePadding">1</span>&nbsp;rem</strong>)</span>
+              <input type="range" id="basePadding" min=".4" max="1.6" value="1" step=".1" class="force full-width cursor" oninput="document.getElementById('basePaddingLabel').innerHTML = document.getElementById('basePadding').value">
+            </p>
+
+            <p class="one-column tablet text-padding-right text-padding-left no-margin relative">
+              <span class="fade block absolute top right float-right text-crunch"><span class="small">A</span> <span>A</span> <span class="big">A</span></span>
+              <span class="block full-width">font&nbsp;size (<strong><span id="baseFontSizeLabel" for="baseFontSize">18</span>&nbsp;px</strong>)</span>
+              <input type="range" id="baseFontSize" min="14" max="22" value="18" step="1" class="force full-width cursor" oninput="document.getElementById('baseFontSizeLabel').innerHTML = document.getElementById('baseFontSize').value">
+            </p>
+
+            
+
+            <p class="one-column tablet text-padding-right text-padding-left no-margin">
+              <span class="float-right"><span class="border thick no-border-left no-border-right dashed padding-left padding-right fade italic small">abc</span></span>
+              <span class="block full-width">line&nbsp;height (<strong><span id="baseLineHeightLabel" for="baseLineHeight">1.8</span></strong>)</span>
+              <input type="range" id="baseLineHeight" min="1.5" max="2.1" value="1.8" step=".1" class="force full-width cursor" oninput="document.getElementById('baseLineHeightLabel').innerHTML = document.getElementById('baseLineHeight').value">
+            </p>
+
+            <p class="one-column tablet text-padding-right text-padding-left no-margin">
+              <span class="float-right fade"><span class="light gray">&nbsp;&nbsp;&nbsp;</span> <span class="light gray">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
               <span class="block full-width">page&nbsp;width (<strong><span id="textBaseLabel" for="textBase">50</span>&nbsp;rem</strong>)</span>
               
-              <input type="range" id="textBase" min="42" max="62" value="52" step="2" class="full-width force dark cool white no-border" oninput="document.getElementById('textBaseLabel').innerHTML = document.getElementById('textBase').value">
-            </p>
-            <p class="two-column tablet text-margin-bottom">
-              <span class="block full-width">padding (<strong><span id="basePaddingLabel" for="basePadding">1</span>&nbsp;rem</strong>)</span>
-              <input type="range" id="basePadding" min=".4" max="1.4" value="1" step=".1" class="full-width force dark cool white no-border" oninput="document.getElementById('basePaddingLabel').innerHTML = document.getElementById('basePadding').value">
+              <input type="range" id="textBase" min="42" max="62" value="52" step="2" class="force full-width cursor" oninput="document.getElementById('textBaseLabel').innerHTML = document.getElementById('textBase').value">
             </p>
 
-            <p class="two-column tablet text-margin-bottom">
-              <span class="block full-width">line&nbsp;height (<strong><span id="baseLineHeightLabel" for="baseLineHeight">1.8</span></strong>)</span>
-              <input type="range" id="baseLineHeight" min="1.5" max="2.2" value="1.8" step=".1" class="full-width force dark cool white no-border" oninput="document.getElementById('baseLineHeightLabel').innerHTML = document.getElementById('baseLineHeight').value">
+            <p class="one-column tablet text-padding-right text-padding-left no-margin">
+              <span class="float-right fade"><span class="character-width dim gray padding-right rounded">&nbsp;</span> <span class="character-width gray padding-right rounded">&nbsp;</span> <span class="character-width bright gray padding-right rounded">&nbsp;</span></span>
+              <span class="block full-width">ambience (<strong><span id="baseLightingLabel" for="baseLighting">95</span>%</strong>)</span>
+              <input type="range" id="baseLighting" min="90" max="100" value="95" step="1" class="force full-width cursor" oninput="document.getElementById('baseLightingLabel').innerHTML = document.getElementById('baseLighting').value">
             </p>
 
-            <p class="two-column tablet text-margin-bottom">
-              <span class="block full-width">ambience (<strong><span id="baseLightingLabel" for="baseLighting">90</span>%</strong>)</span>
-              <input type="range" id="baseLighting" min="75" max="100" value="90" step="5" class="full-width force dark cool white no-border" oninput="document.getElementById('baseLightingLabel').innerHTML = document.getElementById('baseLighting').value">
+            <p class="one-column tablet text-padding-right text-padding-left no-margin">
+              <span class="float-right"><span class="character-width gray padding-right rounded">&nbsp;</span> -> <span class="character-width light gray padding-right rounded">&nbsp;</span></span>
+              <span class="block full-width">lighten (<strong><span id="baseLightenByLabel" for="baseLightenBy">20</span>%</strong>)</span>
+              <input type="range" id="baseLightenBy" min="5" max="35" value="20" step="5" class="force full-width cursor" oninput="document.getElementById('baseLightenByLabel').innerHTML = document.getElementById('baseLightenBy').value">
             </p>
 
-            <p class="two-column tablet">
-              <span class="block full-width">font-size (<strong><span id="baseFontSizeLabel" for="baseFontSize">18</span>&nbsp;px</strong>)</span>
-              <input type="range" id="baseFontSize" min="14" max="22" value="18" step="1" class="full-width force dark cool white no-border" oninput="document.getElementById('baseFontSizeLabel').innerHTML = document.getElementById('baseFontSize').value">
+            <p class="one-column tablet text-padding-right text-padding-left no-margin">
+              <span class="float-right"><span class="character-width gray padding-right rounded">&nbsp;</span> -> <span class="character-width dark gray padding-right rounded">&nbsp;</span></span>
+              <span class="block full-width">darken (<strong><span id="baseDarkenByLabel" for="baseDarkenBy">20</span>%</strong>)</span>
+              <input type="range" id="baseDarkenBy" min="5" max="35" value="20" step="5" class="force full-width cursor" oninput="document.getElementById('baseDarkenByLabel').innerHTML = document.getElementById('baseDarkenBy').value">
             </p>
+
+            
             <p class="text-center">
-              <label class="text-margin inline-block" for="sans-serif">
+              <label class="text-margin inline-block sans-serif" for="sans-serif">
                 <input type="radio" id="sans-serif" name="font" value="sans-serif"
                        checked>
                 Sans-serif
               </label> 
               
-              <label class="text-margin inline-block" for="serif">
+              <label class="text-margin inline-block serif" for="serif">
                 <input type="radio" id="serif" name="font" value="serif">
                 Serif
               </label> 
 
-              <label class="text-margin inline-block" for="monospace">
+              <label class="text-margin inline-block monospace" for="monospace">
                 <input type="radio" id="monospace" name="font" value="monospace">
                 Monospace
               </label>
             </p>
 
             <p class="no-margin clearfix">
-              <button onClick="event.preventDefault(); renderLess();" class="big dark action float-right">Compile Cavepaint</button>
+              <button onClick="event.preventDefault(); renderLess();" class="huge bright tetrad float-right padding">Compile Cavepaint</button>
             </p>
     
           </form>
@@ -1927,9 +1909,9 @@ button:active {
   --direction: 180deg;
   --white: #f1f1fe;
   --black: #040421;
-  --warm: rgba(190, 49, 109, 0.25);
-  --cool: rgba(9, 135, 181, 0.2);
-  --neutral: rgba(28, 29, 167, 0.15);
+  --warm: rgba(200, 61, 102, 0.25);
+  --cool: rgba(10, 147, 177, 0.2);
+  --neutral: rgba(30, 31, 167, 0.15);
   --dull: rgba(103, 103, 103, 0.3);
   --monospace: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, "DejaVu Sans Mono", Courier, monospace;
   --serif: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "Droid Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
@@ -2330,6 +2312,12 @@ button:active {
   --shadow-position: 2px;
   --box-shadow: var(--shadow-position) var(--shadow-position) var(--shadow-blur) var(--shadow-color);
 }
+.full-height {
+  min-height: 100%;
+}
+.full-height.force {
+  height: 100%;
+}
 .viewport-height {
   min-height: 100vh;
 }
@@ -2390,6 +2378,9 @@ button:active {
 }
 .bold {
   font-weight: bold;
+}
+.italic {
+  font-style: italic;
 }
 .all-caps {
   text-transform: uppercase;
@@ -2467,11 +2458,12 @@ button:active {
 .orange,
 .yellow,
 .light.green,
+.bright.green,
 .light.teal,
+.bright.teal,
 .cyan,
 .light.magenta,
 .light.gray,
-.light.reaction,
 .light.complement,
 .bright.complement,
 .light.second.split,
@@ -2480,6 +2472,7 @@ button:active {
 .bright.third.triad,
 .light.third.tetrad,
 .bright.third.tetrad,
+.light.fourth.tetrad,
 .light.second.triad,
 .bright.second.triad {
   color: var(--black);
@@ -2491,10 +2484,11 @@ button:active {
 }
 .tint,
 .black,
-.ambient,
 .red,
 .dark.orange,
 .dim.orange,
+.dark.yellow,
+.dim.yellow,
 .green,
 .teal,
 .dark.cyan,
@@ -2503,10 +2497,7 @@ button:active {
 .purple,
 .magenta,
 .gray,
-.action,
 .base-color,
-.reaction,
-.default,
 .complement,
 .accent,
 .second.accent,
@@ -3073,6 +3064,18 @@ button:active {
 .no-borders * {
   border-width: 0 !important;
 }
+.no-border-top {
+  border-top-width: 0 !important;
+}
+.no-border-right {
+  border-right-width: 0 !important;
+}
+.no-border-bottom {
+  border-bottom-width: 0 !important;
+}
+.no-border-left {
+  border-left-width: 0 !important;
+}
 .no-background {
   background: transparent !important;
 }
@@ -3123,18 +3126,18 @@ button:active {
   --l: 97%;
 }
 .light.white {
-  --l: 99.4%;
+  --l: 100%;
 }
 .dark.white {
-  --l: 81%;
+  --l: 77%;
 }
 .bright.white {
-  --s: 82.6%;
-  --l: 99.4%;
+  --s: 0%;
+  --l: 100%;
 }
 .dim.white {
-  --s: 35.8%;
-  --l: 90.6%;
+  --s: 32.6%;
+  --l: 87%;
 }
 .black {
   --h: 239.6;
@@ -3142,503 +3145,441 @@ button:active {
   --l: 7.1%;
 }
 .light.black {
-  --l: 23.1%;
+  --l: 27.1%;
 }
 .dark.black {
-  --l: 1.4%;
+  --l: 0%;
 }
 .bright.black {
-  --s: 97.9%;
-  --l: 13.5%;
+  --s: 100%;
+  --l: 17.1%;
 }
 .dim.black {
-  --s: 80.2%;
-  --l: 1.4%;
-}
-.ambient {
-  --h: 239.6;
-  --s: 82.6%;
-  --l: 50.8%;
-}
-.light.ambient {
-  --l: 66.8%;
-}
-.dark.ambient {
-  --l: 34.8%;
-}
-.bright.ambient {
-  --s: 96%;
-  --l: 57.2%;
-}
-.dim.ambient {
-  --s: 43.5%;
-  --l: 44.4%;
+  --s: 0%;
+  --l: 0%;
 }
 .red {
-  --h: 343.2;
+  --h: 346.8;
   --s: 88.6%;
-  --l: 39.2%;
+  --l: 40.9%;
 }
 .light.red {
-  --l: 55.2%;
+  --l: 60.9%;
 }
 .dark.red {
-  --l: 23.2%;
+  --l: 20.9%;
 }
 .bright.red {
-  --s: 98%;
-  --l: 45.6%;
+  --s: 100%;
+  --l: 50.9%;
 }
 .dim.red {
-  --s: 50.6%;
-  --l: 32.8%;
+  --s: 38.6%;
+  --l: 30.9%;
 }
 .orange {
-  --h: 36.8;
-  --s: 83.9%;
+  --h: 37.9;
+  --s: 91.9%;
   --l: 50.1%;
 }
 .light.orange {
-  --l: 66.1%;
+  --l: 70.1%;
 }
 .dark.orange {
-  --l: 34.1%;
+  --l: 30.1%;
 }
 .bright.orange {
-  --s: 96.3%;
-  --l: 56.5%;
+  --s: 100%;
+  --l: 60.1%;
 }
 .dim.orange {
-  --s: 45.3%;
-  --l: 43.7%;
+  --s: 41.9%;
+  --l: 40.1%;
 }
 .yellow {
   --h: 60.1;
-  --s: 76.9%;
-  --l: 50.3%;
+  --s: 84.4%;
+  --l: 50.2%;
 }
 .light.yellow {
-  --l: 66.3%;
+  --l: 70.2%;
 }
 .dark.yellow {
-  --l: 34.3%;
+  --l: 30.2%;
 }
 .bright.yellow {
-  --s: 94.7%;
-  --l: 56.7%;
+  --s: 100%;
+  --l: 60.2%;
 }
 .dim.yellow {
-  --s: 38.1%;
-  --l: 43.9%;
+  --s: 34.4%;
+  --l: 40.2%;
 }
 .green {
-  --h: 142.2;
+  --h: 136.2;
   --s: 100%;
-  --l: 21.3%;
+  --l: 22.2%;
 }
 .light.green {
-  --l: 37.3%;
+  --l: 42.2%;
 }
 .dark.green {
-  --l: 5.3%;
+  --l: 2.2%;
 }
 .bright.green {
   --s: 100%;
-  --l: 27.7%;
+  --l: 32.2%;
 }
 .dim.green {
-  --s: 64.3%;
-  --l: 14.9%;
+  --s: 50%;
+  --l: 12.2%;
 }
 .teal {
-  --h: 188.9;
+  --h: 184.6;
   --s: 100%;
-  --l: 27.2%;
+  --l: 26.1%;
 }
 .light.teal {
-  --l: 43.2%;
+  --l: 46.1%;
 }
 .dark.teal {
-  --l: 11.2%;
+  --l: 6.1%;
 }
 .bright.teal {
   --s: 100%;
-  --l: 33.6%;
+  --l: 36.1%;
 }
 .dim.teal {
-  --s: 63.1%;
-  --l: 20.8%;
+  --s: 50%;
+  --l: 16.1%;
 }
 .cyan {
-  --h: 190;
-  --s: 90.7%;
+  --h: 187.6;
+  --s: 90.3%;
   --l: 49.9%;
 }
 .light.cyan {
-  --l: 65.9%;
+  --l: 69.9%;
 }
 .dark.cyan {
-  --l: 33.9%;
+  --l: 29.9%;
 }
 .bright.cyan {
-  --s: 97.8%;
-  --l: 56.3%;
+  --s: 100%;
+  --l: 59.9%;
 }
 .dim.cyan {
-  --s: 52.2%;
-  --l: 43.5%;
+  --s: 40.3%;
+  --l: 39.9%;
 }
 .blue {
   --h: 240;
-  --s: 89.7%;
+  --s: 89.3%;
   --l: 49.4%;
 }
 .light.blue {
-  --l: 65.4%;
+  --l: 69.4%;
 }
 .dark.blue {
-  --l: 33.4%;
+  --l: 29.4%;
 }
 .bright.blue {
-  --s: 97.2%;
-  --l: 55.8%;
+  --s: 100%;
+  --l: 59.4%;
 }
 .dim.blue {
-  --s: 51.2%;
-  --l: 43%;
+  --s: 39.3%;
+  --l: 39.4%;
 }
 .purple {
-  --h: 284;
+  --h: 287.4;
   --s: 100%;
-  --l: 29%;
+  --l: 28.1%;
 }
 .light.purple {
-  --l: 45%;
+  --l: 48.1%;
 }
 .dark.purple {
-  --l: 13%;
+  --l: 8.1%;
 }
 .bright.purple {
   --s: 100%;
-  --l: 35.4%;
+  --l: 38.1%;
 }
 .dim.purple {
-  --s: 62.8%;
-  --l: 22.6%;
+  --s: 50%;
+  --l: 18.1%;
 }
 .magenta {
-  --h: 287;
-  --s: 88.9%;
+  --h: 289.2;
+  --s: 88.4%;
   --l: 48.7%;
 }
 .light.magenta {
-  --l: 64.7%;
+  --l: 68.7%;
 }
 .dark.magenta {
-  --l: 32.7%;
+  --l: 28.7%;
 }
 .bright.magenta {
-  --s: 96.5%;
-  --l: 55.1%;
+  --s: 100%;
+  --l: 58.7%;
 }
 .dim.magenta {
-  --s: 50.4%;
-  --l: 42.3%;
+  --s: 38.4%;
+  --l: 38.7%;
 }
 .gray {
-  --h: 239.7;
-  --s: 8.2%;
+  --h: 239.8;
+  --s: 4.1%;
   --l: 50.2%;
 }
 .light.gray {
-  --l: 66.2%;
+  --l: 70.2%;
 }
 .dark.gray {
-  --l: 34.2%;
+  --l: 30.2%;
 }
 .bright.gray {
-  --s: 27.4%;
-  --l: 56.6%;
+  --s: 29.1%;
+  --l: 60.2%;
 }
 .dim.gray {
-  --s: 1.9%;
-  --l: 43.8%;
+  --s: 0%;
+  --l: 40.2%;
 }
-.action,
 .base-color {
   --h: 239.6;
   --s: 68.8%;
   --l: 40.2%;
 }
-.light.action,
 .light.base-color {
-  --l: 56.2%;
+  --l: 60.2%;
 }
-.dark.action,
 .dark.base-color {
-  --l: 24.2%;
+  --l: 20.2%;
 }
-.bright.action,
 .bright.base-color {
-  --s: 89.5%;
-  --l: 46.6%;
+  --s: 93.8%;
+  --l: 50.2%;
 }
-.dim.action,
 .dim.base-color {
-  --s: 30.7%;
-  --l: 33.8%;
-}
-.reaction {
-  --h: 59.5;
-  --s: 40.5%;
-  --l: 24.7%;
-}
-.light.reaction {
-  --l: 40.7%;
-}
-.dark.reaction {
-  --l: 8.7%;
-}
-.bright.reaction {
-  --s: 61.5%;
-  --l: 31.1%;
-}
-.dim.reaction {
-  --s: 10.9%;
-  --l: 18.3%;
-}
-.default {
-  --h: 239.6;
-  --s: 40.9%;
-  --l: 45.5%;
-}
-.light.default {
-  --l: 61.5%;
-}
-.dark.default {
-  --l: 29.5%;
-}
-.bright.default {
-  --s: 58.7%;
-  --l: 51.9%;
-}
-.dim.default {
-  --s: 9.5%;
-  --l: 39.1%;
+  --s: 18.8%;
+  --l: 30.2%;
 }
 .complement,
 .second.triad {
   --h: 59.6;
-  --s: 47.6%;
-  --l: 32.8%;
+  --s: 57.9%;
+  --l: 32%;
 }
 .light.complement,
 .light.second.triad {
-  --l: 48.8%;
+  --l: 52%;
 }
 .dark.complement,
 .dark.second.triad {
-  --l: 16.8%;
+  --l: 12%;
 }
 .bright.complement,
 .bright.second.triad {
-  --s: 68.4%;
-  --l: 39.2%;
+  --s: 82.9%;
+  --l: 42%;
 }
 .dim.complement,
 .dim.second.triad {
-  --s: 11.8%;
-  --l: 26.4%;
+  --s: 7.9%;
+  --l: 22%;
 }
 .accent {
-  --h: 264.5;
-  --s: 72.6%;
-  --l: 32.8%;
+  --h: 266.9;
+  --s: 70.7%;
+  --l: 32%;
 }
 .light.accent {
-  --l: 48.8%;
+  --l: 52%;
 }
 .dark.accent {
-  --l: 16.8%;
+  --l: 12%;
 }
 .bright.accent {
-  --s: 93.4%;
-  --l: 39.2%;
+  --s: 95.7%;
+  --l: 42%;
 }
 .dim.accent {
-  --s: 35%;
-  --l: 26.4%;
+  --s: 20.7%;
+  --l: 22%;
 }
 .second.accent {
-  --h: 214.7;
-  --s: 72.6%;
-  --l: 32.8%;
+  --h: 212.3;
+  --s: 70.8%;
+  --l: 32%;
 }
 .light.second.accent {
-  --l: 48.8%;
+  --l: 52%;
 }
 .dark.second.accent {
-  --l: 16.8%;
+  --l: 12%;
 }
 .bright.second.accent {
-  --s: 93.5%;
-  --l: 39.2%;
+  --s: 95.8%;
+  --l: 42%;
 }
 .dim.second.accent {
-  --s: 35.1%;
-  --l: 26.4%;
+  --s: 20.8%;
+  --l: 22%;
 }
 .split {
-  --h: 317.1;
-  --s: 68.7%;
-  --l: 28.7%;
+  --h: 323.6;
+  --s: 68.8%;
+  --l: 30%;
 }
 .light.split {
-  --l: 44.7%;
+  --l: 50%;
 }
 .dark.split {
-  --l: 12.7%;
+  --l: 10%;
 }
 .bright.split {
-  --s: 89.7%;
-  --l: 35.1%;
+  --s: 93.8%;
+  --l: 40%;
 }
 .dim.split {
-  --s: 31.6%;
-  --l: 22.3%;
+  --s: 18.8%;
+  --l: 20%;
 }
 .second.split {
-  --h: 162;
+  --h: 155.5;
   --s: 68.8%;
-  --l: 28.7%;
+  --l: 30%;
 }
 .light.second.split {
-  --l: 44.7%;
+  --l: 50%;
 }
 .dark.second.split {
-  --l: 12.7%;
+  --l: 10%;
 }
 .bright.second.split {
-  --s: 89.7%;
-  --l: 35.1%;
+  --s: 93.8%;
+  --l: 40%;
 }
 .dim.second.split {
-  --s: 31.7%;
-  --l: 22.3%;
+  --s: 18.8%;
+  --l: 20%;
 }
 .triad {
-  --h: 289.4;
-  --s: 72.6%;
-  --l: 32.8%;
+  --h: 294.2;
+  --s: 70.7%;
+  --l: 32%;
 }
 .light.triad {
-  --l: 48.8%;
+  --l: 52%;
 }
 .dark.triad {
-  --l: 16.8%;
+  --l: 12%;
 }
 .bright.triad {
-  --s: 93.4%;
-  --l: 39.2%;
+  --s: 95.7%;
+  --l: 42%;
 }
 .dim.triad {
-  --s: 35.1%;
-  --l: 26.4%;
+  --s: 20.7%;
+  --l: 22%;
 }
 .third.triad {
-  --h: 189.9;
-  --s: 72.5%;
-  --l: 32.6%;
+  --h: 185;
+  --s: 70.6%;
+  --l: 31.8%;
 }
 .light.third.triad {
-  --l: 48.6%;
+  --l: 51.8%;
 }
 .dark.third.triad {
-  --l: 16.6%;
+  --l: 11.8%;
 }
 .bright.third.triad {
-  --s: 93.4%;
-  --l: 39%;
+  --s: 95.6%;
+  --l: 41.8%;
 }
 .dim.third.triad {
-  --s: 35%;
-  --l: 26.2%;
+  --s: 20.6%;
+  --l: 21.8%;
 }
 .tetrad {
-  --h: 277;
-  --s: 72.6%;
-  --l: 32.8%;
+  --h: 280.6;
+  --s: 70.7%;
+  --l: 32%;
 }
 .light.tetrad {
-  --l: 48.8%;
+  --l: 52%;
 }
 .dark.tetrad {
-  --l: 16.8%;
+  --l: 12%;
 }
 .bright.tetrad {
-  --s: 93.4%;
-  --l: 39.2%;
+  --s: 95.7%;
+  --l: 42%;
 }
 .dim.tetrad {
-  --s: 35.1%;
-  --l: 26.4%;
+  --s: 20.7%;
+  --l: 22%;
 }
 .second.tetrad {
-  --h: 2.6;
-  --s: 47.6%;
-  --l: 32.8%;
+  --h: 9.5;
+  --s: 57.9%;
+  --l: 32%;
 }
 .light.second.tetrad {
-  --l: 48.8%;
+  --l: 52%;
 }
 .dark.second.tetrad {
-  --l: 16.8%;
+  --l: 12%;
 }
 .bright.second.tetrad {
-  --s: 68.4%;
-  --l: 39.2%;
+  --s: 82.9%;
+  --l: 42%;
 }
 .dim.second.tetrad {
-  --s: 11.8%;
-  --l: 26.4%;
+  --s: 7.9%;
+  --l: 22%;
 }
 .third.tetrad {
-  --h: 116.4;
-  --s: 47.6%;
-  --l: 32.9%;
+  --h: 109.5;
+  --s: 57.9%;
+  --l: 32%;
 }
 .light.third.tetrad {
-  --l: 48.9%;
+  --l: 52%;
 }
 .dark.third.tetrad {
-  --l: 16.9%;
+  --l: 12%;
 }
 .bright.third.tetrad {
-  --s: 68.4%;
-  --l: 39.3%;
+  --s: 82.9%;
+  --l: 42%;
 }
 .dim.third.tetrad {
-  --s: 11.8%;
-  --l: 26.5%;
+  --s: 7.9%;
+  --l: 22%;
 }
 .fourth.tetrad {
-  --h: 202.3;
-  --s: 72.7%;
-  --l: 32.8%;
+  --h: 198.6;
+  --s: 70.8%;
+  --l: 32%;
 }
 .light.fourth.tetrad {
-  --l: 48.8%;
+  --l: 52%;
 }
 .dark.fourth.tetrad {
-  --l: 16.8%;
+  --l: 12%;
 }
 .bright.fourth.tetrad {
-  --s: 93.5%;
-  --l: 39.2%;
+  --s: 95.8%;
+  --l: 42%;
 }
 .dim.fourth.tetrad {
-  --s: 35.1%;
-  --l: 26.4%;
+  --s: 20.8%;
+  --l: 22%;
 }
 .warm {
   background-image: linear-gradient(var(--warm), var(--warm));
@@ -3653,7 +3594,8 @@ button:active {
   background-image: linear-gradient(var(--dull), var(--dull));
 }
 </textarea>
-          <button class="dark red small" onclick="copyCSS()">Copy to clipboard</button>
+          <button class="dark red" onclick="copyCSS()">Copy to clipboard</button>
+          <button class="dark blue" onclick="saveTextAsFile(document.getElementById('css_textarea').value,'cavepaint.css')">Download</button>
         </div>
         <div class="inner-text-width margin-bottom">
           <h5>or put this in &lt;head&gt;</h5>
@@ -3701,9 +3643,9 @@ button:active {
   --direction: 180deg;
   --white: #f1f1fe;
   --black: #040421;
-  --warm: rgba(190, 49, 109, 0.25);
-  --cool: rgba(9, 135, 181, 0.2);
-  --neutral: rgba(28, 29, 167, 0.15);
+  --warm: rgba(200, 61, 102, 0.25);
+  --cool: rgba(10, 147, 177, 0.2);
+  --neutral: rgba(30, 31, 167, 0.15);
   --dull: rgba(103, 103, 103, 0.3);
   --monospace: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, "DejaVu Sans Mono", Courier, monospace;
   --serif: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "Droid Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
@@ -4104,6 +4046,12 @@ button:active {
   --shadow-position: 2px;
   --box-shadow: var(--shadow-position) var(--shadow-position) var(--shadow-blur) var(--shadow-color);
 }
+.full-height {
+  min-height: 100%;
+}
+.full-height.force {
+  height: 100%;
+}
 .viewport-height {
   min-height: 100vh;
 }
@@ -4164,6 +4112,9 @@ button:active {
 }
 .bold {
   font-weight: bold;
+}
+.italic {
+  font-style: italic;
 }
 .all-caps {
   text-transform: uppercase;
@@ -4241,11 +4192,12 @@ button:active {
 .orange,
 .yellow,
 .light.green,
+.bright.green,
 .light.teal,
+.bright.teal,
 .cyan,
 .light.magenta,
 .light.gray,
-.light.reaction,
 .light.complement,
 .bright.complement,
 .light.second.split,
@@ -4254,6 +4206,7 @@ button:active {
 .bright.third.triad,
 .light.third.tetrad,
 .bright.third.tetrad,
+.light.fourth.tetrad,
 .light.second.triad,
 .bright.second.triad {
   color: var(--black);
@@ -4265,10 +4218,11 @@ button:active {
 }
 .tint,
 .black,
-.ambient,
 .red,
 .dark.orange,
 .dim.orange,
+.dark.yellow,
+.dim.yellow,
 .green,
 .teal,
 .dark.cyan,
@@ -4277,10 +4231,7 @@ button:active {
 .purple,
 .magenta,
 .gray,
-.action,
 .base-color,
-.reaction,
-.default,
 .complement,
 .accent,
 .second.accent,
@@ -4847,6 +4798,18 @@ button:active {
 .no-borders * {
   border-width: 0 !important;
 }
+.no-border-top {
+  border-top-width: 0 !important;
+}
+.no-border-right {
+  border-right-width: 0 !important;
+}
+.no-border-bottom {
+  border-bottom-width: 0 !important;
+}
+.no-border-left {
+  border-left-width: 0 !important;
+}
 .no-background {
   background: transparent !important;
 }
@@ -4897,18 +4860,18 @@ button:active {
   --l: 97%;
 }
 .light.white {
-  --l: 99.4%;
+  --l: 100%;
 }
 .dark.white {
-  --l: 81%;
+  --l: 77%;
 }
 .bright.white {
-  --s: 82.6%;
-  --l: 99.4%;
+  --s: 0%;
+  --l: 100%;
 }
 .dim.white {
-  --s: 35.8%;
-  --l: 90.6%;
+  --s: 32.6%;
+  --l: 87%;
 }
 .black {
   --h: 239.6;
@@ -4916,503 +4879,441 @@ button:active {
   --l: 7.1%;
 }
 .light.black {
-  --l: 23.1%;
+  --l: 27.1%;
 }
 .dark.black {
-  --l: 1.4%;
+  --l: 0%;
 }
 .bright.black {
-  --s: 97.9%;
-  --l: 13.5%;
+  --s: 100%;
+  --l: 17.1%;
 }
 .dim.black {
-  --s: 80.2%;
-  --l: 1.4%;
-}
-.ambient {
-  --h: 239.6;
-  --s: 82.6%;
-  --l: 50.8%;
-}
-.light.ambient {
-  --l: 66.8%;
-}
-.dark.ambient {
-  --l: 34.8%;
-}
-.bright.ambient {
-  --s: 96%;
-  --l: 57.2%;
-}
-.dim.ambient {
-  --s: 43.5%;
-  --l: 44.4%;
+  --s: 0%;
+  --l: 0%;
 }
 .red {
-  --h: 343.2;
+  --h: 346.8;
   --s: 88.6%;
-  --l: 39.2%;
+  --l: 40.9%;
 }
 .light.red {
-  --l: 55.2%;
+  --l: 60.9%;
 }
 .dark.red {
-  --l: 23.2%;
+  --l: 20.9%;
 }
 .bright.red {
-  --s: 98%;
-  --l: 45.6%;
+  --s: 100%;
+  --l: 50.9%;
 }
 .dim.red {
-  --s: 50.6%;
-  --l: 32.8%;
+  --s: 38.6%;
+  --l: 30.9%;
 }
 .orange {
-  --h: 36.8;
-  --s: 83.9%;
+  --h: 37.9;
+  --s: 91.9%;
   --l: 50.1%;
 }
 .light.orange {
-  --l: 66.1%;
+  --l: 70.1%;
 }
 .dark.orange {
-  --l: 34.1%;
+  --l: 30.1%;
 }
 .bright.orange {
-  --s: 96.3%;
-  --l: 56.5%;
+  --s: 100%;
+  --l: 60.1%;
 }
 .dim.orange {
-  --s: 45.3%;
-  --l: 43.7%;
+  --s: 41.9%;
+  --l: 40.1%;
 }
 .yellow {
   --h: 60.1;
-  --s: 76.9%;
-  --l: 50.3%;
+  --s: 84.4%;
+  --l: 50.2%;
 }
 .light.yellow {
-  --l: 66.3%;
+  --l: 70.2%;
 }
 .dark.yellow {
-  --l: 34.3%;
+  --l: 30.2%;
 }
 .bright.yellow {
-  --s: 94.7%;
-  --l: 56.7%;
+  --s: 100%;
+  --l: 60.2%;
 }
 .dim.yellow {
-  --s: 38.1%;
-  --l: 43.9%;
+  --s: 34.4%;
+  --l: 40.2%;
 }
 .green {
-  --h: 142.2;
+  --h: 136.2;
   --s: 100%;
-  --l: 21.3%;
+  --l: 22.2%;
 }
 .light.green {
-  --l: 37.3%;
+  --l: 42.2%;
 }
 .dark.green {
-  --l: 5.3%;
+  --l: 2.2%;
 }
 .bright.green {
   --s: 100%;
-  --l: 27.7%;
+  --l: 32.2%;
 }
 .dim.green {
-  --s: 64.3%;
-  --l: 14.9%;
+  --s: 50%;
+  --l: 12.2%;
 }
 .teal {
-  --h: 188.9;
+  --h: 184.6;
   --s: 100%;
-  --l: 27.2%;
+  --l: 26.1%;
 }
 .light.teal {
-  --l: 43.2%;
+  --l: 46.1%;
 }
 .dark.teal {
-  --l: 11.2%;
+  --l: 6.1%;
 }
 .bright.teal {
   --s: 100%;
-  --l: 33.6%;
+  --l: 36.1%;
 }
 .dim.teal {
-  --s: 63.1%;
-  --l: 20.8%;
+  --s: 50%;
+  --l: 16.1%;
 }
 .cyan {
-  --h: 190;
-  --s: 90.7%;
+  --h: 187.6;
+  --s: 90.3%;
   --l: 49.9%;
 }
 .light.cyan {
-  --l: 65.9%;
+  --l: 69.9%;
 }
 .dark.cyan {
-  --l: 33.9%;
+  --l: 29.9%;
 }
 .bright.cyan {
-  --s: 97.8%;
-  --l: 56.3%;
+  --s: 100%;
+  --l: 59.9%;
 }
 .dim.cyan {
-  --s: 52.2%;
-  --l: 43.5%;
+  --s: 40.3%;
+  --l: 39.9%;
 }
 .blue {
   --h: 240;
-  --s: 89.7%;
+  --s: 89.3%;
   --l: 49.4%;
 }
 .light.blue {
-  --l: 65.4%;
+  --l: 69.4%;
 }
 .dark.blue {
-  --l: 33.4%;
+  --l: 29.4%;
 }
 .bright.blue {
-  --s: 97.2%;
-  --l: 55.8%;
+  --s: 100%;
+  --l: 59.4%;
 }
 .dim.blue {
-  --s: 51.2%;
-  --l: 43%;
+  --s: 39.3%;
+  --l: 39.4%;
 }
 .purple {
-  --h: 284;
+  --h: 287.4;
   --s: 100%;
-  --l: 29%;
+  --l: 28.1%;
 }
 .light.purple {
-  --l: 45%;
+  --l: 48.1%;
 }
 .dark.purple {
-  --l: 13%;
+  --l: 8.1%;
 }
 .bright.purple {
   --s: 100%;
-  --l: 35.4%;
+  --l: 38.1%;
 }
 .dim.purple {
-  --s: 62.8%;
-  --l: 22.6%;
+  --s: 50%;
+  --l: 18.1%;
 }
 .magenta {
-  --h: 287;
-  --s: 88.9%;
+  --h: 289.2;
+  --s: 88.4%;
   --l: 48.7%;
 }
 .light.magenta {
-  --l: 64.7%;
+  --l: 68.7%;
 }
 .dark.magenta {
-  --l: 32.7%;
+  --l: 28.7%;
 }
 .bright.magenta {
-  --s: 96.5%;
-  --l: 55.1%;
+  --s: 100%;
+  --l: 58.7%;
 }
 .dim.magenta {
-  --s: 50.4%;
-  --l: 42.3%;
+  --s: 38.4%;
+  --l: 38.7%;
 }
 .gray {
-  --h: 239.7;
-  --s: 8.2%;
+  --h: 239.8;
+  --s: 4.1%;
   --l: 50.2%;
 }
 .light.gray {
-  --l: 66.2%;
+  --l: 70.2%;
 }
 .dark.gray {
-  --l: 34.2%;
+  --l: 30.2%;
 }
 .bright.gray {
-  --s: 27.4%;
-  --l: 56.6%;
+  --s: 29.1%;
+  --l: 60.2%;
 }
 .dim.gray {
-  --s: 1.9%;
-  --l: 43.8%;
+  --s: 0%;
+  --l: 40.2%;
 }
-.action,
 .base-color {
   --h: 239.6;
   --s: 68.8%;
   --l: 40.2%;
 }
-.light.action,
 .light.base-color {
-  --l: 56.2%;
+  --l: 60.2%;
 }
-.dark.action,
 .dark.base-color {
-  --l: 24.2%;
+  --l: 20.2%;
 }
-.bright.action,
 .bright.base-color {
-  --s: 89.5%;
-  --l: 46.6%;
+  --s: 93.8%;
+  --l: 50.2%;
 }
-.dim.action,
 .dim.base-color {
-  --s: 30.7%;
-  --l: 33.8%;
-}
-.reaction {
-  --h: 59.5;
-  --s: 40.5%;
-  --l: 24.7%;
-}
-.light.reaction {
-  --l: 40.7%;
-}
-.dark.reaction {
-  --l: 8.7%;
-}
-.bright.reaction {
-  --s: 61.5%;
-  --l: 31.1%;
-}
-.dim.reaction {
-  --s: 10.9%;
-  --l: 18.3%;
-}
-.default {
-  --h: 239.6;
-  --s: 40.9%;
-  --l: 45.5%;
-}
-.light.default {
-  --l: 61.5%;
-}
-.dark.default {
-  --l: 29.5%;
-}
-.bright.default {
-  --s: 58.7%;
-  --l: 51.9%;
-}
-.dim.default {
-  --s: 9.5%;
-  --l: 39.1%;
+  --s: 18.8%;
+  --l: 30.2%;
 }
 .complement,
 .second.triad {
   --h: 59.6;
-  --s: 47.6%;
-  --l: 32.8%;
+  --s: 57.9%;
+  --l: 32%;
 }
 .light.complement,
 .light.second.triad {
-  --l: 48.8%;
+  --l: 52%;
 }
 .dark.complement,
 .dark.second.triad {
-  --l: 16.8%;
+  --l: 12%;
 }
 .bright.complement,
 .bright.second.triad {
-  --s: 68.4%;
-  --l: 39.2%;
+  --s: 82.9%;
+  --l: 42%;
 }
 .dim.complement,
 .dim.second.triad {
-  --s: 11.8%;
-  --l: 26.4%;
+  --s: 7.9%;
+  --l: 22%;
 }
 .accent {
-  --h: 264.5;
-  --s: 72.6%;
-  --l: 32.8%;
+  --h: 266.9;
+  --s: 70.7%;
+  --l: 32%;
 }
 .light.accent {
-  --l: 48.8%;
+  --l: 52%;
 }
 .dark.accent {
-  --l: 16.8%;
+  --l: 12%;
 }
 .bright.accent {
-  --s: 93.4%;
-  --l: 39.2%;
+  --s: 95.7%;
+  --l: 42%;
 }
 .dim.accent {
-  --s: 35%;
-  --l: 26.4%;
+  --s: 20.7%;
+  --l: 22%;
 }
 .second.accent {
-  --h: 214.7;
-  --s: 72.6%;
-  --l: 32.8%;
+  --h: 212.3;
+  --s: 70.8%;
+  --l: 32%;
 }
 .light.second.accent {
-  --l: 48.8%;
+  --l: 52%;
 }
 .dark.second.accent {
-  --l: 16.8%;
+  --l: 12%;
 }
 .bright.second.accent {
-  --s: 93.5%;
-  --l: 39.2%;
+  --s: 95.8%;
+  --l: 42%;
 }
 .dim.second.accent {
-  --s: 35.1%;
-  --l: 26.4%;
+  --s: 20.8%;
+  --l: 22%;
 }
 .split {
-  --h: 317.1;
-  --s: 68.7%;
-  --l: 28.7%;
+  --h: 323.6;
+  --s: 68.8%;
+  --l: 30%;
 }
 .light.split {
-  --l: 44.7%;
+  --l: 50%;
 }
 .dark.split {
-  --l: 12.7%;
+  --l: 10%;
 }
 .bright.split {
-  --s: 89.7%;
-  --l: 35.1%;
+  --s: 93.8%;
+  --l: 40%;
 }
 .dim.split {
-  --s: 31.6%;
-  --l: 22.3%;
+  --s: 18.8%;
+  --l: 20%;
 }
 .second.split {
-  --h: 162;
+  --h: 155.5;
   --s: 68.8%;
-  --l: 28.7%;
+  --l: 30%;
 }
 .light.second.split {
-  --l: 44.7%;
+  --l: 50%;
 }
 .dark.second.split {
-  --l: 12.7%;
+  --l: 10%;
 }
 .bright.second.split {
-  --s: 89.7%;
-  --l: 35.1%;
+  --s: 93.8%;
+  --l: 40%;
 }
 .dim.second.split {
-  --s: 31.7%;
-  --l: 22.3%;
+  --s: 18.8%;
+  --l: 20%;
 }
 .triad {
-  --h: 289.4;
-  --s: 72.6%;
-  --l: 32.8%;
+  --h: 294.2;
+  --s: 70.7%;
+  --l: 32%;
 }
 .light.triad {
-  --l: 48.8%;
+  --l: 52%;
 }
 .dark.triad {
-  --l: 16.8%;
+  --l: 12%;
 }
 .bright.triad {
-  --s: 93.4%;
-  --l: 39.2%;
+  --s: 95.7%;
+  --l: 42%;
 }
 .dim.triad {
-  --s: 35.1%;
-  --l: 26.4%;
+  --s: 20.7%;
+  --l: 22%;
 }
 .third.triad {
-  --h: 189.9;
-  --s: 72.5%;
-  --l: 32.6%;
+  --h: 185;
+  --s: 70.6%;
+  --l: 31.8%;
 }
 .light.third.triad {
-  --l: 48.6%;
+  --l: 51.8%;
 }
 .dark.third.triad {
-  --l: 16.6%;
+  --l: 11.8%;
 }
 .bright.third.triad {
-  --s: 93.4%;
-  --l: 39%;
+  --s: 95.6%;
+  --l: 41.8%;
 }
 .dim.third.triad {
-  --s: 35%;
-  --l: 26.2%;
+  --s: 20.6%;
+  --l: 21.8%;
 }
 .tetrad {
-  --h: 277;
-  --s: 72.6%;
-  --l: 32.8%;
+  --h: 280.6;
+  --s: 70.7%;
+  --l: 32%;
 }
 .light.tetrad {
-  --l: 48.8%;
+  --l: 52%;
 }
 .dark.tetrad {
-  --l: 16.8%;
+  --l: 12%;
 }
 .bright.tetrad {
-  --s: 93.4%;
-  --l: 39.2%;
+  --s: 95.7%;
+  --l: 42%;
 }
 .dim.tetrad {
-  --s: 35.1%;
-  --l: 26.4%;
+  --s: 20.7%;
+  --l: 22%;
 }
 .second.tetrad {
-  --h: 2.6;
-  --s: 47.6%;
-  --l: 32.8%;
+  --h: 9.5;
+  --s: 57.9%;
+  --l: 32%;
 }
 .light.second.tetrad {
-  --l: 48.8%;
+  --l: 52%;
 }
 .dark.second.tetrad {
-  --l: 16.8%;
+  --l: 12%;
 }
 .bright.second.tetrad {
-  --s: 68.4%;
-  --l: 39.2%;
+  --s: 82.9%;
+  --l: 42%;
 }
 .dim.second.tetrad {
-  --s: 11.8%;
-  --l: 26.4%;
+  --s: 7.9%;
+  --l: 22%;
 }
 .third.tetrad {
-  --h: 116.4;
-  --s: 47.6%;
-  --l: 32.9%;
+  --h: 109.5;
+  --s: 57.9%;
+  --l: 32%;
 }
 .light.third.tetrad {
-  --l: 48.9%;
+  --l: 52%;
 }
 .dark.third.tetrad {
-  --l: 16.9%;
+  --l: 12%;
 }
 .bright.third.tetrad {
-  --s: 68.4%;
-  --l: 39.3%;
+  --s: 82.9%;
+  --l: 42%;
 }
 .dim.third.tetrad {
-  --s: 11.8%;
-  --l: 26.5%;
+  --s: 7.9%;
+  --l: 22%;
 }
 .fourth.tetrad {
-  --h: 202.3;
-  --s: 72.7%;
-  --l: 32.8%;
+  --h: 198.6;
+  --s: 70.8%;
+  --l: 32%;
 }
 .light.fourth.tetrad {
-  --l: 48.8%;
+  --l: 52%;
 }
 .dark.fourth.tetrad {
-  --l: 16.8%;
+  --l: 12%;
 }
 .bright.fourth.tetrad {
-  --s: 93.5%;
-  --l: 39.2%;
+  --s: 95.8%;
+  --l: 42%;
 }
 .dim.fourth.tetrad {
-  --s: 35.1%;
-  --l: 26.4%;
+  --s: 20.8%;
+  --l: 22%;
 }
 .warm {
   background-image: linear-gradient(var(--warm), var(--warm));
@@ -5426,13 +5327,14 @@ button:active {
 .dull {
   background-image: linear-gradient(var(--dull), var(--dull));
 }
-&lt;style&gt;</textarea>
-          <button class="dark red small" onclick="copyHTML()">Copy to clipboard</button>
+&lt;/style&gt;</textarea>
+          <button class="dark red" onclick="copyHTML()">Copy to clipboard</button>
+          <button class="dark blue" onclick="saveTextAsFile(document.getElementById('html_textarea').value,'cavepaint_style_tag.html')">Download</button>
         </div>
         <div class="inner-text-width margin-bottom">
           <h5>or compile this Less</h5>
           <textarea readonly name="" class="full-width no-padding-bottom force black monospace text-padding no-margin" id="less_textarea" cols="30" rows="10">@base-color: #2021AD;
-@ambient-mix: 90%;
+@ambient-mix: 95%;
 @font-size: 18px;
 @font-family: var(--sans-serif);
 @text-base: 52;
@@ -5440,7 +5342,8 @@ button:active {
 @margin: @padding;
 @gutter: @padding * 2;
 @line-height: 1.8;
-@mobile: @card-width + @gutter;
+@lighten-by: 20%;
+@darken-by: 20%;@mobile: @card-width + @gutter;
 @tablet: @text-width + @gutter;
 @desktop: @page-width + @gutter;
 @text-width: 52 * .6rem;
@@ -5864,6 +5767,14 @@ pre > code {
   --box-shadow: var(--shadow-position) var(--shadow-position) var(--shadow-blur) var(--shadow-color);
 }
 
+.full-height {
+  min-height: 100%;
+
+  &.force {
+    height: 100%;
+  }
+}
+
 .viewport-height {
   min-height: 100vh;
 
@@ -5942,6 +5853,10 @@ pre > code {
 
 .bold {
   font-weight: bold;
+}
+
+.italic {
+  font-style: italic;
 }
 
 .all-caps {
@@ -6586,6 +6501,22 @@ grid-column: auto / span 12;
     border-width: 0 !important;
 }
 
+.no-border-top {
+    border-top-width: 0 !important;
+}
+
+.no-border-right {
+    border-right-width: 0 !important;
+}
+
+.no-border-bottom {
+    border-bottom-width: 0 !important;
+}
+
+.no-border-left {
+    border-left-width: 0 !important;
+}
+
 .no-background {
     background: transparent !important;
 }
@@ -6706,7 +6637,6 @@ grid-column: auto / span 12;
 
 .white { .color-helpers(@white);}
 .black { .color-helpers(@black);}
-.ambient { .color-helpers(@ambient);}
 .red { .color-helpers(@red);}
 .orange { .color-helpers(@orange);}
 .yellow { .color-helpers(@yellow);}
@@ -6717,9 +6647,7 @@ grid-column: auto / span 12;
 .purple { .color-helpers(@purple);}
 .magenta { .color-helpers(@magenta);}
 .gray { .color-helpers(@gray);}
-.action, .base-color { .color-helpers(@action);}
-.reaction { .color-helpers(@reaction);}
-.default { .color-helpers(@default);}
+.base-color { .color-helpers(@action);}
 .complement { .color-helpers(@complement);}
 .accent { .color-helpers(@accent);}
 .second.accent { .color-helpers(@inverted-accent);}
@@ -6735,13 +6663,13 @@ grid-column: auto / span 12;
 
 .color-helpers(@color) {
     
-    @effect: 80%;
+    @effect: 100%;
 
-    @brightened: mix(saturate(lighten(@color, 8%), 25%), @color, @effect);
-    @dimmed: mix(desaturate(darken(@color, 8%), 50%), @color, @effect);
+    @brightened: mix(saturate(lighten(@color, (@lighten-by*.5)), 25%), @color, @effect);
+    @dimmed: mix(desaturate(darken(@color, (@darken-by*.5)), 50%), @color, @effect);
     
-    @lightened: mix(lighten(@color, 20%), @color, @effect);
-    @darkened: mix(darken(@color, 20%), @color, @effect);
+    @lightened: mix(lighten(@color, @lighten-by), @color, @effect);
+    @darkened: mix(darken(@color, @darken-by), @color, @effect);
     
     @base-contrast-ceiling: .set-contrast-ratio(@color, @white)[];
     @border-color: .set-lumafix(@color, @black, 75%)[];
@@ -6971,7 +6899,8 @@ grid-column: auto / span 12;
   .set-contrast-ceiling-compare();
   .finalize-tone();
 }</textarea>
-          <button class="dark red small" onclick="copyLess()">Copy to clipboard</button>
+          <button class="dark red" onclick="copyLess()">Copy to clipboard</button>
+          <button class="dark blue" onclick="saveTextAsFile(document.getElementById('less_textarea').value,'cavepaint.less')">Download</button>
         </div>
 
         <div class="inner-text-width margin-bottom hidden">
@@ -7400,6 +7329,14 @@ pre > code {
   --box-shadow: var(--shadow-position) var(--shadow-position) var(--shadow-blur) var(--shadow-color);
 }
 
+.full-height {
+  min-height: 100%;
+
+  &.force {
+    height: 100%;
+  }
+}
+
 .viewport-height {
   min-height: 100vh;
 
@@ -7478,6 +7415,10 @@ pre > code {
 
 .bold {
   font-weight: bold;
+}
+
+.italic {
+  font-style: italic;
 }
 
 .all-caps {
@@ -8122,6 +8063,22 @@ grid-column: auto / span 12;
     border-width: 0 !important;
 }
 
+.no-border-top {
+    border-top-width: 0 !important;
+}
+
+.no-border-right {
+    border-right-width: 0 !important;
+}
+
+.no-border-bottom {
+    border-bottom-width: 0 !important;
+}
+
+.no-border-left {
+    border-left-width: 0 !important;
+}
+
 .no-background {
     background: transparent !important;
 }
@@ -8242,7 +8199,6 @@ grid-column: auto / span 12;
 
 .white { .color-helpers(@white);}
 .black { .color-helpers(@black);}
-.ambient { .color-helpers(@ambient);}
 .red { .color-helpers(@red);}
 .orange { .color-helpers(@orange);}
 .yellow { .color-helpers(@yellow);}
@@ -8253,9 +8209,7 @@ grid-column: auto / span 12;
 .purple { .color-helpers(@purple);}
 .magenta { .color-helpers(@magenta);}
 .gray { .color-helpers(@gray);}
-.action, .base-color { .color-helpers(@action);}
-.reaction { .color-helpers(@reaction);}
-.default { .color-helpers(@default);}
+.base-color { .color-helpers(@action);}
 .complement { .color-helpers(@complement);}
 .accent { .color-helpers(@accent);}
 .second.accent { .color-helpers(@inverted-accent);}
@@ -8271,13 +8225,13 @@ grid-column: auto / span 12;
 
 .color-helpers(@color) {
     
-    @effect: 80%;
+    @effect: 100%;
 
-    @brightened: mix(saturate(lighten(@color, 8%), 25%), @color, @effect);
-    @dimmed: mix(desaturate(darken(@color, 8%), 50%), @color, @effect);
+    @brightened: mix(saturate(lighten(@color, (@lighten-by*.5)), 25%), @color, @effect);
+    @dimmed: mix(desaturate(darken(@color, (@darken-by*.5)), 50%), @color, @effect);
     
-    @lightened: mix(lighten(@color, 20%), @color, @effect);
-    @darkened: mix(darken(@color, 20%), @color, @effect);
+    @lightened: mix(lighten(@color, @lighten-by), @color, @effect);
+    @darkened: mix(darken(@color, @darken-by), @color, @effect);
     
     @base-contrast-ceiling: .set-contrast-ratio(@color, @white)[];
     @border-color: .set-lumafix(@color, @black, 75%)[];
@@ -8534,7 +8488,7 @@ grid-column: auto / span 12;
 <span class="text-center text-padding text-margin-right no-margin-bottom fade small all-caps absolute bottom right">Example markup</span>
       </div>
 
-      <div class="dark cool default vertical-center relative">
+      <div class="dark cool base-color vertical-center relative">
         <div class="card two-column reverse golden margin-auto gutter">
           <div class="vertical-center">
             <img src="caveman.svg" alt="The Cavepaint caveman">
@@ -8561,7 +8515,7 @@ grid-column: auto / span 12;
 <span class="text-center text-padding text-margin-right no-margin-bottom fade small all-caps absolute bottom right">Example markup</span>
       </div>
 
-      <div class="dark neutral reaction vertical-center relative inner-card-width">
+      <div class="dark neutral base-color vertical-center relative inner-card-width">
         <section class="gutter text-center">
           <div class="three-column light yellow padding">
             <div class="green rounded">&check;</div>
@@ -8574,8 +8528,8 @@ grid-column: auto / span 12;
     </section>
     </div>
 
-    <section class="dull dark second split inner-feature-width border-top border-bottom thick padding responsive">
-      <div class="grid tablet text-align-center trim margin no-margin-top responsive">
+    <section class="dull dark second split inner-feature-width border-top border-bottom thick padding ">
+      <div class="grid tablet text-align-center trim margin no-margin-top ">
         <div class="grid-width-eight flex flex-direction justify-content trim">
           <div class="grid desktop trim">
             <div class="grid-width-six flex flex-direction justify-content trim">
@@ -8597,7 +8551,8 @@ grid-column: auto / span 12;
     </section>
 
     <div class="white padding">
-      <h1 class="huge all-caps inner-page-width text-center no-bold">The <span class="text-color red bold">No CSS</span> Manifesto</h1>
+      <h1 class="huge all-caps inner-page-width text-center no-bold no-margin-bottom">The <span class="text-color red bold">No CSS</span> Manifesto</h1>
+      <p class="small inner-page-width text-center gutter-bottom"><em>(Made with Cavepaint!)</em></p>
       <div class="inner-text-width text-padding-top">
         <div class="padding dim white rounded shallow inset text-center margin-auto card-width gutter-bottom">
           <p class="big">Less is too little. Post is too&nbsp;late.</p>
@@ -8627,8 +8582,7 @@ href="style.css"</pre>
         <p>The last 5% is important. But that's the style stuff that really sets your site apart&mdash; it deserves all of your visual design attention, not the in-the-weeds CSS stuff.</p>
         <p>Also&mdash; and we can't stress this enough&mdash; you can <em>do it later</em>.</p>
 
-      </div>
-    
+      </div>    
 
       <div class="inner-page-width two-column golden reverse desktop gutter-bottom gap-gutter">
         <div class="vertical-center inner-card-width">
@@ -8733,7 +8687,7 @@ h5 { font-size: 19px;}</pre>
       
       <h2 class="text-color bright red inner-page-width huge margin-auto">Sins of scope</h2>
       <div class="dim red inset feature-width margin-auto rounded">
-        <div class="red gradient padding rounded">
+        <div class="dim dark warm red padding rounded">
           <div class="three-column desktop no-padding-top inner-feature-width gap-gutter">
             <div class="vertical-center inner-text-width">
               <h3>Going too big</h3>
@@ -8776,7 +8730,7 @@ h5 { font-size: 19px;}</pre>
 
           <p>Picking colors is fun. That's the first red flag.</p>
 
-          <p>We're not saying it's always a waste of time. We're just saying there are <em>severely diminishing returns</em> after picking out the first color associated with your site. So in Cavepaint you pick only the one, the <span class="action text-padding rounded">base&nbsp;color</span>.</p>
+          <p>We're not saying it's always a waste of time. We're just saying there are <em>severely diminishing returns</em> after picking out the first color associated with your site. So in Cavepaint you pick only the one, the <span class="base-color text-padding rounded">base&nbsp;color</span>.</p>
 
           <p>Figuring out colors for use in your site is a breeze with 500+ colors that <em>just work</em> with your base color. Contrast is always white or black text and Cavepaint figures that part out for you.</p>
 
@@ -8784,7 +8738,7 @@ h5 { font-size: 19px;}</pre>
 
           <p>Even if you do pick colors yourself, it's better to use and override the Cavepaint classes. That way, your markup never needs to change. This also means you don't need to go through and update every color on your site when you update your base color, or when you override colors in the color scheme.</p>
 
-          <p>Every color in Cavepaint is based on the <span class="action text-padding rounded">base&nbsp;color</span>. If you multiply the 16.7 million colors in the color space with Cavepaint's extended 3500-color palette, then Cavepaint supports <em>billions</em> of colors.</p>
+          <p>Every color in Cavepaint is based on the <span class="base-color text-padding rounded">base&nbsp;color</span>. If you multiply the 16.7 million colors in the color space with Cavepaint's extended 3500-color palette, then Cavepaint supports <em>billions</em> of colors.</p>
         </div>
 
         <div class="half-width gutter margin-auto vertical-center">
@@ -8949,30 +8903,30 @@ h5 { font-size: 19px;}</pre>
                       <div>
                         <h6>two-column</h6>
                         <div class="two-column responsive gap-border-width no-margin-bottom">
-                          <div class="default placeholder">
+                          <div class="base-color placeholder">
                           </div>
       
-                          <div class="default placeholder">
+                          <div class="base-color placeholder">
                           </div>
                         </div>
                       </div>
                       <div>
                         <h6>two-column golden</h6>
                         <div class="two-column golden responsive gap-border-width no-margin-bottom">
-                          <div class="default placeholder">
+                          <div class="base-color placeholder">
                           </div>
       
-                          <div class="default placeholder">
+                          <div class="base-color placeholder">
                           </div>
                         </div>
                       </div>
                       <div>
                         <h6>two-column golden reverse</h6>
                         <div class="two-column golden reverse responsive gap-border-width no-margin-bottom">
-                          <div class="default placeholder">
+                          <div class="base-color placeholder">
                           </div>
       
-                          <div class="default placeholder">
+                          <div class="base-color placeholder">
                           </div>
                         </div>
                       </div>
@@ -8984,22 +8938,22 @@ h5 { font-size: 19px;}</pre>
                       <div>
                         <h6>three-column</h6>
                         <div class="three-column responsive gap-border-width no-margin-bottom">
-                          <div class="default placeholder no-margin-bottom">
+                          <div class="base-color placeholder no-margin-bottom">
                           </div>
-                          <div class="default placeholder no-margin-bottom">
+                          <div class="base-color placeholder no-margin-bottom">
                           </div>
-                          <div class="default placeholder no-margin-bottom">
+                          <div class="base-color placeholder no-margin-bottom">
                           </div>
                         </div>
                       </div>
                       <div>
                         <h6>three-column golden</h6>
                         <div class="three-column golden responsive gap-border-width no-margin-bottom">
-                          <div class="default placeholder no-margin-bottom">
+                          <div class="base-color placeholder no-margin-bottom">
                           </div>
-                          <div class="default placeholder no-margin-bottom">
+                          <div class="base-color placeholder no-margin-bottom">
                           </div>
-                          <div class="default placeholder no-margin-bottom">
+                          <div class="base-color placeholder no-margin-bottom">
                           </div>
                         </div>
                       </div>
@@ -9008,22 +8962,22 @@ h5 { font-size: 19px;}</pre>
                       <div>
                         <h6>three-column golden leading</h6>
                         <div class="three-column golden leading responsive gap-border-width">
-                          <div class="default placeholder no-margin-bottom">
+                          <div class="base-color placeholder no-margin-bottom">
                           </div>
-                          <div class="default placeholder no-margin-bottom">
+                          <div class="base-color placeholder no-margin-bottom">
                           </div>
-                          <div class="default placeholder no-margin-bottom">
+                          <div class="base-color placeholder no-margin-bottom">
                           </div>
                         </div>
                       </div>
                       <div>
                         <h6>three-column golden trailing</h6>
                         <div class="three-column golden trailing responsive gap-border-width">
-                          <div class="default placeholder no-margin-bottom">
+                          <div class="base-color placeholder no-margin-bottom">
                           </div>
-                          <div class="default placeholder no-margin-bottom">
+                          <div class="base-color placeholder no-margin-bottom">
                           </div>
-                          <div class="default placeholder no-margin-bottom">
+                          <div class="base-color placeholder no-margin-bottom">
                           </div>
                         </div>
                       </div>
@@ -9088,31 +9042,20 @@ h5 { font-size: 19px;}</pre>
     
                   <div class="grid-width-two hide mobile placeholder">
                   </div>
-      
-    
-                  <div id="project_colors" class="grid-width-four text-align-center trim">
-                    <h6 class="gutter-top">Project colors</h6>
-                    <div class="grid tablet">
-                      <div class="grid-width-three text-padding border rounded text-margin-bottom action">action</div>
-                      <div class="grid-width-three text-padding border rounded text-margin-bottom reaction">reaction</div>
-                      <div class="grid-width-three text-padding border rounded text-margin-bottom ambient">ambient</div>
-                      <div class="grid-width-three text-padding border rounded text-margin-bottom default">default</div>  
-                    </div>
-                    </div>
     
                   <div class="grid-width-four text-align-center trim">
                     <h6 class="gutter-top">Wheel colors</h6>
+                    <div class="grid tablet">
+                      <div class="grid-width-three text-padding border rounded text-margin-bottom base-color">base-color</div>
+                      <div class="grid-width-three text-padding border rounded text-margin-bottom triad">triad</div>
+                      <div class="grid-width-three text-padding border rounded text-margin-bottom complement">complement</div>
+                      <div class="grid-width-three text-padding border rounded text-margin-bottom third triad">third triad</div>  
+                    </div>
                     <div class="grid tablet">
                       <div class="grid-width-three text-padding border rounded text-margin-bottom accent">accent</div>
                       <div class="grid-width-three text-padding border rounded text-margin-bottom second accent">second accent</div>
                       <div class="grid-width-three text-padding border rounded text-margin-bottom split">split</div>
                       <div class="grid-width-three text-padding border rounded text-margin-bottom second split">second split</div>  
-                    </div>
-                    <div class="grid tablet">
-                      <div class="grid-width-three text-padding border rounded text-margin-bottom triad">triad</div>
-                      <div class="grid-width-three text-padding border rounded text-margin-bottom second triad">second triad</div>
-                      <div class="grid-width-three text-padding border rounded text-margin-bottom third triad">third triad</div>
-                      <div class="grid-width-three text-padding border rounded text-margin-bottom complement">complement</div>  
                     </div>
                     <div class="grid tablet">
                       <div class="grid-width-three text-padding border rounded text-margin-bottom tetrad">tetrad</div>
@@ -9123,7 +9066,7 @@ h5 { font-size: 19px;}</pre>
                   </div>
     
     
-                  <h6 class="grid-width-twelve text-center gutter-top">Other colors</h6>
+                  <h6 class="grid-width-twelve text-center gutter-top">Palette colors</h6>
                   <div class="grid tablet">
                     <div class="grid-width-three text-align-center margin-bottom">
                       <div class="text-padding border rounded text-margin-bottom red">red</div>
@@ -9171,7 +9114,7 @@ h5 { font-size: 19px;}</pre>
                     </div>
     
                     <div class="grid-width-three text-align-center margin-bottom">
-                      <div class="text-padding border rounded text-margin-bottom text-color action">text-color action</div>
+                      <div class="text-padding border rounded text-margin-bottom text-color base-color">text-color base-color</div>
                       <div class="text-padding border rounded text-margin-bottom text-color gray">text-color gray</div>
                       <div class="text-padding border rounded text-margin-bottom text-color black">text-color black</div>
                     </div>
@@ -9350,7 +9293,7 @@ h5 { font-size: 19px;}</pre>
                     <div class="grid tablet">
                       <div class="grid-width-four margin-bottom">
                         <h6>padding</h6>
-                        <div class="border thick padding responsive default">
+                        <div class="border thick padding responsive base-color">
                           <div class="border current-color dashed placeholder trim">
                           </div>
                         </div>
@@ -9358,14 +9301,14 @@ h5 { font-size: 19px;}</pre>
                       <div class="grid-width-four margin-bottom">
                         <h6>margin</h6>
                         <div class="border current-color dashed">
-                          <div class="border default thick margin responsive placeholder">
+                          <div class="border base-color thick margin responsive placeholder">
                           </div>
                         </div>
                       </div>
                       <div class="grid-width-four margin-bottom">
                         <h6>gutter</h6>
                         <div class="border current-color dashed">
-                          <div class="border default thick gutter responsive placeholder">
+                          <div class="border base-color thick gutter responsive placeholder">
                           </div>
                         </div>
                       </div>
@@ -9376,19 +9319,19 @@ h5 { font-size: 19px;}</pre>
                     <h5>Grid child classes</h5>
                     <p><strong>grid-width-</strong></p>
                     <div class="grid tablet gap-border-width">
-                      <div class="default text-padding grid-width-one">one</div>
-                      <div class="default text-padding grid-width-eleven">eleven</div>
-                      <div class="default text-padding grid-width-two">two</div>
-                      <div class="default text-padding grid-width-ten">ten</div>
-                      <div class="default text-padding grid-width-three">three</div>
-                      <div class="default text-padding grid-width-nine">nine</div>
-                      <div class="default text-padding grid-width-four">four</div>
-                      <div class="default text-padding grid-width-eight">eight</div>
-                      <div class="default text-padding grid-width-five">five</div>
-                      <div class="default text-padding grid-width-seven">seven</div>
-                      <div class="default text-padding grid-width-six">six</div>
-                      <div class="default text-padding grid-width-six">six</div>
-                      <div class="default text-padding grid-width-twelve">twelve</div>
+                      <div class="base-color text-padding grid-width-one">one</div>
+                      <div class="base-color text-padding grid-width-eleven">eleven</div>
+                      <div class="base-color text-padding grid-width-two">two</div>
+                      <div class="base-color text-padding grid-width-ten">ten</div>
+                      <div class="base-color text-padding grid-width-three">three</div>
+                      <div class="base-color text-padding grid-width-nine">nine</div>
+                      <div class="base-color text-padding grid-width-four">four</div>
+                      <div class="base-color text-padding grid-width-eight">eight</div>
+                      <div class="base-color text-padding grid-width-five">five</div>
+                      <div class="base-color text-padding grid-width-seven">seven</div>
+                      <div class="base-color text-padding grid-width-six">six</div>
+                      <div class="base-color text-padding grid-width-six">six</div>
+                      <div class="base-color text-padding grid-width-twelve">twelve</div>
                     </div>
                   </div>
       
@@ -9404,7 +9347,7 @@ h5 { font-size: 19px;}</pre>
                       <div>
                         <h6>margin-auto</h6>
                         <div class="">
-                          <div class="margin-auto inline-block default text-padding">
+                          <div class="margin-auto inline-block base-color text-padding">
                             div
                           </div>
                         </div>
@@ -9417,7 +9360,7 @@ h5 { font-size: 19px;}</pre>
                         </div>
       
                         <div class="flex flex-direction justify-content">
-                          <div class="margin-auto default text-padding">
+                          <div class="margin-auto base-color text-padding">
                             div
                           </div>
                         </div>
@@ -9605,27 +9548,27 @@ h5 { font-size: 19px;}</pre>
                       <div class="grid-width-three">
                         <h6>(no other class)</h6>
                         <ul class="no-list-style">
-                          <li><div class="placeholder default"></div></li>
+                          <li><div class="placeholder base-color"></div></li>
                         </ul>
                       </div>
                       <div class="grid-width-three">
                         <h6>four-to-three</h6>
                         <ul class="no-list-style">
-                          <li><div class="placeholder four-to-three default margin-auto card-width"></div></li>
+                          <li><div class="placeholder four-to-three base-color margin-auto card-width"></div></li>
                         </ul>
                       </div>
       
                       <div class="grid-width-three">
                         <h6>sixteen-to-nine</h6>
                         <ul class="no-list-style">
-                          <li><div class="placeholder sixteen-to-nine default margin-auto card-width"></div></li>
+                          <li><div class="placeholder sixteen-to-nine base-color margin-auto card-width"></div></li>
                         </ul>
                       </div>
       
                       <div class="grid-width-three">
                         <h6>square</h6>
                         <ul class="no-list-style">
-                          <li><div class="placeholder small square default margin-auto card-width"></div></li>
+                          <li><div class="placeholder small square base-color margin-auto card-width"></div></li>
                         </ul>
                       </div>
                     </div>         
@@ -9637,130 +9580,6 @@ h5 { font-size: 19px;}</pre>
     <div class="small no-overflow">
       <section class="small">
               <div class="grid-width-three">
-                  <div class="bright action fifth-width float-left text-padding text-overflow block">bright action</div>
-                  <div class="light action fifth-width float-left text-padding text-overflow block">light action</div>
-                  <div class="action fifth-width float-left text-padding text-overflow block">action</div>
-                  <div class="dark action fifth-width float-left text-padding text-overflow block">dark action</div>
-                  <div class="dim action fifth-width float-left text-padding text-overflow block">dim action</div>
-              
-                  <div class="cool bright action fifth-width float-left text-padding text-overflow block">cool bright action</div>
-                  <div class="cool light action fifth-width float-left text-padding text-overflow block">cool light action</div>
-                  <div class="cool action fifth-width float-left text-padding text-overflow block">cool action</div>
-                  <div class="cool dark action fifth-width float-left text-padding text-overflow block">cool dark action</div>
-                  <div class="cool dim action fifth-width float-left text-padding text-overflow block">cool dim action</div>
-              
-                  <div class="neutral bright action fifth-width float-left text-padding text-overflow block">neutral bright action</div>
-                  <div class="neutral light action fifth-width float-left text-padding text-overflow block">neutral light action</div>
-                  <div class="neutral action fifth-width float-left text-padding text-overflow block">neutral action</div>
-                  <div class="neutral dark action fifth-width float-left text-padding text-overflow block">neutral dark action</div>
-                  <div class="neutral dim action fifth-width float-left text-padding text-overflow block">neutral dim action</div>
-              
-                  <div class="warm bright action fifth-width float-left text-padding text-overflow block">warm bright action</div>
-                  <div class="warm light action fifth-width float-left text-padding text-overflow block">warm light action</div>
-                  <div class="warm action fifth-width float-left text-padding text-overflow block">warm action</div>
-                  <div class="warm dark action fifth-width float-left text-padding text-overflow block">warm dark action</div>
-                  <div class="warm dim action fifth-width float-left text-padding text-overflow block">warm dim action</div>
-              
-                  <div class="dull bright action fifth-width float-left text-padding text-overflow block">dull bright action</div>
-                  <div class="dull light action fifth-width float-left text-padding text-overflow block">dull light action</div>
-                  <div class="dull action fifth-width float-left text-padding text-overflow block">dull action</div>
-                  <div class="dull dark action fifth-width float-left text-padding text-overflow block">dull dark action</div>
-                  <div class="dull dim action fifth-width float-left text-padding text-overflow block">dull dim action</div> 
-              </div>
-                        <div class="grid-width-three">
-                  <div class="bright reaction fifth-width float-left text-padding text-overflow block">bright reaction</div>
-                  <div class="light reaction fifth-width float-left text-padding text-overflow block">light reaction</div>
-                  <div class="reaction fifth-width float-left text-padding text-overflow block">reaction</div>
-                  <div class="dark reaction fifth-width float-left text-padding text-overflow block">dark reaction</div>
-                  <div class="dim reaction fifth-width float-left text-padding text-overflow block">dim reaction</div>
-              
-                  <div class="cool bright reaction fifth-width float-left text-padding text-overflow block">cool bright reaction</div>
-                  <div class="cool light reaction fifth-width float-left text-padding text-overflow block">cool light reaction</div>
-                  <div class="cool reaction fifth-width float-left text-padding text-overflow block">cool reaction</div>
-                  <div class="cool dark reaction fifth-width float-left text-padding text-overflow block">cool dark reaction</div>
-                  <div class="cool dim reaction fifth-width float-left text-padding text-overflow block">cool dim reaction</div>
-              
-                  <div class="neutral bright reaction fifth-width float-left text-padding text-overflow block">neutral bright reaction</div>
-                  <div class="neutral light reaction fifth-width float-left text-padding text-overflow block">neutral light reaction</div>
-                  <div class="neutral reaction fifth-width float-left text-padding text-overflow block">neutral reaction</div>
-                  <div class="neutral dark reaction fifth-width float-left text-padding text-overflow block">neutral dark reaction</div>
-                  <div class="neutral dim reaction fifth-width float-left text-padding text-overflow block">neutral dim reaction</div>
-              
-                  <div class="warm bright reaction fifth-width float-left text-padding text-overflow block">warm bright reaction</div>
-                  <div class="warm light reaction fifth-width float-left text-padding text-overflow block">warm light reaction</div>
-                  <div class="warm reaction fifth-width float-left text-padding text-overflow block">warm reaction</div>
-                  <div class="warm dark reaction fifth-width float-left text-padding text-overflow block">warm dark reaction</div>
-                  <div class="warm dim reaction fifth-width float-left text-padding text-overflow block">warm dim reaction</div>
-              
-                  <div class="dull bright reaction fifth-width float-left text-padding text-overflow block">dull bright reaction</div>
-                  <div class="dull light reaction fifth-width float-left text-padding text-overflow block">dull light reaction</div>
-                  <div class="dull reaction fifth-width float-left text-padding text-overflow block">dull reaction</div>
-                  <div class="dull dark reaction fifth-width float-left text-padding text-overflow block">dull dark reaction</div>
-                  <div class="dull dim reaction fifth-width float-left text-padding text-overflow block">dull dim reaction</div> 
-              </div>
-                        <div class="grid-width-three">
-                  <div class="bright default fifth-width float-left text-padding text-overflow block">bright default</div>
-                  <div class="light default fifth-width float-left text-padding text-overflow block">light default</div>
-                  <div class="default fifth-width float-left text-padding text-overflow block">default</div>
-                  <div class="dark default fifth-width float-left text-padding text-overflow block">dark default</div>
-                  <div class="dim default fifth-width float-left text-padding text-overflow block">dim default</div>
-              
-                  <div class="cool bright default fifth-width float-left text-padding text-overflow block">cool bright default</div>
-                  <div class="cool light default fifth-width float-left text-padding text-overflow block">cool light default</div>
-                  <div class="cool default fifth-width float-left text-padding text-overflow block">cool default</div>
-                  <div class="cool dark default fifth-width float-left text-padding text-overflow block">cool dark default</div>
-                  <div class="cool dim default fifth-width float-left text-padding text-overflow block">cool dim default</div>
-              
-                  <div class="neutral bright default fifth-width float-left text-padding text-overflow block">neutral bright default</div>
-                  <div class="neutral light default fifth-width float-left text-padding text-overflow block">neutral light default</div>
-                  <div class="neutral default fifth-width float-left text-padding text-overflow block">neutral default</div>
-                  <div class="neutral dark default fifth-width float-left text-padding text-overflow block">neutral dark default</div>
-                  <div class="neutral dim default fifth-width float-left text-padding text-overflow block">neutral dim default</div>
-              
-                  <div class="warm bright default fifth-width float-left text-padding text-overflow block">warm bright default</div>
-                  <div class="warm light default fifth-width float-left text-padding text-overflow block">warm light default</div>
-                  <div class="warm default fifth-width float-left text-padding text-overflow block">warm default</div>
-                  <div class="warm dark default fifth-width float-left text-padding text-overflow block">warm dark default</div>
-                  <div class="warm dim default fifth-width float-left text-padding text-overflow block">warm dim default</div>
-              
-                  <div class="dull bright default fifth-width float-left text-padding text-overflow block">dull bright default</div>
-                  <div class="dull light default fifth-width float-left text-padding text-overflow block">dull light default</div>
-                  <div class="dull default fifth-width float-left text-padding text-overflow block">dull default</div>
-                  <div class="dull dark default fifth-width float-left text-padding text-overflow block">dull dark default</div>
-                  <div class="dull dim default fifth-width float-left text-padding text-overflow block">dull dim default</div> 
-              </div>
-                        <div class="grid-width-three">
-                  <div class="bright ambient fifth-width float-left text-padding text-overflow block">bright ambient</div>
-                  <div class="light ambient fifth-width float-left text-padding text-overflow block">light ambient</div>
-                  <div class="ambient fifth-width float-left text-padding text-overflow block">ambient</div>
-                  <div class="dark ambient fifth-width float-left text-padding text-overflow block">dark ambient</div>
-                  <div class="dim ambient fifth-width float-left text-padding text-overflow block">dim ambient</div>
-              
-                  <div class="cool bright ambient fifth-width float-left text-padding text-overflow block">cool bright ambient</div>
-                  <div class="cool light ambient fifth-width float-left text-padding text-overflow block">cool light ambient</div>
-                  <div class="cool ambient fifth-width float-left text-padding text-overflow block">cool ambient</div>
-                  <div class="cool dark ambient fifth-width float-left text-padding text-overflow block">cool dark ambient</div>
-                  <div class="cool dim ambient fifth-width float-left text-padding text-overflow block">cool dim ambient</div>
-              
-                  <div class="neutral bright ambient fifth-width float-left text-padding text-overflow block">neutral bright ambient</div>
-                  <div class="neutral light ambient fifth-width float-left text-padding text-overflow block">neutral light ambient</div>
-                  <div class="neutral ambient fifth-width float-left text-padding text-overflow block">neutral ambient</div>
-                  <div class="neutral dark ambient fifth-width float-left text-padding text-overflow block">neutral dark ambient</div>
-                  <div class="neutral dim ambient fifth-width float-left text-padding text-overflow block">neutral dim ambient</div>
-              
-                  <div class="warm bright ambient fifth-width float-left text-padding text-overflow block">warm bright ambient</div>
-                  <div class="warm light ambient fifth-width float-left text-padding text-overflow block">warm light ambient</div>
-                  <div class="warm ambient fifth-width float-left text-padding text-overflow block">warm ambient</div>
-                  <div class="warm dark ambient fifth-width float-left text-padding text-overflow block">warm dark ambient</div>
-                  <div class="warm dim ambient fifth-width float-left text-padding text-overflow block">warm dim ambient</div>
-              
-                  <div class="dull bright ambient fifth-width float-left text-padding text-overflow block">dull bright ambient</div>
-                  <div class="dull light ambient fifth-width float-left text-padding text-overflow block">dull light ambient</div>
-                  <div class="dull ambient fifth-width float-left text-padding text-overflow block">dull ambient</div>
-                  <div class="dull dark ambient fifth-width float-left text-padding text-overflow block">dull dark ambient</div>
-                  <div class="dull dim ambient fifth-width float-left text-padding text-overflow block">dull dim ambient</div> 
-              </div>
-                        <div class="grid-width-three">
                   <div class="bright accent fifth-width float-left text-padding text-overflow block">bright accent</div>
                   <div class="light accent fifth-width float-left text-padding text-overflow block">light accent</div>
                   <div class="accent fifth-width float-left text-padding text-overflow block">accent</div>
@@ -10519,8 +10338,8 @@ h5 { font-size: 19px;}</pre>
             </div>
             <div class="inner-card-width">
                 <div class="gutter small">
-                    <div class="default placeholder text-margin-bottom"></div>
-                    <div class="default placeholder text-margin-bottom sixteen-to-nine"></div>
+                    <div class="base-color placeholder text-margin-bottom"></div>
+                    <div class="base-color placeholder text-margin-bottom sixteen-to-nine"></div>
                 </div>
             </div>
         </div>
@@ -10530,10 +10349,10 @@ h5 { font-size: 19px;}</pre>
             <div class="inner-card-width gutter-bottom vertical-center">
                 <div class="grid gap-text-margin">
                     <div class="grid-width-eight">
-                        <div class="default placeholder text-margin-bottom"></div>
-                        <div class="default placeholder four-to-three"></div>
+                        <div class="base-color placeholder text-margin-bottom"></div>
+                        <div class="base-color placeholder four-to-three"></div>
                     </div>
-                    <div class="grid-width-four default">
+                    <div class="grid-width-four base-color">
                     </div>
                 </div>
                 
@@ -10557,14 +10376,14 @@ h5 { font-size: 19px;}</pre>
             <div class="inner-card-width gutter-bottom vertical-center">
                 <div class="grid gap-text-margin">
                     <div class="grid-width-eight">
-                        <div class="default placeholder text-margin-bottom"></div>
-                        <div class="default placeholder sixteen-to-nine text-margin-bottom"></div>
-                        <div class="default placeholder"></div>
+                        <div class="base-color placeholder text-margin-bottom"></div>
+                        <div class="base-color placeholder sixteen-to-nine text-margin-bottom"></div>
+                        <div class="base-color placeholder"></div>
         
                     </div>
                     <div class="grid-width-four">
-                        <div class="default placeholder four-to-three text-margin-top text-margin-bottom"></div>
-                        <div class="default placeholder four-to-three"></div>
+                        <div class="base-color placeholder four-to-three text-margin-top text-margin-bottom"></div>
+                        <div class="base-color placeholder four-to-three"></div>
                     </div>
                 </div>
             </div>

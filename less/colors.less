@@ -67,7 +67,6 @@
 
 .white { .color-helpers(@white);}
 .black { .color-helpers(@black);}
-.ambient { .color-helpers(@ambient);}
 .red { .color-helpers(@red);}
 .orange { .color-helpers(@orange);}
 .yellow { .color-helpers(@yellow);}
@@ -78,9 +77,7 @@
 .purple { .color-helpers(@purple);}
 .magenta { .color-helpers(@magenta);}
 .gray { .color-helpers(@gray);}
-.action, .base-color { .color-helpers(@action);}
-.reaction { .color-helpers(@reaction);}
-.default { .color-helpers(@default);}
+.base-color { .color-helpers(@action);}
 .complement { .color-helpers(@complement);}
 .accent { .color-helpers(@accent);}
 .second.accent { .color-helpers(@inverted-accent);}
@@ -96,13 +93,13 @@
 
 .color-helpers(@color) {
     
-    @effect: 80%;
+    @effect: 100%;
 
-    @brightened: mix(saturate(lighten(@color, 8%), 25%), @color, @effect);
-    @dimmed: mix(desaturate(darken(@color, 8%), 50%), @color, @effect);
+    @brightened: mix(saturate(lighten(@color, (@lighten-by*.5)), 25%), @color, @effect);
+    @dimmed: mix(desaturate(darken(@color, (@darken-by*.5)), 50%), @color, @effect);
     
-    @lightened: mix(lighten(@color, 20%), @color, @effect);
-    @darkened: mix(darken(@color, 20%), @color, @effect);
+    @lightened: mix(lighten(@color, @lighten-by), @color, @effect);
+    @darkened: mix(darken(@color, @darken-by), @color, @effect);
     
     @base-contrast-ceiling: .set-contrast-ratio(@color, @white)[];
     @border-color: .set-lumafix(@color, @black, 75%)[];
