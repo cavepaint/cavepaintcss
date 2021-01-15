@@ -9,13 +9,11 @@
   <meta name="author" content="Rex Riepe">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!--<link rel="stylesheet" href="cavepaint.css">-->
-
   <script src="javascript/css-page.js" type="text/javascript"></script>
   <!-- <link rel="stylesheet/less" type="text/css" href="less/cavepaint.less" /> -->
   <script src="javascript/less.min.js" type="text/javascript"></script>
   <style id="css" type="text/css">:root {
-  --font-size-base: 18px;
+  --font-size-base: 16px;
   --font-size: calc(var(--font-size-base) * var(--font-size-mod));
   --font-size-mod: 1;
   --font-family: var(--sans-serif);
@@ -31,21 +29,22 @@
   --gap: var(--spacer);
   --grid-columns: 12;
   --golden: 1.618;
-  --h: 239.6;
-  --s: 82.6%;
-  --l: 97%;
+  --h: 190.7;
+  --s: 96.3%;
+  --l: 97.5%;
+  --a: 0.16;
   --border-width: 1px;
   --border-style: solid;
   --border-radius: 0.5em;
   --border-h: var(--h);
   --border-s: var(--s);
-  --border-l: clamp(0%, calc(var(--l) * 0.35), 25%);
+  --border-l: clamp(0%, calc(var(--l) * 0.5), 35%);
   --border-color: hsl(var(--border-h), var(--border-s), var(--border-l));
   --border: var(--border-width) var(--border-style) var(--border-color);
   --border-thin: calc(var(--border-width) / 2);
   --border-thick: calc(var(--border-width) * 2);
   --border-radius: var(--text-padding);
-  --text-measure: 52;
+  --text-measure: 48;
   --text-width: calc(var(--text-measure) * 0.6rem);
   --card-width: calc(var(--text-width) / var(--golden));
   --page-width: calc(var(--text-width) * var(--golden));
@@ -53,14 +52,14 @@
   --box-shadow: var(--shadow-position) var(--shadow-position) var(--shadow-blur) var(--shadow-color);
   --shadow-position: 1px;
   --shadow-blur: 1px;
-  --shadow-color: rgba(4, 4, 33, 0.2);
+  --shadow-color: rgba(6, 30, 35, 0.2);
   --direction: 180deg;
-  --white: #f1f1fe;
-  --black: #040421;
-  --warm: rgba(200, 61, 102, 0.25);
-  --cool: rgba(10, 147, 177, 0.2);
-  --neutral: rgba(30, 31, 167, 0.15);
-  --dull: rgba(103, 103, 103, 0.3);
+  --white: #f2fdff;
+  --black: #061e23;
+  --warm: rgba(218.89600207, 105.52453813, 112.04086966, var(--a));
+  --cool: rgba(13.4233142, 214.45383482, 215.54811009, var(--a));
+  --neutral: rgba(48.76156514, 145.73661905, 208.21093263, var(--a));
+  --dull: rgba(130.5, 130.5, 130.5, var(--a));
   --monospace: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, "DejaVu Sans Mono", Courier, monospace;
   --serif: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "Droid Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
   --sans-serif: "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, sans-serif;
@@ -72,25 +71,25 @@
     --padding: calc(0.6 * var(--spacer));
     --margin: calc(0.6 * var(--margin-base));
     --gutter: calc(1.2 * var(--margin-base));
-    --font-size-base: calc(18px - 2);
+    --font-size-base: calc(16px - 2);
     --headline-base: 1em;
   }
 }
-@media screen and (min-width: 33.2rem) {
+@media screen and (min-width: 48.08rem) {
   :root {
     --padding: calc(0.8 * var(--spacer));
     --margin: calc(0.8 * var(--margin-base));
     --gutter: calc(1.6 * var(--margin-base));
-    --font-size-base: calc(18px - 1);
+    --font-size-base: calc(16px - 1);
     --headline-base: 1.1em;
   }
 }
-@media screen and (min-width: 51.92rem) {
+@media screen and (min-width: 75.728rem) {
   :root {
     --padding: calc(1 * var(--spacer));
     --margin: calc(1 * var(--margin-base));
     --gutter: calc(2 * var(--margin-base));
-    --font-size-base: 18px;
+    --font-size-base: 16px;
     --headline-base: 1.2em;
   }
 }
@@ -540,8 +539,7 @@ button:active {
   color: transparent;
 }
 .small {
-  font-size: 87.5%;
-  line-height: calc(var(--line-height) * 0.875);
+  --font-size-mod: 0.9;
 }
 .medium {
   font-size: var(--font-size);
@@ -551,7 +549,7 @@ button:active {
   --font-size-mod: 1.25;
 }
 .huge {
-  --font-size-mod: 1.4;
+  --font-size-mod: 1.5;
 }
 .vertical-center,
 .center-vertical {
@@ -603,24 +601,31 @@ button:active {
 }
 .shade,
 .white,
+.light.red,
 .orange,
 .yellow,
-.light.green,
-.bright.green,
-.light.teal,
-.bright.teal,
+.green,
+.teal,
 .cyan,
+.light.blue,
+.light.purple,
 .light.magenta,
 .light.gray,
+.bright.gray,
+.light.base-color,
+.bright.base-color,
 .light.complement,
 .bright.complement,
-.light.second.split,
-.bright.second.split,
-.light.third.triad,
-.bright.third.triad,
-.light.third.tetrad,
-.bright.third.tetrad,
-.light.fourth.tetrad,
+.light.accent,
+.second.accent,
+.light.split,
+.second.split,
+.light.triad,
+.third.triad,
+.light.tetrad,
+.light.second.tetrad,
+.third.tetrad,
+.fourth.tetrad,
 .light.second.triad,
 .bright.second.triad {
   color: var(--black);
@@ -635,12 +640,11 @@ button:active {
 .red,
 .dark.orange,
 .dim.orange,
-.dark.yellow,
-.dim.yellow,
-.green,
-.teal,
+.dark.green,
+.dim.green,
+.dark.teal,
+.dim.teal,
 .dark.cyan,
-.dim.cyan,
 .blue,
 .purple,
 .magenta,
@@ -648,15 +652,19 @@ button:active {
 .base-color,
 .complement,
 .accent,
-.second.accent,
+.dark.second.accent,
+.dim.second.accent,
 .split,
-.second.split,
+.dark.second.split,
+.dim.second.split,
 .triad,
-.third.triad,
+.dark.third.triad,
+.dim.third.triad,
 .tetrad,
 .second.tetrad,
-.third.tetrad,
-.fourth.tetrad,
+.dark.third.tetrad,
+.dark.fourth.tetrad,
+.dim.fourth.tetrad,
 .second.triad {
   color: var(--white);
   background-color: hsl(var(--h), var(--s), var(--l));
@@ -878,7 +886,7 @@ button:active {
     display: grid;
   }
 }
-@media screen and (min-width: 33.2rem) {
+@media screen and (min-width: 48.08rem) {
   .grid.mobile,
   .two-column.mobile,
   .three-column.mobile {
@@ -890,14 +898,14 @@ button:active {
 .three-column.mobile.tablet {
   display: grid;
 }
-@media screen and (min-width: 33.2rem) {
+@media screen and (min-width: 48.08rem) {
   .grid.mobile.tablet,
   .two-column.mobile.tablet,
   .three-column.mobile.tablet {
     display: grid;
   }
 }
-@media screen and (min-width: 51.92rem) {
+@media screen and (min-width: 75.728rem) {
   .grid.mobile.tablet,
   .two-column.mobile.tablet,
   .three-column.mobile.tablet {
@@ -909,7 +917,7 @@ button:active {
 .three-column.tablet {
   display: initial;
 }
-@media screen and (min-width: 33.2rem) {
+@media screen and (min-width: 48.08rem) {
   .grid.tablet,
   .two-column.tablet,
   .three-column.tablet {
@@ -921,7 +929,7 @@ button:active {
 .three-column.desktop {
   display: initial;
 }
-@media screen and (min-width: 51.92rem) {
+@media screen and (min-width: 75.728rem) {
   .grid.desktop,
   .two-column.desktop,
   .three-column.desktop {
@@ -1018,7 +1026,7 @@ button:active {
 .card-width {
   max-width: var(--card-width);
 }
-@media screen and (min-width: 33.2rem) {
+@media screen and (min-width: 48.08rem) {
   .text-width {
     max-width: var(--text-width);
   }
@@ -1052,7 +1060,7 @@ button:active {
   padding-left: calc(50% - ((var(--card-width) * 0.5) + var(--spacer)));
   padding-right: calc(50% - ((var(--card-width) * 0.5) + var(--spacer)));
 }
-@media screen and (min-width: 33.2rem) {
+@media screen and (min-width: 48.08rem) {
   .inner-text-width {
     padding-left: calc(50% - (var(--text-width) * 0.5));
     padding-right: calc(50% - (var(--text-width) * 0.5));
@@ -1062,7 +1070,7 @@ button:active {
     padding-right: calc(50% - (var(--text-width) * 0.5) + var(--spacer));
   }
 }
-@media screen and (min-width: 51.92rem) {
+@media screen and (min-width: 75.728rem) {
   .inner-page-width {
     padding-left: calc(50% - (var(--page-width) * 0.5));
     padding-right: calc(50% - (var(--page-width) * 0.5));
@@ -1092,7 +1100,7 @@ button:active {
 .hide.mobile {
   display: none;
 }
-@media screen and (min-width: 33.2rem) {
+@media screen and (min-width: 48.08rem) {
   .hide.mobile {
     display: initial;
   }
@@ -1100,7 +1108,7 @@ button:active {
     display: none;
   }
 }
-@media screen and (min-width: 51.92rem) {
+@media screen and (min-width: 75.728rem) {
   .hide.desktop {
     display: none;
   }
@@ -1120,7 +1128,7 @@ button:active {
 .fixed.mobile {
   position: fixed;
 }
-@media screen and (min-width: 33.2rem) {
+@media screen and (min-width: 48.08rem) {
   .fixed.mobile {
     position: initial;
   }
@@ -1128,7 +1136,7 @@ button:active {
     position: fixed;
   }
 }
-@media screen and (min-width: 51.92rem) {
+@media screen and (min-width: 75.728rem) {
   .fixed.desktop {
     position: fixed;
   }
@@ -1269,482 +1277,483 @@ button:active {
   column-gap: 0;
 }
 .white {
-  --h: 239.6;
-  --s: 82.6%;
-  --l: 97%;
+  --h: 190.7;
+  --s: 96.3%;
+  --l: 97.5%;
 }
 .light.white {
   --l: 100%;
 }
 .dark.white {
-  --l: 77%;
+  --l: 77.5%;
 }
 .bright.white {
   --s: 0%;
   --l: 100%;
 }
 .dim.white {
-  --s: 32.6%;
-  --l: 87%;
+  --s: 71.3%;
+  --l: 87.5%;
 }
 .black {
-  --h: 239.6;
-  --s: 80.2%;
-  --l: 7.1%;
+  --h: 190.7;
+  --s: 69%;
+  --l: 8.2%;
 }
 .light.black {
-  --l: 27.1%;
+  --l: 28.2%;
 }
 .dark.black {
   --l: 0%;
 }
 .bright.black {
-  --s: 100%;
-  --l: 17.1%;
+  --s: 94%;
+  --l: 18.2%;
 }
 .dim.black {
   --s: 0%;
   --l: 0%;
 }
 .red {
-  --h: 346.8;
-  --s: 88.6%;
-  --l: 40.9%;
+  --h: 357.8;
+  --s: 75.8%;
+  --l: 48.7%;
 }
 .light.red {
-  --l: 60.9%;
+  --l: 68.7%;
 }
 .dark.red {
-  --l: 20.9%;
+  --l: 28.7%;
 }
 .bright.red {
   --s: 100%;
-  --l: 50.9%;
+  --l: 58.7%;
 }
 .dim.red {
-  --s: 38.6%;
-  --l: 30.9%;
+  --s: 50.8%;
+  --l: 38.7%;
 }
 .orange {
-  --h: 37.9;
-  --s: 91.9%;
-  --l: 50.1%;
+  --h: 39.8;
+  --s: 93.5%;
+  --l: 50.8%;
 }
 .light.orange {
-  --l: 70.1%;
+  --l: 70.8%;
 }
 .dark.orange {
-  --l: 30.1%;
+  --l: 30.8%;
 }
 .bright.orange {
   --s: 100%;
-  --l: 60.1%;
+  --l: 60.8%;
 }
 .dim.orange {
-  --s: 41.9%;
-  --l: 40.1%;
+  --s: 68.5%;
+  --l: 40.8%;
 }
 .yellow {
-  --h: 60.1;
-  --s: 84.4%;
-  --l: 50.2%;
+  --h: 64.1;
+  --s: 99.9%;
+  --l: 54.7%;
 }
 .light.yellow {
-  --l: 70.2%;
+  --l: 74.7%;
 }
 .dark.yellow {
-  --l: 30.2%;
+  --l: 34.7%;
 }
 .bright.yellow {
   --s: 100%;
-  --l: 60.2%;
+  --l: 64.7%;
 }
 .dim.yellow {
-  --s: 34.4%;
-  --l: 40.2%;
+  --s: 74.9%;
+  --l: 44.7%;
 }
 .green {
-  --h: 136.2;
-  --s: 100%;
-  --l: 22.2%;
+  --h: 135.2;
+  --s: 62%;
+  --l: 42.1%;
 }
 .light.green {
-  --l: 42.2%;
+  --l: 62.1%;
 }
 .dark.green {
-  --l: 2.2%;
+  --l: 22.1%;
 }
 .bright.green {
-  --s: 100%;
-  --l: 32.2%;
+  --s: 87%;
+  --l: 52.1%;
 }
 .dim.green {
-  --s: 50%;
-  --l: 12.2%;
+  --s: 37%;
+  --l: 32.1%;
 }
 .teal {
-  --h: 184.6;
-  --s: 100%;
-  --l: 26.1%;
+  --h: 180.6;
+  --s: 57.2%;
+  --l: 43.4%;
 }
 .light.teal {
-  --l: 46.1%;
+  --l: 63.4%;
 }
 .dark.teal {
-  --l: 6.1%;
+  --l: 23.4%;
 }
 .bright.teal {
-  --s: 100%;
-  --l: 36.1%;
+  --s: 82.2%;
+  --l: 53.4%;
 }
 .dim.teal {
-  --s: 50%;
-  --l: 16.1%;
+  --s: 32.2%;
+  --l: 33.4%;
 }
 .cyan {
-  --h: 187.6;
-  --s: 90.3%;
-  --l: 49.9%;
+  --h: 180.2;
+  --s: 90.4%;
+  --l: 50.1%;
 }
 .light.cyan {
-  --l: 69.9%;
+  --l: 70.1%;
 }
 .dark.cyan {
-  --l: 29.9%;
+  --l: 30.1%;
 }
 .bright.cyan {
   --s: 100%;
-  --l: 59.9%;
+  --l: 60.1%;
 }
 .dim.cyan {
-  --s: 40.3%;
-  --l: 39.9%;
+  --s: 65.4%;
+  --l: 40.1%;
 }
 .blue {
-  --h: 240;
-  --s: 89.3%;
-  --l: 49.4%;
+  --h: 230;
+  --s: 95.8%;
+  --l: 59.4%;
 }
 .light.blue {
-  --l: 69.4%;
+  --l: 79.4%;
 }
 .dark.blue {
-  --l: 29.4%;
+  --l: 39.4%;
 }
 .bright.blue {
   --s: 100%;
-  --l: 59.4%;
+  --l: 69.4%;
 }
 .dim.blue {
-  --s: 39.3%;
-  --l: 39.4%;
+  --s: 70.8%;
+  --l: 49.4%;
 }
 .purple {
-  --h: 287.4;
-  --s: 100%;
-  --l: 28.1%;
+  --h: 285.4;
+  --s: 50.1%;
+  --l: 45.3%;
 }
 .light.purple {
-  --l: 48.1%;
+  --l: 65.3%;
 }
 .dark.purple {
-  --l: 8.1%;
+  --l: 25.3%;
 }
 .bright.purple {
-  --s: 100%;
-  --l: 38.1%;
+  --s: 75.1%;
+  --l: 55.3%;
 }
 .dim.purple {
-  --s: 50%;
-  --l: 18.1%;
+  --s: 25.1%;
+  --l: 35.3%;
 }
 .magenta {
-  --h: 289.2;
-  --s: 88.4%;
-  --l: 48.7%;
+  --h: 289.4;
+  --s: 82.5%;
+  --l: 55.6%;
 }
 .light.magenta {
-  --l: 68.7%;
+  --l: 75.6%;
 }
 .dark.magenta {
-  --l: 28.7%;
+  --l: 35.6%;
 }
 .bright.magenta {
   --s: 100%;
-  --l: 58.7%;
+  --l: 65.6%;
 }
 .dim.magenta {
-  --s: 38.4%;
-  --l: 38.7%;
+  --s: 57.5%;
+  --l: 45.6%;
 }
 .gray {
-  --h: 239.8;
-  --s: 4.1%;
-  --l: 50.2%;
+  --h: 190.7;
+  --s: 4%;
+  --l: 50.6%;
 }
 .light.gray {
-  --l: 70.2%;
+  --l: 70.6%;
 }
 .dark.gray {
-  --l: 30.2%;
+  --l: 30.6%;
 }
 .bright.gray {
-  --s: 29.1%;
-  --l: 60.2%;
+  --s: 29%;
+  --l: 60.6%;
 }
 .dim.gray {
   --s: 0%;
-  --l: 40.2%;
+  --l: 40.6%;
 }
 .base-color {
-  --h: 239.6;
-  --s: 68.8%;
-  --l: 40.2%;
+  --h: 203.5;
+  --s: 68.7%;
+  --l: 51.2%;
 }
 .light.base-color {
-  --l: 60.2%;
+  --l: 71.2%;
 }
 .dark.base-color {
-  --l: 20.2%;
+  --l: 31.2%;
 }
 .bright.base-color {
-  --s: 93.8%;
-  --l: 50.2%;
+  --s: 93.7%;
+  --l: 61.2%;
 }
 .dim.base-color {
-  --s: 18.8%;
-  --l: 30.2%;
+  --s: 43.7%;
+  --l: 41.2%;
 }
 .complement,
 .second.triad {
-  --h: 59.6;
-  --s: 57.9%;
-  --l: 32%;
+  --h: 24.1;
+  --s: 62.5%;
+  --l: 51.8%;
 }
 .light.complement,
 .light.second.triad {
-  --l: 52%;
+  --l: 71.8%;
 }
 .dark.complement,
 .dark.second.triad {
-  --l: 12%;
+  --l: 31.8%;
 }
 .bright.complement,
 .bright.second.triad {
-  --s: 82.9%;
-  --l: 42%;
+  --s: 87.5%;
+  --l: 61.8%;
 }
 .dim.complement,
 .dim.second.triad {
-  --s: 7.9%;
-  --l: 22%;
-}
-.accent {
-  --h: 266.9;
-  --s: 70.7%;
-  --l: 32%;
-}
-.light.accent {
-  --l: 52%;
-}
-.dark.accent {
-  --l: 12%;
-}
-.bright.accent {
-  --s: 95.7%;
-  --l: 42%;
-}
-.dim.accent {
-  --s: 20.7%;
-  --l: 22%;
-}
-.second.accent {
-  --h: 212.3;
-  --s: 70.8%;
-  --l: 32%;
-}
-.light.second.accent {
-  --l: 52%;
-}
-.dark.second.accent {
-  --l: 12%;
-}
-.bright.second.accent {
-  --s: 95.8%;
-  --l: 42%;
-}
-.dim.second.accent {
-  --s: 20.8%;
-  --l: 22%;
-}
-.split {
-  --h: 323.6;
-  --s: 68.8%;
-  --l: 30%;
-}
-.light.split {
-  --l: 50%;
-}
-.dark.split {
-  --l: 10%;
-}
-.bright.split {
-  --s: 93.8%;
-  --l: 40%;
-}
-.dim.split {
-  --s: 18.8%;
-  --l: 20%;
-}
-.second.split {
-  --h: 155.5;
-  --s: 68.8%;
-  --l: 30%;
-}
-.light.second.split {
-  --l: 50%;
-}
-.dark.second.split {
-  --l: 10%;
-}
-.bright.second.split {
-  --s: 93.8%;
-  --l: 40%;
-}
-.dim.second.split {
-  --s: 18.8%;
-  --l: 20%;
-}
-.triad {
-  --h: 294.2;
-  --s: 70.7%;
-  --l: 32%;
-}
-.light.triad {
-  --l: 52%;
-}
-.dark.triad {
-  --l: 12%;
-}
-.bright.triad {
-  --s: 95.7%;
-  --l: 42%;
-}
-.dim.triad {
-  --s: 20.7%;
-  --l: 22%;
-}
-.third.triad {
-  --h: 185;
-  --s: 70.6%;
-  --l: 31.8%;
-}
-.light.third.triad {
-  --l: 51.8%;
-}
-.dark.third.triad {
-  --l: 11.8%;
-}
-.bright.third.triad {
-  --s: 95.6%;
+  --s: 37.5%;
   --l: 41.8%;
 }
+.accent {
+  --h: 230.9;
+  --s: 70.1%;
+  --l: 51.3%;
+}
+.light.accent {
+  --l: 71.3%;
+}
+.dark.accent {
+  --l: 31.3%;
+}
+.bright.accent {
+  --s: 95.1%;
+  --l: 61.3%;
+}
+.dim.accent {
+  --s: 45.1%;
+  --l: 41.3%;
+}
+.second.accent {
+  --h: 174.1;
+  --s: 69.8%;
+  --l: 51.2%;
+}
+.light.second.accent {
+  --l: 71.2%;
+}
+.dark.second.accent {
+  --l: 31.2%;
+}
+.bright.second.accent {
+  --s: 94.8%;
+  --l: 61.2%;
+}
+.dim.second.accent {
+  --s: 44.8%;
+  --l: 41.2%;
+}
+.split {
+  --h: 290.3;
+  --s: 68.9%;
+  --l: 52.9%;
+}
+.light.split {
+  --l: 72.9%;
+}
+.dark.split {
+  --l: 32.9%;
+}
+.bright.split {
+  --s: 93.9%;
+  --l: 62.9%;
+}
+.dim.split {
+  --s: 43.9%;
+  --l: 42.9%;
+}
+.second.split {
+  --h: 117.7;
+  --s: 68.1%;
+  --l: 53.4%;
+}
+.light.second.split {
+  --l: 73.4%;
+}
+.dark.second.split {
+  --l: 33.4%;
+}
+.bright.second.split {
+  --s: 93.1%;
+  --l: 63.4%;
+}
+.dim.second.split {
+  --s: 43.1%;
+  --l: 43.4%;
+}
+.triad {
+  --h: 260.4;
+  --s: 68.9%;
+  --l: 52.9%;
+}
+.light.triad {
+  --l: 72.9%;
+}
+.dark.triad {
+  --l: 32.9%;
+}
+.bright.triad {
+  --s: 93.9%;
+  --l: 62.9%;
+}
+.dim.triad {
+  --s: 43.9%;
+  --l: 42.9%;
+}
+.third.triad {
+  --h: 146;
+  --s: 69.6%;
+  --l: 51.1%;
+}
+.light.third.triad {
+  --l: 71.1%;
+}
+.dark.third.triad {
+  --l: 31.1%;
+}
+.bright.third.triad {
+  --s: 94.6%;
+  --l: 61.1%;
+}
 .dim.third.triad {
-  --s: 20.6%;
-  --l: 21.8%;
+  --s: 44.6%;
+  --l: 41.1%;
 }
 .tetrad {
-  --h: 280.6;
-  --s: 70.7%;
-  --l: 32%;
+  --h: 245.4;
+  --s: 68.9%;
+  --l: 52.9%;
 }
 .light.tetrad {
-  --l: 52%;
+  --l: 72.9%;
 }
 .dark.tetrad {
-  --l: 12%;
+  --l: 32.9%;
 }
 .bright.tetrad {
-  --s: 95.7%;
-  --l: 42%;
+  --s: 93.9%;
+  --l: 62.9%;
 }
 .dim.tetrad {
-  --s: 20.7%;
-  --l: 22%;
+  --s: 43.9%;
+  --l: 42.9%;
 }
 .second.tetrad {
-  --h: 9.5;
-  --s: 57.9%;
-  --l: 32%;
+  --h: 336.6;
+  --s: 63%;
+  --l: 51.2%;
 }
 .light.second.tetrad {
-  --l: 52%;
+  --l: 71.2%;
 }
 .dark.second.tetrad {
-  --l: 12%;
+  --l: 31.2%;
 }
 .bright.second.tetrad {
-  --s: 82.9%;
-  --l: 42%;
+  --s: 88%;
+  --l: 61.2%;
 }
 .dim.second.tetrad {
-  --s: 7.9%;
-  --l: 22%;
+  --s: 38%;
+  --l: 41.2%;
 }
 .third.tetrad {
-  --h: 109.5;
-  --s: 57.9%;
-  --l: 32%;
+  --h: 71.7;
+  --s: 68.1%;
+  --l: 53.4%;
 }
 .light.third.tetrad {
-  --l: 52%;
+  --l: 73.4%;
 }
 .dark.third.tetrad {
-  --l: 12%;
+  --l: 33.4%;
 }
 .bright.third.tetrad {
-  --s: 82.9%;
-  --l: 42%;
+  --s: 93.1%;
+  --l: 63.4%;
 }
 .dim.third.tetrad {
-  --s: 7.9%;
-  --l: 22%;
+  --s: 43.1%;
+  --l: 43.4%;
 }
 .fourth.tetrad {
-  --h: 198.6;
-  --s: 70.8%;
-  --l: 32%;
+  --h: 160.1;
+  --s: 69.6%;
+  --l: 51.1%;
 }
 .light.fourth.tetrad {
-  --l: 52%;
+  --l: 71.1%;
 }
 .dark.fourth.tetrad {
-  --l: 12%;
+  --l: 31.1%;
 }
 .bright.fourth.tetrad {
-  --s: 95.8%;
-  --l: 42%;
+  --s: 94.6%;
+  --l: 61.1%;
 }
 .dim.fourth.tetrad {
-  --s: 20.8%;
-  --l: 22%;
+  --s: 44.6%;
+  --l: 41.1%;
 }
 .warm {
-  background-image: linear-gradient(var(--warm), var(--warm));
+  --a: 0.15;
+  background-image: linear-gradient(rgba(218.89600207, 105.52453813, 112.04086966, var(--a)), rgba(218.89600207, 105.52453813, 112.04086966, var(--a)));
 }
 .cool {
-  background-image: linear-gradient(var(--cool), var(--cool));
+  --a: 0.15;
+  background-image: linear-gradient(rgba(13.4233142, 214.45383482, 215.54811009, var(--a)), rgba(13.4233142, 214.45383482, 215.54811009, var(--a)));
 }
 .neutral {
-  background-image: linear-gradient(var(--neutral), var(--neutral));
+  --a: 0.15;
+  background-image: linear-gradient(rgba(48.76156514, 145.73661905, 208.21093263, var(--a)), rgba(48.76156514, 145.73661905, 208.21093263, var(--a)));
 }
 .dull {
-  background-image: linear-gradient(var(--dull), var(--dull));
+  --a: 0.15;
+  background-image: linear-gradient(rgba(130.5, 130.5, 130.5, var(--a)), rgba(130.5, 130.5, 130.5, var(--a)));
 }
 </style>
-
-
-
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -1756,11 +1765,12 @@ button:active {
 
 <body class="neutral">
   <nav class="bar base-color text-padding shadow no-underlines border-bottom fixed inner-feature-width">
-      <a class="text-margin" href="" class="inline-block ">
+      <a class="text-margin bold" href="">
           Cavepaint CSS
       </a>
       <div class="float-right">
           <a href="learn/" class="text-padding text-margin-right">Docs</a>
+          <a href="colors/" class="text-padding text-margin-right">Colors</a> 
           <a href="https://github.com/cavepaint/cavepaintcss" target="_blank" class="new-tab text-padding">Github</a>
       </div>
   </nav>
@@ -1769,16 +1779,16 @@ button:active {
         <div class="vertical-center">
           <img src="cavepaint_logo.svg" alt="Cavepaint logo" class="block margin margin-auto golden-width ">
 
-          <p class="gutter-bottom padding text-crunch card-width margin-auto">This page is running Cavepaint, the no-workflow, no-CSS, custom-property-powered modern CSS framework. Customize it here.</p>
+          <p class="gutter-bottom padding text-crunch card-width margin-auto">This page is running Cavepaint, the no-workflow, <a href="no-css">no-CSS</a>, custom-property-powered modern CSS framework. Customize it here.</p>
           
         </div>
-        <div class="light white padding border border-radius full-width force margin-auto margin-bottom shadow">
+        <div class="light white padding border border-radius page-width margin-auto margin-bottom shadow">
           <form class="two-column tablet">
             <p class="one-column tablet text-padding-right text-padding-left no-margin">
               <span class="float-right"><span class="character-width base-color padding-right rounded">&nbsp;</span></span>
-              <span class="block full-width">base&nbsp;color (<strong><span id="baseColorLabel" for="baseColor">#2021AD</span></strong>)</span>
+              <span class="block full-width">base&nbsp;color (<strong><span id="baseColorLabel" for="baseColor">#2d95d8</span></strong>)</span>
               
-              <input class="no-padding pointer force full-width" id="baseColor" type="color" value="#2021AD" oninput="document.getElementById('baseColorLabel').innerHTML = document.getElementById('baseColor').value">
+              <input class="no-padding pointer force full-width" id="baseColor" type="color" value="#2d95d8" oninput="document.getElementById('baseColorLabel').innerHTML = document.getElementById('baseColor').value">
             </p>
             <p class="one-column tablet text-padding-right text-padding-left no-margin">
               <span class="float-right fade"><span class="border thick no-border-top no-border-bottom padding-left padding-right"><span class="border thick dashed no-border-top no-border-bottom">&nbsp;&nbsp;&nbsp;</span></span></span>
@@ -1788,8 +1798,8 @@ button:active {
 
             <p class="one-column tablet text-padding-right text-padding-left no-margin relative">
               <span class="fade block absolute top right float-right text-crunch"><span class="small">A</span> <span>A</span> <span class="big">A</span></span>
-              <span class="block full-width">font&nbsp;size (<strong><span id="baseFontSizeLabel" for="baseFontSize">18</span>&nbsp;px</strong>)</span>
-              <input type="range" id="baseFontSize" min="14" max="22" value="18" step="1" class="force full-width cursor" oninput="document.getElementById('baseFontSizeLabel').innerHTML = document.getElementById('baseFontSize').value">
+              <span class="block full-width">font&nbsp;size (<strong><span id="baseFontSizeLabel" for="baseFontSize">16</span>&nbsp;px</strong>)</span>
+              <input type="range" id="baseFontSize" min="14" max="20" value="16" step="1" class="force full-width cursor" oninput="document.getElementById('baseFontSizeLabel').innerHTML = document.getElementById('baseFontSize').value">
             </p>
 
             
@@ -1802,9 +1812,9 @@ button:active {
 
             <p class="one-column tablet text-padding-right text-padding-left no-margin">
               <span class="float-right fade"><span class="light gray">&nbsp;&nbsp;&nbsp;</span> <span class="light gray">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
-              <span class="block full-width">page&nbsp;width (<strong><span id="textBaseLabel" for="textBase">50</span>&nbsp;rem</strong>)</span>
+              <span class="block full-width">page&nbsp;width (<strong><span id="textBaseLabel" for="textBase">48</span>&nbsp;rem</strong>)</span>
               
-              <input type="range" id="textBase" min="42" max="62" value="52" step="2" class="force full-width cursor" oninput="document.getElementById('textBaseLabel').innerHTML = document.getElementById('textBase').value">
+              <input type="range" id="textBase" min="40" max="60" value="48" step="2" class="force full-width cursor" oninput="document.getElementById('textBaseLabel').innerHTML = document.getElementById('textBase').value">
             </p>
 
             <p class="one-column tablet text-padding-right text-padding-left no-margin">
@@ -1845,7 +1855,7 @@ button:active {
             </p>
 
             <p class="no-margin clearfix">
-              <button onClick="event.preventDefault(); renderLess();" class="huge bright tetrad float-right padding">Compile Cavepaint</button>
+              <button onClick="event.preventDefault(); renderLess();" class="big bright warm red float-right padding">Compile Cavepaint</button>
             </p>
     
           </form>
@@ -1867,7 +1877,7 @@ button:active {
         <div class="inner-text-width margin-bottom">
           <h5>Use this CSS</h5>
           <textarea readonly name="" class="full-width no-padding-bottom force black monospace text-padding no-margin" id="css_textarea" cols="30" rows="10">:root {
-  --font-size-base: 18px;
+  --font-size-base: 16px;
   --font-size: calc(var(--font-size-base) * var(--font-size-mod));
   --font-size-mod: 1;
   --font-family: var(--sans-serif);
@@ -1883,21 +1893,22 @@ button:active {
   --gap: var(--spacer);
   --grid-columns: 12;
   --golden: 1.618;
-  --h: 239.6;
-  --s: 82.6%;
-  --l: 97%;
+  --h: 190.7;
+  --s: 96.3%;
+  --l: 97.5%;
+  --a: 0.16;
   --border-width: 1px;
   --border-style: solid;
   --border-radius: 0.5em;
   --border-h: var(--h);
   --border-s: var(--s);
-  --border-l: clamp(0%, calc(var(--l) * 0.35), 25%);
+  --border-l: clamp(0%, calc(var(--l) * 0.5), 35%);
   --border-color: hsl(var(--border-h), var(--border-s), var(--border-l));
   --border: var(--border-width) var(--border-style) var(--border-color);
   --border-thin: calc(var(--border-width) / 2);
   --border-thick: calc(var(--border-width) * 2);
   --border-radius: var(--text-padding);
-  --text-measure: 52;
+  --text-measure: 48;
   --text-width: calc(var(--text-measure) * 0.6rem);
   --card-width: calc(var(--text-width) / var(--golden));
   --page-width: calc(var(--text-width) * var(--golden));
@@ -1905,14 +1916,14 @@ button:active {
   --box-shadow: var(--shadow-position) var(--shadow-position) var(--shadow-blur) var(--shadow-color);
   --shadow-position: 1px;
   --shadow-blur: 1px;
-  --shadow-color: rgba(4, 4, 33, 0.2);
+  --shadow-color: rgba(6, 30, 35, 0.2);
   --direction: 180deg;
-  --white: #f1f1fe;
-  --black: #040421;
-  --warm: rgba(200, 61, 102, 0.25);
-  --cool: rgba(10, 147, 177, 0.2);
-  --neutral: rgba(30, 31, 167, 0.15);
-  --dull: rgba(103, 103, 103, 0.3);
+  --white: #f2fdff;
+  --black: #061e23;
+  --warm: rgba(218.89600207, 105.52453813, 112.04086966, var(--a));
+  --cool: rgba(13.4233142, 214.45383482, 215.54811009, var(--a));
+  --neutral: rgba(48.76156514, 145.73661905, 208.21093263, var(--a));
+  --dull: rgba(130.5, 130.5, 130.5, var(--a));
   --monospace: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, "DejaVu Sans Mono", Courier, monospace;
   --serif: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "Droid Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
   --sans-serif: "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, sans-serif;
@@ -1924,25 +1935,25 @@ button:active {
     --padding: calc(0.6 * var(--spacer));
     --margin: calc(0.6 * var(--margin-base));
     --gutter: calc(1.2 * var(--margin-base));
-    --font-size-base: calc(18px - 2);
+    --font-size-base: calc(16px - 2);
     --headline-base: 1em;
   }
 }
-@media screen and (min-width: 33.2rem) {
+@media screen and (min-width: 48.08rem) {
   :root {
     --padding: calc(0.8 * var(--spacer));
     --margin: calc(0.8 * var(--margin-base));
     --gutter: calc(1.6 * var(--margin-base));
-    --font-size-base: calc(18px - 1);
+    --font-size-base: calc(16px - 1);
     --headline-base: 1.1em;
   }
 }
-@media screen and (min-width: 51.92rem) {
+@media screen and (min-width: 75.728rem) {
   :root {
     --padding: calc(1 * var(--spacer));
     --margin: calc(1 * var(--margin-base));
     --gutter: calc(2 * var(--margin-base));
-    --font-size-base: 18px;
+    --font-size-base: 16px;
     --headline-base: 1.2em;
   }
 }
@@ -2392,8 +2403,7 @@ button:active {
   color: transparent;
 }
 .small {
-  font-size: 87.5%;
-  line-height: calc(var(--line-height) * 0.875);
+  --font-size-mod: 0.9;
 }
 .medium {
   font-size: var(--font-size);
@@ -2403,7 +2413,7 @@ button:active {
   --font-size-mod: 1.25;
 }
 .huge {
-  --font-size-mod: 1.4;
+  --font-size-mod: 1.5;
 }
 .vertical-center,
 .center-vertical {
@@ -2455,24 +2465,31 @@ button:active {
 }
 .shade,
 .white,
+.light.red,
 .orange,
 .yellow,
-.light.green,
-.bright.green,
-.light.teal,
-.bright.teal,
+.green,
+.teal,
 .cyan,
+.light.blue,
+.light.purple,
 .light.magenta,
 .light.gray,
+.bright.gray,
+.light.base-color,
+.bright.base-color,
 .light.complement,
 .bright.complement,
-.light.second.split,
-.bright.second.split,
-.light.third.triad,
-.bright.third.triad,
-.light.third.tetrad,
-.bright.third.tetrad,
-.light.fourth.tetrad,
+.light.accent,
+.second.accent,
+.light.split,
+.second.split,
+.light.triad,
+.third.triad,
+.light.tetrad,
+.light.second.tetrad,
+.third.tetrad,
+.fourth.tetrad,
 .light.second.triad,
 .bright.second.triad {
   color: var(--black);
@@ -2487,12 +2504,11 @@ button:active {
 .red,
 .dark.orange,
 .dim.orange,
-.dark.yellow,
-.dim.yellow,
-.green,
-.teal,
+.dark.green,
+.dim.green,
+.dark.teal,
+.dim.teal,
 .dark.cyan,
-.dim.cyan,
 .blue,
 .purple,
 .magenta,
@@ -2500,15 +2516,19 @@ button:active {
 .base-color,
 .complement,
 .accent,
-.second.accent,
+.dark.second.accent,
+.dim.second.accent,
 .split,
-.second.split,
+.dark.second.split,
+.dim.second.split,
 .triad,
-.third.triad,
+.dark.third.triad,
+.dim.third.triad,
 .tetrad,
 .second.tetrad,
-.third.tetrad,
-.fourth.tetrad,
+.dark.third.tetrad,
+.dark.fourth.tetrad,
+.dim.fourth.tetrad,
 .second.triad {
   color: var(--white);
   background-color: hsl(var(--h), var(--s), var(--l));
@@ -2730,7 +2750,7 @@ button:active {
     display: grid;
   }
 }
-@media screen and (min-width: 33.2rem) {
+@media screen and (min-width: 48.08rem) {
   .grid.mobile,
   .two-column.mobile,
   .three-column.mobile {
@@ -2742,14 +2762,14 @@ button:active {
 .three-column.mobile.tablet {
   display: grid;
 }
-@media screen and (min-width: 33.2rem) {
+@media screen and (min-width: 48.08rem) {
   .grid.mobile.tablet,
   .two-column.mobile.tablet,
   .three-column.mobile.tablet {
     display: grid;
   }
 }
-@media screen and (min-width: 51.92rem) {
+@media screen and (min-width: 75.728rem) {
   .grid.mobile.tablet,
   .two-column.mobile.tablet,
   .three-column.mobile.tablet {
@@ -2761,7 +2781,7 @@ button:active {
 .three-column.tablet {
   display: initial;
 }
-@media screen and (min-width: 33.2rem) {
+@media screen and (min-width: 48.08rem) {
   .grid.tablet,
   .two-column.tablet,
   .three-column.tablet {
@@ -2773,7 +2793,7 @@ button:active {
 .three-column.desktop {
   display: initial;
 }
-@media screen and (min-width: 51.92rem) {
+@media screen and (min-width: 75.728rem) {
   .grid.desktop,
   .two-column.desktop,
   .three-column.desktop {
@@ -2870,7 +2890,7 @@ button:active {
 .card-width {
   max-width: var(--card-width);
 }
-@media screen and (min-width: 33.2rem) {
+@media screen and (min-width: 48.08rem) {
   .text-width {
     max-width: var(--text-width);
   }
@@ -2904,7 +2924,7 @@ button:active {
   padding-left: calc(50% - ((var(--card-width) * 0.5) + var(--spacer)));
   padding-right: calc(50% - ((var(--card-width) * 0.5) + var(--spacer)));
 }
-@media screen and (min-width: 33.2rem) {
+@media screen and (min-width: 48.08rem) {
   .inner-text-width {
     padding-left: calc(50% - (var(--text-width) * 0.5));
     padding-right: calc(50% - (var(--text-width) * 0.5));
@@ -2914,7 +2934,7 @@ button:active {
     padding-right: calc(50% - (var(--text-width) * 0.5) + var(--spacer));
   }
 }
-@media screen and (min-width: 51.92rem) {
+@media screen and (min-width: 75.728rem) {
   .inner-page-width {
     padding-left: calc(50% - (var(--page-width) * 0.5));
     padding-right: calc(50% - (var(--page-width) * 0.5));
@@ -2944,7 +2964,7 @@ button:active {
 .hide.mobile {
   display: none;
 }
-@media screen and (min-width: 33.2rem) {
+@media screen and (min-width: 48.08rem) {
   .hide.mobile {
     display: initial;
   }
@@ -2952,7 +2972,7 @@ button:active {
     display: none;
   }
 }
-@media screen and (min-width: 51.92rem) {
+@media screen and (min-width: 75.728rem) {
   .hide.desktop {
     display: none;
   }
@@ -2972,7 +2992,7 @@ button:active {
 .fixed.mobile {
   position: fixed;
 }
-@media screen and (min-width: 33.2rem) {
+@media screen and (min-width: 48.08rem) {
   .fixed.mobile {
     position: initial;
   }
@@ -2980,7 +3000,7 @@ button:active {
     position: fixed;
   }
 }
-@media screen and (min-width: 51.92rem) {
+@media screen and (min-width: 75.728rem) {
   .fixed.desktop {
     position: fixed;
   }
@@ -3121,477 +3141,481 @@ button:active {
   column-gap: 0;
 }
 .white {
-  --h: 239.6;
-  --s: 82.6%;
-  --l: 97%;
+  --h: 190.7;
+  --s: 96.3%;
+  --l: 97.5%;
 }
 .light.white {
   --l: 100%;
 }
 .dark.white {
-  --l: 77%;
+  --l: 77.5%;
 }
 .bright.white {
   --s: 0%;
   --l: 100%;
 }
 .dim.white {
-  --s: 32.6%;
-  --l: 87%;
+  --s: 71.3%;
+  --l: 87.5%;
 }
 .black {
-  --h: 239.6;
-  --s: 80.2%;
-  --l: 7.1%;
+  --h: 190.7;
+  --s: 69%;
+  --l: 8.2%;
 }
 .light.black {
-  --l: 27.1%;
+  --l: 28.2%;
 }
 .dark.black {
   --l: 0%;
 }
 .bright.black {
-  --s: 100%;
-  --l: 17.1%;
+  --s: 94%;
+  --l: 18.2%;
 }
 .dim.black {
   --s: 0%;
   --l: 0%;
 }
 .red {
-  --h: 346.8;
-  --s: 88.6%;
-  --l: 40.9%;
+  --h: 357.8;
+  --s: 75.8%;
+  --l: 48.7%;
 }
 .light.red {
-  --l: 60.9%;
+  --l: 68.7%;
 }
 .dark.red {
-  --l: 20.9%;
+  --l: 28.7%;
 }
 .bright.red {
   --s: 100%;
-  --l: 50.9%;
+  --l: 58.7%;
 }
 .dim.red {
-  --s: 38.6%;
-  --l: 30.9%;
+  --s: 50.8%;
+  --l: 38.7%;
 }
 .orange {
-  --h: 37.9;
-  --s: 91.9%;
-  --l: 50.1%;
+  --h: 39.8;
+  --s: 93.5%;
+  --l: 50.8%;
 }
 .light.orange {
-  --l: 70.1%;
+  --l: 70.8%;
 }
 .dark.orange {
-  --l: 30.1%;
+  --l: 30.8%;
 }
 .bright.orange {
   --s: 100%;
-  --l: 60.1%;
+  --l: 60.8%;
 }
 .dim.orange {
-  --s: 41.9%;
-  --l: 40.1%;
+  --s: 68.5%;
+  --l: 40.8%;
 }
 .yellow {
-  --h: 60.1;
-  --s: 84.4%;
-  --l: 50.2%;
+  --h: 64.1;
+  --s: 99.9%;
+  --l: 54.7%;
 }
 .light.yellow {
-  --l: 70.2%;
+  --l: 74.7%;
 }
 .dark.yellow {
-  --l: 30.2%;
+  --l: 34.7%;
 }
 .bright.yellow {
   --s: 100%;
-  --l: 60.2%;
+  --l: 64.7%;
 }
 .dim.yellow {
-  --s: 34.4%;
-  --l: 40.2%;
+  --s: 74.9%;
+  --l: 44.7%;
 }
 .green {
-  --h: 136.2;
-  --s: 100%;
-  --l: 22.2%;
+  --h: 135.2;
+  --s: 62%;
+  --l: 42.1%;
 }
 .light.green {
-  --l: 42.2%;
+  --l: 62.1%;
 }
 .dark.green {
-  --l: 2.2%;
+  --l: 22.1%;
 }
 .bright.green {
-  --s: 100%;
-  --l: 32.2%;
+  --s: 87%;
+  --l: 52.1%;
 }
 .dim.green {
-  --s: 50%;
-  --l: 12.2%;
+  --s: 37%;
+  --l: 32.1%;
 }
 .teal {
-  --h: 184.6;
-  --s: 100%;
-  --l: 26.1%;
+  --h: 180.6;
+  --s: 57.2%;
+  --l: 43.4%;
 }
 .light.teal {
-  --l: 46.1%;
+  --l: 63.4%;
 }
 .dark.teal {
-  --l: 6.1%;
+  --l: 23.4%;
 }
 .bright.teal {
-  --s: 100%;
-  --l: 36.1%;
+  --s: 82.2%;
+  --l: 53.4%;
 }
 .dim.teal {
-  --s: 50%;
-  --l: 16.1%;
+  --s: 32.2%;
+  --l: 33.4%;
 }
 .cyan {
-  --h: 187.6;
-  --s: 90.3%;
-  --l: 49.9%;
+  --h: 180.2;
+  --s: 90.4%;
+  --l: 50.1%;
 }
 .light.cyan {
-  --l: 69.9%;
+  --l: 70.1%;
 }
 .dark.cyan {
-  --l: 29.9%;
+  --l: 30.1%;
 }
 .bright.cyan {
   --s: 100%;
-  --l: 59.9%;
+  --l: 60.1%;
 }
 .dim.cyan {
-  --s: 40.3%;
-  --l: 39.9%;
+  --s: 65.4%;
+  --l: 40.1%;
 }
 .blue {
-  --h: 240;
-  --s: 89.3%;
-  --l: 49.4%;
+  --h: 230;
+  --s: 95.8%;
+  --l: 59.4%;
 }
 .light.blue {
-  --l: 69.4%;
+  --l: 79.4%;
 }
 .dark.blue {
-  --l: 29.4%;
+  --l: 39.4%;
 }
 .bright.blue {
   --s: 100%;
-  --l: 59.4%;
+  --l: 69.4%;
 }
 .dim.blue {
-  --s: 39.3%;
-  --l: 39.4%;
+  --s: 70.8%;
+  --l: 49.4%;
 }
 .purple {
-  --h: 287.4;
-  --s: 100%;
-  --l: 28.1%;
+  --h: 285.4;
+  --s: 50.1%;
+  --l: 45.3%;
 }
 .light.purple {
-  --l: 48.1%;
+  --l: 65.3%;
 }
 .dark.purple {
-  --l: 8.1%;
+  --l: 25.3%;
 }
 .bright.purple {
-  --s: 100%;
-  --l: 38.1%;
+  --s: 75.1%;
+  --l: 55.3%;
 }
 .dim.purple {
-  --s: 50%;
-  --l: 18.1%;
+  --s: 25.1%;
+  --l: 35.3%;
 }
 .magenta {
-  --h: 289.2;
-  --s: 88.4%;
-  --l: 48.7%;
+  --h: 289.4;
+  --s: 82.5%;
+  --l: 55.6%;
 }
 .light.magenta {
-  --l: 68.7%;
+  --l: 75.6%;
 }
 .dark.magenta {
-  --l: 28.7%;
+  --l: 35.6%;
 }
 .bright.magenta {
   --s: 100%;
-  --l: 58.7%;
+  --l: 65.6%;
 }
 .dim.magenta {
-  --s: 38.4%;
-  --l: 38.7%;
+  --s: 57.5%;
+  --l: 45.6%;
 }
 .gray {
-  --h: 239.8;
-  --s: 4.1%;
-  --l: 50.2%;
+  --h: 190.7;
+  --s: 4%;
+  --l: 50.6%;
 }
 .light.gray {
-  --l: 70.2%;
+  --l: 70.6%;
 }
 .dark.gray {
-  --l: 30.2%;
+  --l: 30.6%;
 }
 .bright.gray {
-  --s: 29.1%;
-  --l: 60.2%;
+  --s: 29%;
+  --l: 60.6%;
 }
 .dim.gray {
   --s: 0%;
-  --l: 40.2%;
+  --l: 40.6%;
 }
 .base-color {
-  --h: 239.6;
-  --s: 68.8%;
-  --l: 40.2%;
+  --h: 203.5;
+  --s: 68.7%;
+  --l: 51.2%;
 }
 .light.base-color {
-  --l: 60.2%;
+  --l: 71.2%;
 }
 .dark.base-color {
-  --l: 20.2%;
+  --l: 31.2%;
 }
 .bright.base-color {
-  --s: 93.8%;
-  --l: 50.2%;
+  --s: 93.7%;
+  --l: 61.2%;
 }
 .dim.base-color {
-  --s: 18.8%;
-  --l: 30.2%;
+  --s: 43.7%;
+  --l: 41.2%;
 }
 .complement,
 .second.triad {
-  --h: 59.6;
-  --s: 57.9%;
-  --l: 32%;
+  --h: 24.1;
+  --s: 62.5%;
+  --l: 51.8%;
 }
 .light.complement,
 .light.second.triad {
-  --l: 52%;
+  --l: 71.8%;
 }
 .dark.complement,
 .dark.second.triad {
-  --l: 12%;
+  --l: 31.8%;
 }
 .bright.complement,
 .bright.second.triad {
-  --s: 82.9%;
-  --l: 42%;
+  --s: 87.5%;
+  --l: 61.8%;
 }
 .dim.complement,
 .dim.second.triad {
-  --s: 7.9%;
-  --l: 22%;
-}
-.accent {
-  --h: 266.9;
-  --s: 70.7%;
-  --l: 32%;
-}
-.light.accent {
-  --l: 52%;
-}
-.dark.accent {
-  --l: 12%;
-}
-.bright.accent {
-  --s: 95.7%;
-  --l: 42%;
-}
-.dim.accent {
-  --s: 20.7%;
-  --l: 22%;
-}
-.second.accent {
-  --h: 212.3;
-  --s: 70.8%;
-  --l: 32%;
-}
-.light.second.accent {
-  --l: 52%;
-}
-.dark.second.accent {
-  --l: 12%;
-}
-.bright.second.accent {
-  --s: 95.8%;
-  --l: 42%;
-}
-.dim.second.accent {
-  --s: 20.8%;
-  --l: 22%;
-}
-.split {
-  --h: 323.6;
-  --s: 68.8%;
-  --l: 30%;
-}
-.light.split {
-  --l: 50%;
-}
-.dark.split {
-  --l: 10%;
-}
-.bright.split {
-  --s: 93.8%;
-  --l: 40%;
-}
-.dim.split {
-  --s: 18.8%;
-  --l: 20%;
-}
-.second.split {
-  --h: 155.5;
-  --s: 68.8%;
-  --l: 30%;
-}
-.light.second.split {
-  --l: 50%;
-}
-.dark.second.split {
-  --l: 10%;
-}
-.bright.second.split {
-  --s: 93.8%;
-  --l: 40%;
-}
-.dim.second.split {
-  --s: 18.8%;
-  --l: 20%;
-}
-.triad {
-  --h: 294.2;
-  --s: 70.7%;
-  --l: 32%;
-}
-.light.triad {
-  --l: 52%;
-}
-.dark.triad {
-  --l: 12%;
-}
-.bright.triad {
-  --s: 95.7%;
-  --l: 42%;
-}
-.dim.triad {
-  --s: 20.7%;
-  --l: 22%;
-}
-.third.triad {
-  --h: 185;
-  --s: 70.6%;
-  --l: 31.8%;
-}
-.light.third.triad {
-  --l: 51.8%;
-}
-.dark.third.triad {
-  --l: 11.8%;
-}
-.bright.third.triad {
-  --s: 95.6%;
+  --s: 37.5%;
   --l: 41.8%;
 }
+.accent {
+  --h: 230.9;
+  --s: 70.1%;
+  --l: 51.3%;
+}
+.light.accent {
+  --l: 71.3%;
+}
+.dark.accent {
+  --l: 31.3%;
+}
+.bright.accent {
+  --s: 95.1%;
+  --l: 61.3%;
+}
+.dim.accent {
+  --s: 45.1%;
+  --l: 41.3%;
+}
+.second.accent {
+  --h: 174.1;
+  --s: 69.8%;
+  --l: 51.2%;
+}
+.light.second.accent {
+  --l: 71.2%;
+}
+.dark.second.accent {
+  --l: 31.2%;
+}
+.bright.second.accent {
+  --s: 94.8%;
+  --l: 61.2%;
+}
+.dim.second.accent {
+  --s: 44.8%;
+  --l: 41.2%;
+}
+.split {
+  --h: 290.3;
+  --s: 68.9%;
+  --l: 52.9%;
+}
+.light.split {
+  --l: 72.9%;
+}
+.dark.split {
+  --l: 32.9%;
+}
+.bright.split {
+  --s: 93.9%;
+  --l: 62.9%;
+}
+.dim.split {
+  --s: 43.9%;
+  --l: 42.9%;
+}
+.second.split {
+  --h: 117.7;
+  --s: 68.1%;
+  --l: 53.4%;
+}
+.light.second.split {
+  --l: 73.4%;
+}
+.dark.second.split {
+  --l: 33.4%;
+}
+.bright.second.split {
+  --s: 93.1%;
+  --l: 63.4%;
+}
+.dim.second.split {
+  --s: 43.1%;
+  --l: 43.4%;
+}
+.triad {
+  --h: 260.4;
+  --s: 68.9%;
+  --l: 52.9%;
+}
+.light.triad {
+  --l: 72.9%;
+}
+.dark.triad {
+  --l: 32.9%;
+}
+.bright.triad {
+  --s: 93.9%;
+  --l: 62.9%;
+}
+.dim.triad {
+  --s: 43.9%;
+  --l: 42.9%;
+}
+.third.triad {
+  --h: 146;
+  --s: 69.6%;
+  --l: 51.1%;
+}
+.light.third.triad {
+  --l: 71.1%;
+}
+.dark.third.triad {
+  --l: 31.1%;
+}
+.bright.third.triad {
+  --s: 94.6%;
+  --l: 61.1%;
+}
 .dim.third.triad {
-  --s: 20.6%;
-  --l: 21.8%;
+  --s: 44.6%;
+  --l: 41.1%;
 }
 .tetrad {
-  --h: 280.6;
-  --s: 70.7%;
-  --l: 32%;
+  --h: 245.4;
+  --s: 68.9%;
+  --l: 52.9%;
 }
 .light.tetrad {
-  --l: 52%;
+  --l: 72.9%;
 }
 .dark.tetrad {
-  --l: 12%;
+  --l: 32.9%;
 }
 .bright.tetrad {
-  --s: 95.7%;
-  --l: 42%;
+  --s: 93.9%;
+  --l: 62.9%;
 }
 .dim.tetrad {
-  --s: 20.7%;
-  --l: 22%;
+  --s: 43.9%;
+  --l: 42.9%;
 }
 .second.tetrad {
-  --h: 9.5;
-  --s: 57.9%;
-  --l: 32%;
+  --h: 336.6;
+  --s: 63%;
+  --l: 51.2%;
 }
 .light.second.tetrad {
-  --l: 52%;
+  --l: 71.2%;
 }
 .dark.second.tetrad {
-  --l: 12%;
+  --l: 31.2%;
 }
 .bright.second.tetrad {
-  --s: 82.9%;
-  --l: 42%;
+  --s: 88%;
+  --l: 61.2%;
 }
 .dim.second.tetrad {
-  --s: 7.9%;
-  --l: 22%;
+  --s: 38%;
+  --l: 41.2%;
 }
 .third.tetrad {
-  --h: 109.5;
-  --s: 57.9%;
-  --l: 32%;
+  --h: 71.7;
+  --s: 68.1%;
+  --l: 53.4%;
 }
 .light.third.tetrad {
-  --l: 52%;
+  --l: 73.4%;
 }
 .dark.third.tetrad {
-  --l: 12%;
+  --l: 33.4%;
 }
 .bright.third.tetrad {
-  --s: 82.9%;
-  --l: 42%;
+  --s: 93.1%;
+  --l: 63.4%;
 }
 .dim.third.tetrad {
-  --s: 7.9%;
-  --l: 22%;
+  --s: 43.1%;
+  --l: 43.4%;
 }
 .fourth.tetrad {
-  --h: 198.6;
-  --s: 70.8%;
-  --l: 32%;
+  --h: 160.1;
+  --s: 69.6%;
+  --l: 51.1%;
 }
 .light.fourth.tetrad {
-  --l: 52%;
+  --l: 71.1%;
 }
 .dark.fourth.tetrad {
-  --l: 12%;
+  --l: 31.1%;
 }
 .bright.fourth.tetrad {
-  --s: 95.8%;
-  --l: 42%;
+  --s: 94.6%;
+  --l: 61.1%;
 }
 .dim.fourth.tetrad {
-  --s: 20.8%;
-  --l: 22%;
+  --s: 44.6%;
+  --l: 41.1%;
 }
 .warm {
-  background-image: linear-gradient(var(--warm), var(--warm));
+  --a: 0.15;
+  background-image: linear-gradient(rgba(218.89600207, 105.52453813, 112.04086966, var(--a)), rgba(218.89600207, 105.52453813, 112.04086966, var(--a)));
 }
 .cool {
-  background-image: linear-gradient(var(--cool), var(--cool));
+  --a: 0.15;
+  background-image: linear-gradient(rgba(13.4233142, 214.45383482, 215.54811009, var(--a)), rgba(13.4233142, 214.45383482, 215.54811009, var(--a)));
 }
 .neutral {
-  background-image: linear-gradient(var(--neutral), var(--neutral));
+  --a: 0.15;
+  background-image: linear-gradient(rgba(48.76156514, 145.73661905, 208.21093263, var(--a)), rgba(48.76156514, 145.73661905, 208.21093263, var(--a)));
 }
 .dull {
-  background-image: linear-gradient(var(--dull), var(--dull));
+  --a: 0.15;
+  background-image: linear-gradient(rgba(130.5, 130.5, 130.5, var(--a)), rgba(130.5, 130.5, 130.5, var(--a)));
 }
 </textarea>
           <button class="dark red" onclick="copyCSS()">Copy to clipboard</button>
@@ -3601,7 +3625,7 @@ button:active {
           <h5>or put this in &lt;head&gt;</h5>
           <textarea readonly name="" class="full-width no-padding-bottom force black monospace text-padding no-margin" id="html_textarea" cols="30" rows="10">&lt;style&gt;
 :root {
-  --font-size-base: 18px;
+  --font-size-base: 16px;
   --font-size: calc(var(--font-size-base) * var(--font-size-mod));
   --font-size-mod: 1;
   --font-family: var(--sans-serif);
@@ -3617,21 +3641,22 @@ button:active {
   --gap: var(--spacer);
   --grid-columns: 12;
   --golden: 1.618;
-  --h: 239.6;
-  --s: 82.6%;
-  --l: 97%;
+  --h: 190.7;
+  --s: 96.3%;
+  --l: 97.5%;
+  --a: 0.16;
   --border-width: 1px;
   --border-style: solid;
   --border-radius: 0.5em;
   --border-h: var(--h);
   --border-s: var(--s);
-  --border-l: clamp(0%, calc(var(--l) * 0.35), 25%);
+  --border-l: clamp(0%, calc(var(--l) * 0.5), 35%);
   --border-color: hsl(var(--border-h), var(--border-s), var(--border-l));
   --border: var(--border-width) var(--border-style) var(--border-color);
   --border-thin: calc(var(--border-width) / 2);
   --border-thick: calc(var(--border-width) * 2);
   --border-radius: var(--text-padding);
-  --text-measure: 52;
+  --text-measure: 48;
   --text-width: calc(var(--text-measure) * 0.6rem);
   --card-width: calc(var(--text-width) / var(--golden));
   --page-width: calc(var(--text-width) * var(--golden));
@@ -3639,14 +3664,14 @@ button:active {
   --box-shadow: var(--shadow-position) var(--shadow-position) var(--shadow-blur) var(--shadow-color);
   --shadow-position: 1px;
   --shadow-blur: 1px;
-  --shadow-color: rgba(4, 4, 33, 0.2);
+  --shadow-color: rgba(6, 30, 35, 0.2);
   --direction: 180deg;
-  --white: #f1f1fe;
-  --black: #040421;
-  --warm: rgba(200, 61, 102, 0.25);
-  --cool: rgba(10, 147, 177, 0.2);
-  --neutral: rgba(30, 31, 167, 0.15);
-  --dull: rgba(103, 103, 103, 0.3);
+  --white: #f2fdff;
+  --black: #061e23;
+  --warm: rgba(218.89600207, 105.52453813, 112.04086966, var(--a));
+  --cool: rgba(13.4233142, 214.45383482, 215.54811009, var(--a));
+  --neutral: rgba(48.76156514, 145.73661905, 208.21093263, var(--a));
+  --dull: rgba(130.5, 130.5, 130.5, var(--a));
   --monospace: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, "DejaVu Sans Mono", Courier, monospace;
   --serif: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "Droid Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
   --sans-serif: "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, sans-serif;
@@ -3658,25 +3683,25 @@ button:active {
     --padding: calc(0.6 * var(--spacer));
     --margin: calc(0.6 * var(--margin-base));
     --gutter: calc(1.2 * var(--margin-base));
-    --font-size-base: calc(18px - 2);
+    --font-size-base: calc(16px - 2);
     --headline-base: 1em;
   }
 }
-@media screen and (min-width: 33.2rem) {
+@media screen and (min-width: 48.08rem) {
   :root {
     --padding: calc(0.8 * var(--spacer));
     --margin: calc(0.8 * var(--margin-base));
     --gutter: calc(1.6 * var(--margin-base));
-    --font-size-base: calc(18px - 1);
+    --font-size-base: calc(16px - 1);
     --headline-base: 1.1em;
   }
 }
-@media screen and (min-width: 51.92rem) {
+@media screen and (min-width: 75.728rem) {
   :root {
     --padding: calc(1 * var(--spacer));
     --margin: calc(1 * var(--margin-base));
     --gutter: calc(2 * var(--margin-base));
-    --font-size-base: 18px;
+    --font-size-base: 16px;
     --headline-base: 1.2em;
   }
 }
@@ -4126,8 +4151,7 @@ button:active {
   color: transparent;
 }
 .small {
-  font-size: 87.5%;
-  line-height: calc(var(--line-height) * 0.875);
+  --font-size-mod: 0.9;
 }
 .medium {
   font-size: var(--font-size);
@@ -4137,7 +4161,7 @@ button:active {
   --font-size-mod: 1.25;
 }
 .huge {
-  --font-size-mod: 1.4;
+  --font-size-mod: 1.5;
 }
 .vertical-center,
 .center-vertical {
@@ -4189,24 +4213,31 @@ button:active {
 }
 .shade,
 .white,
+.light.red,
 .orange,
 .yellow,
-.light.green,
-.bright.green,
-.light.teal,
-.bright.teal,
+.green,
+.teal,
 .cyan,
+.light.blue,
+.light.purple,
 .light.magenta,
 .light.gray,
+.bright.gray,
+.light.base-color,
+.bright.base-color,
 .light.complement,
 .bright.complement,
-.light.second.split,
-.bright.second.split,
-.light.third.triad,
-.bright.third.triad,
-.light.third.tetrad,
-.bright.third.tetrad,
-.light.fourth.tetrad,
+.light.accent,
+.second.accent,
+.light.split,
+.second.split,
+.light.triad,
+.third.triad,
+.light.tetrad,
+.light.second.tetrad,
+.third.tetrad,
+.fourth.tetrad,
 .light.second.triad,
 .bright.second.triad {
   color: var(--black);
@@ -4221,12 +4252,11 @@ button:active {
 .red,
 .dark.orange,
 .dim.orange,
-.dark.yellow,
-.dim.yellow,
-.green,
-.teal,
+.dark.green,
+.dim.green,
+.dark.teal,
+.dim.teal,
 .dark.cyan,
-.dim.cyan,
 .blue,
 .purple,
 .magenta,
@@ -4234,15 +4264,19 @@ button:active {
 .base-color,
 .complement,
 .accent,
-.second.accent,
+.dark.second.accent,
+.dim.second.accent,
 .split,
-.second.split,
+.dark.second.split,
+.dim.second.split,
 .triad,
-.third.triad,
+.dark.third.triad,
+.dim.third.triad,
 .tetrad,
 .second.tetrad,
-.third.tetrad,
-.fourth.tetrad,
+.dark.third.tetrad,
+.dark.fourth.tetrad,
+.dim.fourth.tetrad,
 .second.triad {
   color: var(--white);
   background-color: hsl(var(--h), var(--s), var(--l));
@@ -4464,7 +4498,7 @@ button:active {
     display: grid;
   }
 }
-@media screen and (min-width: 33.2rem) {
+@media screen and (min-width: 48.08rem) {
   .grid.mobile,
   .two-column.mobile,
   .three-column.mobile {
@@ -4476,14 +4510,14 @@ button:active {
 .three-column.mobile.tablet {
   display: grid;
 }
-@media screen and (min-width: 33.2rem) {
+@media screen and (min-width: 48.08rem) {
   .grid.mobile.tablet,
   .two-column.mobile.tablet,
   .three-column.mobile.tablet {
     display: grid;
   }
 }
-@media screen and (min-width: 51.92rem) {
+@media screen and (min-width: 75.728rem) {
   .grid.mobile.tablet,
   .two-column.mobile.tablet,
   .three-column.mobile.tablet {
@@ -4495,7 +4529,7 @@ button:active {
 .three-column.tablet {
   display: initial;
 }
-@media screen and (min-width: 33.2rem) {
+@media screen and (min-width: 48.08rem) {
   .grid.tablet,
   .two-column.tablet,
   .three-column.tablet {
@@ -4507,7 +4541,7 @@ button:active {
 .three-column.desktop {
   display: initial;
 }
-@media screen and (min-width: 51.92rem) {
+@media screen and (min-width: 75.728rem) {
   .grid.desktop,
   .two-column.desktop,
   .three-column.desktop {
@@ -4604,7 +4638,7 @@ button:active {
 .card-width {
   max-width: var(--card-width);
 }
-@media screen and (min-width: 33.2rem) {
+@media screen and (min-width: 48.08rem) {
   .text-width {
     max-width: var(--text-width);
   }
@@ -4638,7 +4672,7 @@ button:active {
   padding-left: calc(50% - ((var(--card-width) * 0.5) + var(--spacer)));
   padding-right: calc(50% - ((var(--card-width) * 0.5) + var(--spacer)));
 }
-@media screen and (min-width: 33.2rem) {
+@media screen and (min-width: 48.08rem) {
   .inner-text-width {
     padding-left: calc(50% - (var(--text-width) * 0.5));
     padding-right: calc(50% - (var(--text-width) * 0.5));
@@ -4648,7 +4682,7 @@ button:active {
     padding-right: calc(50% - (var(--text-width) * 0.5) + var(--spacer));
   }
 }
-@media screen and (min-width: 51.92rem) {
+@media screen and (min-width: 75.728rem) {
   .inner-page-width {
     padding-left: calc(50% - (var(--page-width) * 0.5));
     padding-right: calc(50% - (var(--page-width) * 0.5));
@@ -4678,7 +4712,7 @@ button:active {
 .hide.mobile {
   display: none;
 }
-@media screen and (min-width: 33.2rem) {
+@media screen and (min-width: 48.08rem) {
   .hide.mobile {
     display: initial;
   }
@@ -4686,7 +4720,7 @@ button:active {
     display: none;
   }
 }
-@media screen and (min-width: 51.92rem) {
+@media screen and (min-width: 75.728rem) {
   .hide.desktop {
     display: none;
   }
@@ -4706,7 +4740,7 @@ button:active {
 .fixed.mobile {
   position: fixed;
 }
-@media screen and (min-width: 33.2rem) {
+@media screen and (min-width: 48.08rem) {
   .fixed.mobile {
     position: initial;
   }
@@ -4714,7 +4748,7 @@ button:active {
     position: fixed;
   }
 }
-@media screen and (min-width: 51.92rem) {
+@media screen and (min-width: 75.728rem) {
   .fixed.desktop {
     position: fixed;
   }
@@ -4855,477 +4889,481 @@ button:active {
   column-gap: 0;
 }
 .white {
-  --h: 239.6;
-  --s: 82.6%;
-  --l: 97%;
+  --h: 190.7;
+  --s: 96.3%;
+  --l: 97.5%;
 }
 .light.white {
   --l: 100%;
 }
 .dark.white {
-  --l: 77%;
+  --l: 77.5%;
 }
 .bright.white {
   --s: 0%;
   --l: 100%;
 }
 .dim.white {
-  --s: 32.6%;
-  --l: 87%;
+  --s: 71.3%;
+  --l: 87.5%;
 }
 .black {
-  --h: 239.6;
-  --s: 80.2%;
-  --l: 7.1%;
+  --h: 190.7;
+  --s: 69%;
+  --l: 8.2%;
 }
 .light.black {
-  --l: 27.1%;
+  --l: 28.2%;
 }
 .dark.black {
   --l: 0%;
 }
 .bright.black {
-  --s: 100%;
-  --l: 17.1%;
+  --s: 94%;
+  --l: 18.2%;
 }
 .dim.black {
   --s: 0%;
   --l: 0%;
 }
 .red {
-  --h: 346.8;
-  --s: 88.6%;
-  --l: 40.9%;
+  --h: 357.8;
+  --s: 75.8%;
+  --l: 48.7%;
 }
 .light.red {
-  --l: 60.9%;
+  --l: 68.7%;
 }
 .dark.red {
-  --l: 20.9%;
+  --l: 28.7%;
 }
 .bright.red {
   --s: 100%;
-  --l: 50.9%;
+  --l: 58.7%;
 }
 .dim.red {
-  --s: 38.6%;
-  --l: 30.9%;
+  --s: 50.8%;
+  --l: 38.7%;
 }
 .orange {
-  --h: 37.9;
-  --s: 91.9%;
-  --l: 50.1%;
+  --h: 39.8;
+  --s: 93.5%;
+  --l: 50.8%;
 }
 .light.orange {
-  --l: 70.1%;
+  --l: 70.8%;
 }
 .dark.orange {
-  --l: 30.1%;
+  --l: 30.8%;
 }
 .bright.orange {
   --s: 100%;
-  --l: 60.1%;
+  --l: 60.8%;
 }
 .dim.orange {
-  --s: 41.9%;
-  --l: 40.1%;
+  --s: 68.5%;
+  --l: 40.8%;
 }
 .yellow {
-  --h: 60.1;
-  --s: 84.4%;
-  --l: 50.2%;
+  --h: 64.1;
+  --s: 99.9%;
+  --l: 54.7%;
 }
 .light.yellow {
-  --l: 70.2%;
+  --l: 74.7%;
 }
 .dark.yellow {
-  --l: 30.2%;
+  --l: 34.7%;
 }
 .bright.yellow {
   --s: 100%;
-  --l: 60.2%;
+  --l: 64.7%;
 }
 .dim.yellow {
-  --s: 34.4%;
-  --l: 40.2%;
+  --s: 74.9%;
+  --l: 44.7%;
 }
 .green {
-  --h: 136.2;
-  --s: 100%;
-  --l: 22.2%;
+  --h: 135.2;
+  --s: 62%;
+  --l: 42.1%;
 }
 .light.green {
-  --l: 42.2%;
+  --l: 62.1%;
 }
 .dark.green {
-  --l: 2.2%;
+  --l: 22.1%;
 }
 .bright.green {
-  --s: 100%;
-  --l: 32.2%;
+  --s: 87%;
+  --l: 52.1%;
 }
 .dim.green {
-  --s: 50%;
-  --l: 12.2%;
+  --s: 37%;
+  --l: 32.1%;
 }
 .teal {
-  --h: 184.6;
-  --s: 100%;
-  --l: 26.1%;
+  --h: 180.6;
+  --s: 57.2%;
+  --l: 43.4%;
 }
 .light.teal {
-  --l: 46.1%;
+  --l: 63.4%;
 }
 .dark.teal {
-  --l: 6.1%;
+  --l: 23.4%;
 }
 .bright.teal {
-  --s: 100%;
-  --l: 36.1%;
+  --s: 82.2%;
+  --l: 53.4%;
 }
 .dim.teal {
-  --s: 50%;
-  --l: 16.1%;
+  --s: 32.2%;
+  --l: 33.4%;
 }
 .cyan {
-  --h: 187.6;
-  --s: 90.3%;
-  --l: 49.9%;
+  --h: 180.2;
+  --s: 90.4%;
+  --l: 50.1%;
 }
 .light.cyan {
-  --l: 69.9%;
+  --l: 70.1%;
 }
 .dark.cyan {
-  --l: 29.9%;
+  --l: 30.1%;
 }
 .bright.cyan {
   --s: 100%;
-  --l: 59.9%;
+  --l: 60.1%;
 }
 .dim.cyan {
-  --s: 40.3%;
-  --l: 39.9%;
+  --s: 65.4%;
+  --l: 40.1%;
 }
 .blue {
-  --h: 240;
-  --s: 89.3%;
-  --l: 49.4%;
+  --h: 230;
+  --s: 95.8%;
+  --l: 59.4%;
 }
 .light.blue {
-  --l: 69.4%;
+  --l: 79.4%;
 }
 .dark.blue {
-  --l: 29.4%;
+  --l: 39.4%;
 }
 .bright.blue {
   --s: 100%;
-  --l: 59.4%;
+  --l: 69.4%;
 }
 .dim.blue {
-  --s: 39.3%;
-  --l: 39.4%;
+  --s: 70.8%;
+  --l: 49.4%;
 }
 .purple {
-  --h: 287.4;
-  --s: 100%;
-  --l: 28.1%;
+  --h: 285.4;
+  --s: 50.1%;
+  --l: 45.3%;
 }
 .light.purple {
-  --l: 48.1%;
+  --l: 65.3%;
 }
 .dark.purple {
-  --l: 8.1%;
+  --l: 25.3%;
 }
 .bright.purple {
-  --s: 100%;
-  --l: 38.1%;
+  --s: 75.1%;
+  --l: 55.3%;
 }
 .dim.purple {
-  --s: 50%;
-  --l: 18.1%;
+  --s: 25.1%;
+  --l: 35.3%;
 }
 .magenta {
-  --h: 289.2;
-  --s: 88.4%;
-  --l: 48.7%;
+  --h: 289.4;
+  --s: 82.5%;
+  --l: 55.6%;
 }
 .light.magenta {
-  --l: 68.7%;
+  --l: 75.6%;
 }
 .dark.magenta {
-  --l: 28.7%;
+  --l: 35.6%;
 }
 .bright.magenta {
   --s: 100%;
-  --l: 58.7%;
+  --l: 65.6%;
 }
 .dim.magenta {
-  --s: 38.4%;
-  --l: 38.7%;
+  --s: 57.5%;
+  --l: 45.6%;
 }
 .gray {
-  --h: 239.8;
-  --s: 4.1%;
-  --l: 50.2%;
+  --h: 190.7;
+  --s: 4%;
+  --l: 50.6%;
 }
 .light.gray {
-  --l: 70.2%;
+  --l: 70.6%;
 }
 .dark.gray {
-  --l: 30.2%;
+  --l: 30.6%;
 }
 .bright.gray {
-  --s: 29.1%;
-  --l: 60.2%;
+  --s: 29%;
+  --l: 60.6%;
 }
 .dim.gray {
   --s: 0%;
-  --l: 40.2%;
+  --l: 40.6%;
 }
 .base-color {
-  --h: 239.6;
-  --s: 68.8%;
-  --l: 40.2%;
+  --h: 203.5;
+  --s: 68.7%;
+  --l: 51.2%;
 }
 .light.base-color {
-  --l: 60.2%;
+  --l: 71.2%;
 }
 .dark.base-color {
-  --l: 20.2%;
+  --l: 31.2%;
 }
 .bright.base-color {
-  --s: 93.8%;
-  --l: 50.2%;
+  --s: 93.7%;
+  --l: 61.2%;
 }
 .dim.base-color {
-  --s: 18.8%;
-  --l: 30.2%;
+  --s: 43.7%;
+  --l: 41.2%;
 }
 .complement,
 .second.triad {
-  --h: 59.6;
-  --s: 57.9%;
-  --l: 32%;
+  --h: 24.1;
+  --s: 62.5%;
+  --l: 51.8%;
 }
 .light.complement,
 .light.second.triad {
-  --l: 52%;
+  --l: 71.8%;
 }
 .dark.complement,
 .dark.second.triad {
-  --l: 12%;
+  --l: 31.8%;
 }
 .bright.complement,
 .bright.second.triad {
-  --s: 82.9%;
-  --l: 42%;
+  --s: 87.5%;
+  --l: 61.8%;
 }
 .dim.complement,
 .dim.second.triad {
-  --s: 7.9%;
-  --l: 22%;
-}
-.accent {
-  --h: 266.9;
-  --s: 70.7%;
-  --l: 32%;
-}
-.light.accent {
-  --l: 52%;
-}
-.dark.accent {
-  --l: 12%;
-}
-.bright.accent {
-  --s: 95.7%;
-  --l: 42%;
-}
-.dim.accent {
-  --s: 20.7%;
-  --l: 22%;
-}
-.second.accent {
-  --h: 212.3;
-  --s: 70.8%;
-  --l: 32%;
-}
-.light.second.accent {
-  --l: 52%;
-}
-.dark.second.accent {
-  --l: 12%;
-}
-.bright.second.accent {
-  --s: 95.8%;
-  --l: 42%;
-}
-.dim.second.accent {
-  --s: 20.8%;
-  --l: 22%;
-}
-.split {
-  --h: 323.6;
-  --s: 68.8%;
-  --l: 30%;
-}
-.light.split {
-  --l: 50%;
-}
-.dark.split {
-  --l: 10%;
-}
-.bright.split {
-  --s: 93.8%;
-  --l: 40%;
-}
-.dim.split {
-  --s: 18.8%;
-  --l: 20%;
-}
-.second.split {
-  --h: 155.5;
-  --s: 68.8%;
-  --l: 30%;
-}
-.light.second.split {
-  --l: 50%;
-}
-.dark.second.split {
-  --l: 10%;
-}
-.bright.second.split {
-  --s: 93.8%;
-  --l: 40%;
-}
-.dim.second.split {
-  --s: 18.8%;
-  --l: 20%;
-}
-.triad {
-  --h: 294.2;
-  --s: 70.7%;
-  --l: 32%;
-}
-.light.triad {
-  --l: 52%;
-}
-.dark.triad {
-  --l: 12%;
-}
-.bright.triad {
-  --s: 95.7%;
-  --l: 42%;
-}
-.dim.triad {
-  --s: 20.7%;
-  --l: 22%;
-}
-.third.triad {
-  --h: 185;
-  --s: 70.6%;
-  --l: 31.8%;
-}
-.light.third.triad {
-  --l: 51.8%;
-}
-.dark.third.triad {
-  --l: 11.8%;
-}
-.bright.third.triad {
-  --s: 95.6%;
+  --s: 37.5%;
   --l: 41.8%;
 }
+.accent {
+  --h: 230.9;
+  --s: 70.1%;
+  --l: 51.3%;
+}
+.light.accent {
+  --l: 71.3%;
+}
+.dark.accent {
+  --l: 31.3%;
+}
+.bright.accent {
+  --s: 95.1%;
+  --l: 61.3%;
+}
+.dim.accent {
+  --s: 45.1%;
+  --l: 41.3%;
+}
+.second.accent {
+  --h: 174.1;
+  --s: 69.8%;
+  --l: 51.2%;
+}
+.light.second.accent {
+  --l: 71.2%;
+}
+.dark.second.accent {
+  --l: 31.2%;
+}
+.bright.second.accent {
+  --s: 94.8%;
+  --l: 61.2%;
+}
+.dim.second.accent {
+  --s: 44.8%;
+  --l: 41.2%;
+}
+.split {
+  --h: 290.3;
+  --s: 68.9%;
+  --l: 52.9%;
+}
+.light.split {
+  --l: 72.9%;
+}
+.dark.split {
+  --l: 32.9%;
+}
+.bright.split {
+  --s: 93.9%;
+  --l: 62.9%;
+}
+.dim.split {
+  --s: 43.9%;
+  --l: 42.9%;
+}
+.second.split {
+  --h: 117.7;
+  --s: 68.1%;
+  --l: 53.4%;
+}
+.light.second.split {
+  --l: 73.4%;
+}
+.dark.second.split {
+  --l: 33.4%;
+}
+.bright.second.split {
+  --s: 93.1%;
+  --l: 63.4%;
+}
+.dim.second.split {
+  --s: 43.1%;
+  --l: 43.4%;
+}
+.triad {
+  --h: 260.4;
+  --s: 68.9%;
+  --l: 52.9%;
+}
+.light.triad {
+  --l: 72.9%;
+}
+.dark.triad {
+  --l: 32.9%;
+}
+.bright.triad {
+  --s: 93.9%;
+  --l: 62.9%;
+}
+.dim.triad {
+  --s: 43.9%;
+  --l: 42.9%;
+}
+.third.triad {
+  --h: 146;
+  --s: 69.6%;
+  --l: 51.1%;
+}
+.light.third.triad {
+  --l: 71.1%;
+}
+.dark.third.triad {
+  --l: 31.1%;
+}
+.bright.third.triad {
+  --s: 94.6%;
+  --l: 61.1%;
+}
 .dim.third.triad {
-  --s: 20.6%;
-  --l: 21.8%;
+  --s: 44.6%;
+  --l: 41.1%;
 }
 .tetrad {
-  --h: 280.6;
-  --s: 70.7%;
-  --l: 32%;
+  --h: 245.4;
+  --s: 68.9%;
+  --l: 52.9%;
 }
 .light.tetrad {
-  --l: 52%;
+  --l: 72.9%;
 }
 .dark.tetrad {
-  --l: 12%;
+  --l: 32.9%;
 }
 .bright.tetrad {
-  --s: 95.7%;
-  --l: 42%;
+  --s: 93.9%;
+  --l: 62.9%;
 }
 .dim.tetrad {
-  --s: 20.7%;
-  --l: 22%;
+  --s: 43.9%;
+  --l: 42.9%;
 }
 .second.tetrad {
-  --h: 9.5;
-  --s: 57.9%;
-  --l: 32%;
+  --h: 336.6;
+  --s: 63%;
+  --l: 51.2%;
 }
 .light.second.tetrad {
-  --l: 52%;
+  --l: 71.2%;
 }
 .dark.second.tetrad {
-  --l: 12%;
+  --l: 31.2%;
 }
 .bright.second.tetrad {
-  --s: 82.9%;
-  --l: 42%;
+  --s: 88%;
+  --l: 61.2%;
 }
 .dim.second.tetrad {
-  --s: 7.9%;
-  --l: 22%;
+  --s: 38%;
+  --l: 41.2%;
 }
 .third.tetrad {
-  --h: 109.5;
-  --s: 57.9%;
-  --l: 32%;
+  --h: 71.7;
+  --s: 68.1%;
+  --l: 53.4%;
 }
 .light.third.tetrad {
-  --l: 52%;
+  --l: 73.4%;
 }
 .dark.third.tetrad {
-  --l: 12%;
+  --l: 33.4%;
 }
 .bright.third.tetrad {
-  --s: 82.9%;
-  --l: 42%;
+  --s: 93.1%;
+  --l: 63.4%;
 }
 .dim.third.tetrad {
-  --s: 7.9%;
-  --l: 22%;
+  --s: 43.1%;
+  --l: 43.4%;
 }
 .fourth.tetrad {
-  --h: 198.6;
-  --s: 70.8%;
-  --l: 32%;
+  --h: 160.1;
+  --s: 69.6%;
+  --l: 51.1%;
 }
 .light.fourth.tetrad {
-  --l: 52%;
+  --l: 71.1%;
 }
 .dark.fourth.tetrad {
-  --l: 12%;
+  --l: 31.1%;
 }
 .bright.fourth.tetrad {
-  --s: 95.8%;
-  --l: 42%;
+  --s: 94.6%;
+  --l: 61.1%;
 }
 .dim.fourth.tetrad {
-  --s: 20.8%;
-  --l: 22%;
+  --s: 44.6%;
+  --l: 41.1%;
 }
 .warm {
-  background-image: linear-gradient(var(--warm), var(--warm));
+  --a: 0.15;
+  background-image: linear-gradient(rgba(218.89600207, 105.52453813, 112.04086966, var(--a)), rgba(218.89600207, 105.52453813, 112.04086966, var(--a)));
 }
 .cool {
-  background-image: linear-gradient(var(--cool), var(--cool));
+  --a: 0.15;
+  background-image: linear-gradient(rgba(13.4233142, 214.45383482, 215.54811009, var(--a)), rgba(13.4233142, 214.45383482, 215.54811009, var(--a)));
 }
 .neutral {
-  background-image: linear-gradient(var(--neutral), var(--neutral));
+  --a: 0.15;
+  background-image: linear-gradient(rgba(48.76156514, 145.73661905, 208.21093263, var(--a)), rgba(48.76156514, 145.73661905, 208.21093263, var(--a)));
 }
 .dull {
-  background-image: linear-gradient(var(--dull), var(--dull));
+  --a: 0.15;
+  background-image: linear-gradient(rgba(130.5, 130.5, 130.5, var(--a)), rgba(130.5, 130.5, 130.5, var(--a)));
 }
 &lt;/style&gt;</textarea>
           <button class="dark red" onclick="copyHTML()">Copy to clipboard</button>
@@ -5333,24 +5371,25 @@ button:active {
         </div>
         <div class="inner-text-width margin-bottom">
           <h5>or compile this Less</h5>
-          <textarea readonly name="" class="full-width no-padding-bottom force black monospace text-padding no-margin" id="less_textarea" cols="30" rows="10">@base-color: #2021AD;
+          <textarea readonly name="" class="full-width no-padding-bottom force black monospace text-padding no-margin" id="less_textarea" cols="30" rows="10">@base-color: #2d95d8;
 @ambient-mix: 95%;
-@font-size: 18px;
+@font-size: 16px;
 @font-family: var(--sans-serif);
-@text-base: 52;
+@text-base: 48;
 @padding: 1rem;
 @margin: @padding;
 @gutter: @padding * 2;
 @line-height: 1.8;
 @lighten-by: 20%;
 @darken-by: 20%;@mobile: @card-width + @gutter;
-@tablet: @text-width + @gutter;
-@desktop: @page-width + @gutter;
-@text-width: 52 * .6rem;
+@tablet: @page-width + @gutter;
+@desktop: @feature-width + @gutter;
+@text-width: @text-base * .6rem;
 @card-width: @text-width * .6;
 @page-width: @text-width * 1.6;
-@font-size-mobile: @font-size - 1;
-@font-size-desktop: @font-size + 1;
+@feature-width: @page-width * 1.6;
+@font-size-mobile: calc(@font-size - 1);
+@font-size-desktop: calc(@font-size + 1);
 
 :root {
     --font-size-base: @font-size;
@@ -5372,12 +5411,13 @@ button:active {
     --h: round(hue(@white), 1);
     --s: round(saturation(@white), 1);
     --l: round(lightness(@white), 1);
+    --a: .16;
     --border-width: 1px;
     --border-style: solid;
     --border-radius: .5em;
     --border-h: var(--h);
     --border-s: var(--s);
-    --border-l: clamp(0%, calc(var(--l) * .35), 25%);
+    --border-l: clamp(0%, calc(var(--l) * .5), 35%);
     --border-color: hsl(var(--border-h), var(--border-s), var(--border-l));
     --border: var(--border-width) var(--border-style) var(--border-color);
     --border-thin: calc(var(--border-width) / 2);
@@ -5395,10 +5435,10 @@ button:active {
     --direction: 180deg;
     --white: @white;
     --black: @black;
-    --warm: @warm-gradient;
-    --cool: @cool-gradient;
-    --neutral: @neutral-gradient;
-    --dull: @dull-gradient;
+    --warm: @warm-rgba;
+    --cool: @cool-rgba;
+    --neutral: @neutral-rgba;
+    --dull: @dull-rgba;
     --monospace: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, "DejaVu Sans Mono", Courier, monospace;
     --serif: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "Droid Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
     --sans-serif: "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, sans-serif;
@@ -5872,8 +5912,7 @@ pre > code {
 }
 
 .small {
-  font-size: 87.5%;
-  line-height: calc(var(--line-height) * .875);
+  --font-size-mod: .9;
 }
 
 .medium {
@@ -5886,7 +5925,7 @@ pre > code {
 }
 
 .huge {
-  --font-size-mod: 1.4;
+  --font-size-mod: 1.5;
 }
 
 .vertical-center, .center-vertical { 
@@ -6578,18 +6617,18 @@ grid-column: auto / span 12;
 
 @rep-color: .set-rep-color()[];
 
-@accent-str: 50%;
+@accent-str: 0%;
 @white: mix(white, @ambient, 94%);
 @black: mix(black, @ambient, 86%);
 @ambient: softlight(screen(@base-color, @base-color), @base-color);
-@red: .set-color(~"red", rgb(233, 14, 14), (1/2), .85)[];
+@red: .set-color(~"red", rgb(233, 14, 14), (1/2), .95)[];
 @orange: .set-color(~"orange", orange, (1/12), 1)[];
 @yellow: .set-color(~"yellow", yellow, (1/6), .95)[];
-@green: .set-color(~"green", green, (1/2), .9)[];
-@teal: .set-color(~"teal", teal, (1/3))[];
+@green: .set-color(~"green", rgb(45, 165, 45), (1/2), .9)[];
+@teal: .set-color(~"teal", rgb(49, 170, 170), (1/3))[];
 @cyan: .set-color(~"cyan", rgb(14, 241, 241), (1/2), .9)[];
-@blue: .set-color(~"blue", rgb(16, 16, 236), (1/2), .85)[];
-@purple: .set-color(~"purple", purple, (1/2), .9)[];
+@blue: .set-color(~"blue", rgb(60, 60, 250), (1/2), .85)[];
+@purple: .set-color(~"purple", rgb(160, 36, 160), (1/2), .9)[];
 @magenta: .set-color(~"magenta", rgb(231, 17, 231), (7/8), .85)[];
 @gray: .set-color(~"gray", gray, (1/6))[];
 @action: @base-color;
@@ -6602,37 +6641,37 @@ grid-column: auto / span 12;
 @default-base: average(@action, @gray);
 @default: .set-color(~"default", @default-base, .5)[];
 
-@accent-base: .set-lumafix(spin(@rep-color, 30), @rep-color, @accent-str)[];
+@accent-base: spin(@rep-color, 30);
 @accent: .set-color(accent, @accent-base, 0, 1)[];
 
-@inverted-accent-base: .set-lumafix(spin(@rep-color, -30), @rep-color, @accent-str)[];
+@inverted-accent-base: spin(@rep-color, -30);
 @inverted-accent: .set-color(accent, @inverted-accent-base, 0, 1)[];
 
-@complement-base: .set-lumafix(spin(@rep-color, 180), @rep-color, @accent-str)[];
+@complement-base: spin(@rep-color, 180);
 @complement: .set-color(complement, @complement-base, (1/2), 1)[];
 
-@split-base: .set-lumafix(spin(@rep-color, 90), @rep-color, @accent-str)[];
+@split-base: spin(@rep-color, 90);
 @split: .set-color(split, @split-base, (1/2), 1)[];
 
-@inverted-split-base: .set-lumafix(spin(@rep-color, -90), @rep-color, @accent-str)[];
+@inverted-split-base: spin(@rep-color, -90);
 @inverted-split: .set-color(inverted-split, @inverted-split-base, (1/2), 1)[];
 
-@tetrad-base: .set-lumafix(spin(@rep-color, 45), @rep-color, @accent-str)[];
+@tetrad-base: spin(@rep-color, 45);
 @tetrad: .set-color(tetrad, @tetrad-base, (1/2), 1)[];
 
-@second-tetrad-base: .set-lumafix(spin(@rep-color, 135), @rep-color, @accent-str)[];
+@second-tetrad-base: spin(@rep-color, 135);
 @second-tetrad: .set-color(second-tetrad, @second-tetrad-base, (1/2), 1)[];
 
-@third-tetrad-base: .set-lumafix(spin(@rep-color, -135), @rep-color, @accent-str)[];
+@third-tetrad-base: spin(@rep-color, -135);
 @third-tetrad: .set-color(third-tetrad, @third-tetrad-base, (1/2), 1)[];
 
-@fourth-tetrad-base: .set-lumafix(spin(@rep-color, -45), @rep-color, @accent-str)[];
+@fourth-tetrad-base: spin(@rep-color, -45);
 @fourth-tetrad: .set-color(fourth-tetrad, @fourth-tetrad-base, (1/2), 1)[];
 
-@triad-base: .set-lumafix(spin(@rep-color, 60), @rep-color, @accent-str)[];
+@triad-base: spin(@rep-color, 60);
 @triad: .set-color(triad, @triad-base, (1/2), 1)[];
 
-@third-triad-base: .set-lumafix(spin(@rep-color, -60), @rep-color, @accent-str)[];
+@third-triad-base: spin(@rep-color, -60);
 @third-triad: .set-color(third-triad, @third-triad-base, (1/2), 1)[];
 
 .white { .color-helpers(@white);}
@@ -6663,13 +6702,11 @@ grid-column: auto / span 12;
 
 .color-helpers(@color) {
     
-    @effect: 100%;
-
-    @brightened: mix(saturate(lighten(@color, (@lighten-by*.5)), 25%), @color, @effect);
-    @dimmed: mix(desaturate(darken(@color, (@darken-by*.5)), 50%), @color, @effect);
+    @brightened: saturate(lighten(@color, (@lighten-by*.5)), 25%);
+    @dimmed: desaturate(darken(@color, (@darken-by*.5)), 25%);
     
-    @lightened: mix(lighten(@color, @lighten-by), @color, @effect);
-    @darkened: mix(darken(@color, @darken-by), @color, @effect);
+    @lightened: lighten(@color, @lighten-by);
+    @darkened: darken(@color, @darken-by);
     
     @base-contrast-ceiling: .set-contrast-ratio(@color, @white)[];
     @border-color: .set-lumafix(@color, @black, 75%)[];
@@ -6734,11 +6771,13 @@ grid-column: auto / span 12;
 @warm-base: .set-warm-base()[];
 @warm-lumafix: .set-lumafix(@warm-base, @base-color, 25%)[];
 @warm: .set-color(~"warm", @warm-lumafix, 0)[];
-@warm-gradient: rgba(red(@warm), green(@warm), blue(@warm), @warm-bg-fill-opacity);
-@warm-bg-fill-opacity: .25;
+@warm-rgba: rgba(red(@warm), green(@warm), blue(@warm), var(--a));
+@warm-bg-fill-opacity: var(--a);
 
 .warm {
-    background-image: linear-gradient(var(--warm), var(--warm));
+    --a: .15;
+    background-image: linear-gradient(rgba(red(@warm), green(@warm), blue(@warm), var(--a)), rgba(red(@warm), green(@warm), blue(@warm), var(--a)));
+
 }
 
 .set-cool-base() when (blue(@base-color) > 128) {
@@ -6752,11 +6791,12 @@ grid-column: auto / span 12;
 @cool-base: .set-cool-base()[];
 @cool-lumafix: .set-lumafix(@cool-base, @base-color, 50%)[];
 @cool: .set-color(~"cool", @cool-lumafix, 0)[];
-@cool-gradient: rgba(red(@cool), green(@cool), blue(@cool), @cool-bg-fill-opacity);
-@cool-bg-fill-opacity: .2;
+@cool-rgba: rgba(red(@cool), green(@cool), blue(@cool), var(--a));
+@cool-bg-fill-opacity: var(--a);
 
 .cool {
-    background-image: linear-gradient(var(--cool), var(--cool));
+    --a: .15;
+    background-image: linear-gradient(rgba(red(@cool), green(@cool), blue(@cool), var(--a)), rgba(red(@cool), green(@cool), blue(@cool), var(--a)));
 }
 
 .set-neutral-base() when (green(@base-color) > 128) {
@@ -6770,20 +6810,22 @@ grid-column: auto / span 12;
 @neutral-base: .set-neutral-base()[];
 @neutral-lumafix: .set-lumafix(@neutral-base, @base-color, 50%)[];
 @neutral: average(@neutral-lumafix, @action);
-@neutral-gradient: rgba(red(@neutral), green(@neutral), blue(@neutral), @neutral-bg-fill-opacity);
-@neutral-bg-fill-opacity: .15;
+@neutral-rgba: rgba(red(@neutral), green(@neutral), blue(@neutral), var(--a));
+@neutral-bg-fill-opacity: var(--a);
 
 .neutral {
-    background-image: linear-gradient(var(--neutral), var(--neutral));
+    --a: .15;
+    background-image: linear-gradient(rgba(red(@neutral), green(@neutral), blue(@neutral), var(--a)), rgba(red(@neutral), green(@neutral), blue(@neutral), var(--a)));
 }
 
 @dull-base: desaturate(@action, 100%);
 @dull: @dull-base;
-@dull-bg-fill-opacity: .3;
-@dull-gradient: rgba(red(@dull), green(@dull), blue(@dull), @dull-bg-fill-opacity);
+@dull-bg-fill-opacity: var(--a);
+@dull-rgba: rgba(red(@dull), green(@dull), blue(@dull), var(--a));
 
 .dull {
-    background-image: linear-gradient(var(--dull), var(--dull));
+    --a: .15;
+    background-image: linear-gradient(rgba(red(@dull), green(@dull), blue(@dull), var(--a)), rgba(red(@dull), green(@dull), blue(@dull), var(--a)));
 }.set-average(@colors) {
   // averages a list of colors
   // sets result to @average
@@ -6906,13 +6948,14 @@ grid-column: auto / span 12;
         <div class="inner-text-width margin-bottom hidden">
           <h5>or compile this HEADLESS Less</h5>
           <textarea readonly name="" class="full-width no-padding-bottom force black monospace text-padding no-margin" id="headless_less_textarea" cols="30" rows="10">@mobile: @card-width + @gutter;
-@tablet: @text-width + @gutter;
-@desktop: @page-width + @gutter;
-@text-width: 52 * .6rem;
+@tablet: @page-width + @gutter;
+@desktop: @feature-width + @gutter;
+@text-width: @text-base * .6rem;
 @card-width: @text-width * .6;
 @page-width: @text-width * 1.6;
-@font-size-mobile: @font-size - 1;
-@font-size-desktop: @font-size + 1;
+@feature-width: @page-width * 1.6;
+@font-size-mobile: calc(@font-size - 1);
+@font-size-desktop: calc(@font-size + 1);
 
 :root {
     --font-size-base: @font-size;
@@ -6934,12 +6977,13 @@ grid-column: auto / span 12;
     --h: round(hue(@white), 1);
     --s: round(saturation(@white), 1);
     --l: round(lightness(@white), 1);
+    --a: .16;
     --border-width: 1px;
     --border-style: solid;
     --border-radius: .5em;
     --border-h: var(--h);
     --border-s: var(--s);
-    --border-l: clamp(0%, calc(var(--l) * .35), 25%);
+    --border-l: clamp(0%, calc(var(--l) * .5), 35%);
     --border-color: hsl(var(--border-h), var(--border-s), var(--border-l));
     --border: var(--border-width) var(--border-style) var(--border-color);
     --border-thin: calc(var(--border-width) / 2);
@@ -6957,10 +7001,10 @@ grid-column: auto / span 12;
     --direction: 180deg;
     --white: @white;
     --black: @black;
-    --warm: @warm-gradient;
-    --cool: @cool-gradient;
-    --neutral: @neutral-gradient;
-    --dull: @dull-gradient;
+    --warm: @warm-rgba;
+    --cool: @cool-rgba;
+    --neutral: @neutral-rgba;
+    --dull: @dull-rgba;
     --monospace: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, "DejaVu Sans Mono", Courier, monospace;
     --serif: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "Droid Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
     --sans-serif: "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, sans-serif;
@@ -7434,8 +7478,7 @@ pre > code {
 }
 
 .small {
-  font-size: 87.5%;
-  line-height: calc(var(--line-height) * .875);
+  --font-size-mod: .9;
 }
 
 .medium {
@@ -7448,7 +7491,7 @@ pre > code {
 }
 
 .huge {
-  --font-size-mod: 1.4;
+  --font-size-mod: 1.5;
 }
 
 .vertical-center, .center-vertical { 
@@ -8140,18 +8183,18 @@ grid-column: auto / span 12;
 
 @rep-color: .set-rep-color()[];
 
-@accent-str: 50%;
+@accent-str: 0%;
 @white: mix(white, @ambient, 94%);
 @black: mix(black, @ambient, 86%);
 @ambient: softlight(screen(@base-color, @base-color), @base-color);
-@red: .set-color(~"red", rgb(233, 14, 14), (1/2), .85)[];
+@red: .set-color(~"red", rgb(233, 14, 14), (1/2), .95)[];
 @orange: .set-color(~"orange", orange, (1/12), 1)[];
 @yellow: .set-color(~"yellow", yellow, (1/6), .95)[];
-@green: .set-color(~"green", green, (1/2), .9)[];
-@teal: .set-color(~"teal", teal, (1/3))[];
+@green: .set-color(~"green", rgb(45, 165, 45), (1/2), .9)[];
+@teal: .set-color(~"teal", rgb(49, 170, 170), (1/3))[];
 @cyan: .set-color(~"cyan", rgb(14, 241, 241), (1/2), .9)[];
-@blue: .set-color(~"blue", rgb(16, 16, 236), (1/2), .85)[];
-@purple: .set-color(~"purple", purple, (1/2), .9)[];
+@blue: .set-color(~"blue", rgb(60, 60, 250), (1/2), .85)[];
+@purple: .set-color(~"purple", rgb(160, 36, 160), (1/2), .9)[];
 @magenta: .set-color(~"magenta", rgb(231, 17, 231), (7/8), .85)[];
 @gray: .set-color(~"gray", gray, (1/6))[];
 @action: @base-color;
@@ -8164,37 +8207,37 @@ grid-column: auto / span 12;
 @default-base: average(@action, @gray);
 @default: .set-color(~"default", @default-base, .5)[];
 
-@accent-base: .set-lumafix(spin(@rep-color, 30), @rep-color, @accent-str)[];
+@accent-base: spin(@rep-color, 30);
 @accent: .set-color(accent, @accent-base, 0, 1)[];
 
-@inverted-accent-base: .set-lumafix(spin(@rep-color, -30), @rep-color, @accent-str)[];
+@inverted-accent-base: spin(@rep-color, -30);
 @inverted-accent: .set-color(accent, @inverted-accent-base, 0, 1)[];
 
-@complement-base: .set-lumafix(spin(@rep-color, 180), @rep-color, @accent-str)[];
+@complement-base: spin(@rep-color, 180);
 @complement: .set-color(complement, @complement-base, (1/2), 1)[];
 
-@split-base: .set-lumafix(spin(@rep-color, 90), @rep-color, @accent-str)[];
+@split-base: spin(@rep-color, 90);
 @split: .set-color(split, @split-base, (1/2), 1)[];
 
-@inverted-split-base: .set-lumafix(spin(@rep-color, -90), @rep-color, @accent-str)[];
+@inverted-split-base: spin(@rep-color, -90);
 @inverted-split: .set-color(inverted-split, @inverted-split-base, (1/2), 1)[];
 
-@tetrad-base: .set-lumafix(spin(@rep-color, 45), @rep-color, @accent-str)[];
+@tetrad-base: spin(@rep-color, 45);
 @tetrad: .set-color(tetrad, @tetrad-base, (1/2), 1)[];
 
-@second-tetrad-base: .set-lumafix(spin(@rep-color, 135), @rep-color, @accent-str)[];
+@second-tetrad-base: spin(@rep-color, 135);
 @second-tetrad: .set-color(second-tetrad, @second-tetrad-base, (1/2), 1)[];
 
-@third-tetrad-base: .set-lumafix(spin(@rep-color, -135), @rep-color, @accent-str)[];
+@third-tetrad-base: spin(@rep-color, -135);
 @third-tetrad: .set-color(third-tetrad, @third-tetrad-base, (1/2), 1)[];
 
-@fourth-tetrad-base: .set-lumafix(spin(@rep-color, -45), @rep-color, @accent-str)[];
+@fourth-tetrad-base: spin(@rep-color, -45);
 @fourth-tetrad: .set-color(fourth-tetrad, @fourth-tetrad-base, (1/2), 1)[];
 
-@triad-base: .set-lumafix(spin(@rep-color, 60), @rep-color, @accent-str)[];
+@triad-base: spin(@rep-color, 60);
 @triad: .set-color(triad, @triad-base, (1/2), 1)[];
 
-@third-triad-base: .set-lumafix(spin(@rep-color, -60), @rep-color, @accent-str)[];
+@third-triad-base: spin(@rep-color, -60);
 @third-triad: .set-color(third-triad, @third-triad-base, (1/2), 1)[];
 
 .white { .color-helpers(@white);}
@@ -8225,13 +8268,11 @@ grid-column: auto / span 12;
 
 .color-helpers(@color) {
     
-    @effect: 100%;
-
-    @brightened: mix(saturate(lighten(@color, (@lighten-by*.5)), 25%), @color, @effect);
-    @dimmed: mix(desaturate(darken(@color, (@darken-by*.5)), 50%), @color, @effect);
+    @brightened: saturate(lighten(@color, (@lighten-by*.5)), 25%);
+    @dimmed: desaturate(darken(@color, (@darken-by*.5)), 25%);
     
-    @lightened: mix(lighten(@color, @lighten-by), @color, @effect);
-    @darkened: mix(darken(@color, @darken-by), @color, @effect);
+    @lightened: lighten(@color, @lighten-by);
+    @darkened: darken(@color, @darken-by);
     
     @base-contrast-ceiling: .set-contrast-ratio(@color, @white)[];
     @border-color: .set-lumafix(@color, @black, 75%)[];
@@ -8296,11 +8337,13 @@ grid-column: auto / span 12;
 @warm-base: .set-warm-base()[];
 @warm-lumafix: .set-lumafix(@warm-base, @base-color, 25%)[];
 @warm: .set-color(~"warm", @warm-lumafix, 0)[];
-@warm-gradient: rgba(red(@warm), green(@warm), blue(@warm), @warm-bg-fill-opacity);
-@warm-bg-fill-opacity: .25;
+@warm-rgba: rgba(red(@warm), green(@warm), blue(@warm), var(--a));
+@warm-bg-fill-opacity: var(--a);
 
 .warm {
-    background-image: linear-gradient(var(--warm), var(--warm));
+    --a: .15;
+    background-image: linear-gradient(rgba(red(@warm), green(@warm), blue(@warm), var(--a)), rgba(red(@warm), green(@warm), blue(@warm), var(--a)));
+
 }
 
 .set-cool-base() when (blue(@base-color) > 128) {
@@ -8314,11 +8357,12 @@ grid-column: auto / span 12;
 @cool-base: .set-cool-base()[];
 @cool-lumafix: .set-lumafix(@cool-base, @base-color, 50%)[];
 @cool: .set-color(~"cool", @cool-lumafix, 0)[];
-@cool-gradient: rgba(red(@cool), green(@cool), blue(@cool), @cool-bg-fill-opacity);
-@cool-bg-fill-opacity: .2;
+@cool-rgba: rgba(red(@cool), green(@cool), blue(@cool), var(--a));
+@cool-bg-fill-opacity: var(--a);
 
 .cool {
-    background-image: linear-gradient(var(--cool), var(--cool));
+    --a: .15;
+    background-image: linear-gradient(rgba(red(@cool), green(@cool), blue(@cool), var(--a)), rgba(red(@cool), green(@cool), blue(@cool), var(--a)));
 }
 
 .set-neutral-base() when (green(@base-color) > 128) {
@@ -8332,20 +8376,22 @@ grid-column: auto / span 12;
 @neutral-base: .set-neutral-base()[];
 @neutral-lumafix: .set-lumafix(@neutral-base, @base-color, 50%)[];
 @neutral: average(@neutral-lumafix, @action);
-@neutral-gradient: rgba(red(@neutral), green(@neutral), blue(@neutral), @neutral-bg-fill-opacity);
-@neutral-bg-fill-opacity: .15;
+@neutral-rgba: rgba(red(@neutral), green(@neutral), blue(@neutral), var(--a));
+@neutral-bg-fill-opacity: var(--a);
 
 .neutral {
-    background-image: linear-gradient(var(--neutral), var(--neutral));
+    --a: .15;
+    background-image: linear-gradient(rgba(red(@neutral), green(@neutral), blue(@neutral), var(--a)), rgba(red(@neutral), green(@neutral), blue(@neutral), var(--a)));
 }
 
 @dull-base: desaturate(@action, 100%);
 @dull: @dull-base;
-@dull-bg-fill-opacity: .3;
-@dull-gradient: rgba(red(@dull), green(@dull), blue(@dull), @dull-bg-fill-opacity);
+@dull-bg-fill-opacity: var(--a);
+@dull-rgba: rgba(red(@dull), green(@dull), blue(@dull), var(--a));
 
 .dull {
-    background-image: linear-gradient(var(--dull), var(--dull));
+    --a: .15;
+    background-image: linear-gradient(rgba(red(@dull), green(@dull), blue(@dull), var(--a)), rgba(red(@dull), green(@dull), blue(@dull), var(--a)));
 }.set-average(@colors) {
   // averages a list of colors
   // sets result to @average
@@ -8473,7 +8519,7 @@ grid-column: auto / span 12;
 
 
 
-    <section class="dark warm gray two-column desktop no-gap feature-width margin-auto">
+    <section class="dark warm gray two-column desktop no-gap full-width margin-auto">
       <div class="dark warm black relative">
         <pre class="dark warm black no-margin monospace small full-width force padding white-space">
 &lt;div class="card two-column golden reverse margin-auto gutter"&gt;
@@ -8550,342 +8596,6 @@ grid-column: auto / span 12;
       </div>
     </section>
 
-    <div class="white padding">
-      <h1 class="huge all-caps inner-page-width text-center no-bold no-margin-bottom">The <span class="text-color red bold">No CSS</span> Manifesto</h1>
-      <p class="small inner-page-width text-center gutter-bottom"><em>(Made with Cavepaint!)</em></p>
-      <div class="inner-text-width text-padding-top">
-        <div class="padding dim white rounded shallow inset text-center margin-auto card-width gutter-bottom">
-          <p class="big">Less is too little. Post is too&nbsp;late.</p>
-
-          <p class="big">The real revolution is here and it's <strong>No&nbsp;CSS</strong>.
-          </p>
-          <p>...Well, it's more like a strike, really.</p>
-        </div>
-        
-
-        <h2>Writing CSS&mdash; bad for your wrists?</h2>
-        <p>It may seem odd for a CSS framework to be categorically against writing CSS.</p>
-        <p>If we weren't, though, what kind of CSS framework would we be?</p>
-        <div class="inner-card-width">
-          <h3 class="text-color green">Do &check;</h3>
-
-          <pre class="black padding monospace full-width force">
-href="cavepaint.css"</pre>
-        </div>
-        <div class="inner-card-width gutter-bottom">
-          <h3 class="text-color red">Don't &cross;</h3>
-
-          <pre class="black padding monospace full-width force">
-href="style.css"</pre>
-        </div>
-        <p>Start with a versatile CSS codebase that lets you do 95% of what you'll do day-to-day while maintaining style standards <em>without touching any CSS</em>. Without setting up any workflow. That's Cavepaint.</p>
-        <p>The last 5% is important. But that's the style stuff that really sets your site apart&mdash; it deserves all of your visual design attention, not the in-the-weeds CSS stuff.</p>
-        <p>Also&mdash; and we can't stress this enough&mdash; you can <em>do it later</em>.</p>
-
-      </div>    
-
-      <div class="inner-page-width two-column golden reverse desktop gutter-bottom gap-gutter">
-        <div class="vertical-center inner-card-width">
-          <blockquote class="big border-left thick padding text-crunch">CSS was once one of the most interesting core skills of web development. Now it's one of the least interesting specialties.</blockquote>
-        </div>
-        <div class="inner-text-width gutter-bottom">
-          <h2>The counter-curriculum</h2>
-
-          <p>Nobody ever really <em>learns</em> CSS, just as nobody ever really steps through the same river twice. CSS is an ever-changing notion of what style on the internet should be.</p>
-
-          <p>HTML meanwhile is pretty much the same as it's always been.</p>
-          
-          <p>So do that instead.</p>
-          
-          <p>Even people who are very good at CSS should try to write as little of it as possible. Even the&mdash;<em>gasp</em>&mdash; people who <em>like writing CSS</em> should write as little of it as possible.</p>
-          
-          <p>No, <em>especially</em> those people.</p>
-
-          <p>CSS isn't dead. On the contrary, it's better than it's ever been. But it's gone from being something everyone on the team needs to know, to something only one person on the team needs to know. Unless you're that person, <em>don't bother learning CSS</em>.</p>
-        </div>
-        
-        
-      </div>
-
-      <div class="inner-page-width gutter-bottom two-column golden tablet gap-gutter">
-
-        <div>
-          <h2>CSS, thief of joy and learning</h2>
-
-          <p>Learning in general has a cost. We'd say it's time but really it boils down to space in our brain.</p>
-          
-          <p>Cavepaint keeps everything easy with simple class names with no numbers, and words taken mostly from CSS. You don't really learn it. You just use it.</p>
-
-          <p>It's designed for cavemen (and women), after all. It has class names like "blue" and "big." The classes sound a bit like caveman-speak when put together.</p>
-
-          <p>Cavepaint gets out of your way and lets you get to building. It doesn't lock you in because it's almost 99% pure CSS. There's no workflow to learn because there's no workflow.</p>
-
-          <p>At the end of the day, there are more interesting things to learn. Spend your time developing skills in deep learning or doing Clojure koans, not in CSS.</p>
-        </div>
-        
-        <div class="inner-card-width vertical-center">
-          <h3 class="text-color green">Do &check;</h3>
-
-          <pre class="black padding monospace full-width force">LEARNING:
-- orbital dynamics
-- ultradeep learning
-- nanorobotics</pre>
-        
-          <h3 class="text-color red">Don't &cross;</h3>
-
-          <pre class="black padding monospace full-width force">LEARNING:
-- responsive layout
-- pseudo-selectors
-- vertical centering</pre>
-        </div>
-
-      </div>
-
-      <div class="two-column desktop gap-gutter padding gutter-bottom rounded inner-feature-width">
-        <div class="inner-text-width">
-          <h2>Shaking trees considered harmful</h2>
-
-          <p>We're fussy about adding CSS so it makes sense that we're fussy about removing it too.</p>
-
-          <p>Your site doesn't use the h4 tag, so you found a tool that removes the h4 rule from your CSS. Cool, right?</p>
-
-          <p>Wrong. This is an anti-pattern. This is CSS anarchy!</p>
-
-          <p>It's like removing rules from the board posted by the pool.</p>
-
-          <p>Just because a rule hasn't been used recently doesn't mean it shouldn't be there. Somebody might slip!</p>
-        </div>
-        <div class="two-column tablet">
-          <div class="vertical-center">
-            <h3 class="text-color green">Do &check;</h3>
-  
-            <pre class="black padding monospace full-width force">
-h1 { font-size: 26px;}
-h2 { font-size: 24px;}
-h3 { font-size: 22px;}
-h4 { font-size: 20px;}
-h5 { font-size: 19px;}
-h6 { font-size: 18px;}</pre>
-          </div>
-          <div class="vertical-center">
-            <h3 class="text-color red">Don't &cross;</h3>
-            <pre class="black padding monospace full-width force">
-h1 { font-size: 26px;}
-h2 { font-size: 24px;}
-h5 { font-size: 19px;}</pre>
-          </div>
-        </div>
-        
-      </div>
-
-      <div class="inner-text-width gutter-bottom">
-        <h2>Everything considered harmful</h2>
-        <p>When you have a CSS workflow, you have a CSS workflow to maintain.</p>
-        <p>Do as little as possible to your CSS.</p>
-        <p>Cavepaint isn't about doing everything possible with CSS, but about doing 95% of what's possible right now, out of the box, with one standardized CSS file.</p>
-      </div>
-      
-      <h2 class="text-color bright red inner-page-width huge margin-auto">Sins of scope</h2>
-      <div class="dim red inset feature-width margin-auto rounded">
-        <div class="dim dark warm red padding rounded">
-          <div class="three-column desktop no-padding-top inner-feature-width gap-gutter">
-            <div class="vertical-center inner-text-width">
-              <h3>Going too big</h3>
-
-              <p>You've achieved a 300kb CSS file, with rules for every little corner of your monolithic website.</p>
-
-              <p>You've made it, right? Wrong. Every bit of that CSS has a chance of needing your attention at some point in the future.</p>
-
-              <p>Your goal in any project should be <em>to write as little CSS as possible</em>. CSS is never your core product!</p>
-
-              <p>Okay, well, sometimes it is. Please visit the Cavepaint store.</p>
-            </div>
-            <div class="vertical-center inner-text-width">
-              <h3>Starting too small</h3>
-
-              <p>Reeling from your 300kb maintenance monster, you decide you'll start things off on the right foot with your next project. You find the tiniest slice of starter CSS you can find. 3kb! That's less than 300kb, and therefore better, right?</p>
-
-              <p>Well, it's better <em>at first</em>. This is only half anti-pattern! If it stays small, that's great. If it bloats, then it can be bad. And it's going to bloat, because you'll need to write more CSS to navigate around all that minimalism.</p>
-
-            </div>
-            <div class="vertical-center inner-text-width">
-              <h3>The wrong metrics</h3>
-              <p>The Cavepaint approach is that it's better to start at 30kb and balloon to 40 or maybe 45kb than it is to start at 3kb and balloon into a 100kb mess.</p>
-
-              <p>Cavepaint is going for <strong>bang-per-kb</strong>. It's a middleweight library that punches way above its class. Start at 30kb and use that CSS over and over.</p>
-
-              <p>Optimize on readability, performance and utility, not file size.</p>
-            </div>
-
-          </div>
-        </div>
-      </div>
-      
-
-      
-
-      <div class="inner-page-width two-column golden tablet gutter-bottom">
-        <div class="gutter-top">
-          <h2>Eyedropping out</h2>
-
-          <p>Picking colors is fun. That's the first red flag.</p>
-
-          <p>We're not saying it's always a waste of time. We're just saying there are <em>severely diminishing returns</em> after picking out the first color associated with your site. So in Cavepaint you pick only the one, the <span class="base-color text-padding rounded">base&nbsp;color</span>.</p>
-
-          <p>Figuring out colors for use in your site is a breeze with 500+ colors that <em>just work</em> with your base color. Contrast is always white or black text and Cavepaint figures that part out for you.</p>
-
-          <p>Because the expressive composable classes let you use colors like <span class="warm dark blue text-padding rounded">warm&nbsp;dark&nbsp;blue</span>, <span class="bright red text-padding rounded">bright&nbsp;red</span> or <span class="dim green text-padding rounded">dim&nbsp;green</span>, you can save time on tangling with color droppers and color contrast tools. Describe the colors on your site <em>with words</em>.</p>
-
-          <p>Even if you do pick colors yourself, it's better to use and override the Cavepaint classes. That way, your markup never needs to change. This also means you don't need to go through and update every color on your site when you update your base color, or when you override colors in the color scheme.</p>
-
-          <p>Every color in Cavepaint is based on the <span class="base-color text-padding rounded">base&nbsp;color</span>. If you multiply the 16.7 million colors in the color space with Cavepaint's extended 3500-color palette, then Cavepaint supports <em>billions</em> of colors.</p>
-        </div>
-
-        <div class="half-width gutter margin-auto vertical-center">
-          <div>
-            <div class="tetrad light neutral half-width float-left square placeholder">
-
-            </div>
-            <div class="second tetrad light neutral half-width float-left square placeholder">
-  
-            </div>
-            <div class="third tetrad light neutral half-width float-left square placeholder">
-  
-            </div>
-            <div class="fourth tetrad light neutral half-width float-left square placeholder">
-  
-            </div>
-          </div>
-          
-        </div>
-        
-      </div>
-      
-      <div class="inner-feature-width two-column desktop gap-gutter">
-        <div class="inner-text-width">
-          <h2>Just say "No!" to Javascript </h2>
-
-          <p>We're against <em>writing CSS</em> because of its complexity. Don't get us started on Javascript.</p>
-
-          <p>But we get it. Javascript is a big deal. It's probably running a big portion of whatever you're working on. We can't help you with your Javascript problem.</p>
-
-          <p>What we can do is <em>only</em> CSS. We can get out of your way so that Cavepaint works with whichever framework you're using, so long as it supports HTML/CSS.</p>
-
-          <p>It's hard to include Javascript without being overly prescriptive. So we don't, except this: The code driving your components should probably be written in the same framework or style as the rest of your frontend code.</p>
-
-        </div>
-        
-        <div class="vertical-center inner-text-width">
-          <p class="no-margin-bottom text-trim">Where to take style cues for your site's JS:</p>
-          <div class="two-column tablet">
-            <div class="vertical-center">
-              <h3 class="text-color green">Do &check;</h3>
-    
-              <pre class="white-space white monospace">- your favorite library
-- React, Angular, Vue
-- JAMstack
-- Clojurescript
-- Svelte</pre>
-            </div>
-            <div class="vertical-center">
-              <h3 class="text-color red">Don't &cross;</h3>
-              <pre class="white-space white monospace">- your CSS framework
-- online horoscopes
-- augury
-- seeing which style your dog goes to when called</pre>
-            </div>
-          </div>
-        </div>
-        
-
-      </div>
-      
-      <div class="inner-page-width two-column golden desktop gap-gutter gutter-bottom">
-
-        <div class="inner-text-width">
-          <h2>Dev oops</h2>
-
-          <p>CSS workflows are pointless.</p>
-
-          <p>Maybe they weren't always this way. They've gotten out of control, however, and Cavepaint is therefore <strong>strictly anti-workflow</strong>.</p>
-
-          <p>Don't minify Cavepaint. Leave it human-readable. Don't take out the colors you didn't use&mdash; leave the whole palette there for someone else to use. Your user, maybe?</p>
-
-          <p>Don't sprongify it or run reverse amplitude deflections on it. (Both of these are made up...we think.) Generate it here and customize it in the file as your project needs. Write your own CSS on top of (after) it. Don't ever come back here. Enjoy CSS bliss.</p>
-
-          <p>Or, do all of the nitty-gritty technical stuff. Cavepaint is basic CSS so we can't stop you. The point is that with Cavepaint, you have the option. It doesn't enforce any workflow upon you. (Although it has a great workflow based in Less, if you do go that route.)</p>
-        </div>
-
-        <div class="vertical-center inner-text-width">
-
-          <div class="grid no-gap text-margin-bottom bold">
-            <div class="small text-padding grid-width-two green">
-              CSS (40kb)
-            </div>
-            <div class="small text-padding grid-width-four dark green">
-              JS (160kb)
-            </div>
-            <div class="small text-padding grid-width-six red">
-              Ads (230kb)
-            </div>
-
-          </div>
-          <p class="text-crunch"><em>"Better optimize the CSS!"</em> &mdash; modern web developers when presented with this hypothetical project</p>
-        </div>
-
-
-      </div>
-
-      <div class="black page-width margin-auto gutter-bottom">
-        <div class="bright black gradient padding">
-          <h1 class="text-center">Time, space and CSS</h1>
-          <p class="card-width margin-auto padding border-top border-bottom current-color">There's a whole universe of ways to be wrong about CSS.</p>
-          <div class="two-column tablet">
-            <div class="inner-text-width gutter">
-              <h2>Multiverse CSS</h2>
-      
-              <p>If your components have <em>token seeds</em>, like Minecraft worlds, then your approach to styling your site has probably gotten too complicated.</p>
-      
-              <p>Cavepaint reuses the same core CSS everywhere so it's great for big sites. Even sites that really absolutely need to do complicated CSS shuffling from massive codebases will benefit from using Cavepaint as a shared resource.</p>
-      
-              <p>This <em>Multiverse CSS</em> effect creeps into smaller or medium-sized projects that don't need it. Write simple CSS that works everywhere. Begin every project with Cavepaint. It's the practical CSS compromise you'll wish you had started with.</p>
-            </div>
-      
-      
-            <div class="inner-text-width gutter">
-              <h2>"Sacred" CSS</h2>
-      
-              <p>CSS is disposable. There's a world of difference between "disposable" and "unimportant," though.</p>
-      
-              <p>CSS is important! And disposable. Cavepaint treats CSS as a generic, versatile asset, a skeleton framework for enforcing simple design standards in HTML.</p>
-      
-              <p>In terms of web projects, CSS has tons of potential as a complexity sink, but only if it's treated in this disposable way. When CSS is enshrined and entombed in a project, it only gums everything up.</p>
-      
-              <p>Spend your design hours delighting your user, not tangling with CSS 101.</p>
-      
-            </div>
-          </div>
-          <p class="text-center"><img src="images/hey.gif" alt="The old man from the end of time">
-          </p>
-          <p class="text-center monospace gutter-bottom">Cavepaint is the CSS file from the end&nbsp;of&nbsp;time.</p>
-        </div>
-      </div>
-
-      <div class="text-width margin-auto gutter-bottom">
-        <h2 class="text-center">The tenets of <span class="text-color red">No CSS</span></h2>
-        <p>Not writing CSS is better than writing CSS.</p>
-        <p>Classes should have <strong>utility</strong>, or multiple different uses.</p>
-        <p>Classes should have <strong>composability</strong>, or work with other classes.</p>
-        <p>Reusable markup and conventions are paramount.</p>
-        <p>A stylesheet below 10kb is absurd!</p>
-        <p>A stylesheet above 100kb is absurd!</p>
-        <p>CSS is disposable.</p>
-        <p>CSS is a complexity sink.</p>
-        <p>Classes should be readable and usable by anyone who reads them.</p>
-        <p>Save the CSS workflow and Photoshop-to-HTML design for later.</p>
-      </div>
-    </div>
-
     <div class="light yellow border-top border-bottom thick padding">
       <div class="two-column tablet text-center big bold page-width margin-auto">
         <a href="https://github.com/cavepaint/cavepaintcss" class="block">&raquo; See the Github</a>
@@ -8894,7 +8604,7 @@ h5 { font-size: 19px;}</pre>
     </div>
 
     
-            <section id="cheatsheet" class="white container">
+            <section id="cheatsheet" class="white feature-width margin-auto border padding gutter">
                 <h3 class="text-center">The Cavepaint CSS&nbsp;cheatsheet</h3>
       
                   <div class="grid-width-twelve text-align-center margin-bottom">
@@ -9289,7 +8999,7 @@ h5 { font-size: 19px;}</pre>
                   </div>
       
                   <div class="grid-width-twelve text-align-center">
-                    <h5>Spacing (composes with .responsive)</h5>
+                    <h5>Spacing</h5>
                     <div class="grid tablet">
                       <div class="grid-width-four margin-bottom">
                         <h6>padding</h6>
@@ -10405,8 +10115,8 @@ h5 { font-size: 19px;}</pre>
       </div>
     </div>
 
-    <footer class="bar warm black inner-page-width padding responsive no-margins">
-        <p class="fade no-margin-bottom"><a href="">Cavepaint CSS</a> <span class="float-right clearfix">&copy; 2020 Rex Riepe</span></p>
+    <footer class="bar warm black inner-feature-width padding responsive no-margins">
+        <p class="fade no-margin-bottom"><a href="">Cavepaint CSS</a> <span class="float-right clearfix">&copy; 2021 Rex Riepe</span></p>
     </footer>
 </body>
 </html>

@@ -19,28 +19,30 @@
 
 </head>
 
-<body class="dull dark gray">
+<body class="neutral">
 
-  <nav class="bar padding text-padding-top text-padding-bottom box-shadow no-underlines border-bottom base-color fixed inner-page-width trim-all vertical-align">
+  <nav class="bar text-padding box-shadow no-underlines border-bottom base-color fixed inner-feature-width trim-all vertical-align">
       <a class="title bold" href="../" class="inline-block ">
           Cavepaint CSS
       </a>
       <div class="float-right">
           <a href="../learn/" class="text-padding text-margin-right bold">Docs</a>
+          <a href="../colors/" class="text-padding text-margin-right">Colors</a>
           <a href="https://github.com/cavepaint/cavepaintcss" target="_blank" class="new-tab text-padding">Github</a>
       </div>
-  </nav>
-  <div class="bar full-width gutter-bottom border-bottom placeholder">&nbsp;</div>  
-  <main class="min-viewport-height white padding container gutter-top border current-color shadow deep">
+  </nav>  <br>
+  
+  <main class="min-viewport-height white padding feature-width margin-auto gutter-top gutter-bottom border rounded shadow deep">
     <div class="grid desktop responsive">
       <div class="grid-width-three">
         <div class="padding">
-          <nav class="fixed desktop white small margin-auto card-width gutter-bottom">
+          <nav class="fixed desktop margin-auto card-width gutter-bottom">
             <ul class="two-column mobile tablet no-list-style">
               <div>
                 <li><a class="bold text-padding" href="">install</a></li>
                 <li><a class=" text-padding" href="colors">color</a></li>
-                <li><a class=" text-padding" href="grid">layout</a></li>
+                <li><a class=" text-padding" href="typography">typography</a></li>
+                <li><a class=" text-padding" href="layout">layout</a></li>
               </div>
               <div>
                 <li><a class=" text-padding" href="hide">hide &amp; fixed</a></li>
@@ -49,55 +51,66 @@
               </div>
             </ul>
           </nav>        </div>
-        
       </div>
       <div class="grid-width-nine inner-text-width">
         
-<h2>The CSS version</h2>
+<section class="padding-bottom gutter-bottom">
 
-<div>
-    <p>Grab the base-color Cavepaint CSS file here:</p>
-    <p class="text-center">
-        <a class="big warm blue button" id="download_it" href="../../cavepaint.css" download="cavepaint.css">Get the CSS</a>
-    </p>
-    <p>Or hit the <a href="../">main page</a> to customize a CSS version.</p>
-</div>
+  <h2 class="text-padding border-bottom thick no-background">The CSS version</h2>
+
+  <div>
+      <p>Grab the default Cavepaint CSS file here:</p>
+      <p class="text-center">
+          <a class="big warm blue button" id="download_it" href="../../cavepaint.css" download="cavepaint.css">Get the CSS</a>
+      </p>
+      <p>Or hit the <a href="../">main page</a> to customize a CSS version.</p>
+  </div>
+</section>
+
+<section class="padding-bottom gutter-bottom">
+
+  <h2 class="text-padding border-bottom thick no-background">The Less version</h2>
+
+  <ol class="text-align-left">
+      <li>Get <a target="_blank" class="new-tab" href="https://github.com/cavepaint/cavepaintCSS">the files</a>. Or:</li>
+      <li><pre class="white-space">git clone https://github.com/cavepaint/cavepaintCSS.git</pre></li>
+      <li>Use the files <em>as your codebase</em>.</li>
+      <li>Install Less: <code>npm install less -g</code></li>
+      <li>Run Less: <code>lessc cavepaint.less cavepaint.css</code></li>
+  </ol>
+
+  <p>It's that easy! If anything here confuses you, or if you just want more, check out the <a class="new-tab" href="http://lesscss.org/usage/" target="_blank">Less usage guide</a>. There are a whole lot of ways to compile Less.</p>
+
+  <h5>Where to write your styles</h5>
+
+  <p>If you're using the CSS version, write or include your styles <em>after</em> cavepaint.css</p>
+
+  <p>For the Less version, use the Cavepaint Less project download as a simple starting point for your style codebase. More detailed project templates for Less, Sass and Stylus are planned for the future. Cavepaint only uses preprocessing for a few variables and to drive the color system.</p>
+
+  <p>Since it's mostly just using CSS custom properties, so the CSS output should play well with any preprocessor.</p>
+
+</section>
+
+<section class="padding-bottom gutter-bottom">
+
+  <h2 class="text-padding border-bottom thick no-background">Moving from CSS to Less</h2>
+
+  <p>Cavepaint uses the same conventions everywhere. You can get started using the CSS version and your markup will work when or if you transition to Less.</p>
+
+  <p>Plenty of projects don't even get off the ground. Don't set up your Less codebase until you need to.</p>
+
+  <p>When you do move to Less, here are some quick tips to get started:</p>
+
+  <ul class="card-width margin-auto">
+      <li>Edit <strong>properties.less</strong> for your basic settings.</li>
+      <li>Add whatever you want. Use the Less project as a starting point.</li>
+      <li>Don't bother with updating or adding Cavepaint as a dependency.</li>
+  </ul>
+</section>
 
 
 
-<h2>The Less version</h2>
 
-<ol class="text-align-left">
-    <li>Get <a target="_blank" class="new-tab" href="https://github.com/cavepaint/cavepaintCSS">the files</a>. Or:</li>
-    <li><code>git clone https://github.com/cavepaint/cavepaintCSS.git</code></li>
-    <li>Use the files <em>as your codebase</em>.</li>
-    <li>Install Less: <code>npm install less -g</code></li>
-    <li>Run Less: <code>lessc cavepaint.less cavepaint.css</code></li>
-</ol>
-
-<p>It's that easy! If anything here confuses you, or if you just want more, check out the <a class="new-tab" href="http://lesscss.org/usage/" target="_blank">Less usage guide</a>. There are a whole lot of ways to compile Less.</p>
-
-<h2>Where to write your styles</h2>
-
-<p>If you're using the CSS version, write or include your styles <em>after</em> cavepaint.css</p>
-
-<p>For the Less version, use the Cavepaint Less project download as a simple starting point for your style codebase. More detailed project templates for Less, Sass and Stylus are planned for the future. Cavepaint only uses preprocessing for a few variables and to drive the color system.</p>
-
-<p>Since it's mostly just using CSS custom properties, so the CSS output should play well with any preprocessor.</p>
-
-<h2>Moving from CSS to Less</h2>
-
-<p>Cavepaint uses the same conventions everywhere. You can get started using the CSS version and your markup will work when or if you transition to Less.</p>
-
-<p>Plenty of projects don't even get off the ground. Don't set up your Less codebase until you need to.</p>
-
-<p>When you do move to Less, here are some quick tips to get started:</p>
-
-<ul class="card-width margin-auto">
-    <li>Edit <strong>properties.less</strong> for your basic settings.</li>
-    <li>Add whatever you want. Use the Less project as a starting point.</li>
-    <li>Don't bother with updating or adding Cavepaint as a dependency.</li>
-</ul>
 
 <section id="composables">
     <h2>Cavepaint overview</h2>

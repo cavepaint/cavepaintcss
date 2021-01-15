@@ -1,0 +1,220 @@
+.grid {
+    display: grid;
+    gap: var(--gap);
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+
+    &.mobile {    
+        .on-mobile({
+            display: grid;
+        });
+
+        .on-tablet({
+            display: initial;
+        });
+    }
+
+    &.mobile.tablet {
+        display: grid;
+    
+        .on-tablet({
+            display: grid;
+        });
+
+        .on-desktop({
+            display: initial;
+        });
+    }
+
+    &.tablet {
+        display: initial;
+    
+        .on-tablet({
+            display: grid;
+        });
+    }
+    
+    &.desktop {
+        display: initial;
+    
+        .on-desktop({
+            display: grid;
+        });
+    }
+
+}
+
+.two-column, .three-column {
+    &:extend(.grid all);
+}
+
+.two-column {
+    grid-template-columns: 1fr 1fr;
+
+    &.golden {
+        grid-template-columns: 1.618fr 1fr;
+    }
+
+    &.golden.reverse {
+        grid-template-columns: 1fr 1.618fr;
+    }
+}
+
+.three-column {
+    grid-template-columns: 1fr 1fr 1fr;
+    
+    &.golden {
+        grid-template-columns: 1fr 1.618fr 1fr;
+    }
+
+    &.golden.leading {
+        grid-template-columns: 1.618fr 1fr 1fr;
+    }
+
+    &.golden.trailing {
+        grid-template-columns: 1fr 1fr 1.618fr;
+    }
+}
+
+.grid-width-one {
+    grid-column: auto / span 1;
+}
+.grid-width-two {
+    grid-column: auto / span 2;
+}
+.grid-width-three {
+    grid-column: auto / span 3;
+}
+.grid-width-four {
+    grid-column: auto / span 4;
+}
+.grid-width-five {
+    grid-column: auto / span 5;
+}
+.grid-width-six {
+    grid-column: auto / span 6;
+}
+.grid-width-seven {
+    grid-column: auto / span 7;
+}
+.grid-width-eight {
+    grid-column: auto / span 8;
+}
+.grid-width-nine {
+  grid-column: auto / span 9;
+}
+.grid-width-ten {
+  grid-column: auto / span 10;
+}
+.grid-width-eleven {
+  grid-column: auto / span 11;
+}
+.grid-width-twelve {
+  grid-column: auto / span 12;
+}
+
+.rem-width { 
+    width: 1rem;
+}
+
+.half-width {
+    width: 50%;
+}
+
+.third-width {
+    width: 33.33%;
+}
+
+.fourth-width {
+    width: 25%;
+}
+
+.fifth-width {
+    width: 20%;
+}
+
+.sixth-width {
+    width: 16.66%;
+}
+
+.golden-width { max-width: calc(62% - var(--spacer));}
+.golden-width.force { width: calc(62% - var(--spacer));}
+.golden-width.reverse { max-width: calc(38% - var(--spacer));}
+.golden-width.reverse.force { width: calc(38% - var(--spacer));}
+
+.card-width { 
+    max-width: var(--card-width);
+}
+
+.on-tablet({
+    .text-width { 
+        max-width: var(--text-width); 
+    }
+    .text-width.force {
+        width: var(--text-width);
+    }
+});
+
+.page-width { 
+    max-width: var(--page-width);
+}
+
+.page-width.force {
+    width: var(--page-width);
+}
+
+.full-width { max-width: 100%;}
+.full-width.force { width: 100%;}
+
+.inner-card-width {
+    padding-left: calc(50% - ((var(--card-width) * .5) - var(--spacer)));
+    padding-right: calc(50% - ((var(--card-width) * .5) - var(--spacer)));
+
+    &.padding {
+        padding-left: calc(50% - (var(--card-width) * .5));
+        padding-right: calc(50% - (var(--card-width) * .5));
+    }
+}
+
+.on-tablet({
+    .inner-text-width {
+        padding-left: calc(50% - (var(--text-width) * .5) - var(--spacer));
+        padding-right: calc(50% - (var(--text-width) * .5) - var(--spacer));
+
+        &.padding {
+            padding-left: calc(50% - (var(--text-width) * .5));
+            padding-right: calc(50% - (var(--text-width) * .5));
+        }
+    }  
+});
+
+.on-desktop({
+    .inner-page-width {
+        padding-left: calc(50% - (var(--page-width) * .5) - var(--spacer));
+        padding-right: calc(50% - (var(--page-width) * .5) - var(--spacer));
+
+        &.padding {
+            padding-left: calc(50% - (var(--page-width) * .5));
+            padding-right: calc(50% - (var(--page-width) * .5));
+        }
+    }
+});
+
+.hide {
+    display: none;
+
+    // &.mobile { & { display: initial;}}
+    &.tablet { & { display: initial;}}
+    &.desktop { & { display: initial;}}
+
+    &.mobile { display: none;}
+
+    .on-tablet({
+        &.mobile { display: initial;}
+        &.tablet { display: none;}
+    });
+
+    .on-desktop({
+        &.desktop { display: none;}
+        &.mobile.tablet { display: initial;}
+    });
+}

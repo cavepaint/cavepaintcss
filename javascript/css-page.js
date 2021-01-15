@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function renderLess() {
-    var lessInput = document.getElementById("less_textarea").value;
+    // var lessInput = document.getElementById("less_textarea").value;
     var headlessLessInput = document.getElementById("headless_less_textarea").value;
     var baseColor = document.getElementById("baseColor").value;
     var baseLighting = document.getElementById("baseLighting").value + '%';
