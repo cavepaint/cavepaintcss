@@ -71,9 +71,28 @@ function copyHTML() {
 
 function copyLess() {
     var textToCopy = document.getElementById("less_textarea");
+    console.log(textToCopy);
     textToCopy.select();
     textToCopy.setSelectionRange(0, 99999);
     document.execCommand("copy");
+}
+
+function copyColorString(id) {
+    var stringToCopy = document.getElementById(id);
+    var theStringItself = stringToCopy.value;
+    console.log(stringToCopy);
+    stringToCopy.select();
+    stringToCopy.setSelectionRange(0, 99999);
+    document.execCommand("copy");
+    showMessage("Copied '" + theStringItself + "' to clipboard.");
+}
+
+function showMessage(string) {
+    var messageDiv = document.getElementById("nav_message");
+    messageDiv.innerText = string;
+    messageDiv.classList.remove("hide");
+
+    setTimeout(function() { messageDiv.classList.add("hide"); }, 3000);
 }
 
 function saveTextAsFile(textToWrite, fileNameToSaveAs) {
