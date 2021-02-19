@@ -8,18 +8,17 @@
 
 @rep-color: .set-rep-color()[];
 
-@accent-str: 50%;
 @white: mix(white, @ambient, 94%);
 @black: mix(black, @ambient, 86%);
 @ambient: softlight(screen(@base-color, @base-color), @base-color);
-@red: .set-color(~"red", rgb(233, 14, 14), (1/2), .85)[];
+@red: .set-color(~"red", rgb(233, 14, 14), (1/2), .95)[];
 @orange: .set-color(~"orange", orange, (1/12), 1)[];
 @yellow: .set-color(~"yellow", yellow, (1/6), .95)[];
-@green: .set-color(~"green", green, (1/2), .9)[];
-@teal: .set-color(~"teal", teal, (1/3))[];
+@green: .set-color(~"green", rgb(45, 165, 45), (1/2), .9)[];
+@teal: .set-color(~"teal", rgb(49, 170, 170), (1/3))[];
 @cyan: .set-color(~"cyan", rgb(14, 241, 241), (1/2), .9)[];
-@blue: .set-color(~"blue", rgb(16, 16, 236), (1/2), .85)[];
-@purple: .set-color(~"purple", purple, (1/2), .9)[];
+@blue: .set-color(~"blue", rgb(60, 60, 250), (1/2), .85)[];
+@purple: .set-color(~"purple", rgb(160, 36, 160), (1/2), .9)[];
 @magenta: .set-color(~"magenta", rgb(231, 17, 231), (7/8), .85)[];
 @gray: .set-color(~"gray", gray, (1/6))[];
 @action: @base-color;
@@ -32,42 +31,41 @@
 @default-base: average(@action, @gray);
 @default: .set-color(~"default", @default-base, .5)[];
 
-@accent-base: .set-lumafix(spin(@rep-color, 30), @rep-color, @accent-str)[];
+@accent-base: spin(@rep-color, 30);
 @accent: .set-color(accent, @accent-base, 0, 1)[];
 
-@inverted-accent-base: .set-lumafix(spin(@rep-color, -30), @rep-color, @accent-str)[];
+@inverted-accent-base: spin(@rep-color, -30);
 @inverted-accent: .set-color(accent, @inverted-accent-base, 0, 1)[];
 
-@complement-base: .set-lumafix(spin(@rep-color, 180), @rep-color, @accent-str)[];
-@complement: .set-color(complement, @complement-base, (1/2), 1)[];
+@complement-base: spin(@rep-color, 180);
+@complement: .set-color(complement, @complement-base, 0, 1)[];
 
-@split-base: .set-lumafix(spin(@rep-color, 90), @rep-color, @accent-str)[];
-@split: .set-color(split, @split-base, (1/2), 1)[];
+@split-base: spin(@rep-color, 90);
+@split: .set-color(split, @split-base, 0, 1)[];
 
-@inverted-split-base: .set-lumafix(spin(@rep-color, -90), @rep-color, @accent-str)[];
-@inverted-split: .set-color(inverted-split, @inverted-split-base, (1/2), 1)[];
+@inverted-split-base: spin(@rep-color, -90);
+@inverted-split: .set-color(inverted-split, @inverted-split-base, 0, 1)[];
 
-@tetrad-base: .set-lumafix(spin(@rep-color, 45), @rep-color, @accent-str)[];
-@tetrad: .set-color(tetrad, @tetrad-base, (1/2), 1)[];
+@tetrad-base: spin(@rep-color, 45);
+@tetrad: .set-color(tetrad, @tetrad-base, 0, 1)[];
 
-@second-tetrad-base: .set-lumafix(spin(@rep-color, 135), @rep-color, @accent-str)[];
-@second-tetrad: .set-color(second-tetrad, @second-tetrad-base, (1/2), 1)[];
+@second-tetrad-base: spin(@rep-color, 135);
+@second-tetrad: .set-color(second-tetrad, @second-tetrad-base, 0, 1)[];
 
-@third-tetrad-base: .set-lumafix(spin(@rep-color, -135), @rep-color, @accent-str)[];
-@third-tetrad: .set-color(third-tetrad, @third-tetrad-base, (1/2), 1)[];
+@third-tetrad-base: spin(@rep-color, -135);
+@third-tetrad: .set-color(third-tetrad, @third-tetrad-base, 0, 1)[];
 
-@fourth-tetrad-base: .set-lumafix(spin(@rep-color, -45), @rep-color, @accent-str)[];
-@fourth-tetrad: .set-color(fourth-tetrad, @fourth-tetrad-base, (1/2), 1)[];
+@fourth-tetrad-base: spin(@rep-color, -45);
+@fourth-tetrad: .set-color(fourth-tetrad, @fourth-tetrad-base, 0, 1)[];
 
-@triad-base: .set-lumafix(spin(@rep-color, 60), @rep-color, @accent-str)[];
-@triad: .set-color(triad, @triad-base, (1/2), 1)[];
+@triad-base: spin(@rep-color, 60);
+@triad: .set-color(triad, @triad-base, 0, 1)[];
 
-@third-triad-base: .set-lumafix(spin(@rep-color, -60), @rep-color, @accent-str)[];
-@third-triad: .set-color(third-triad, @third-triad-base, (1/2), 1)[];
+@third-triad-base: spin(@rep-color, -60);
+@third-triad: .set-color(third-triad, @third-triad-base, 0, 1)[];
 
 .white { .color-helpers(@white);}
 .black { .color-helpers(@black);}
-.ambient { .color-helpers(@ambient);}
 .red { .color-helpers(@red);}
 .orange { .color-helpers(@orange);}
 .yellow { .color-helpers(@yellow);}
@@ -78,9 +76,7 @@
 .purple { .color-helpers(@purple);}
 .magenta { .color-helpers(@magenta);}
 .gray { .color-helpers(@gray);}
-.action, .base-color { .color-helpers(@action);}
-.reaction { .color-helpers(@reaction);}
-.default { .color-helpers(@default);}
+.base-color { .color-helpers(@action);}
 .complement { .color-helpers(@complement);}
 .accent { .color-helpers(@accent);}
 .second.accent { .color-helpers(@inverted-accent);}
@@ -94,15 +90,23 @@
 .third.tetrad { .color-helpers(@third-tetrad);}
 .fourth.tetrad { .color-helpers(@fourth-tetrad);}
 
+.action { &:extend(.base-color all);}
+.primary { &:extend(.base-color all);}
+.reaction { &:extend(.complement all);}
+.secondary { &:extend(.complement all);}
+.info { &:extend(.blue all);}
+.warning { &:extend(.orange all);}
+.success { &:extend(.green all);}
+.failure { &:extend(.red all);}
+.error { &:extend(.red all);}
+
 .color-helpers(@color) {
     
-    @effect: 80%;
-
-    @brightened: mix(saturate(lighten(@color, 8%), 25%), @color, @effect);
-    @dimmed: mix(desaturate(darken(@color, 8%), 50%), @color, @effect);
+    @brightened: saturate(lighten(@color, (@lighten-by*.5)), 25%);
+    @dimmed: desaturate(darken(@color, (@darken-by*.5)), 25%);
     
-    @lightened: mix(lighten(@color, 20%), @color, @effect);
-    @darkened: mix(darken(@color, 20%), @color, @effect);
+    @lightened: lighten(@color, @lighten-by);
+    @darkened: darken(@color, @darken-by);
     
     @base-contrast-ceiling: .set-contrast-ratio(@color, @white)[];
     @border-color: .set-lumafix(@color, @black, 75%)[];
@@ -167,11 +171,13 @@
 @warm-base: .set-warm-base()[];
 @warm-lumafix: .set-lumafix(@warm-base, @base-color, 25%)[];
 @warm: .set-color(~"warm", @warm-lumafix, 0)[];
-@warm-gradient: rgba(red(@warm), green(@warm), blue(@warm), @warm-bg-fill-opacity);
-@warm-bg-fill-opacity: .25;
+@warm-rgba: rgba(red(@warm), green(@warm), blue(@warm), var(--a));
+@warm-bg-fill-opacity: var(--a);
 
 .warm {
-    background-image: linear-gradient(var(--warm), var(--warm));
+    --a: .2;
+    background-image: linear-gradient(rgba(red(@warm), green(@warm), blue(@warm), var(--a)), rgba(red(@warm), green(@warm), blue(@warm), var(--a)));
+
 }
 
 .set-cool-base() when (blue(@base-color) > 128) {
@@ -185,11 +191,12 @@
 @cool-base: .set-cool-base()[];
 @cool-lumafix: .set-lumafix(@cool-base, @base-color, 50%)[];
 @cool: .set-color(~"cool", @cool-lumafix, 0)[];
-@cool-gradient: rgba(red(@cool), green(@cool), blue(@cool), @cool-bg-fill-opacity);
-@cool-bg-fill-opacity: .2;
+@cool-rgba: rgba(red(@cool), green(@cool), blue(@cool), var(--a));
+@cool-bg-fill-opacity: var(--a);
 
 .cool {
-    background-image: linear-gradient(var(--cool), var(--cool));
+    --a: .2;
+    background-image: linear-gradient(rgba(red(@cool), green(@cool), blue(@cool), var(--a)), rgba(red(@cool), green(@cool), blue(@cool), var(--a)));
 }
 
 .set-neutral-base() when (green(@base-color) > 128) {
@@ -203,18 +210,20 @@
 @neutral-base: .set-neutral-base()[];
 @neutral-lumafix: .set-lumafix(@neutral-base, @base-color, 50%)[];
 @neutral: average(@neutral-lumafix, @action);
-@neutral-gradient: rgba(red(@neutral), green(@neutral), blue(@neutral), @neutral-bg-fill-opacity);
-@neutral-bg-fill-opacity: .15;
+@neutral-rgba: rgba(red(@neutral), green(@neutral), blue(@neutral), var(--a));
+@neutral-bg-fill-opacity: var(--a);
 
 .neutral {
-    background-image: linear-gradient(var(--neutral), var(--neutral));
+    --a: .2;
+    background-image: linear-gradient(rgba(red(@neutral), green(@neutral), blue(@neutral), var(--a)), rgba(red(@neutral), green(@neutral), blue(@neutral), var(--a)));
 }
 
 @dull-base: desaturate(@action, 100%);
 @dull: @dull-base;
-@dull-bg-fill-opacity: .3;
-@dull-gradient: rgba(red(@dull), green(@dull), blue(@dull), @dull-bg-fill-opacity);
+@dull-bg-fill-opacity: var(--a);
+@dull-rgba: rgba(red(@dull), green(@dull), blue(@dull), var(--a));
 
 .dull {
-    background-image: linear-gradient(var(--dull), var(--dull));
+    --a: .2;
+    background-image: linear-gradient(rgba(red(@dull), green(@dull), blue(@dull), var(--a)), rgba(red(@dull), green(@dull), blue(@dull), var(--a)));
 }
