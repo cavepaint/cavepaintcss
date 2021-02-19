@@ -35,7 +35,6 @@
   --card-width: calc(var(--text-width) / var(--golden));
   --page-width: calc(var(--text-width) * var(--golden));
   --feature-width: calc(var(--page-width) * var(--golden));
-  --box-shadow: var(--shadow-position) var(--shadow-position) var(--shadow-blur) var(--shadow-color);
   --shadow-position: 1px;
   --shadow-blur: 1px;
   --shadow-color: rgba(6, 30, 35, 0.2);
@@ -57,7 +56,6 @@
     --padding: calc(0.6 * var(--spacer));
     --margin: calc(0.6 * var(--margin-base));
     --gutter: calc(1.2 * var(--margin-base));
-    --font-size-base: calc(16px - 2);
     --headline-base: 1em;
   }
 }
@@ -66,7 +64,6 @@
     --padding: calc(0.8 * var(--spacer));
     --margin: calc(0.8 * var(--margin-base));
     --gutter: calc(1.6 * var(--margin-base));
-    --font-size-base: calc(16px - 1);
     --headline-base: 1.1em;
   }
 }
@@ -75,7 +72,6 @@
     --padding: calc(1 * var(--spacer));
     --margin: calc(1 * var(--margin-base));
     --gutter: calc(2 * var(--margin-base));
-    --font-size-base: 16px;
     --headline-base: 1.2em;
   }
 }
@@ -104,6 +100,7 @@ h4,
 h5,
 h6 {
   font-weight: bold;
+  margin-top: 0.6em;
   margin-bottom: 0.6em;
   letter-spacing: -0.025em;
   color: inherit;
@@ -433,15 +430,13 @@ button:active {
 }
 .box-shadow,
 .shadow {
-  box-shadow: var(--box-shadow);
+  box-shadow: var(--shadow-position) var(--shadow-position) var(--shadow-blur) var(--shadow-color);
 }
 .shallow {
   --shadow-position: 0.5px;
-  --box-shadow: var(--shadow-position) var(--shadow-position) var(--shadow-blur) var(--shadow-color);
 }
 .deep {
   --shadow-position: 2px;
-  --box-shadow: var(--shadow-position) var(--shadow-position) var(--shadow-blur) var(--shadow-color);
 }
 .full-height {
   min-height: 100%;
@@ -536,10 +531,40 @@ button:active {
   line-height: var(--line-height);
 }
 .big {
-  --font-size-mod: 1.25;
+  --font-size-mod: 1.2;
 }
 .huge {
-  --font-size-mod: 1.5;
+  --font-size-mod: 1.4;
+}
+@media screen and (min-width: 39.44rem) {
+  .small {
+    --font-size-mod: 0.9;
+  }
+  .medium {
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+  }
+  .big {
+    --font-size-mod: 1.25;
+  }
+  .huge {
+    --font-size-mod: 1.5;
+  }
+}
+@media screen and (min-width: 61.904rem) {
+  .small {
+    --font-size-mod: 0.9;
+  }
+  .medium {
+    font-size: var(--font-size);
+    line-height: var(--line-height);
+  }
+  .big {
+    --font-size-mod: 1.25;
+  }
+  .huge {
+    --font-size-mod: 1.5;
+  }
 }
 .vertical-center,
 .center-vertical {
@@ -589,6 +614,10 @@ button:active {
   color: hsl(var(--h), clamp(0%, var(--s), 90%), clamp(0%, var(--l), 40%)) !important;
   background-color: transparent !important;
 }
+.text-color.tint {
+  color: hsl(var(--h), clamp(0%, var(--s), 90%), clamp(60%, var(--l), 100%)) !important;
+  background-color: transparent !important;
+}
 .shade,
 .white,
 .orange,
@@ -608,7 +637,17 @@ button:active {
 .third.tetrad,
 .fourth.tetrad,
 .light.second.triad,
-.bright.second.triad {
+.bright.second.triad,
+.light.action,
+.bright.action,
+.light.primary,
+.bright.primary,
+.light.reaction,
+.bright.reaction,
+.light.secondary,
+.bright.secondary,
+.warning,
+.success {
   color: var(--black);
   background-color: hsl(var(--h), var(--s), var(--l));
   border-color: hsl(var(--border-h), var(--border-s), var(--border-l));
@@ -634,7 +673,16 @@ button:active {
 .triad,
 .tetrad,
 .second.tetrad,
-.second.triad {
+.second.triad,
+.action,
+.primary,
+.reaction,
+.secondary,
+.info,
+.dark.success,
+.dim.success,
+.failure,
+.error {
   color: var(--white);
   background-color: hsl(var(--h), var(--s), var(--l));
   border-color: hsl(var(--border-h), var(--border-s), var(--border-l));
@@ -962,6 +1010,33 @@ button:active {
 .grid-width-twelve {
   grid-column: auto / span 12;
 }
+.four-column {
+  --grid-columns: 4;
+}
+.five-column {
+  --grid-columns: 5;
+}
+.six-column {
+  --grid-columns: 6;
+}
+.seven-column {
+  --grid-columns: 7;
+}
+.eight-column {
+  --grid-columns: 8;
+}
+.nine-column {
+  --grid-columns: 9;
+}
+.ten-column {
+  --grid-columns: 10;
+}
+.eleven-column {
+  --grid-columns: 11;
+}
+.twelve-column {
+  --grid-columns: 12;
+}
 .rem-width {
   width: 1rem;
 }
@@ -1284,41 +1359,56 @@ button:active {
   --s: 44%;
   --l: 3.2%;
 }
-.red {
+.red,
+.failure,
+.error {
   --h: 357.8;
   --s: 75.8%;
   --l: 48.7%;
 }
-.light.red {
+.light.red,
+.light.failure,
+.light.error {
   --l: 58.7%;
 }
-.dark.red {
+.dark.red,
+.dark.failure,
+.dark.error {
   --l: 38.7%;
 }
-.bright.red {
+.bright.red,
+.bright.failure,
+.bright.error {
   --s: 100%;
   --l: 53.7%;
 }
-.dim.red {
+.dim.red,
+.dim.failure,
+.dim.error {
   --s: 50.8%;
   --l: 43.7%;
 }
-.orange {
+.orange,
+.warning {
   --h: 39.8;
   --s: 93.5%;
   --l: 50.8%;
 }
-.light.orange {
+.light.orange,
+.light.warning {
   --l: 60.8%;
 }
-.dark.orange {
+.dark.orange,
+.dark.warning {
   --l: 40.8%;
 }
-.bright.orange {
+.bright.orange,
+.bright.warning {
   --s: 100%;
   --l: 55.8%;
 }
-.dim.orange {
+.dim.orange,
+.dim.warning {
   --s: 68.5%;
   --l: 45.8%;
 }
@@ -1341,22 +1431,27 @@ button:active {
   --s: 74.9%;
   --l: 49.7%;
 }
-.green {
+.green,
+.success {
   --h: 135.2;
   --s: 62%;
   --l: 42.1%;
 }
-.light.green {
+.light.green,
+.light.success {
   --l: 52.1%;
 }
-.dark.green {
+.dark.green,
+.dark.success {
   --l: 32.1%;
 }
-.bright.green {
+.bright.green,
+.bright.success {
   --s: 87%;
   --l: 47.1%;
 }
-.dim.green {
+.dim.green,
+.dim.success {
   --s: 37%;
   --l: 37.1%;
 }
@@ -1398,22 +1493,27 @@ button:active {
   --s: 65.4%;
   --l: 45.1%;
 }
-.blue {
+.blue,
+.info {
   --h: 230;
   --s: 95.8%;
   --l: 59.4%;
 }
-.light.blue {
+.light.blue,
+.light.info {
   --l: 69.4%;
 }
-.dark.blue {
+.dark.blue,
+.dark.info {
   --l: 49.4%;
 }
-.bright.blue {
+.bright.blue,
+.bright.info {
   --s: 100%;
   --l: 64.4%;
 }
-.dim.blue {
+.dim.blue,
+.dim.info {
   --s: 70.8%;
   --l: 54.4%;
 }
@@ -1474,46 +1574,66 @@ button:active {
   --s: 0%;
   --l: 45.6%;
 }
-.base-color {
+.base-color,
+.action,
+.primary {
   --h: 203.5;
   --s: 68.7%;
   --l: 51.2%;
 }
-.light.base-color {
+.light.base-color,
+.light.action,
+.light.primary {
   --l: 61.2%;
 }
-.dark.base-color {
+.dark.base-color,
+.dark.action,
+.dark.primary {
   --l: 41.2%;
 }
-.bright.base-color {
+.bright.base-color,
+.bright.action,
+.bright.primary {
   --s: 93.7%;
   --l: 56.2%;
 }
-.dim.base-color {
+.dim.base-color,
+.dim.action,
+.dim.primary {
   --s: 43.7%;
   --l: 46.2%;
 }
 .complement,
-.second.triad {
+.second.triad,
+.reaction,
+.secondary {
   --h: 24.1;
   --s: 62.6%;
   --l: 51.8%;
 }
 .light.complement,
-.light.second.triad {
+.light.second.triad,
+.light.reaction,
+.light.secondary {
   --l: 61.8%;
 }
 .dark.complement,
-.dark.second.triad {
+.dark.second.triad,
+.dark.reaction,
+.dark.secondary {
   --l: 41.8%;
 }
 .bright.complement,
-.bright.second.triad {
+.bright.second.triad,
+.bright.reaction,
+.bright.secondary {
   --s: 87.6%;
   --l: 56.8%;
 }
 .dim.complement,
-.dim.second.triad {
+.dim.second.triad,
+.dim.reaction,
+.dim.secondary {
   --s: 37.6%;
   --l: 46.8%;
 }
