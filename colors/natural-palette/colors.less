@@ -171,12 +171,12 @@
 @warm-base: .set-warm-base()[];
 @warm-lumafix: .set-lumafix(@warm-base, @base-color, 25%)[];
 @warm: .set-color(~"warm", @warm-lumafix, 0)[];
-@warm-rgba: rgba(red(@warm), green(@warm), blue(@warm), var(--a));
+@warm-rgba: rgba(round(red(@warm), 1), round(green(@warm), 1), round(blue(@warm), 1), var(--a));
 @warm-bg-fill-opacity: var(--a);
 
 .warm {
     --a: .2;
-    background-image: linear-gradient(rgba(red(@warm), green(@warm), blue(@warm), var(--a)), rgba(red(@warm), green(@warm), blue(@warm), var(--a)));
+    background-image: linear-gradient(@warm-rgba, @warm-rgba);
 
 }
 
@@ -191,12 +191,12 @@
 @cool-base: .set-cool-base()[];
 @cool-lumafix: .set-lumafix(@cool-base, @base-color, 50%)[];
 @cool: .set-color(~"cool", @cool-lumafix, 0)[];
-@cool-rgba: rgba(red(@cool), green(@cool), blue(@cool), var(--a));
+@cool-rgba: rgba(round(red(@cool), 1), round(green(@cool), 1), round(blue(@cool), 1), var(--a));
 @cool-bg-fill-opacity: var(--a);
 
 .cool {
     --a: .2;
-    background-image: linear-gradient(rgba(red(@cool), green(@cool), blue(@cool), var(--a)), rgba(red(@cool), green(@cool), blue(@cool), var(--a)));
+    background-image: linear-gradient(@cool-rgba, @cool-rgba);
 }
 
 .set-neutral-base() when (green(@base-color) > 128) {
@@ -210,20 +210,20 @@
 @neutral-base: .set-neutral-base()[];
 @neutral-lumafix: .set-lumafix(@neutral-base, @base-color, 50%)[];
 @neutral: average(@neutral-lumafix, @action);
-@neutral-rgba: rgba(red(@neutral), green(@neutral), blue(@neutral), var(--a));
+@neutral-rgba: rgba(round(red(@neutral), 1), round(green(@neutral), 1), round(blue(@neutral), 1), var(--a));
 @neutral-bg-fill-opacity: var(--a);
 
 .neutral {
     --a: .2;
-    background-image: linear-gradient(rgba(red(@neutral), green(@neutral), blue(@neutral), var(--a)), rgba(red(@neutral), green(@neutral), blue(@neutral), var(--a)));
+    background-image: linear-gradient(@neutral-rgba, @neutral-rgba);
 }
 
 @dull-base: desaturate(@action, 100%);
 @dull: @dull-base;
 @dull-bg-fill-opacity: var(--a);
-@dull-rgba: rgba(red(@dull), green(@dull), blue(@dull), var(--a));
+@dull-rgba: rgba(round(red(@dull), 1), round(green(@dull), 1), round(blue(@dull), 1), var(--a));
 
 .dull {
     --a: .2;
-    background-image: linear-gradient(rgba(red(@dull), green(@dull), blue(@dull), var(--a)), rgba(red(@dull), green(@dull), blue(@dull), var(--a)));
+    background-image: linear-gradient(@dull-rgba, @dull-rgba);
 }

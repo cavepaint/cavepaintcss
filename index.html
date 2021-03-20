@@ -3,18 +3,16 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-
   <title>Cavepaint CSS</title>
   <meta name="description" content="Cavepaint CSS, composable class and color library for Less/CSS">
   <meta name="author" content="Rex Riepe">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
   <script src="javascript/css-page.js" type="text/javascript"></script>
-  <!-- <link rel="stylesheet/less" type="text/css" href="less/cavepaint.less" /> -->
   <script src="javascript/less.min.js" type="text/javascript"></script>
-  <style id="css" type="text/css">:root {
+  <style id="css" type="text/css">/* This project uses Cavepaint (MIT License) by Rex Riepe */
+/* https://github.com/cavepaint/cavepaintCSS */
+:root {
   --font-size-base: 16px;
-  --font-size: calc(var(--font-size-base) * var(--font-size-mod));
   --font-size-mod: 1;
   --font-family: var(--sans-serif);
   --line-height: 1.8;
@@ -38,7 +36,7 @@
   --border-radius: 0.5em;
   --border-h: var(--h);
   --border-s: var(--s);
-  --border-l: clamp(0%, calc(var(--l) * 0.5), 35%);
+  --border-l: clamp(0%, calc(var(--l) * 0.85), 85%);
   --border-color: hsl(var(--border-h), var(--border-s), var(--border-l));
   --border: var(--border-width) var(--border-style) var(--border-color);
   --border-thin: calc(var(--border-width) / 2);
@@ -49,43 +47,45 @@
   --card-width: calc(var(--text-width) / var(--golden));
   --page-width: calc(var(--text-width) * var(--golden));
   --feature-width: calc(var(--page-width) * var(--golden));
+  --box-shadow: var(--shadow-position) var(--shadow-position) var(--shadow-blur) var(--shadow-color);
   --shadow-position: 1px;
   --shadow-blur: 1px;
   --shadow-color: rgba(6, 30, 35, 0.2);
   --direction: 180deg;
   --white: #f2fdff;
   --black: #061e23;
-  --warm: rgba(218.89600207, 105.52453813, 112.04086966, var(--a));
-  --cool: rgba(13.4233142, 214.45383482, 215.54811009, var(--a));
-  --neutral: rgba(48.76156514, 145.73661905, 208.21093263, var(--a));
+  --warm: rgba(218.9, 105.5, 112, var(--a));
+  --cool: rgba(13.4, 214.5, 215.5, var(--a));
+  --neutral: rgba(48.8, 145.7, 208.2, var(--a));
   --dull: rgba(130.5, 130.5, 130.5, var(--a));
   --monospace: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, "DejaVu Sans Mono", Courier, monospace;
   --serif: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "Droid Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
   --sans-serif: "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, sans-serif;
-  /* This project uses Cavepaint (MIT License) by Rex Riepe */
-  /* https://github.com/cavepaint/cavepaintCSS */
 }
 @media screen and (min-width: 1px) {
   :root {
     --padding: calc(0.6 * var(--spacer));
     --margin: calc(0.6 * var(--margin-base));
     --gutter: calc(1.2 * var(--margin-base));
+    --font-size: calc(16px - 2);
     --headline-base: 1em;
   }
 }
-@media screen and (min-width: 39.44rem) {
+@media screen and (min-width: 25.04rem) {
   :root {
     --padding: calc(0.8 * var(--spacer));
     --margin: calc(0.8 * var(--margin-base));
     --gutter: calc(1.6 * var(--margin-base));
+    --font-size: calc(16px - 1);
     --headline-base: 1.1em;
   }
 }
-@media screen and (min-width: 61.904rem) {
+@media screen and (min-width: 38.864rem) {
   :root {
     --padding: calc(1 * var(--spacer));
     --margin: calc(1 * var(--margin-base));
     --gutter: calc(2 * var(--margin-base));
+    --font-size: 16px;
     --headline-base: 1.2em;
   }
 }
@@ -444,13 +444,15 @@ button:active {
 }
 .box-shadow,
 .shadow {
-  box-shadow: var(--shadow-position) var(--shadow-position) var(--shadow-blur) var(--shadow-color);
+  box-shadow: var(--box-shadow);
 }
 .shallow {
   --shadow-position: 0.5px;
+  --box-shadow: var(--shadow-position) var(--shadow-position) var(--shadow-blur) var(--shadow-color);
 }
 .deep {
   --shadow-position: 2px;
+  --box-shadow: var(--shadow-position) var(--shadow-position) var(--shadow-blur) var(--shadow-color);
 }
 .full-height {
   min-height: 100%;
@@ -505,6 +507,7 @@ button:active {
   border-width: var(--border-thick);
 }
 .thin {
+  --border-l: clamp(0%, calc(var(--l) * 0.9), 85%);
   border-width: var(--border-thin);
 }
 .current-color {
@@ -541,43 +544,40 @@ button:active {
   --font-size-mod: 0.9;
 }
 .medium {
-  font-size: var(--font-size);
-  line-height: var(--line-height);
+  --font-size-mod: 1;
 }
 .big {
-  --font-size-mod: 1.2;
+  --font-size-mod: 1.1;
 }
 .huge {
-  --font-size-mod: 1.4;
+  --font-size-mod: 1.2;
 }
-@media screen and (min-width: 39.44rem) {
+@media screen and (min-width: 25.04rem) {
   .small {
     --font-size-mod: 0.9;
   }
   .medium {
-    font-size: var(--font-size);
-    line-height: var(--line-height);
+    --font-size-mod: 1;
   }
   .big {
-    --font-size-mod: 1.25;
+    --font-size-mod: 1.2;
   }
   .huge {
-    --font-size-mod: 1.5;
+    --font-size-mod: 1.4;
   }
 }
-@media screen and (min-width: 61.904rem) {
+@media screen and (min-width: 38.864rem) {
   .small {
     --font-size-mod: 0.9;
   }
   .medium {
-    font-size: var(--font-size);
-    line-height: var(--line-height);
+    --font-size-mod: 1;
   }
   .big {
-    --font-size-mod: 1.25;
+    --font-size-mod: 1.3;
   }
   .huge {
-    --font-size-mod: 1.5;
+    --font-size-mod: 1.6;
   }
 }
 .vertical-center,
@@ -667,7 +667,7 @@ button:active {
   border-color: hsl(var(--border-h), var(--border-s), var(--border-l));
   --border-h: var(--h);
   --border-s: var(--s);
-  --border-l: clamp(0%, calc(var(--l) * 0.4), 30%);
+  --border-l: clamp(0%, calc(var(--l) * 0.75), 85%);
 }
 .tint,
 .black,
@@ -702,7 +702,7 @@ button:active {
   border-color: hsl(var(--border-h), var(--border-s), var(--border-l));
   --border-h: var(--h);
   --border-s: var(--s);
-  --border-l: clamp(0%, calc(var(--l) * 0.4), 30%);
+  --border-l: clamp(0%, calc(var(--l) * 0.75), 85%);
 }
 .transparent {
   background-color: transparent !important;
@@ -881,94 +881,61 @@ button:active {
 .placeholder::after {
   content: " ";
 }
-.square::after,
-.one-to-one::after,
-.four-to-three::after,
-.sixteen-to-nine::after,
-.two-to-one::after {
-  content: "";
-  display: block;
-  width: 0;
-}
-.square::after,
-.one-to-one::after {
-  padding-top: 100%;
-}
-.four-to-three::after {
-  padding-top: 75%;
-}
-.sixteen-to-nine::after {
-  padding-top: 56.25%;
-}
-.two-to-one::after {
-  padding-top: 50%;
-}
 .grid,
 .two-column,
-.three-column {
+.three-column,
+.four-column,
+.five-column,
+.six-column,
+.seven-column,
+.eight-column,
+.nine-column,
+.ten-column,
+.eleven-column,
+.twelve-column {
+  --grid-columns: 12;
   display: grid;
   gap: var(--gap);
   grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
 }
-@media screen and (min-width: 1px) {
-  .grid.mobile,
-  .two-column.mobile,
-  .three-column.mobile {
-    display: grid;
-  }
-}
-@media screen and (min-width: 39.44rem) {
-  .grid.mobile,
-  .two-column.mobile,
-  .three-column.mobile {
-    display: initial;
-  }
-}
-.grid.mobile.tablet,
-.two-column.mobile.tablet,
-.three-column.mobile.tablet {
-  display: grid;
-}
-@media screen and (min-width: 39.44rem) {
-  .grid.mobile.tablet,
-  .two-column.mobile.tablet,
-  .three-column.mobile.tablet {
-    display: grid;
-  }
-}
-@media screen and (min-width: 61.904rem) {
-  .grid.mobile.tablet,
-  .two-column.mobile.tablet,
-  .three-column.mobile.tablet {
-    display: initial;
-  }
-}
-.grid.tablet,
+.two-column.mobile,
+.three-column.mobile,
+.four-column.mobile,
+.five-column.mobile,
+.six-column.mobile,
+.seven-column.mobile,
+.eight-column.mobile,
+.nine-column.mobile,
+.ten-column.mobile,
+.eleven-column.mobile,
+.twelve-column.mobile,
 .two-column.tablet,
-.three-column.tablet {
-  display: initial;
-}
-@media screen and (min-width: 39.44rem) {
-  .grid.tablet,
-  .two-column.tablet,
-  .three-column.tablet {
-    display: grid;
-  }
-}
-.grid.desktop,
+.three-column.tablet,
+.four-column.tablet,
+.five-column.tablet,
+.six-column.tablet,
+.seven-column.tablet,
+.eight-column.tablet,
+.nine-column.tablet,
+.ten-column.tablet,
+.eleven-column.tablet,
+.twelve-column.tablet,
 .two-column.desktop,
-.three-column.desktop {
-  display: initial;
+.three-column.desktop,
+.four-column.desktop,
+.five-column.desktop,
+.six-column.desktop,
+.seven-column.desktop,
+.eight-column.desktop,
+.nine-column.desktop,
+.ten-column.desktop,
+.eleven-column.desktop,
+.twelve-column.desktop {
+  grid-template-columns: minmax(0, 1fr);
 }
-@media screen and (min-width: 61.904rem) {
-  .grid.desktop,
-  .two-column.desktop,
-  .three-column.desktop {
-    display: grid;
-  }
-}
-.two-column {
-  grid-template-columns: 1fr 1fr;
+.two-column.tablet,
+.two-column.desktop {
+  --grid-columns: 1;
 }
 .two-column.golden {
   grid-template-columns: 1.618fr 1fr;
@@ -976,17 +943,309 @@ button:active {
 .two-column.golden.reverse {
   grid-template-columns: 1fr 1.618fr;
 }
-.three-column {
-  grid-template-columns: 1fr 1fr 1fr;
+.mobile {
+  --grid-columns: 1;
 }
-.three-column.golden {
-  grid-template-columns: 1fr 1.618fr 1fr;
+.mobile.two-column.golden {
+  grid-template-columns: minmax(0, 1fr);
 }
-.three-column.golden.leading {
-  grid-template-columns: 1.618fr 1fr 1fr;
+.mobile.two-column.golden.reverse {
+  grid-template-columns: minmax(0, 1fr);
 }
-.three-column.golden.trailing {
-  grid-template-columns: 1fr 1fr 1.618fr;
+@media screen and (min-width: 1px) {
+  .grid,
+  .two-column.mobile,
+  .three-column.mobile,
+  .four-column.mobile,
+  .five-column.mobile,
+  .six-column.mobile,
+  .seven-column.mobile,
+  .eight-column.mobile,
+  .nine-column.mobile,
+  .ten-column.mobile,
+  .eleven-column.mobile,
+  .twelve-column.mobile,
+  .two-column,
+  .three-column,
+  .four-column,
+  .five-column,
+  .six-column,
+  .seven-column,
+  .eight-column,
+  .nine-column,
+  .ten-column,
+  .eleven-column,
+  .twelve-column {
+    --grid-columns: 12;
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  }
+  .two-column {
+    --grid-columns: 2;
+  }
+  .three-column {
+    --grid-columns: 3;
+  }
+  .four-column {
+    --grid-columns: 4;
+  }
+  .five-column {
+    --grid-columns: 5;
+  }
+  .six-column {
+    --grid-columns: 6;
+  }
+  .seven-column {
+    --grid-columns: 7;
+  }
+  .eight-column {
+    --grid-columns: 8;
+  }
+  .nine-column {
+    --grid-columns: 9;
+  }
+  .ten-column {
+    --grid-columns: 10;
+  }
+  .eleven-column {
+    --grid-columns: 11;
+  }
+  .twelve-column {
+    --grid-columns: 12;
+  }
+  .mobile.two-column.golden {
+    grid-template-columns: 1.618fr 1fr;
+  }
+  .mobile.two-column.golden.reverse {
+    grid-template-columns: 1fr 1.618fr;
+  }
+}
+.tablet {
+  --grid-columns: 1;
+}
+.tablet.two-column.golden {
+  grid-template-columns: minmax(0, 1fr);
+}
+.tablet.two-column.golden.reverse {
+  grid-template-columns: minmax(0, 1fr);
+}
+@media screen and (min-width: 25.04rem) {
+  .grid,
+  .two-column.tablet,
+  .three-column.tablet,
+  .four-column.tablet,
+  .five-column.tablet,
+  .six-column.tablet,
+  .seven-column.tablet,
+  .eight-column.tablet,
+  .nine-column.tablet,
+  .ten-column.tablet,
+  .eleven-column.tablet,
+  .twelve-column.tablet,
+  .two-column,
+  .three-column,
+  .four-column,
+  .five-column,
+  .six-column,
+  .seven-column,
+  .eight-column,
+  .nine-column,
+  .ten-column,
+  .eleven-column,
+  .twelve-column {
+    --grid-columns: 12;
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  }
+  .two-column.tablet {
+    --grid-columns: 2;
+  }
+  .three-column.tablet {
+    --grid-columns: 3;
+  }
+  .four-column.tablet {
+    --grid-columns: 4;
+  }
+  .five-column.tablet {
+    --grid-columns: 5;
+  }
+  .six-column.tablet {
+    --grid-columns: 6;
+  }
+  .seven-column.tablet {
+    --grid-columns: 7;
+  }
+  .eight-column.tablet {
+    --grid-columns: 8;
+  }
+  .nine-column.tablet {
+    --grid-columns: 9;
+  }
+  .ten-column.tablet {
+    --grid-columns: 10;
+  }
+  .eleven-column.tablet {
+    --grid-columns: 11;
+  }
+  .twelve-column.tablet {
+    --grid-columns: 12;
+  }
+  .tablet.two-column.golden {
+    grid-template-columns: 1.618fr 1fr;
+  }
+  .tablet.two-column.golden.reverse {
+    grid-template-columns: 1fr 1.618fr;
+  }
+}
+.mobile.tablet {
+  --grid-columns: 1;
+}
+.mobile.tablet.two-column.golden {
+  grid-template-columns: minmax(0, 1fr);
+}
+.mobile.tablet.two-column.golden.reverse {
+  grid-template-columns: minmax(0, 1fr);
+}
+@media screen and (max-width: calc(38.864rem - 1px)) {
+  .grid,
+  .two-column.mobile.tablet,
+  .three-column.mobile.tablet,
+  .four-column.mobile.tablet,
+  .five-column.mobile.tablet,
+  .six-column.mobile.tablet,
+  .seven-column.mobile.tablet,
+  .eight-column.mobile.tablet,
+  .nine-column.mobile.tablet,
+  .ten-column.mobile.tablet,
+  .eleven-column.mobile.tablet,
+  .twelve-column.mobile.tablet,
+  .two-column,
+  .three-column,
+  .four-column,
+  .five-column,
+  .six-column,
+  .seven-column,
+  .eight-column,
+  .nine-column,
+  .ten-column,
+  .eleven-column,
+  .twelve-column {
+    --grid-columns: 12;
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  }
+  .two-column.mobile.tablet {
+    --grid-columns: 2;
+  }
+  .three-column.mobile.tablet {
+    --grid-columns: 3;
+  }
+  .four-column.mobile.tablet {
+    --grid-columns: 4;
+  }
+  .five-column.mobile.tablet {
+    --grid-columns: 5;
+  }
+  .six-column.mobile.tablet {
+    --grid-columns: 6;
+  }
+  .seven-column.mobile.tablet {
+    --grid-columns: 7;
+  }
+  .eight-column.mobile.tablet {
+    --grid-columns: 8;
+  }
+  .nine-column.mobile.tablet {
+    --grid-columns: 9;
+  }
+  .ten-column.mobile.tablet {
+    --grid-columns: 10;
+  }
+  .eleven-column.mobile.tablet {
+    --grid-columns: 11;
+  }
+  .twelve-column.mobile.tablet {
+    --grid-columns: 12;
+  }
+  .mobile.tablet.two-column.golden {
+    grid-template-columns: 1.618fr 1fr;
+  }
+  .mobile.tablet.two-column.golden.reverse {
+    grid-template-columns: 1fr 1.618fr;
+  }
+}
+.desktop {
+  --grid-columns: 1;
+}
+.desktop.two-column.golden {
+  grid-template-columns: minmax(0, 1fr);
+}
+.desktop.two-column.golden.reverse {
+  grid-template-columns: minmax(0, 1fr);
+}
+@media screen and (min-width: 38.864rem) {
+  .grid,
+  .two-column.desktop,
+  .three-column.desktop,
+  .four-column.desktop,
+  .five-column.desktop,
+  .six-column.desktop,
+  .seven-column.desktop,
+  .eight-column.desktop,
+  .nine-column.desktop,
+  .ten-column.desktop,
+  .eleven-column.desktop,
+  .twelve-column.desktop,
+  .two-column,
+  .three-column,
+  .four-column,
+  .five-column,
+  .six-column,
+  .seven-column,
+  .eight-column,
+  .nine-column,
+  .ten-column,
+  .eleven-column,
+  .twelve-column {
+    --grid-columns: 12;
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  }
+  .two-column.desktop {
+    --grid-columns: 2;
+  }
+  .three-column.desktop {
+    --grid-columns: 3;
+  }
+  .four-column.desktop {
+    --grid-columns: 4;
+  }
+  .five-column.desktop {
+    --grid-columns: 5;
+  }
+  .six-column.desktop {
+    --grid-columns: 6;
+  }
+  .seven-column.desktop {
+    --grid-columns: 7;
+  }
+  .eight-column.desktop {
+    --grid-columns: 8;
+  }
+  .nine-column.desktop {
+    --grid-columns: 9;
+  }
+  .ten-column.desktop {
+    --grid-columns: 10;
+  }
+  .eleven-column.desktop {
+    --grid-columns: 11;
+  }
+  .twelve-column.desktop {
+    --grid-columns: 12;
+  }
+  .desktop.two-column.golden {
+    grid-template-columns: 1.618fr 1fr;
+  }
+  .desktop.two-column.golden.reverse {
+    grid-template-columns: 1fr 1.618fr;
+  }
 }
 .grid-width-one {
   grid-column: auto / span 1;
@@ -1023,6 +1282,18 @@ button:active {
 }
 .grid-width-twelve {
   grid-column: auto / span 12;
+}
+.first-column {
+  grid-column-start: 1;
+}
+.second-column {
+  grid-column-start: 2;
+}
+.two-column {
+  --grid-columns: 2;
+}
+.three-column {
+  --grid-columns: 3;
 }
 .four-column {
   --grid-columns: 4;
@@ -1075,16 +1346,16 @@ button:active {
 .golden-width.force {
   width: calc(62% - var(--spacer));
 }
-.golden-width.reverse {
+.golden-width.switch {
   max-width: calc(38% - var(--spacer));
 }
-.golden-width.reverse.force {
+.golden-width.switch.force {
   width: calc(38% - var(--spacer));
 }
 .card-width {
   max-width: var(--card-width);
 }
-@media screen and (min-width: 39.44rem) {
+@media screen and (min-width: 25.04rem) {
   .text-width {
     max-width: var(--text-width);
   }
@@ -1118,7 +1389,7 @@ button:active {
   padding-left: calc(50% - ((var(--card-width) * 0.5) + var(--spacer)));
   padding-right: calc(50% - ((var(--card-width) * 0.5) + var(--spacer)));
 }
-@media screen and (min-width: 39.44rem) {
+@media screen and (min-width: 25.04rem) {
   .inner-text-width {
     padding-left: calc(50% - (var(--text-width) * 0.5));
     padding-right: calc(50% - (var(--text-width) * 0.5));
@@ -1128,7 +1399,7 @@ button:active {
     padding-right: calc(50% - (var(--text-width) * 0.5) + var(--spacer));
   }
 }
-@media screen and (min-width: 61.904rem) {
+@media screen and (min-width: 38.864rem) {
   .inner-page-width {
     padding-left: calc(50% - (var(--page-width) * 0.5));
     padding-right: calc(50% - (var(--page-width) * 0.5));
@@ -1158,7 +1429,7 @@ button:active {
 .hide.mobile {
   display: none;
 }
-@media screen and (min-width: 39.44rem) {
+@media screen and (min-width: 25.04rem) {
   .hide.mobile {
     display: initial;
   }
@@ -1166,7 +1437,7 @@ button:active {
     display: none;
   }
 }
-@media screen and (min-width: 61.904rem) {
+@media screen and (min-width: 38.864rem) {
   .hide.desktop {
     display: none;
   }
@@ -1186,7 +1457,7 @@ button:active {
 .fixed.mobile {
   position: fixed;
 }
-@media screen and (min-width: 39.44rem) {
+@media screen and (min-width: 25.04rem) {
   .fixed.mobile {
     position: initial;
   }
@@ -1194,7 +1465,7 @@ button:active {
     position: fixed;
   }
 }
-@media screen and (min-width: 61.904rem) {
+@media screen and (min-width: 38.864rem) {
   .fixed.desktop {
     position: fixed;
   }
@@ -1329,6 +1600,9 @@ button:active {
 .no-list-style {
   list-style-type: none;
   margin-left: 0;
+}
+.no-fade {
+  opacity: 1;
 }
 .no-gap,
 .no-column-gap {
@@ -1843,15 +2117,15 @@ button:active {
 }
 .warm {
   --a: 0.2;
-  background-image: linear-gradient(rgba(218.89600207, 105.52453813, 112.04086966, var(--a)), rgba(218.89600207, 105.52453813, 112.04086966, var(--a)));
+  background-image: linear-gradient(rgba(218.9, 105.5, 112, var(--a)), rgba(218.9, 105.5, 112, var(--a)));
 }
 .cool {
   --a: 0.2;
-  background-image: linear-gradient(rgba(13.4233142, 214.45383482, 215.54811009, var(--a)), rgba(13.4233142, 214.45383482, 215.54811009, var(--a)));
+  background-image: linear-gradient(rgba(13.4, 214.5, 215.5, var(--a)), rgba(13.4, 214.5, 215.5, var(--a)));
 }
 .neutral {
   --a: 0.2;
-  background-image: linear-gradient(rgba(48.76156514, 145.73661905, 208.21093263, var(--a)), rgba(48.76156514, 145.73661905, 208.21093263, var(--a)));
+  background-image: linear-gradient(rgba(48.8, 145.7, 208.2, var(--a)), rgba(48.8, 145.7, 208.2, var(--a)));
 }
 .dull {
   --a: 0.2;
@@ -1864,10 +2138,9 @@ button:active {
   <link rel="manifest" href="/site.webmanifest">
   <meta name="msapplication-TileColor" content="#da532c">
   <meta name="theme-color" content="#ffffff">
-
 </head>
 
-<body class="neutral">
+<body class="neutral relative">
   <nav class="bar base-color text-padding no-underlines fixed inner-feature-width">
       <a class="text-margin bold" href="">
           Cavepaint CSS
@@ -1891,52 +2164,50 @@ button:active {
         </div>
         <div class="light white padding border-radius page-width margin-auto margin-bottom deep shadow">
           <form class="two-column tablet">
-            <p class="one-column tablet text-padding-right text-padding-left no-margin">
+            <p class="tablet text-padding-right text-padding-left no-margin">
               <span class="float-right"><span class="character-width base-color padding-right rounded">&nbsp;</span></span>
               <span class="block full-width">base&nbsp;color (<strong><span id="baseColorLabel" for="baseColor">#2d95d8</span></strong>)</span>
               
               <input class="no-padding pointer force full-width" id="baseColor" type="color" value="#2d95d8" oninput="document.getElementById('baseColorLabel').innerHTML = document.getElementById('baseColor').value">
             </p>
-            <p class="one-column tablet text-padding-right text-padding-left no-margin">
+            <p class="tablet text-padding-right text-padding-left no-margin">
               <span class="float-right fade"><span class="border thick no-border-top no-border-bottom padding-left padding-right"><span class="border thick dashed no-border-top no-border-bottom">&nbsp;&nbsp;&nbsp;</span></span></span>
               <span class="block full-width">padding (<strong><span id="basePaddingLabel" for="basePadding">1</span>&nbsp;rem</strong>)</span>
               <input type="range" id="basePadding" min=".4" max="1.6" value="1" step=".1" class="force full-width cursor" oninput="document.getElementById('basePaddingLabel').innerHTML = document.getElementById('basePadding').value">
             </p>
 
-            <p class="one-column tablet text-padding-right text-padding-left no-margin relative">
+            <p class="tablet text-padding-right text-padding-left no-margin relative">
               <span class="fade block absolute top right float-right text-crunch"><span class="small">A</span> <span>A</span> <span class="big">A</span></span>
               <span class="block full-width">font&nbsp;size (<strong><span id="baseFontSizeLabel" for="baseFontSize">16</span>&nbsp;px</strong>)</span>
               <input type="range" id="baseFontSize" min="14" max="20" value="16" step="1" class="force full-width cursor" oninput="document.getElementById('baseFontSizeLabel').innerHTML = document.getElementById('baseFontSize').value">
-            </p>
+            </p>            
 
-            
-
-            <p class="one-column tablet text-padding-right text-padding-left no-margin">
+            <p class="tablet text-padding-right text-padding-left no-margin">
               <span class="float-right"><span class="border thick no-border-left no-border-right dashed padding-left padding-right fade italic small">abc</span></span>
               <span class="block full-width">line&nbsp;height (<strong><span id="baseLineHeightLabel" for="baseLineHeight">1.8</span></strong>)</span>
               <input type="range" id="baseLineHeight" min="1.5" max="2.1" value="1.8" step=".1" class="force full-width cursor" oninput="document.getElementById('baseLineHeightLabel').innerHTML = document.getElementById('baseLineHeight').value">
             </p>
 
-            <p class="one-column tablet text-padding-right text-padding-left no-margin">
+            <p class="tablet text-padding-right text-padding-left no-margin">
               <span class="float-right fade"><span class="light gray">&nbsp;&nbsp;&nbsp;</span> <span class="light gray">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
               <span class="block full-width">page&nbsp;width (<strong><span id="textBaseLabel" for="textBase">48</span>&nbsp;rem</strong>)</span>
               
               <input type="range" id="textBase" min="40" max="60" value="48" step="2" class="force full-width cursor" oninput="document.getElementById('textBaseLabel').innerHTML = document.getElementById('textBase').value">
             </p>
 
-            <p class="one-column tablet text-padding-right text-padding-left no-margin">
+            <p class="tablet text-padding-right text-padding-left no-margin">
               <span class="float-right fade"><span class="character-width dim gray padding-right rounded">&nbsp;</span> <span class="character-width gray padding-right rounded">&nbsp;</span> <span class="character-width bright gray padding-right rounded">&nbsp;</span></span>
               <span class="block full-width">ambience (<strong><span id="baseLightingLabel" for="baseLighting">95</span>%</strong>)</span>
               <input type="range" id="baseLighting" min="90" max="100" value="95" step="1" class="force full-width cursor" oninput="document.getElementById('baseLightingLabel').innerHTML = document.getElementById('baseLighting').value">
             </p>
 
-            <p class="one-column tablet text-padding-right text-padding-left no-margin">
+            <p class="tablet text-padding-right text-padding-left no-margin">
               <span class="float-right"><span class="character-width gray padding-right rounded">&nbsp;</span> -> <span class="character-width light gray padding-right rounded">&nbsp;</span></span>
               <span class="block full-width">lighten (<strong><span id="baseLightenByLabel" for="baseLightenBy">20</span>%</strong>)</span>
               <input type="range" id="baseLightenBy" min="5" max="35" value="20" step="5" class="force full-width cursor" oninput="document.getElementById('baseLightenByLabel').innerHTML = document.getElementById('baseLightenBy').value">
             </p>
 
-            <p class="one-column tablet text-padding-right text-padding-left no-margin">
+            <p class="tablet text-padding-right text-padding-left no-margin">
               <span class="float-right"><span class="character-width gray padding-right rounded">&nbsp;</span> -> <span class="character-width dark gray padding-right rounded">&nbsp;</span></span>
               <span class="block full-width">darken (<strong><span id="baseDarkenByLabel" for="baseDarkenBy">20</span>%</strong>)</span>
               <input type="range" id="baseDarkenBy" min="5" max="35" value="20" step="5" class="force full-width cursor" oninput="document.getElementById('baseDarkenByLabel').innerHTML = document.getElementById('baseDarkenBy').value">
@@ -1967,25 +2238,21 @@ button:active {
     
           </form>
         </div>
-
-        
       </div>
       <div class="feature-width text-center margin-auto">
         <h1 class="big light yellow inline-block text-padding-left text-padding-right">Untangle your bootstraps. Break&nbsp;out of your&nbsp;tailspin.</h1>
         <p class="big">Cavepaint is a CSS framework for devs and teams who want to <a href="#cheatsheet">spend way less time on CSS</a></p>
       </div>
-      <!-- <p class="text-center"><a href="" onClick="newCSS()"><strong>Try a new cavepaint.css!</strong></a></p> -->
-        <!-- <a class="big inline-block margin-bottom bright second split text-padding" href="https://github.com/cavepaint/cavepaintcss">View Github</a> -->
-      
     </div>
 
     <section class="padding gutter-bottom">
       <div class="three-column desktop feature-width margin-auto gutter-bottom">
         <div class="inner-text-width margin-bottom">
           <h5>Use this CSS</h5>
-          <textarea readonly name="" class="full-width no-padding-bottom force black monospace text-padding no-margin" id="css_textarea" cols="30" rows="10">:root {
+          <textarea readonly name="" class="full-width no-padding-bottom force black monospace text-padding no-margin" id="css_textarea" cols="30" rows="10">/* This project uses Cavepaint (MIT License) by Rex Riepe */
+/* https://github.com/cavepaint/cavepaintCSS */
+:root {
   --font-size-base: 16px;
-  --font-size: calc(var(--font-size-base) * var(--font-size-mod));
   --font-size-mod: 1;
   --font-family: var(--sans-serif);
   --line-height: 1.8;
@@ -2009,7 +2276,7 @@ button:active {
   --border-radius: 0.5em;
   --border-h: var(--h);
   --border-s: var(--s);
-  --border-l: clamp(0%, calc(var(--l) * 0.5), 35%);
+  --border-l: clamp(0%, calc(var(--l) * 0.85), 85%);
   --border-color: hsl(var(--border-h), var(--border-s), var(--border-l));
   --border: var(--border-width) var(--border-style) var(--border-color);
   --border-thin: calc(var(--border-width) / 2);
@@ -2020,43 +2287,45 @@ button:active {
   --card-width: calc(var(--text-width) / var(--golden));
   --page-width: calc(var(--text-width) * var(--golden));
   --feature-width: calc(var(--page-width) * var(--golden));
+  --box-shadow: var(--shadow-position) var(--shadow-position) var(--shadow-blur) var(--shadow-color);
   --shadow-position: 1px;
   --shadow-blur: 1px;
   --shadow-color: rgba(6, 30, 35, 0.2);
   --direction: 180deg;
   --white: #f2fdff;
   --black: #061e23;
-  --warm: rgba(218.89600207, 105.52453813, 112.04086966, var(--a));
-  --cool: rgba(13.4233142, 214.45383482, 215.54811009, var(--a));
-  --neutral: rgba(48.76156514, 145.73661905, 208.21093263, var(--a));
+  --warm: rgba(218.9, 105.5, 112, var(--a));
+  --cool: rgba(13.4, 214.5, 215.5, var(--a));
+  --neutral: rgba(48.8, 145.7, 208.2, var(--a));
   --dull: rgba(130.5, 130.5, 130.5, var(--a));
   --monospace: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, "DejaVu Sans Mono", Courier, monospace;
   --serif: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "Droid Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
   --sans-serif: "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, sans-serif;
-  /* This project uses Cavepaint (MIT License) by Rex Riepe */
-  /* https://github.com/cavepaint/cavepaintCSS */
 }
 @media screen and (min-width: 1px) {
   :root {
     --padding: calc(0.6 * var(--spacer));
     --margin: calc(0.6 * var(--margin-base));
     --gutter: calc(1.2 * var(--margin-base));
+    --font-size: calc(16px - 2);
     --headline-base: 1em;
   }
 }
-@media screen and (min-width: 39.44rem) {
+@media screen and (min-width: 25.04rem) {
   :root {
     --padding: calc(0.8 * var(--spacer));
     --margin: calc(0.8 * var(--margin-base));
     --gutter: calc(1.6 * var(--margin-base));
+    --font-size: calc(16px - 1);
     --headline-base: 1.1em;
   }
 }
-@media screen and (min-width: 61.904rem) {
+@media screen and (min-width: 38.864rem) {
   :root {
     --padding: calc(1 * var(--spacer));
     --margin: calc(1 * var(--margin-base));
     --gutter: calc(2 * var(--margin-base));
+    --font-size: 16px;
     --headline-base: 1.2em;
   }
 }
@@ -2415,13 +2684,15 @@ button:active {
 }
 .box-shadow,
 .shadow {
-  box-shadow: var(--shadow-position) var(--shadow-position) var(--shadow-blur) var(--shadow-color);
+  box-shadow: var(--box-shadow);
 }
 .shallow {
   --shadow-position: 0.5px;
+  --box-shadow: var(--shadow-position) var(--shadow-position) var(--shadow-blur) var(--shadow-color);
 }
 .deep {
   --shadow-position: 2px;
+  --box-shadow: var(--shadow-position) var(--shadow-position) var(--shadow-blur) var(--shadow-color);
 }
 .full-height {
   min-height: 100%;
@@ -2476,6 +2747,7 @@ button:active {
   border-width: var(--border-thick);
 }
 .thin {
+  --border-l: clamp(0%, calc(var(--l) * 0.9), 85%);
   border-width: var(--border-thin);
 }
 .current-color {
@@ -2512,43 +2784,40 @@ button:active {
   --font-size-mod: 0.9;
 }
 .medium {
-  font-size: var(--font-size);
-  line-height: var(--line-height);
+  --font-size-mod: 1;
 }
 .big {
-  --font-size-mod: 1.2;
+  --font-size-mod: 1.1;
 }
 .huge {
-  --font-size-mod: 1.4;
+  --font-size-mod: 1.2;
 }
-@media screen and (min-width: 39.44rem) {
+@media screen and (min-width: 25.04rem) {
   .small {
     --font-size-mod: 0.9;
   }
   .medium {
-    font-size: var(--font-size);
-    line-height: var(--line-height);
+    --font-size-mod: 1;
   }
   .big {
-    --font-size-mod: 1.25;
+    --font-size-mod: 1.2;
   }
   .huge {
-    --font-size-mod: 1.5;
+    --font-size-mod: 1.4;
   }
 }
-@media screen and (min-width: 61.904rem) {
+@media screen and (min-width: 38.864rem) {
   .small {
     --font-size-mod: 0.9;
   }
   .medium {
-    font-size: var(--font-size);
-    line-height: var(--line-height);
+    --font-size-mod: 1;
   }
   .big {
-    --font-size-mod: 1.25;
+    --font-size-mod: 1.3;
   }
   .huge {
-    --font-size-mod: 1.5;
+    --font-size-mod: 1.6;
   }
 }
 .vertical-center,
@@ -2638,7 +2907,7 @@ button:active {
   border-color: hsl(var(--border-h), var(--border-s), var(--border-l));
   --border-h: var(--h);
   --border-s: var(--s);
-  --border-l: clamp(0%, calc(var(--l) * 0.4), 30%);
+  --border-l: clamp(0%, calc(var(--l) * 0.75), 85%);
 }
 .tint,
 .black,
@@ -2673,7 +2942,7 @@ button:active {
   border-color: hsl(var(--border-h), var(--border-s), var(--border-l));
   --border-h: var(--h);
   --border-s: var(--s);
-  --border-l: clamp(0%, calc(var(--l) * 0.4), 30%);
+  --border-l: clamp(0%, calc(var(--l) * 0.75), 85%);
 }
 .transparent {
   background-color: transparent !important;
@@ -2852,94 +3121,61 @@ button:active {
 .placeholder::after {
   content: " ";
 }
-.square::after,
-.one-to-one::after,
-.four-to-three::after,
-.sixteen-to-nine::after,
-.two-to-one::after {
-  content: "";
-  display: block;
-  width: 0;
-}
-.square::after,
-.one-to-one::after {
-  padding-top: 100%;
-}
-.four-to-three::after {
-  padding-top: 75%;
-}
-.sixteen-to-nine::after {
-  padding-top: 56.25%;
-}
-.two-to-one::after {
-  padding-top: 50%;
-}
 .grid,
 .two-column,
-.three-column {
+.three-column,
+.four-column,
+.five-column,
+.six-column,
+.seven-column,
+.eight-column,
+.nine-column,
+.ten-column,
+.eleven-column,
+.twelve-column {
+  --grid-columns: 12;
   display: grid;
   gap: var(--gap);
   grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
 }
-@media screen and (min-width: 1px) {
-  .grid.mobile,
-  .two-column.mobile,
-  .three-column.mobile {
-    display: grid;
-  }
-}
-@media screen and (min-width: 39.44rem) {
-  .grid.mobile,
-  .two-column.mobile,
-  .three-column.mobile {
-    display: initial;
-  }
-}
-.grid.mobile.tablet,
-.two-column.mobile.tablet,
-.three-column.mobile.tablet {
-  display: grid;
-}
-@media screen and (min-width: 39.44rem) {
-  .grid.mobile.tablet,
-  .two-column.mobile.tablet,
-  .three-column.mobile.tablet {
-    display: grid;
-  }
-}
-@media screen and (min-width: 61.904rem) {
-  .grid.mobile.tablet,
-  .two-column.mobile.tablet,
-  .three-column.mobile.tablet {
-    display: initial;
-  }
-}
-.grid.tablet,
+.two-column.mobile,
+.three-column.mobile,
+.four-column.mobile,
+.five-column.mobile,
+.six-column.mobile,
+.seven-column.mobile,
+.eight-column.mobile,
+.nine-column.mobile,
+.ten-column.mobile,
+.eleven-column.mobile,
+.twelve-column.mobile,
 .two-column.tablet,
-.three-column.tablet {
-  display: initial;
-}
-@media screen and (min-width: 39.44rem) {
-  .grid.tablet,
-  .two-column.tablet,
-  .three-column.tablet {
-    display: grid;
-  }
-}
-.grid.desktop,
+.three-column.tablet,
+.four-column.tablet,
+.five-column.tablet,
+.six-column.tablet,
+.seven-column.tablet,
+.eight-column.tablet,
+.nine-column.tablet,
+.ten-column.tablet,
+.eleven-column.tablet,
+.twelve-column.tablet,
 .two-column.desktop,
-.three-column.desktop {
-  display: initial;
+.three-column.desktop,
+.four-column.desktop,
+.five-column.desktop,
+.six-column.desktop,
+.seven-column.desktop,
+.eight-column.desktop,
+.nine-column.desktop,
+.ten-column.desktop,
+.eleven-column.desktop,
+.twelve-column.desktop {
+  grid-template-columns: minmax(0, 1fr);
 }
-@media screen and (min-width: 61.904rem) {
-  .grid.desktop,
-  .two-column.desktop,
-  .three-column.desktop {
-    display: grid;
-  }
-}
-.two-column {
-  grid-template-columns: 1fr 1fr;
+.two-column.tablet,
+.two-column.desktop {
+  --grid-columns: 1;
 }
 .two-column.golden {
   grid-template-columns: 1.618fr 1fr;
@@ -2947,17 +3183,309 @@ button:active {
 .two-column.golden.reverse {
   grid-template-columns: 1fr 1.618fr;
 }
-.three-column {
-  grid-template-columns: 1fr 1fr 1fr;
+.mobile {
+  --grid-columns: 1;
 }
-.three-column.golden {
-  grid-template-columns: 1fr 1.618fr 1fr;
+.mobile.two-column.golden {
+  grid-template-columns: minmax(0, 1fr);
 }
-.three-column.golden.leading {
-  grid-template-columns: 1.618fr 1fr 1fr;
+.mobile.two-column.golden.reverse {
+  grid-template-columns: minmax(0, 1fr);
 }
-.three-column.golden.trailing {
-  grid-template-columns: 1fr 1fr 1.618fr;
+@media screen and (min-width: 1px) {
+  .grid,
+  .two-column.mobile,
+  .three-column.mobile,
+  .four-column.mobile,
+  .five-column.mobile,
+  .six-column.mobile,
+  .seven-column.mobile,
+  .eight-column.mobile,
+  .nine-column.mobile,
+  .ten-column.mobile,
+  .eleven-column.mobile,
+  .twelve-column.mobile,
+  .two-column,
+  .three-column,
+  .four-column,
+  .five-column,
+  .six-column,
+  .seven-column,
+  .eight-column,
+  .nine-column,
+  .ten-column,
+  .eleven-column,
+  .twelve-column {
+    --grid-columns: 12;
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  }
+  .two-column {
+    --grid-columns: 2;
+  }
+  .three-column {
+    --grid-columns: 3;
+  }
+  .four-column {
+    --grid-columns: 4;
+  }
+  .five-column {
+    --grid-columns: 5;
+  }
+  .six-column {
+    --grid-columns: 6;
+  }
+  .seven-column {
+    --grid-columns: 7;
+  }
+  .eight-column {
+    --grid-columns: 8;
+  }
+  .nine-column {
+    --grid-columns: 9;
+  }
+  .ten-column {
+    --grid-columns: 10;
+  }
+  .eleven-column {
+    --grid-columns: 11;
+  }
+  .twelve-column {
+    --grid-columns: 12;
+  }
+  .mobile.two-column.golden {
+    grid-template-columns: 1.618fr 1fr;
+  }
+  .mobile.two-column.golden.reverse {
+    grid-template-columns: 1fr 1.618fr;
+  }
+}
+.tablet {
+  --grid-columns: 1;
+}
+.tablet.two-column.golden {
+  grid-template-columns: minmax(0, 1fr);
+}
+.tablet.two-column.golden.reverse {
+  grid-template-columns: minmax(0, 1fr);
+}
+@media screen and (min-width: 25.04rem) {
+  .grid,
+  .two-column.tablet,
+  .three-column.tablet,
+  .four-column.tablet,
+  .five-column.tablet,
+  .six-column.tablet,
+  .seven-column.tablet,
+  .eight-column.tablet,
+  .nine-column.tablet,
+  .ten-column.tablet,
+  .eleven-column.tablet,
+  .twelve-column.tablet,
+  .two-column,
+  .three-column,
+  .four-column,
+  .five-column,
+  .six-column,
+  .seven-column,
+  .eight-column,
+  .nine-column,
+  .ten-column,
+  .eleven-column,
+  .twelve-column {
+    --grid-columns: 12;
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  }
+  .two-column.tablet {
+    --grid-columns: 2;
+  }
+  .three-column.tablet {
+    --grid-columns: 3;
+  }
+  .four-column.tablet {
+    --grid-columns: 4;
+  }
+  .five-column.tablet {
+    --grid-columns: 5;
+  }
+  .six-column.tablet {
+    --grid-columns: 6;
+  }
+  .seven-column.tablet {
+    --grid-columns: 7;
+  }
+  .eight-column.tablet {
+    --grid-columns: 8;
+  }
+  .nine-column.tablet {
+    --grid-columns: 9;
+  }
+  .ten-column.tablet {
+    --grid-columns: 10;
+  }
+  .eleven-column.tablet {
+    --grid-columns: 11;
+  }
+  .twelve-column.tablet {
+    --grid-columns: 12;
+  }
+  .tablet.two-column.golden {
+    grid-template-columns: 1.618fr 1fr;
+  }
+  .tablet.two-column.golden.reverse {
+    grid-template-columns: 1fr 1.618fr;
+  }
+}
+.mobile.tablet {
+  --grid-columns: 1;
+}
+.mobile.tablet.two-column.golden {
+  grid-template-columns: minmax(0, 1fr);
+}
+.mobile.tablet.two-column.golden.reverse {
+  grid-template-columns: minmax(0, 1fr);
+}
+@media screen and (max-width: calc(38.864rem - 1px)) {
+  .grid,
+  .two-column.mobile.tablet,
+  .three-column.mobile.tablet,
+  .four-column.mobile.tablet,
+  .five-column.mobile.tablet,
+  .six-column.mobile.tablet,
+  .seven-column.mobile.tablet,
+  .eight-column.mobile.tablet,
+  .nine-column.mobile.tablet,
+  .ten-column.mobile.tablet,
+  .eleven-column.mobile.tablet,
+  .twelve-column.mobile.tablet,
+  .two-column,
+  .three-column,
+  .four-column,
+  .five-column,
+  .six-column,
+  .seven-column,
+  .eight-column,
+  .nine-column,
+  .ten-column,
+  .eleven-column,
+  .twelve-column {
+    --grid-columns: 12;
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  }
+  .two-column.mobile.tablet {
+    --grid-columns: 2;
+  }
+  .three-column.mobile.tablet {
+    --grid-columns: 3;
+  }
+  .four-column.mobile.tablet {
+    --grid-columns: 4;
+  }
+  .five-column.mobile.tablet {
+    --grid-columns: 5;
+  }
+  .six-column.mobile.tablet {
+    --grid-columns: 6;
+  }
+  .seven-column.mobile.tablet {
+    --grid-columns: 7;
+  }
+  .eight-column.mobile.tablet {
+    --grid-columns: 8;
+  }
+  .nine-column.mobile.tablet {
+    --grid-columns: 9;
+  }
+  .ten-column.mobile.tablet {
+    --grid-columns: 10;
+  }
+  .eleven-column.mobile.tablet {
+    --grid-columns: 11;
+  }
+  .twelve-column.mobile.tablet {
+    --grid-columns: 12;
+  }
+  .mobile.tablet.two-column.golden {
+    grid-template-columns: 1.618fr 1fr;
+  }
+  .mobile.tablet.two-column.golden.reverse {
+    grid-template-columns: 1fr 1.618fr;
+  }
+}
+.desktop {
+  --grid-columns: 1;
+}
+.desktop.two-column.golden {
+  grid-template-columns: minmax(0, 1fr);
+}
+.desktop.two-column.golden.reverse {
+  grid-template-columns: minmax(0, 1fr);
+}
+@media screen and (min-width: 38.864rem) {
+  .grid,
+  .two-column.desktop,
+  .three-column.desktop,
+  .four-column.desktop,
+  .five-column.desktop,
+  .six-column.desktop,
+  .seven-column.desktop,
+  .eight-column.desktop,
+  .nine-column.desktop,
+  .ten-column.desktop,
+  .eleven-column.desktop,
+  .twelve-column.desktop,
+  .two-column,
+  .three-column,
+  .four-column,
+  .five-column,
+  .six-column,
+  .seven-column,
+  .eight-column,
+  .nine-column,
+  .ten-column,
+  .eleven-column,
+  .twelve-column {
+    --grid-columns: 12;
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  }
+  .two-column.desktop {
+    --grid-columns: 2;
+  }
+  .three-column.desktop {
+    --grid-columns: 3;
+  }
+  .four-column.desktop {
+    --grid-columns: 4;
+  }
+  .five-column.desktop {
+    --grid-columns: 5;
+  }
+  .six-column.desktop {
+    --grid-columns: 6;
+  }
+  .seven-column.desktop {
+    --grid-columns: 7;
+  }
+  .eight-column.desktop {
+    --grid-columns: 8;
+  }
+  .nine-column.desktop {
+    --grid-columns: 9;
+  }
+  .ten-column.desktop {
+    --grid-columns: 10;
+  }
+  .eleven-column.desktop {
+    --grid-columns: 11;
+  }
+  .twelve-column.desktop {
+    --grid-columns: 12;
+  }
+  .desktop.two-column.golden {
+    grid-template-columns: 1.618fr 1fr;
+  }
+  .desktop.two-column.golden.reverse {
+    grid-template-columns: 1fr 1.618fr;
+  }
 }
 .grid-width-one {
   grid-column: auto / span 1;
@@ -2994,6 +3522,18 @@ button:active {
 }
 .grid-width-twelve {
   grid-column: auto / span 12;
+}
+.first-column {
+  grid-column-start: 1;
+}
+.second-column {
+  grid-column-start: 2;
+}
+.two-column {
+  --grid-columns: 2;
+}
+.three-column {
+  --grid-columns: 3;
 }
 .four-column {
   --grid-columns: 4;
@@ -3046,16 +3586,16 @@ button:active {
 .golden-width.force {
   width: calc(62% - var(--spacer));
 }
-.golden-width.reverse {
+.golden-width.switch {
   max-width: calc(38% - var(--spacer));
 }
-.golden-width.reverse.force {
+.golden-width.switch.force {
   width: calc(38% - var(--spacer));
 }
 .card-width {
   max-width: var(--card-width);
 }
-@media screen and (min-width: 39.44rem) {
+@media screen and (min-width: 25.04rem) {
   .text-width {
     max-width: var(--text-width);
   }
@@ -3089,7 +3629,7 @@ button:active {
   padding-left: calc(50% - ((var(--card-width) * 0.5) + var(--spacer)));
   padding-right: calc(50% - ((var(--card-width) * 0.5) + var(--spacer)));
 }
-@media screen and (min-width: 39.44rem) {
+@media screen and (min-width: 25.04rem) {
   .inner-text-width {
     padding-left: calc(50% - (var(--text-width) * 0.5));
     padding-right: calc(50% - (var(--text-width) * 0.5));
@@ -3099,7 +3639,7 @@ button:active {
     padding-right: calc(50% - (var(--text-width) * 0.5) + var(--spacer));
   }
 }
-@media screen and (min-width: 61.904rem) {
+@media screen and (min-width: 38.864rem) {
   .inner-page-width {
     padding-left: calc(50% - (var(--page-width) * 0.5));
     padding-right: calc(50% - (var(--page-width) * 0.5));
@@ -3129,7 +3669,7 @@ button:active {
 .hide.mobile {
   display: none;
 }
-@media screen and (min-width: 39.44rem) {
+@media screen and (min-width: 25.04rem) {
   .hide.mobile {
     display: initial;
   }
@@ -3137,7 +3677,7 @@ button:active {
     display: none;
   }
 }
-@media screen and (min-width: 61.904rem) {
+@media screen and (min-width: 38.864rem) {
   .hide.desktop {
     display: none;
   }
@@ -3157,7 +3697,7 @@ button:active {
 .fixed.mobile {
   position: fixed;
 }
-@media screen and (min-width: 39.44rem) {
+@media screen and (min-width: 25.04rem) {
   .fixed.mobile {
     position: initial;
   }
@@ -3165,7 +3705,7 @@ button:active {
     position: fixed;
   }
 }
-@media screen and (min-width: 61.904rem) {
+@media screen and (min-width: 38.864rem) {
   .fixed.desktop {
     position: fixed;
   }
@@ -3300,6 +3840,9 @@ button:active {
 .no-list-style {
   list-style-type: none;
   margin-left: 0;
+}
+.no-fade {
+  opacity: 1;
 }
 .no-gap,
 .no-column-gap {
@@ -3814,15 +4357,15 @@ button:active {
 }
 .warm {
   --a: 0.2;
-  background-image: linear-gradient(rgba(218.89600207, 105.52453813, 112.04086966, var(--a)), rgba(218.89600207, 105.52453813, 112.04086966, var(--a)));
+  background-image: linear-gradient(rgba(218.9, 105.5, 112, var(--a)), rgba(218.9, 105.5, 112, var(--a)));
 }
 .cool {
   --a: 0.2;
-  background-image: linear-gradient(rgba(13.4233142, 214.45383482, 215.54811009, var(--a)), rgba(13.4233142, 214.45383482, 215.54811009, var(--a)));
+  background-image: linear-gradient(rgba(13.4, 214.5, 215.5, var(--a)), rgba(13.4, 214.5, 215.5, var(--a)));
 }
 .neutral {
   --a: 0.2;
-  background-image: linear-gradient(rgba(48.76156514, 145.73661905, 208.21093263, var(--a)), rgba(48.76156514, 145.73661905, 208.21093263, var(--a)));
+  background-image: linear-gradient(rgba(48.8, 145.7, 208.2, var(--a)), rgba(48.8, 145.7, 208.2, var(--a)));
 }
 .dull {
   --a: 0.2;
@@ -3835,9 +4378,10 @@ button:active {
         <div class="inner-text-width margin-bottom">
           <h5>or put this in &lt;head&gt;</h5>
           <textarea readonly name="" class="full-width no-padding-bottom force black monospace text-padding no-margin" id="html_textarea" cols="30" rows="10">&lt;style&gt;
+/* This project uses Cavepaint (MIT License) by Rex Riepe */
+/* https://github.com/cavepaint/cavepaintCSS */
 :root {
   --font-size-base: 16px;
-  --font-size: calc(var(--font-size-base) * var(--font-size-mod));
   --font-size-mod: 1;
   --font-family: var(--sans-serif);
   --line-height: 1.8;
@@ -3861,7 +4405,7 @@ button:active {
   --border-radius: 0.5em;
   --border-h: var(--h);
   --border-s: var(--s);
-  --border-l: clamp(0%, calc(var(--l) * 0.5), 35%);
+  --border-l: clamp(0%, calc(var(--l) * 0.85), 85%);
   --border-color: hsl(var(--border-h), var(--border-s), var(--border-l));
   --border: var(--border-width) var(--border-style) var(--border-color);
   --border-thin: calc(var(--border-width) / 2);
@@ -3872,43 +4416,45 @@ button:active {
   --card-width: calc(var(--text-width) / var(--golden));
   --page-width: calc(var(--text-width) * var(--golden));
   --feature-width: calc(var(--page-width) * var(--golden));
+  --box-shadow: var(--shadow-position) var(--shadow-position) var(--shadow-blur) var(--shadow-color);
   --shadow-position: 1px;
   --shadow-blur: 1px;
   --shadow-color: rgba(6, 30, 35, 0.2);
   --direction: 180deg;
   --white: #f2fdff;
   --black: #061e23;
-  --warm: rgba(218.89600207, 105.52453813, 112.04086966, var(--a));
-  --cool: rgba(13.4233142, 214.45383482, 215.54811009, var(--a));
-  --neutral: rgba(48.76156514, 145.73661905, 208.21093263, var(--a));
+  --warm: rgba(218.9, 105.5, 112, var(--a));
+  --cool: rgba(13.4, 214.5, 215.5, var(--a));
+  --neutral: rgba(48.8, 145.7, 208.2, var(--a));
   --dull: rgba(130.5, 130.5, 130.5, var(--a));
   --monospace: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, "DejaVu Sans Mono", Courier, monospace;
   --serif: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "Droid Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
   --sans-serif: "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, sans-serif;
-  /* This project uses Cavepaint (MIT License) by Rex Riepe */
-  /* https://github.com/cavepaint/cavepaintCSS */
 }
 @media screen and (min-width: 1px) {
   :root {
     --padding: calc(0.6 * var(--spacer));
     --margin: calc(0.6 * var(--margin-base));
     --gutter: calc(1.2 * var(--margin-base));
+    --font-size: calc(16px - 2);
     --headline-base: 1em;
   }
 }
-@media screen and (min-width: 39.44rem) {
+@media screen and (min-width: 25.04rem) {
   :root {
     --padding: calc(0.8 * var(--spacer));
     --margin: calc(0.8 * var(--margin-base));
     --gutter: calc(1.6 * var(--margin-base));
+    --font-size: calc(16px - 1);
     --headline-base: 1.1em;
   }
 }
-@media screen and (min-width: 61.904rem) {
+@media screen and (min-width: 38.864rem) {
   :root {
     --padding: calc(1 * var(--spacer));
     --margin: calc(1 * var(--margin-base));
     --gutter: calc(2 * var(--margin-base));
+    --font-size: 16px;
     --headline-base: 1.2em;
   }
 }
@@ -4267,13 +4813,15 @@ button:active {
 }
 .box-shadow,
 .shadow {
-  box-shadow: var(--shadow-position) var(--shadow-position) var(--shadow-blur) var(--shadow-color);
+  box-shadow: var(--box-shadow);
 }
 .shallow {
   --shadow-position: 0.5px;
+  --box-shadow: var(--shadow-position) var(--shadow-position) var(--shadow-blur) var(--shadow-color);
 }
 .deep {
   --shadow-position: 2px;
+  --box-shadow: var(--shadow-position) var(--shadow-position) var(--shadow-blur) var(--shadow-color);
 }
 .full-height {
   min-height: 100%;
@@ -4328,6 +4876,7 @@ button:active {
   border-width: var(--border-thick);
 }
 .thin {
+  --border-l: clamp(0%, calc(var(--l) * 0.9), 85%);
   border-width: var(--border-thin);
 }
 .current-color {
@@ -4364,43 +4913,40 @@ button:active {
   --font-size-mod: 0.9;
 }
 .medium {
-  font-size: var(--font-size);
-  line-height: var(--line-height);
+  --font-size-mod: 1;
 }
 .big {
-  --font-size-mod: 1.2;
+  --font-size-mod: 1.1;
 }
 .huge {
-  --font-size-mod: 1.4;
+  --font-size-mod: 1.2;
 }
-@media screen and (min-width: 39.44rem) {
+@media screen and (min-width: 25.04rem) {
   .small {
     --font-size-mod: 0.9;
   }
   .medium {
-    font-size: var(--font-size);
-    line-height: var(--line-height);
+    --font-size-mod: 1;
   }
   .big {
-    --font-size-mod: 1.25;
+    --font-size-mod: 1.2;
   }
   .huge {
-    --font-size-mod: 1.5;
+    --font-size-mod: 1.4;
   }
 }
-@media screen and (min-width: 61.904rem) {
+@media screen and (min-width: 38.864rem) {
   .small {
     --font-size-mod: 0.9;
   }
   .medium {
-    font-size: var(--font-size);
-    line-height: var(--line-height);
+    --font-size-mod: 1;
   }
   .big {
-    --font-size-mod: 1.25;
+    --font-size-mod: 1.3;
   }
   .huge {
-    --font-size-mod: 1.5;
+    --font-size-mod: 1.6;
   }
 }
 .vertical-center,
@@ -4490,7 +5036,7 @@ button:active {
   border-color: hsl(var(--border-h), var(--border-s), var(--border-l));
   --border-h: var(--h);
   --border-s: var(--s);
-  --border-l: clamp(0%, calc(var(--l) * 0.4), 30%);
+  --border-l: clamp(0%, calc(var(--l) * 0.75), 85%);
 }
 .tint,
 .black,
@@ -4525,7 +5071,7 @@ button:active {
   border-color: hsl(var(--border-h), var(--border-s), var(--border-l));
   --border-h: var(--h);
   --border-s: var(--s);
-  --border-l: clamp(0%, calc(var(--l) * 0.4), 30%);
+  --border-l: clamp(0%, calc(var(--l) * 0.75), 85%);
 }
 .transparent {
   background-color: transparent !important;
@@ -4704,94 +5250,61 @@ button:active {
 .placeholder::after {
   content: " ";
 }
-.square::after,
-.one-to-one::after,
-.four-to-three::after,
-.sixteen-to-nine::after,
-.two-to-one::after {
-  content: "";
-  display: block;
-  width: 0;
-}
-.square::after,
-.one-to-one::after {
-  padding-top: 100%;
-}
-.four-to-three::after {
-  padding-top: 75%;
-}
-.sixteen-to-nine::after {
-  padding-top: 56.25%;
-}
-.two-to-one::after {
-  padding-top: 50%;
-}
 .grid,
 .two-column,
-.three-column {
+.three-column,
+.four-column,
+.five-column,
+.six-column,
+.seven-column,
+.eight-column,
+.nine-column,
+.ten-column,
+.eleven-column,
+.twelve-column {
+  --grid-columns: 12;
   display: grid;
   gap: var(--gap);
   grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
 }
-@media screen and (min-width: 1px) {
-  .grid.mobile,
-  .two-column.mobile,
-  .three-column.mobile {
-    display: grid;
-  }
-}
-@media screen and (min-width: 39.44rem) {
-  .grid.mobile,
-  .two-column.mobile,
-  .three-column.mobile {
-    display: initial;
-  }
-}
-.grid.mobile.tablet,
-.two-column.mobile.tablet,
-.three-column.mobile.tablet {
-  display: grid;
-}
-@media screen and (min-width: 39.44rem) {
-  .grid.mobile.tablet,
-  .two-column.mobile.tablet,
-  .three-column.mobile.tablet {
-    display: grid;
-  }
-}
-@media screen and (min-width: 61.904rem) {
-  .grid.mobile.tablet,
-  .two-column.mobile.tablet,
-  .three-column.mobile.tablet {
-    display: initial;
-  }
-}
-.grid.tablet,
+.two-column.mobile,
+.three-column.mobile,
+.four-column.mobile,
+.five-column.mobile,
+.six-column.mobile,
+.seven-column.mobile,
+.eight-column.mobile,
+.nine-column.mobile,
+.ten-column.mobile,
+.eleven-column.mobile,
+.twelve-column.mobile,
 .two-column.tablet,
-.three-column.tablet {
-  display: initial;
-}
-@media screen and (min-width: 39.44rem) {
-  .grid.tablet,
-  .two-column.tablet,
-  .three-column.tablet {
-    display: grid;
-  }
-}
-.grid.desktop,
+.three-column.tablet,
+.four-column.tablet,
+.five-column.tablet,
+.six-column.tablet,
+.seven-column.tablet,
+.eight-column.tablet,
+.nine-column.tablet,
+.ten-column.tablet,
+.eleven-column.tablet,
+.twelve-column.tablet,
 .two-column.desktop,
-.three-column.desktop {
-  display: initial;
+.three-column.desktop,
+.four-column.desktop,
+.five-column.desktop,
+.six-column.desktop,
+.seven-column.desktop,
+.eight-column.desktop,
+.nine-column.desktop,
+.ten-column.desktop,
+.eleven-column.desktop,
+.twelve-column.desktop {
+  grid-template-columns: minmax(0, 1fr);
 }
-@media screen and (min-width: 61.904rem) {
-  .grid.desktop,
-  .two-column.desktop,
-  .three-column.desktop {
-    display: grid;
-  }
-}
-.two-column {
-  grid-template-columns: 1fr 1fr;
+.two-column.tablet,
+.two-column.desktop {
+  --grid-columns: 1;
 }
 .two-column.golden {
   grid-template-columns: 1.618fr 1fr;
@@ -4799,17 +5312,309 @@ button:active {
 .two-column.golden.reverse {
   grid-template-columns: 1fr 1.618fr;
 }
-.three-column {
-  grid-template-columns: 1fr 1fr 1fr;
+.mobile {
+  --grid-columns: 1;
 }
-.three-column.golden {
-  grid-template-columns: 1fr 1.618fr 1fr;
+.mobile.two-column.golden {
+  grid-template-columns: minmax(0, 1fr);
 }
-.three-column.golden.leading {
-  grid-template-columns: 1.618fr 1fr 1fr;
+.mobile.two-column.golden.reverse {
+  grid-template-columns: minmax(0, 1fr);
 }
-.three-column.golden.trailing {
-  grid-template-columns: 1fr 1fr 1.618fr;
+@media screen and (min-width: 1px) {
+  .grid,
+  .two-column.mobile,
+  .three-column.mobile,
+  .four-column.mobile,
+  .five-column.mobile,
+  .six-column.mobile,
+  .seven-column.mobile,
+  .eight-column.mobile,
+  .nine-column.mobile,
+  .ten-column.mobile,
+  .eleven-column.mobile,
+  .twelve-column.mobile,
+  .two-column,
+  .three-column,
+  .four-column,
+  .five-column,
+  .six-column,
+  .seven-column,
+  .eight-column,
+  .nine-column,
+  .ten-column,
+  .eleven-column,
+  .twelve-column {
+    --grid-columns: 12;
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  }
+  .two-column {
+    --grid-columns: 2;
+  }
+  .three-column {
+    --grid-columns: 3;
+  }
+  .four-column {
+    --grid-columns: 4;
+  }
+  .five-column {
+    --grid-columns: 5;
+  }
+  .six-column {
+    --grid-columns: 6;
+  }
+  .seven-column {
+    --grid-columns: 7;
+  }
+  .eight-column {
+    --grid-columns: 8;
+  }
+  .nine-column {
+    --grid-columns: 9;
+  }
+  .ten-column {
+    --grid-columns: 10;
+  }
+  .eleven-column {
+    --grid-columns: 11;
+  }
+  .twelve-column {
+    --grid-columns: 12;
+  }
+  .mobile.two-column.golden {
+    grid-template-columns: 1.618fr 1fr;
+  }
+  .mobile.two-column.golden.reverse {
+    grid-template-columns: 1fr 1.618fr;
+  }
+}
+.tablet {
+  --grid-columns: 1;
+}
+.tablet.two-column.golden {
+  grid-template-columns: minmax(0, 1fr);
+}
+.tablet.two-column.golden.reverse {
+  grid-template-columns: minmax(0, 1fr);
+}
+@media screen and (min-width: 25.04rem) {
+  .grid,
+  .two-column.tablet,
+  .three-column.tablet,
+  .four-column.tablet,
+  .five-column.tablet,
+  .six-column.tablet,
+  .seven-column.tablet,
+  .eight-column.tablet,
+  .nine-column.tablet,
+  .ten-column.tablet,
+  .eleven-column.tablet,
+  .twelve-column.tablet,
+  .two-column,
+  .three-column,
+  .four-column,
+  .five-column,
+  .six-column,
+  .seven-column,
+  .eight-column,
+  .nine-column,
+  .ten-column,
+  .eleven-column,
+  .twelve-column {
+    --grid-columns: 12;
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  }
+  .two-column.tablet {
+    --grid-columns: 2;
+  }
+  .three-column.tablet {
+    --grid-columns: 3;
+  }
+  .four-column.tablet {
+    --grid-columns: 4;
+  }
+  .five-column.tablet {
+    --grid-columns: 5;
+  }
+  .six-column.tablet {
+    --grid-columns: 6;
+  }
+  .seven-column.tablet {
+    --grid-columns: 7;
+  }
+  .eight-column.tablet {
+    --grid-columns: 8;
+  }
+  .nine-column.tablet {
+    --grid-columns: 9;
+  }
+  .ten-column.tablet {
+    --grid-columns: 10;
+  }
+  .eleven-column.tablet {
+    --grid-columns: 11;
+  }
+  .twelve-column.tablet {
+    --grid-columns: 12;
+  }
+  .tablet.two-column.golden {
+    grid-template-columns: 1.618fr 1fr;
+  }
+  .tablet.two-column.golden.reverse {
+    grid-template-columns: 1fr 1.618fr;
+  }
+}
+.mobile.tablet {
+  --grid-columns: 1;
+}
+.mobile.tablet.two-column.golden {
+  grid-template-columns: minmax(0, 1fr);
+}
+.mobile.tablet.two-column.golden.reverse {
+  grid-template-columns: minmax(0, 1fr);
+}
+@media screen and (max-width: calc(38.864rem - 1px)) {
+  .grid,
+  .two-column.mobile.tablet,
+  .three-column.mobile.tablet,
+  .four-column.mobile.tablet,
+  .five-column.mobile.tablet,
+  .six-column.mobile.tablet,
+  .seven-column.mobile.tablet,
+  .eight-column.mobile.tablet,
+  .nine-column.mobile.tablet,
+  .ten-column.mobile.tablet,
+  .eleven-column.mobile.tablet,
+  .twelve-column.mobile.tablet,
+  .two-column,
+  .three-column,
+  .four-column,
+  .five-column,
+  .six-column,
+  .seven-column,
+  .eight-column,
+  .nine-column,
+  .ten-column,
+  .eleven-column,
+  .twelve-column {
+    --grid-columns: 12;
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  }
+  .two-column.mobile.tablet {
+    --grid-columns: 2;
+  }
+  .three-column.mobile.tablet {
+    --grid-columns: 3;
+  }
+  .four-column.mobile.tablet {
+    --grid-columns: 4;
+  }
+  .five-column.mobile.tablet {
+    --grid-columns: 5;
+  }
+  .six-column.mobile.tablet {
+    --grid-columns: 6;
+  }
+  .seven-column.mobile.tablet {
+    --grid-columns: 7;
+  }
+  .eight-column.mobile.tablet {
+    --grid-columns: 8;
+  }
+  .nine-column.mobile.tablet {
+    --grid-columns: 9;
+  }
+  .ten-column.mobile.tablet {
+    --grid-columns: 10;
+  }
+  .eleven-column.mobile.tablet {
+    --grid-columns: 11;
+  }
+  .twelve-column.mobile.tablet {
+    --grid-columns: 12;
+  }
+  .mobile.tablet.two-column.golden {
+    grid-template-columns: 1.618fr 1fr;
+  }
+  .mobile.tablet.two-column.golden.reverse {
+    grid-template-columns: 1fr 1.618fr;
+  }
+}
+.desktop {
+  --grid-columns: 1;
+}
+.desktop.two-column.golden {
+  grid-template-columns: minmax(0, 1fr);
+}
+.desktop.two-column.golden.reverse {
+  grid-template-columns: minmax(0, 1fr);
+}
+@media screen and (min-width: 38.864rem) {
+  .grid,
+  .two-column.desktop,
+  .three-column.desktop,
+  .four-column.desktop,
+  .five-column.desktop,
+  .six-column.desktop,
+  .seven-column.desktop,
+  .eight-column.desktop,
+  .nine-column.desktop,
+  .ten-column.desktop,
+  .eleven-column.desktop,
+  .twelve-column.desktop,
+  .two-column,
+  .three-column,
+  .four-column,
+  .five-column,
+  .six-column,
+  .seven-column,
+  .eight-column,
+  .nine-column,
+  .ten-column,
+  .eleven-column,
+  .twelve-column {
+    --grid-columns: 12;
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  }
+  .two-column.desktop {
+    --grid-columns: 2;
+  }
+  .three-column.desktop {
+    --grid-columns: 3;
+  }
+  .four-column.desktop {
+    --grid-columns: 4;
+  }
+  .five-column.desktop {
+    --grid-columns: 5;
+  }
+  .six-column.desktop {
+    --grid-columns: 6;
+  }
+  .seven-column.desktop {
+    --grid-columns: 7;
+  }
+  .eight-column.desktop {
+    --grid-columns: 8;
+  }
+  .nine-column.desktop {
+    --grid-columns: 9;
+  }
+  .ten-column.desktop {
+    --grid-columns: 10;
+  }
+  .eleven-column.desktop {
+    --grid-columns: 11;
+  }
+  .twelve-column.desktop {
+    --grid-columns: 12;
+  }
+  .desktop.two-column.golden {
+    grid-template-columns: 1.618fr 1fr;
+  }
+  .desktop.two-column.golden.reverse {
+    grid-template-columns: 1fr 1.618fr;
+  }
 }
 .grid-width-one {
   grid-column: auto / span 1;
@@ -4846,6 +5651,18 @@ button:active {
 }
 .grid-width-twelve {
   grid-column: auto / span 12;
+}
+.first-column {
+  grid-column-start: 1;
+}
+.second-column {
+  grid-column-start: 2;
+}
+.two-column {
+  --grid-columns: 2;
+}
+.three-column {
+  --grid-columns: 3;
 }
 .four-column {
   --grid-columns: 4;
@@ -4898,16 +5715,16 @@ button:active {
 .golden-width.force {
   width: calc(62% - var(--spacer));
 }
-.golden-width.reverse {
+.golden-width.switch {
   max-width: calc(38% - var(--spacer));
 }
-.golden-width.reverse.force {
+.golden-width.switch.force {
   width: calc(38% - var(--spacer));
 }
 .card-width {
   max-width: var(--card-width);
 }
-@media screen and (min-width: 39.44rem) {
+@media screen and (min-width: 25.04rem) {
   .text-width {
     max-width: var(--text-width);
   }
@@ -4941,7 +5758,7 @@ button:active {
   padding-left: calc(50% - ((var(--card-width) * 0.5) + var(--spacer)));
   padding-right: calc(50% - ((var(--card-width) * 0.5) + var(--spacer)));
 }
-@media screen and (min-width: 39.44rem) {
+@media screen and (min-width: 25.04rem) {
   .inner-text-width {
     padding-left: calc(50% - (var(--text-width) * 0.5));
     padding-right: calc(50% - (var(--text-width) * 0.5));
@@ -4951,7 +5768,7 @@ button:active {
     padding-right: calc(50% - (var(--text-width) * 0.5) + var(--spacer));
   }
 }
-@media screen and (min-width: 61.904rem) {
+@media screen and (min-width: 38.864rem) {
   .inner-page-width {
     padding-left: calc(50% - (var(--page-width) * 0.5));
     padding-right: calc(50% - (var(--page-width) * 0.5));
@@ -4981,7 +5798,7 @@ button:active {
 .hide.mobile {
   display: none;
 }
-@media screen and (min-width: 39.44rem) {
+@media screen and (min-width: 25.04rem) {
   .hide.mobile {
     display: initial;
   }
@@ -4989,7 +5806,7 @@ button:active {
     display: none;
   }
 }
-@media screen and (min-width: 61.904rem) {
+@media screen and (min-width: 38.864rem) {
   .hide.desktop {
     display: none;
   }
@@ -5009,7 +5826,7 @@ button:active {
 .fixed.mobile {
   position: fixed;
 }
-@media screen and (min-width: 39.44rem) {
+@media screen and (min-width: 25.04rem) {
   .fixed.mobile {
     position: initial;
   }
@@ -5017,7 +5834,7 @@ button:active {
     position: fixed;
   }
 }
-@media screen and (min-width: 61.904rem) {
+@media screen and (min-width: 38.864rem) {
   .fixed.desktop {
     position: fixed;
   }
@@ -5152,6 +5969,9 @@ button:active {
 .no-list-style {
   list-style-type: none;
   margin-left: 0;
+}
+.no-fade {
+  opacity: 1;
 }
 .no-gap,
 .no-column-gap {
@@ -5666,15 +6486,15 @@ button:active {
 }
 .warm {
   --a: 0.2;
-  background-image: linear-gradient(rgba(218.89600207, 105.52453813, 112.04086966, var(--a)), rgba(218.89600207, 105.52453813, 112.04086966, var(--a)));
+  background-image: linear-gradient(rgba(218.9, 105.5, 112, var(--a)), rgba(218.9, 105.5, 112, var(--a)));
 }
 .cool {
   --a: 0.2;
-  background-image: linear-gradient(rgba(13.4233142, 214.45383482, 215.54811009, var(--a)), rgba(13.4233142, 214.45383482, 215.54811009, var(--a)));
+  background-image: linear-gradient(rgba(13.4, 214.5, 215.5, var(--a)), rgba(13.4, 214.5, 215.5, var(--a)));
 }
 .neutral {
   --a: 0.2;
-  background-image: linear-gradient(rgba(48.76156514, 145.73661905, 208.21093263, var(--a)), rgba(48.76156514, 145.73661905, 208.21093263, var(--a)));
+  background-image: linear-gradient(rgba(48.8, 145.7, 208.2, var(--a)), rgba(48.8, 145.7, 208.2, var(--a)));
 }
 .dull {
   --a: 0.2;
@@ -5696,17 +6516,22 @@ button:active {
 @gutter: @padding * 2;
 @line-height: 1.8;
 @lighten-by: 10%;
-@darken-by: 10%;@mobile: (@card-width + @text-width)*.5 + @gutter;
-@tablet: (@text-width + @page-width)*.5 + @gutter;
-@desktop: (@page-width + @feature-width)*.5 + @gutter;
+@darken-by: 10%;@mobile: (@text-width)*.5 + @gutter;
+@tablet: (@page-width)*.5 + @gutter;
+@desktop: (@feature-width)*.5 + @gutter;
 @text-width: @text-base * .6rem;
 @card-width: @text-width * .6;
 @page-width: @text-width * 1.6;
 @feature-width: @page-width * 1.6;
+@font-size-mobile: calc(@font-size - 2);
+@font-size-tablet: calc(@font-size - 1);
+@font-size-desktop: @font-size;
+
+/* This project uses Cavepaint (MIT License) by Rex Riepe */ 
+/* https://github.com/cavepaint/cavepaintCSS */
 
 :root {
     --font-size-base: @font-size;
-    --font-size: calc(var(--font-size-base) * var(--font-size-mod));
     --font-size-mod: 1;
     --font-family: @font-family;
     --line-height: @line-height;
@@ -5730,7 +6555,7 @@ button:active {
     --border-radius: .5em;
     --border-h: var(--h);
     --border-s: var(--s);
-    --border-l: clamp(0%, calc(var(--l) * .5), 35%);
+    --border-l: clamp(0%, calc(var(--l) * .85), 85%);
     --border-color: hsl(var(--border-h), var(--border-s), var(--border-l));
     --border: var(--border-width) var(--border-style) var(--border-color);
     --border-thin: calc(var(--border-width) / 2);
@@ -5741,6 +6566,7 @@ button:active {
     --card-width: calc(var(--text-width) / var(--golden));
     --page-width: calc(var(--text-width) * var(--golden));
     --feature-width: calc(var(--page-width) * var(--golden));
+    --box-shadow: var(--shadow-position) var(--shadow-position) var(--shadow-blur) var(--shadow-color);
     --shadow-position: 1px;
     --shadow-blur: 1px;
     --shadow-color: fade(@black, 20%);
@@ -5759,6 +6585,7 @@ button:active {
         --padding: calc(.6 * var(--spacer));
         --margin: calc(.6 * var(--margin-base));
         --gutter: calc(1.2 * var(--margin-base));
+        --font-size: calc(@font-size - 2);
         --headline-base: 1em;
     });
 
@@ -5766,6 +6593,7 @@ button:active {
         --padding: calc(.8 * var(--spacer));
         --margin: calc(.8 * var(--margin-base));
         --gutter: calc(1.6 * var(--margin-base));
+        --font-size: calc(@font-size - 1);
         --headline-base: 1.1em;
     });
 
@@ -5773,10 +6601,9 @@ button:active {
         --padding: calc(1 * var(--spacer));
         --margin: calc(1 * var(--margin-base));
         --gutter: calc(2 * var(--margin-base));
+        --font-size: @font-size;
         --headline-base: 1.2em;
     });
-    /* This project uses Cavepaint (MIT License) by Rex Riepe */ 
-    /* https://github.com/cavepaint/cavepaintCSS */
 }
 
 .on-mobile(@rules) {
@@ -5789,6 +6616,10 @@ button:active {
 
 .on-desktop(@rules) {
     @media screen and (min-width: @desktop) { @rules();}
+}
+
+.under-desktop(@rules) {
+    @media screen and (max-width: calc(@desktop - 1px)) { @rules();}
 }* {
     margin: 0;
     padding: 0;
@@ -6104,15 +6935,17 @@ pre > code {
 }
 
 .box-shadow, .shadow {
-  box-shadow: var(--shadow-position) var(--shadow-position) var(--shadow-blur) var(--shadow-color);
+  box-shadow: var(--box-shadow);
 }
 
 .shallow {
   --shadow-position: .5px;
+  --box-shadow: var(--shadow-position) var(--shadow-position) var(--shadow-blur) var(--shadow-color);
 }
 
 .deep {
   --shadow-position: 2px;
+  --box-shadow: var(--shadow-position) var(--shadow-position) var(--shadow-blur) var(--shadow-color);
 }
 
 .full-height {
@@ -6184,6 +7017,7 @@ pre > code {
 }
 
 .thin {
+  --border-l: clamp(0%, calc(var(--l) * .9), 85%);
   border-width: var(--border-thin);
 }
 
@@ -6232,16 +7066,15 @@ pre > code {
 }
 
 .medium {
-  font-size: var(--font-size);
-  line-height: var(--line-height);
+  --font-size-mod: 1;
 }
 
 .big {
-  --font-size-mod: 1.2;
+  --font-size-mod: 1.1;
 }
 
 .huge {
-  --font-size-mod: 1.4;
+  --font-size-mod: 1.2;
 }
 
 .on-tablet({
@@ -6250,16 +7083,15 @@ pre > code {
   }
   
   .medium {
-    font-size: var(--font-size);
-    line-height: var(--line-height);
+    --font-size-mod: 1;
   }
   
   .big {
-    --font-size-mod: 1.25;
+    --font-size-mod: 1.2;
   }
   
   .huge {
-    --font-size-mod: 1.5;
+    --font-size-mod: 1.4;
   }
 });
 
@@ -6269,16 +7101,15 @@ pre > code {
   }
   
   .medium {
-    font-size: var(--font-size);
-    line-height: var(--line-height);
+    --font-size-mod: 1;
   }
   
   .big {
-    --font-size-mod: 1.25;
+    --font-size-mod: 1.3;
   }
   
   .huge {
-    --font-size-mod: 1.5;
+    --font-size-mod: 1.6;
   }
 });
 
@@ -6351,7 +7182,7 @@ pre > code {
   border-color: hsl(var(--border-h), var(--border-s), var(--border-l));
   --border-h: var(--h);
   --border-s: var(--s);
-  --border-l: clamp(0%, calc(var(--l) * .4), 30%);
+  --border-l: clamp(0%, calc(var(--l) * .75), 85%);
 }
 
 .tint {
@@ -6360,7 +7191,7 @@ pre > code {
   border-color: hsl(var(--border-h), var(--border-s), var(--border-l));
   --border-h: var(--h);
   --border-s: var(--s);
-  --border-l: clamp(0%, calc(var(--l) * .4), 30%);
+  --border-l: clamp(0%, calc(var(--l) * .75), 85%);
 }
 
 .transparent {
@@ -6561,105 +7392,215 @@ pre > code {
   content: " ";
 }
 
-.square::after, .one-to-one::after, .four-to-three::after, .sixteen-to-nine::after, .two-to-one::after {
-  content: ""; display: block; width: 0;
-}
-
-.square::after, .one-to-one::after {
-  padding-top: 100%;
-}
-
-.four-to-three::after {
-  // prop to maintain image dimensions of 4:3
-  padding-top: 75%;
-}
-
-.sixteen-to-nine::after {
-  // prop to maintain video dimensions of 16:9
-  padding-top: 56.25%;
-}
-
-.two-to-one::after {
-  // prop to maintain video dimensions of 2:1
-  padding-top: 50%;
-}
-
 .grid {
+  --grid-columns: 12;
   display: grid;
   gap: var(--gap);
   grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
-
-  &.mobile {    
-      .on-mobile({
-          display: grid;
-      });
-
-      .on-tablet({
-          display: initial;
-      });
-  }
-
-  &.mobile.tablet {
-      display: grid;
-  
-      .on-tablet({
-          display: grid;
-      });
-
-      .on-desktop({
-          display: initial;
-      });
-  }
-
-  &.tablet {
-      display: initial;
-  
-      .on-tablet({
-          display: grid;
-      });
-  }
-  
-  &.desktop {
-      display: initial;
-  
-      .on-desktop({
-          display: grid;
-      });
-  }
-
 }
 
-.two-column, .three-column {
-  &:extend(.grid all);
-}
+.two-column,
+.three-column,
+.four-column,
+.five-column,
+.six-column,
+.seven-column,
+.eight-column,
+.nine-column,
+.ten-column,
+.eleven-column,
+.twelve-column {
+  &:extend(.grid);
 
-.two-column {
-  grid-template-columns: 1fr 1fr;
-
-  &.golden {
-      grid-template-columns: 1.618fr 1fr;
-  }
-
-  &.golden.reverse {
-      grid-template-columns: 1fr 1.618fr;
+  &.mobile, &.tablet, &.desktop {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
-.three-column {
-  grid-template-columns: 1fr 1fr 1fr;
-  
-  &.golden {
-      grid-template-columns: 1fr 1.618fr 1fr;
-  }
-
-  &.golden.leading {
-      grid-template-columns: 1.618fr 1fr 1fr;
-  }
-
-  &.golden.trailing {
-      grid-template-columns: 1fr 1fr 1.618fr;
-  }
+.two-column.tablet,
+.two-column.desktop {
+  --grid-columns: 1;
 }
+
+.two-column.golden { grid-template-columns: 1.618fr 1fr;}
+.two-column.golden.reverse { grid-template-columns: 1fr 1.618fr;}
+
+.mobile {
+  --grid-columns: 1;
+}
+
+.mobile.two-column.golden { grid-template-columns: minmax(0, 1fr);}
+.mobile.two-column.golden.reverse { grid-template-columns: minmax(0, 1fr);}
+
+.on-mobile({
+
+  .grid {
+    --grid-columns: 12;
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  }
+
+  .two-column.mobile,
+  .three-column.mobile,
+  .four-column.mobile,
+  .five-column.mobile,
+  .six-column.mobile,
+  .seven-column.mobile,
+  .eight-column.mobile,
+  .nine-column.mobile,
+  .ten-column.mobile,
+  .eleven-column.mobile,
+  .twelve-column.mobile {
+    &:extend(.grid);
+  }
+
+  .two-column { --grid-columns: 2;}
+  .three-column { --grid-columns: 3;}
+  .four-column { --grid-columns: 4;}
+  .five-column { --grid-columns: 5;}
+  .six-column { --grid-columns: 6;}
+  .seven-column { --grid-columns: 7;}
+  .eight-column { --grid-columns: 8;}
+  .nine-column { --grid-columns: 9;}
+  .ten-column { --grid-columns: 10;}
+  .eleven-column { --grid-columns: 11;}
+  .twelve-column { --grid-columns: 12;}
+
+  .mobile.two-column.golden { grid-template-columns: 1.618fr 1fr;}
+  .mobile.two-column.golden.reverse { grid-template-columns: 1fr 1.618fr;}
+});
+
+.tablet {
+  --grid-columns: 1;
+}
+
+.tablet.two-column.golden { grid-template-columns: minmax(0, 1fr);}
+.tablet.two-column.golden.reverse { grid-template-columns: minmax(0, 1fr);}
+
+.on-tablet({
+
+  .grid {
+    --grid-columns: 12;
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  }
+
+  .two-column.tablet,
+  .three-column.tablet,
+  .four-column.tablet,
+  .five-column.tablet,
+  .six-column.tablet,
+  .seven-column.tablet,
+  .eight-column.tablet,
+  .nine-column.tablet,
+  .ten-column.tablet,
+  .eleven-column.tablet,
+  .twelve-column.tablet {
+    &:extend(.grid);
+  }
+
+  .two-column.tablet { --grid-columns: 2;}
+  .three-column.tablet { --grid-columns: 3;}
+  .four-column.tablet { --grid-columns: 4;}
+  .five-column.tablet { --grid-columns: 5;}
+  .six-column.tablet { --grid-columns: 6;}
+  .seven-column.tablet { --grid-columns: 7;}
+  .eight-column.tablet { --grid-columns: 8;}
+  .nine-column.tablet { --grid-columns: 9;}
+  .ten-column.tablet { --grid-columns: 10;}
+  .eleven-column.tablet { --grid-columns: 11;}
+  .twelve-column.tablet { --grid-columns: 12;}
+
+  .tablet.two-column.golden { grid-template-columns: 1.618fr 1fr;}
+  .tablet.two-column.golden.reverse { grid-template-columns: 1fr 1.618fr;}
+});
+
+.mobile.tablet {
+  --grid-columns: 1;
+}
+
+.mobile.tablet.two-column.golden { grid-template-columns: minmax(0, 1fr);}
+.mobile.tablet.two-column.golden.reverse { grid-template-columns: minmax(0, 1fr);}
+
+.under-desktop({
+
+  .grid {
+    --grid-columns: 12;
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  }
+
+  .two-column.mobile.tablet,
+  .three-column.mobile.tablet,
+  .four-column.mobile.tablet,
+  .five-column.mobile.tablet,
+  .six-column.mobile.tablet,
+  .seven-column.mobile.tablet,
+  .eight-column.mobile.tablet,
+  .nine-column.mobile.tablet,
+  .ten-column.mobile.tablet,
+  .eleven-column.mobile.tablet,
+  .twelve-column.mobile.tablet {
+    &:extend(.grid);
+  }
+
+  .two-column.mobile.tablet { --grid-columns: 2;}
+  .three-column.mobile.tablet { --grid-columns: 3;}
+  .four-column.mobile.tablet { --grid-columns: 4;}
+  .five-column.mobile.tablet { --grid-columns: 5;}
+  .six-column.mobile.tablet { --grid-columns: 6;}
+  .seven-column.mobile.tablet { --grid-columns: 7;}
+  .eight-column.mobile.tablet { --grid-columns: 8;}
+  .nine-column.mobile.tablet { --grid-columns: 9;}
+  .ten-column.mobile.tablet { --grid-columns: 10;}
+  .eleven-column.mobile.tablet { --grid-columns: 11;}
+  .twelve-column.mobile.tablet { --grid-columns: 12;}
+
+  .mobile.tablet.two-column.golden { grid-template-columns: 1.618fr 1fr;}
+  .mobile.tablet.two-column.golden.reverse { grid-template-columns: 1fr 1.618fr;}
+});
+
+
+.desktop {
+  --grid-columns: 1;
+}
+
+.desktop.two-column.golden { grid-template-columns: minmax(0, 1fr);}
+.desktop.two-column.golden.reverse { grid-template-columns: minmax(0, 1fr);}
+
+.on-desktop({
+
+  .grid {
+    --grid-columns: 12;
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  }
+
+  .two-column.desktop,
+  .three-column.desktop,
+  .four-column.desktop,
+  .five-column.desktop,
+  .six-column.desktop,
+  .seven-column.desktop,
+  .eight-column.desktop,
+  .nine-column.desktop,
+  .ten-column.desktop,
+  .eleven-column.desktop,
+  .twelve-column.desktop {
+    &:extend(.grid);
+  }
+
+  .two-column.desktop { --grid-columns: 2;}
+  .three-column.desktop { --grid-columns: 3;}
+  .four-column.desktop { --grid-columns: 4;}
+  .five-column.desktop { --grid-columns: 5;}
+  .six-column.desktop { --grid-columns: 6;}
+  .seven-column.desktop { --grid-columns: 7;}
+  .eight-column.desktop { --grid-columns: 8;}
+  .nine-column.desktop { --grid-columns: 9;}
+  .ten-column.desktop { --grid-columns: 10;}
+  .eleven-column.desktop { --grid-columns: 11;}
+  .twelve-column.desktop { --grid-columns: 12;}
+
+  .desktop.two-column.golden { grid-template-columns: 1.618fr 1fr;}
+  .desktop.two-column.golden.reverse { grid-template-columns: 1fr 1.618fr;}
+});
 
 .grid-width-one {
   grid-column: auto / span 1;
@@ -6698,6 +7639,16 @@ pre > code {
   grid-column: auto / span 12;
 }
 
+.first-column {
+  grid-column-start: 1;
+}
+
+.second-column {
+  grid-column-start: 2;
+}
+
+.two-column { --grid-columns: 2;}
+.three-column { --grid-columns: 3;}
 .four-column { --grid-columns: 4;}
 .five-column { --grid-columns: 5;}
 .six-column { --grid-columns: 6;}
@@ -6734,8 +7685,8 @@ pre > code {
 
 .golden-width { max-width: calc(62% - var(--spacer));}
 .golden-width.force { width: calc(62% - var(--spacer));}
-.golden-width.reverse { max-width: calc(38% - var(--spacer));}
-.golden-width.reverse.force { width: calc(38% - var(--spacer));}
+.golden-width.switch { max-width: calc(38% - var(--spacer));}
+.golden-width.switch.force { width: calc(38% - var(--spacer));}
 
 .card-width { 
   max-width: var(--card-width);
@@ -6974,6 +7925,10 @@ pre > code {
     margin-left: 0;
 }
 
+.no-fade {
+    opacity: 1;
+}
+
 .no-gap, .no-column-gap {
     gap: 0;
     column-gap: 0;
@@ -7150,12 +8105,12 @@ pre > code {
 @warm-base: .set-warm-base()[];
 @warm-lumafix: .set-lumafix(@warm-base, @base-color, 25%)[];
 @warm: .set-color(~"warm", @warm-lumafix, 0)[];
-@warm-rgba: rgba(red(@warm), green(@warm), blue(@warm), var(--a));
+@warm-rgba: rgba(round(red(@warm), 1), round(green(@warm), 1), round(blue(@warm), 1), var(--a));
 @warm-bg-fill-opacity: var(--a);
 
 .warm {
     --a: .2;
-    background-image: linear-gradient(rgba(red(@warm), green(@warm), blue(@warm), var(--a)), rgba(red(@warm), green(@warm), blue(@warm), var(--a)));
+    background-image: linear-gradient(@warm-rgba, @warm-rgba);
 
 }
 
@@ -7170,12 +8125,12 @@ pre > code {
 @cool-base: .set-cool-base()[];
 @cool-lumafix: .set-lumafix(@cool-base, @base-color, 50%)[];
 @cool: .set-color(~"cool", @cool-lumafix, 0)[];
-@cool-rgba: rgba(red(@cool), green(@cool), blue(@cool), var(--a));
+@cool-rgba: rgba(round(red(@cool), 1), round(green(@cool), 1), round(blue(@cool), 1), var(--a));
 @cool-bg-fill-opacity: var(--a);
 
 .cool {
     --a: .2;
-    background-image: linear-gradient(rgba(red(@cool), green(@cool), blue(@cool), var(--a)), rgba(red(@cool), green(@cool), blue(@cool), var(--a)));
+    background-image: linear-gradient(@cool-rgba, @cool-rgba);
 }
 
 .set-neutral-base() when (green(@base-color) > 128) {
@@ -7189,22 +8144,22 @@ pre > code {
 @neutral-base: .set-neutral-base()[];
 @neutral-lumafix: .set-lumafix(@neutral-base, @base-color, 50%)[];
 @neutral: average(@neutral-lumafix, @action);
-@neutral-rgba: rgba(red(@neutral), green(@neutral), blue(@neutral), var(--a));
+@neutral-rgba: rgba(round(red(@neutral), 1), round(green(@neutral), 1), round(blue(@neutral), 1), var(--a));
 @neutral-bg-fill-opacity: var(--a);
 
 .neutral {
     --a: .2;
-    background-image: linear-gradient(rgba(red(@neutral), green(@neutral), blue(@neutral), var(--a)), rgba(red(@neutral), green(@neutral), blue(@neutral), var(--a)));
+    background-image: linear-gradient(@neutral-rgba, @neutral-rgba);
 }
 
 @dull-base: desaturate(@action, 100%);
 @dull: @dull-base;
 @dull-bg-fill-opacity: var(--a);
-@dull-rgba: rgba(red(@dull), green(@dull), blue(@dull), var(--a));
+@dull-rgba: rgba(round(red(@dull), 1), round(green(@dull), 1), round(blue(@dull), 1), var(--a));
 
 .dull {
     --a: .2;
-    background-image: linear-gradient(rgba(red(@dull), green(@dull), blue(@dull), var(--a)), rgba(red(@dull), green(@dull), blue(@dull), var(--a)));
+    background-image: linear-gradient(@dull-rgba, @dull-rgba);
 }.set-average(@colors) {
   // averages a list of colors
   // sets result to @average
@@ -7323,20 +8278,24 @@ pre > code {
           <button class="dark red" onclick="copyLess()">Copy to clipboard</button>
           <button class="dark blue" onclick="saveTextAsFile(document.getElementById('less_textarea').value,'cavepaint.less')">Download</button>
         </div>
-
         <div class="inner-text-width margin-bottom hidden">
           <h5>or compile this HEADLESS Less</h5>
-          <textarea readonly name="" class="full-width no-padding-bottom force black monospace text-padding no-margin" id="headless_less_textarea" cols="30" rows="10">@mobile: (@card-width + @text-width)*.5 + @gutter;
-@tablet: (@text-width + @page-width)*.5 + @gutter;
-@desktop: (@page-width + @feature-width)*.5 + @gutter;
+          <textarea readonly name="" class="full-width no-padding-bottom force black monospace text-padding no-margin" id="headless_less_textarea" cols="30" rows="10">@mobile: (@text-width)*.5 + @gutter;
+@tablet: (@page-width)*.5 + @gutter;
+@desktop: (@feature-width)*.5 + @gutter;
 @text-width: @text-base * .6rem;
 @card-width: @text-width * .6;
 @page-width: @text-width * 1.6;
 @feature-width: @page-width * 1.6;
+@font-size-mobile: calc(@font-size - 2);
+@font-size-tablet: calc(@font-size - 1);
+@font-size-desktop: @font-size;
+
+/* This project uses Cavepaint (MIT License) by Rex Riepe */ 
+/* https://github.com/cavepaint/cavepaintCSS */
 
 :root {
     --font-size-base: @font-size;
-    --font-size: calc(var(--font-size-base) * var(--font-size-mod));
     --font-size-mod: 1;
     --font-family: @font-family;
     --line-height: @line-height;
@@ -7360,7 +8319,7 @@ pre > code {
     --border-radius: .5em;
     --border-h: var(--h);
     --border-s: var(--s);
-    --border-l: clamp(0%, calc(var(--l) * .5), 35%);
+    --border-l: clamp(0%, calc(var(--l) * .85), 85%);
     --border-color: hsl(var(--border-h), var(--border-s), var(--border-l));
     --border: var(--border-width) var(--border-style) var(--border-color);
     --border-thin: calc(var(--border-width) / 2);
@@ -7371,6 +8330,7 @@ pre > code {
     --card-width: calc(var(--text-width) / var(--golden));
     --page-width: calc(var(--text-width) * var(--golden));
     --feature-width: calc(var(--page-width) * var(--golden));
+    --box-shadow: var(--shadow-position) var(--shadow-position) var(--shadow-blur) var(--shadow-color);
     --shadow-position: 1px;
     --shadow-blur: 1px;
     --shadow-color: fade(@black, 20%);
@@ -7389,6 +8349,7 @@ pre > code {
         --padding: calc(.6 * var(--spacer));
         --margin: calc(.6 * var(--margin-base));
         --gutter: calc(1.2 * var(--margin-base));
+        --font-size: calc(@font-size - 2);
         --headline-base: 1em;
     });
 
@@ -7396,6 +8357,7 @@ pre > code {
         --padding: calc(.8 * var(--spacer));
         --margin: calc(.8 * var(--margin-base));
         --gutter: calc(1.6 * var(--margin-base));
+        --font-size: calc(@font-size - 1);
         --headline-base: 1.1em;
     });
 
@@ -7403,10 +8365,9 @@ pre > code {
         --padding: calc(1 * var(--spacer));
         --margin: calc(1 * var(--margin-base));
         --gutter: calc(2 * var(--margin-base));
+        --font-size: @font-size;
         --headline-base: 1.2em;
     });
-    /* This project uses Cavepaint (MIT License) by Rex Riepe */ 
-    /* https://github.com/cavepaint/cavepaintCSS */
 }
 
 .on-mobile(@rules) {
@@ -7419,6 +8380,10 @@ pre > code {
 
 .on-desktop(@rules) {
     @media screen and (min-width: @desktop) { @rules();}
+}
+
+.under-desktop(@rules) {
+    @media screen and (max-width: calc(@desktop - 1px)) { @rules();}
 }* {
     margin: 0;
     padding: 0;
@@ -7734,15 +8699,17 @@ pre > code {
 }
 
 .box-shadow, .shadow {
-  box-shadow: var(--shadow-position) var(--shadow-position) var(--shadow-blur) var(--shadow-color);
+  box-shadow: var(--box-shadow);
 }
 
 .shallow {
   --shadow-position: .5px;
+  --box-shadow: var(--shadow-position) var(--shadow-position) var(--shadow-blur) var(--shadow-color);
 }
 
 .deep {
   --shadow-position: 2px;
+  --box-shadow: var(--shadow-position) var(--shadow-position) var(--shadow-blur) var(--shadow-color);
 }
 
 .full-height {
@@ -7814,6 +8781,7 @@ pre > code {
 }
 
 .thin {
+  --border-l: clamp(0%, calc(var(--l) * .9), 85%);
   border-width: var(--border-thin);
 }
 
@@ -7862,16 +8830,15 @@ pre > code {
 }
 
 .medium {
-  font-size: var(--font-size);
-  line-height: var(--line-height);
+  --font-size-mod: 1;
 }
 
 .big {
-  --font-size-mod: 1.2;
+  --font-size-mod: 1.1;
 }
 
 .huge {
-  --font-size-mod: 1.4;
+  --font-size-mod: 1.2;
 }
 
 .on-tablet({
@@ -7880,16 +8847,15 @@ pre > code {
   }
   
   .medium {
-    font-size: var(--font-size);
-    line-height: var(--line-height);
+    --font-size-mod: 1;
   }
   
   .big {
-    --font-size-mod: 1.25;
+    --font-size-mod: 1.2;
   }
   
   .huge {
-    --font-size-mod: 1.5;
+    --font-size-mod: 1.4;
   }
 });
 
@@ -7899,16 +8865,15 @@ pre > code {
   }
   
   .medium {
-    font-size: var(--font-size);
-    line-height: var(--line-height);
+    --font-size-mod: 1;
   }
   
   .big {
-    --font-size-mod: 1.25;
+    --font-size-mod: 1.3;
   }
   
   .huge {
-    --font-size-mod: 1.5;
+    --font-size-mod: 1.6;
   }
 });
 
@@ -7981,7 +8946,7 @@ pre > code {
   border-color: hsl(var(--border-h), var(--border-s), var(--border-l));
   --border-h: var(--h);
   --border-s: var(--s);
-  --border-l: clamp(0%, calc(var(--l) * .4), 30%);
+  --border-l: clamp(0%, calc(var(--l) * .75), 85%);
 }
 
 .tint {
@@ -7990,7 +8955,7 @@ pre > code {
   border-color: hsl(var(--border-h), var(--border-s), var(--border-l));
   --border-h: var(--h);
   --border-s: var(--s);
-  --border-l: clamp(0%, calc(var(--l) * .4), 30%);
+  --border-l: clamp(0%, calc(var(--l) * .75), 85%);
 }
 
 .transparent {
@@ -8191,105 +9156,215 @@ pre > code {
   content: " ";
 }
 
-.square::after, .one-to-one::after, .four-to-three::after, .sixteen-to-nine::after, .two-to-one::after {
-  content: ""; display: block; width: 0;
-}
-
-.square::after, .one-to-one::after {
-  padding-top: 100%;
-}
-
-.four-to-three::after {
-  // prop to maintain image dimensions of 4:3
-  padding-top: 75%;
-}
-
-.sixteen-to-nine::after {
-  // prop to maintain video dimensions of 16:9
-  padding-top: 56.25%;
-}
-
-.two-to-one::after {
-  // prop to maintain video dimensions of 2:1
-  padding-top: 50%;
-}
-
 .grid {
+  --grid-columns: 12;
   display: grid;
   gap: var(--gap);
   grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
-
-  &.mobile {    
-      .on-mobile({
-          display: grid;
-      });
-
-      .on-tablet({
-          display: initial;
-      });
-  }
-
-  &.mobile.tablet {
-      display: grid;
-  
-      .on-tablet({
-          display: grid;
-      });
-
-      .on-desktop({
-          display: initial;
-      });
-  }
-
-  &.tablet {
-      display: initial;
-  
-      .on-tablet({
-          display: grid;
-      });
-  }
-  
-  &.desktop {
-      display: initial;
-  
-      .on-desktop({
-          display: grid;
-      });
-  }
-
 }
 
-.two-column, .three-column {
-  &:extend(.grid all);
-}
+.two-column,
+.three-column,
+.four-column,
+.five-column,
+.six-column,
+.seven-column,
+.eight-column,
+.nine-column,
+.ten-column,
+.eleven-column,
+.twelve-column {
+  &:extend(.grid);
 
-.two-column {
-  grid-template-columns: 1fr 1fr;
-
-  &.golden {
-      grid-template-columns: 1.618fr 1fr;
-  }
-
-  &.golden.reverse {
-      grid-template-columns: 1fr 1.618fr;
+  &.mobile, &.tablet, &.desktop {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
-.three-column {
-  grid-template-columns: 1fr 1fr 1fr;
-  
-  &.golden {
-      grid-template-columns: 1fr 1.618fr 1fr;
-  }
-
-  &.golden.leading {
-      grid-template-columns: 1.618fr 1fr 1fr;
-  }
-
-  &.golden.trailing {
-      grid-template-columns: 1fr 1fr 1.618fr;
-  }
+.two-column.tablet,
+.two-column.desktop {
+  --grid-columns: 1;
 }
+
+.two-column.golden { grid-template-columns: 1.618fr 1fr;}
+.two-column.golden.reverse { grid-template-columns: 1fr 1.618fr;}
+
+.mobile {
+  --grid-columns: 1;
+}
+
+.mobile.two-column.golden { grid-template-columns: minmax(0, 1fr);}
+.mobile.two-column.golden.reverse { grid-template-columns: minmax(0, 1fr);}
+
+.on-mobile({
+
+  .grid {
+    --grid-columns: 12;
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  }
+
+  .two-column.mobile,
+  .three-column.mobile,
+  .four-column.mobile,
+  .five-column.mobile,
+  .six-column.mobile,
+  .seven-column.mobile,
+  .eight-column.mobile,
+  .nine-column.mobile,
+  .ten-column.mobile,
+  .eleven-column.mobile,
+  .twelve-column.mobile {
+    &:extend(.grid);
+  }
+
+  .two-column { --grid-columns: 2;}
+  .three-column { --grid-columns: 3;}
+  .four-column { --grid-columns: 4;}
+  .five-column { --grid-columns: 5;}
+  .six-column { --grid-columns: 6;}
+  .seven-column { --grid-columns: 7;}
+  .eight-column { --grid-columns: 8;}
+  .nine-column { --grid-columns: 9;}
+  .ten-column { --grid-columns: 10;}
+  .eleven-column { --grid-columns: 11;}
+  .twelve-column { --grid-columns: 12;}
+
+  .mobile.two-column.golden { grid-template-columns: 1.618fr 1fr;}
+  .mobile.two-column.golden.reverse { grid-template-columns: 1fr 1.618fr;}
+});
+
+.tablet {
+  --grid-columns: 1;
+}
+
+.tablet.two-column.golden { grid-template-columns: minmax(0, 1fr);}
+.tablet.two-column.golden.reverse { grid-template-columns: minmax(0, 1fr);}
+
+.on-tablet({
+
+  .grid {
+    --grid-columns: 12;
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  }
+
+  .two-column.tablet,
+  .three-column.tablet,
+  .four-column.tablet,
+  .five-column.tablet,
+  .six-column.tablet,
+  .seven-column.tablet,
+  .eight-column.tablet,
+  .nine-column.tablet,
+  .ten-column.tablet,
+  .eleven-column.tablet,
+  .twelve-column.tablet {
+    &:extend(.grid);
+  }
+
+  .two-column.tablet { --grid-columns: 2;}
+  .three-column.tablet { --grid-columns: 3;}
+  .four-column.tablet { --grid-columns: 4;}
+  .five-column.tablet { --grid-columns: 5;}
+  .six-column.tablet { --grid-columns: 6;}
+  .seven-column.tablet { --grid-columns: 7;}
+  .eight-column.tablet { --grid-columns: 8;}
+  .nine-column.tablet { --grid-columns: 9;}
+  .ten-column.tablet { --grid-columns: 10;}
+  .eleven-column.tablet { --grid-columns: 11;}
+  .twelve-column.tablet { --grid-columns: 12;}
+
+  .tablet.two-column.golden { grid-template-columns: 1.618fr 1fr;}
+  .tablet.two-column.golden.reverse { grid-template-columns: 1fr 1.618fr;}
+});
+
+.mobile.tablet {
+  --grid-columns: 1;
+}
+
+.mobile.tablet.two-column.golden { grid-template-columns: minmax(0, 1fr);}
+.mobile.tablet.two-column.golden.reverse { grid-template-columns: minmax(0, 1fr);}
+
+.under-desktop({
+
+  .grid {
+    --grid-columns: 12;
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  }
+
+  .two-column.mobile.tablet,
+  .three-column.mobile.tablet,
+  .four-column.mobile.tablet,
+  .five-column.mobile.tablet,
+  .six-column.mobile.tablet,
+  .seven-column.mobile.tablet,
+  .eight-column.mobile.tablet,
+  .nine-column.mobile.tablet,
+  .ten-column.mobile.tablet,
+  .eleven-column.mobile.tablet,
+  .twelve-column.mobile.tablet {
+    &:extend(.grid);
+  }
+
+  .two-column.mobile.tablet { --grid-columns: 2;}
+  .three-column.mobile.tablet { --grid-columns: 3;}
+  .four-column.mobile.tablet { --grid-columns: 4;}
+  .five-column.mobile.tablet { --grid-columns: 5;}
+  .six-column.mobile.tablet { --grid-columns: 6;}
+  .seven-column.mobile.tablet { --grid-columns: 7;}
+  .eight-column.mobile.tablet { --grid-columns: 8;}
+  .nine-column.mobile.tablet { --grid-columns: 9;}
+  .ten-column.mobile.tablet { --grid-columns: 10;}
+  .eleven-column.mobile.tablet { --grid-columns: 11;}
+  .twelve-column.mobile.tablet { --grid-columns: 12;}
+
+  .mobile.tablet.two-column.golden { grid-template-columns: 1.618fr 1fr;}
+  .mobile.tablet.two-column.golden.reverse { grid-template-columns: 1fr 1.618fr;}
+});
+
+
+.desktop {
+  --grid-columns: 1;
+}
+
+.desktop.two-column.golden { grid-template-columns: minmax(0, 1fr);}
+.desktop.two-column.golden.reverse { grid-template-columns: minmax(0, 1fr);}
+
+.on-desktop({
+
+  .grid {
+    --grid-columns: 12;
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  }
+
+  .two-column.desktop,
+  .three-column.desktop,
+  .four-column.desktop,
+  .five-column.desktop,
+  .six-column.desktop,
+  .seven-column.desktop,
+  .eight-column.desktop,
+  .nine-column.desktop,
+  .ten-column.desktop,
+  .eleven-column.desktop,
+  .twelve-column.desktop {
+    &:extend(.grid);
+  }
+
+  .two-column.desktop { --grid-columns: 2;}
+  .three-column.desktop { --grid-columns: 3;}
+  .four-column.desktop { --grid-columns: 4;}
+  .five-column.desktop { --grid-columns: 5;}
+  .six-column.desktop { --grid-columns: 6;}
+  .seven-column.desktop { --grid-columns: 7;}
+  .eight-column.desktop { --grid-columns: 8;}
+  .nine-column.desktop { --grid-columns: 9;}
+  .ten-column.desktop { --grid-columns: 10;}
+  .eleven-column.desktop { --grid-columns: 11;}
+  .twelve-column.desktop { --grid-columns: 12;}
+
+  .desktop.two-column.golden { grid-template-columns: 1.618fr 1fr;}
+  .desktop.two-column.golden.reverse { grid-template-columns: 1fr 1.618fr;}
+});
 
 .grid-width-one {
   grid-column: auto / span 1;
@@ -8328,6 +9403,16 @@ pre > code {
   grid-column: auto / span 12;
 }
 
+.first-column {
+  grid-column-start: 1;
+}
+
+.second-column {
+  grid-column-start: 2;
+}
+
+.two-column { --grid-columns: 2;}
+.three-column { --grid-columns: 3;}
 .four-column { --grid-columns: 4;}
 .five-column { --grid-columns: 5;}
 .six-column { --grid-columns: 6;}
@@ -8364,8 +9449,8 @@ pre > code {
 
 .golden-width { max-width: calc(62% - var(--spacer));}
 .golden-width.force { width: calc(62% - var(--spacer));}
-.golden-width.reverse { max-width: calc(38% - var(--spacer));}
-.golden-width.reverse.force { width: calc(38% - var(--spacer));}
+.golden-width.switch { max-width: calc(38% - var(--spacer));}
+.golden-width.switch.force { width: calc(38% - var(--spacer));}
 
 .card-width { 
   max-width: var(--card-width);
@@ -8604,6 +9689,10 @@ pre > code {
     margin-left: 0;
 }
 
+.no-fade {
+    opacity: 1;
+}
+
 .no-gap, .no-column-gap {
     gap: 0;
     column-gap: 0;
@@ -8780,12 +9869,12 @@ pre > code {
 @warm-base: .set-warm-base()[];
 @warm-lumafix: .set-lumafix(@warm-base, @base-color, 25%)[];
 @warm: .set-color(~"warm", @warm-lumafix, 0)[];
-@warm-rgba: rgba(red(@warm), green(@warm), blue(@warm), var(--a));
+@warm-rgba: rgba(round(red(@warm), 1), round(green(@warm), 1), round(blue(@warm), 1), var(--a));
 @warm-bg-fill-opacity: var(--a);
 
 .warm {
     --a: .2;
-    background-image: linear-gradient(rgba(red(@warm), green(@warm), blue(@warm), var(--a)), rgba(red(@warm), green(@warm), blue(@warm), var(--a)));
+    background-image: linear-gradient(@warm-rgba, @warm-rgba);
 
 }
 
@@ -8800,12 +9889,12 @@ pre > code {
 @cool-base: .set-cool-base()[];
 @cool-lumafix: .set-lumafix(@cool-base, @base-color, 50%)[];
 @cool: .set-color(~"cool", @cool-lumafix, 0)[];
-@cool-rgba: rgba(red(@cool), green(@cool), blue(@cool), var(--a));
+@cool-rgba: rgba(round(red(@cool), 1), round(green(@cool), 1), round(blue(@cool), 1), var(--a));
 @cool-bg-fill-opacity: var(--a);
 
 .cool {
     --a: .2;
-    background-image: linear-gradient(rgba(red(@cool), green(@cool), blue(@cool), var(--a)), rgba(red(@cool), green(@cool), blue(@cool), var(--a)));
+    background-image: linear-gradient(@cool-rgba, @cool-rgba);
 }
 
 .set-neutral-base() when (green(@base-color) > 128) {
@@ -8819,22 +9908,22 @@ pre > code {
 @neutral-base: .set-neutral-base()[];
 @neutral-lumafix: .set-lumafix(@neutral-base, @base-color, 50%)[];
 @neutral: average(@neutral-lumafix, @action);
-@neutral-rgba: rgba(red(@neutral), green(@neutral), blue(@neutral), var(--a));
+@neutral-rgba: rgba(round(red(@neutral), 1), round(green(@neutral), 1), round(blue(@neutral), 1), var(--a));
 @neutral-bg-fill-opacity: var(--a);
 
 .neutral {
     --a: .2;
-    background-image: linear-gradient(rgba(red(@neutral), green(@neutral), blue(@neutral), var(--a)), rgba(red(@neutral), green(@neutral), blue(@neutral), var(--a)));
+    background-image: linear-gradient(@neutral-rgba, @neutral-rgba);
 }
 
 @dull-base: desaturate(@action, 100%);
 @dull: @dull-base;
 @dull-bg-fill-opacity: var(--a);
-@dull-rgba: rgba(red(@dull), green(@dull), blue(@dull), var(--a));
+@dull-rgba: rgba(round(red(@dull), 1), round(green(@dull), 1), round(blue(@dull), 1), var(--a));
 
 .dull {
     --a: .2;
-    background-image: linear-gradient(rgba(red(@dull), green(@dull), blue(@dull), var(--a)), rgba(red(@dull), green(@dull), blue(@dull), var(--a)));
+    background-image: linear-gradient(@dull-rgba, @dull-rgba);
 }.set-average(@colors) {
   // averages a list of colors
   // sets result to @average
@@ -8951,17 +10040,10 @@ pre > code {
   .finalize-tone();
 }</textarea>
         </div>
-  
       </div>
     </section>
-    
-
+  
     <div class="dark warm gray">
-
-
-
-
-
     <section class="dark warm gray two-column desktop no-gap full-width margin-auto">
       <div class="dark warm black relative">
         <pre class="dark warm black no-margin monospace small full-width force padding white-space">
@@ -9047,6 +10129,8 @@ pre > code {
     </div>
 
     
+
+    
             <section id="cheatsheet" class="white feature-width margin-auto border-radius shadow padding gutter">
                 <h3 class="text-center">The Cavepaint CSS&nbsp;cheatsheet</h3>
       
@@ -9086,7 +10170,7 @@ pre > code {
                     </div>
                   </div>
                   <div class="grid-width-twelve text-align-center gutter-bottom">
-                    <h5 class="gutter-top">three-column</h5>
+                    <h5 class="gutter-top">More columns (up to twelve)</h5>
                     <div class="two-column gap-gutter tablet no-margin-bottom">
                       <div>
                         <h6>three-column</h6>
@@ -9100,8 +10184,10 @@ pre > code {
                         </div>
                       </div>
                       <div>
-                        <h6>three-column golden</h6>
-                        <div class="three-column golden responsive gap-border-width no-margin-bottom">
+                        <h6>four-column</h6>
+                        <div class="four-column responsive gap-border-width no-margin-bottom">
+                          <div class="base-color placeholder no-margin-bottom">
+                          </div>
                           <div class="base-color placeholder no-margin-bottom">
                           </div>
                           <div class="base-color placeholder no-margin-bottom">
@@ -9112,9 +10198,13 @@ pre > code {
                       </div>
                     </div>
                     <div class="two-column gap-gutter tablet no-margin-bottom">
-                      <div class="padding-top">
-                        <h6>three-column golden leading</h6>
-                        <div class="three-column golden leading responsive gap-border-width">
+                      <div>
+                        <h6>five-column</h6>
+                        <div class="five-column responsive gap-border-width no-margin-bottom">
+                          <div class="base-color placeholder no-margin-bottom">
+                          </div>
+                          <div class="base-color placeholder no-margin-bottom">
+                          </div>
                           <div class="base-color placeholder no-margin-bottom">
                           </div>
                           <div class="base-color placeholder no-margin-bottom">
@@ -9123,9 +10213,17 @@ pre > code {
                           </div>
                         </div>
                       </div>
-                      <div class="padding-top">
-                        <h6>three-column golden trailing</h6>
-                        <div class="three-column golden trailing responsive gap-border-width">
+                      <div>
+                        <h6>seven-column</h6>
+                        <div class="seven-column golden responsive gap-border-width no-margin-bottom">
+                          <div class="base-color placeholder no-margin-bottom">
+                          </div>
+                          <div class="base-color placeholder no-margin-bottom">
+                          </div>
+                          <div class="base-color placeholder no-margin-bottom">
+                          </div>
+                          <div class="base-color placeholder no-margin-bottom">
+                          </div>
                           <div class="base-color placeholder no-margin-bottom">
                           </div>
                           <div class="base-color placeholder no-margin-bottom">
@@ -9135,11 +10233,12 @@ pre > code {
                         </div>
                       </div>
                     </div>
+                    
                   </div>
     
                   <div class="grid-width-twelve text-align-center">
                     <h6 class="gutter-top">Color helpers</h6>
-                    <div class="grid tablet">
+                    <div class="grid twelve-column tablet">
                       <div class="grid-width-three vertical-center">
                         <div class="text-padding border rounded text-margin-bottom warm red">warm red</div>
                       </div>
@@ -9158,7 +10257,7 @@ pre > code {
     
                   <div class="grid-width-twelve text-align-center margin-top">
                     <h6>Color alternates</h6>
-                    <div class="grid tablet">
+                    <div class="grid twelve-column tablet">
                       <div class="grid-width-three vertical-center">
                         <div class="text-padding border rounded text-margin-bottom light red">light red</div>
                       </div>
@@ -9176,7 +10275,7 @@ pre > code {
     
                   <div class="grid-width-twelve text-align-center margin-top">
                     <h6>Gradient alternates</h6>
-                    <div class="grid tablet">
+                    <div class="grid twelve-column tablet">
                       <div class="grid-width-two hide mobile">
     
                       </div>
@@ -9198,19 +10297,19 @@ pre > code {
     
                   <div class="grid-width-four text-align-center trim gutter-top">
                     <h6 class="">Wheel colors</h6>
-                    <div class="grid tablet">
+                    <div class="grid twelve-column margin-bottom tablet">
                       <div class="grid-width-three text-padding border rounded text-margin-bottom base-color">base-color</div>
                       <div class="grid-width-three text-padding border rounded text-margin-bottom triad">triad</div>
                       <div class="grid-width-three text-padding border rounded text-margin-bottom complement">complement</div>
                       <div class="grid-width-three text-padding border rounded text-margin-bottom third triad">third triad</div>  
                     </div>
-                    <div class="grid tablet">
+                    <div class="grid twelve-column margin-bottom tablet">
                       <div class="grid-width-three text-padding border rounded text-margin-bottom accent">accent</div>
                       <div class="grid-width-three text-padding border rounded text-margin-bottom second accent">second accent</div>
                       <div class="grid-width-three text-padding border rounded text-margin-bottom split">split</div>
                       <div class="grid-width-three text-padding border rounded text-margin-bottom second split">second split</div>  
                     </div>
-                    <div class="grid tablet">
+                    <div class="grid twelve-column margin-bottom tablet">
                       <div class="grid-width-three text-padding border rounded text-margin-bottom tetrad">tetrad</div>
                       <div class="grid-width-three text-padding border rounded text-margin-bottom second tetrad">second tetrad</div>
                       <div class="grid-width-three text-padding border rounded text-margin-bottom third tetrad">third tetrad</div>
@@ -9220,7 +10319,7 @@ pre > code {
     
     
                   <h6 class="grid-width-twelve text-center gutter-top">Palette colors</h6>
-                  <div class="grid tablet">
+                  <div class="grid twelve-column tablet">
                     <div class="grid-width-three text-align-center margin-bottom">
                       <div class="text-padding border rounded text-margin-bottom red">red</div>
                       <div class="text-padding border rounded text-margin-bottom orange">orange</div>
@@ -9247,7 +10346,7 @@ pre > code {
                   </div>
     
                   <h6 class="grid-width-twelve text-center gutter-top">text-color (composes with any color)</h6>
-                  <div class="grid tablet">
+                  <div class="grid twelve-column tablet">
                     <div class="grid-width-three text-align-center margin-bottom">
                       <div class="text-padding border rounded text-margin-bottom text-color red">text-color red</div>
                       <div class="text-padding border rounded text-margin-bottom text-color orange">text-color orange</div>
@@ -9695,41 +10794,131 @@ pre > code {
       
                 </div>
     
-                <div class="grid-width-twelve text-align-center">
-                    <h5>Placeholder helpers</h5>
-                    <div class="grid tablet no-margin-bottom gap-border-width">
-                      <div class="grid-width-three">
-                        <h6>(no other class)</h6>
-                        <ul class="no-list-style">
-                          <li><div class="placeholder base-color"></div></li>
-                        </ul>
-                      </div>
-                      <div class="grid-width-three">
-                        <h6>four-to-three</h6>
-                        <ul class="no-list-style">
-                          <li><div class="placeholder four-to-three base-color margin-auto card-width"></div></li>
-                        </ul>
-                      </div>
-      
-                      <div class="grid-width-three">
-                        <h6>sixteen-to-nine</h6>
-                        <ul class="no-list-style">
-                          <li><div class="placeholder sixteen-to-nine base-color margin-auto card-width"></div></li>
-                        </ul>
-                      </div>
-      
-                      <div class="grid-width-three">
-                        <h6>square</h6>
-                        <ul class="no-list-style">
-                          <li><div class="placeholder small square base-color margin-auto card-width"></div></li>
-                        </ul>
-                      </div>
-                    </div>         
-                  </div>
               </section>
     
     
               
+
+    <div class="inner-feature-width margin-bottom">
+      <h2>Form examples</h2>
+      <div class="grid desktop">
+        <div class="grid-width-six">
+              <form class="light white card margin-auto card-width margin-bottom responsive">
+                  <fieldset class="block padding responsive">
+                      <label for="fname">First name:</label><br>
+                      <input type="text" id="fname" name="fname" class="light white shallow inset border-radius"><br>
+                      <label for="lname">Last name:</label><br>
+                      <input type="text" id="lname" name="lname" class="light white shallow inset border-radius">
+                  </fieldset>
+                  <fieldset class="padding responsive">
+                      <input type="radio" id="male" name="gender" value="male">
+                      <label for="male">Male</label><br>
+                      <input type="radio" id="female" name="gender" value="female">
+                      <label for="female">Female</label><br>
+                      <input type="radio" id="other" name="gender" value="other">
+                      <label for="other">Other</label>
+                  </fieldset>
+                  <fieldset class="padding responsive">
+                      <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+                      <label for="vehicle1"> I have a bike</label><br>
+                      <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+                      <label for="vehicle2"> I have a car</label><br>
+                      <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+                      <label for="vehicle3"> I have a boat</label>
+                  </fieldset>
+                  <footer class="padding responsive">
+                      <button class="block bright action">Submit</button>
+                  </footer>
+              </form>         </div>
+        <div class="grid-width-six">
+              <form class="thick border current-color dark neutral split margin-auto card-width margin-bottom">
+                  <fieldset class="light neutral split padding responsive text-margin-bottom">
+                      <label for="fname">First name:</label><br>
+                      <input type="text" id="fname" name="fname" class="shallow inset"><br>
+                      <label for="lname">Last name:</label><br>
+                      <input type="text" id="lname" name="lname" class="shallow inset">
+                  </fieldset>
+                  <fieldset class="light neutral second split padding responsive text-margin-bottom">
+                      <input type="radio" id="male" name="gender" value="male">
+                      <label for="male">Male</label><br>
+                      <input type="radio" id="female" name="gender" value="female">
+                      <label for="female">Female</label><br>
+                      <input type="radio" id="other" name="gender" value="other">
+                      <label for="other">Other</label>
+                  </fieldset>
+                  <fieldset class="light neutral complement padding responsive text-margin-bottom">
+                      <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+                      <label for="vehicle1"> I have a bike</label><br>
+                      <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+                      <label for="vehicle2"> I have a car</label><br>
+                      <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+                      <label for="vehicle3"> I have a boat</label>
+                  </fieldset>
+                  <footer class="padding responsive">
+                      <button class="block black no-border-radius force full-width huge">Submit</button>
+                  </footer>
+              </form> 
+        </div>
+        <div class="grid-width-six">
+              <form class="card-width margin-auto padding dark dull red deep box-shadow border-radius margin-bottom monospace max-width">
+                  <fieldset class="padding border-radius warm red margin-bottom">
+                      <label for="fname">First name:</label><br>
+                      <input type="text" id="fname" name="fname" class="deep inset light white"><br>
+                      <label for="lname">Last name:</label><br>
+                      <input type="text" id="lname" name="lname" class="deep inset light white">
+                  </fieldset>
+                  <fieldset class="padding border-radius warm red margin-bottom">
+                      <input type="radio" id="male" name="gender" value="male">
+                      <label for="male">Male</label><br>
+                      <input type="radio" id="female" name="gender" value="female">
+                      <label for="female">Female</label><br>
+                      <input type="radio" id="other" name="gender" value="other">
+                      <label for="other">Other</label>
+                  </fieldset>
+                  <fieldset class="padding border-radius warm red margin-bottom">
+                      <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+                      <label for="vehicle1"> I have a bike</label><br>
+                      <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+                      <label for="vehicle2"> I have a car</label><br>
+                      <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+                      <label for="vehicle3"> I have a boat</label>
+                  </fieldset>
+                  <footer class="padding border-radius warm red clearfix"> 
+                      <button class="bright yellow deep box-shadow float-right">Submit</button>
+                  </footer>
+              </form>         </div>
+        <div class="grid-width-six">
+          <form class="card-width margin-auto border dull dark white deep box-shadow text-padding">
+              <fieldset class="border padding responsive warm light white text-margin-bottom">
+                  <label for="fname">First name:</label><br>
+                  <input type="text" id="fname" name="fname" class="deep inset light white border"><br>
+                  <label for="lname">Last name:</label><br>
+                  <input type="text" id="lname" name="lname" class="deep inset light white border">
+              </fieldset>
+              <fieldset class="border padding responsive warm light white text-margin-bottom">
+                  <input type="radio" id="male" name="gender" value="male">
+                  <label for="male">Male</label><br>
+                  <input type="radio" id="female" name="gender" value="female">
+                  <label for="female">Female</label><br>
+                  <input type="radio" id="other" name="gender" value="other">
+                  <label for="other">Other</label>
+              </fieldset>
+              <fieldset class="border padding responsive warm light white text-margin-bottom">
+                  <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+                  <label for="vehicle1"> I have a bike</label><br>
+                  <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+                  <label for="vehicle2"> I have a car</label><br>
+                  <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+                  <label for="vehicle3"> I have a boat</label>
+              </fieldset>
+              <footer class="padding responsive warm light white"> 
+                  <button class="bright blue deep box-shadow">Submit</button>
+              </footer>
+          </form> 
+        </div>
+      </div>
+    </div>
+
     <div class="small no-overflow">
       <section class="small">
               <div class="grid five-column tablet no-gap">
@@ -11777,6 +12966,174 @@ pre > code {
           
       </section>    </div>
 
+    <div class="inner-feature-width margin-bottom">
+      <h2>Chat examples</h2>
+      <div class="inner-page-width">
+        <div id="chat_example1" class="black border monospace gutter">
+            <div class="grid tablet gap-border-width no-margin-bottom">
+                <div class="grid-width-nine">
+                    <div id="chat_window" class="no-margins text-padding overflow-scroll warm black">
+                        <p class="placeholder"></p>
+                        <p class="placeholder"></p>
+                        <p class="placeholder"></p>
+                        <p class="placeholder"></p>
+                        <p><strong>new2css:</strong> i added 'blue' but i don't like the blue</p>
+                        <p><strong>hazel:</strong> try warm blue</p>
+                        <p><strong>johnnee:</strong> cool blue</p>
+                        <p><strong>byzan10:</strong> neutral dark blue</p>
+                        <p><strong>hazel:</strong> bright blue</p>
+                        <p><strong>new2css:</strong> nvm i found what i was looking for</p>
+                        <p><strong>johnnee:</strong> well?</p>
+                        <p><strong>johnnee:</strong> what was it?</p>
+                        <p><strong>new2css:</strong> teal</p>
+                    </div>
+                </div>
+                <div class="grid-width-three dark dull gray hide mobile">
+                    <div class="text-padding">
+                        <h6 class="hidden">Who's here?</h6>
+                        <ul class="no-list-style no-margins">
+                            <li><span class="small text-padding force character-width border thick text-trim no-text inline-block green">active</span> johnnee</li>
+                            <li><span class="small text-padding force character-width border thick text-trim no-text inline-block green">active</span> hazel</li>
+                            <li><span class="small text-padding force character-width border thick text-trim no-text inline-block green">active</span> new2css</li>
+                            <li class="fade"><span class="small text-padding force character-width border thick text-trim no-text inline-block blue dim">idle</span> byzan10</li>
+                            <li class="fade"><span class="small text-padding force character-width border thick text-trim no-text inline-block blue dim">idle</span> tenfourover</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="grid-width-twelve">
+                    <div class="grid gap-border-width no-margin-bottom">
+                        <input type="text" class="grid-width-nine monospace">
+                        <button class="grid-width-three bright red flatten no-borders no-border-radius">Chat</button>
+                    </div>
+                </div>
+                <div class="hidden">
+        
+                </div>
+            </div>
+        </div>         <div id="chat_example2" class="padding responsive dark dull second tetrad gutter">
+            <div class="grid tablet gap-padding trim">
+                <div class="grid-width-eight light warm white">
+                    <div id="chat_window" class="no-margins padding responsive overflow-scroll">
+                        <p class="placeholder"></p>
+                        <p class="placeholder"></p>
+                        <p><strong>new2css:</strong> how do I set up my work flow?</p>
+                        <p><strong>tenfourover:</strong> what?</p>
+                        <p><strong>new2css:</strong> how do I trim out my unused CSS</p>
+                        <p><strong>new2css:</strong> minify, etc?</p>
+                        <p><strong>tenfourover:</strong> don't do any of that</p>
+                        <p><strong>tenfourover:</strong> cavepaint is only 30kb</p>
+                        <p><strong>tenfourover:</strong> use the remaining 20kb for whatever</p>
+                        <p><strong>tenfourover:</strong> and you're still good for AMP et al</p>
+                        <p><strong>new2css:</strong> is AMP a new js microframework?</p>
+                        <p><strong>tenfourover:</strong> no, it's a google standard</p>
+                        <p><strong>new2css:</strong> do you know any good new js microframeworks?</p>
+                        <p><strong>tenfourover:</strong> stop</p>
+                    </div>
+                    
+                </div>
+                <div class="grid-width-four padding responsive small dark warm white">
+                    <h6 class="no-margin-top text-margin-bottom big">Who's here?</h6>
+                    <ul class="no-list-style no-margin-bottom">
+                        <li class="no-margin-bottom"><span class="small badge text-trim no-text inline-block bright green">active</span> johnnee</li>
+                        <li class="no-margin-bottom"><span class="small badge text-trim no-text inline-block bright green">active</span> tenfourover</li>
+                        <li class="no-margin-bottom"><span class="small badge text-trim no-text inline-block bright green">active</span> new2css</li>
+                        <li class="no-margin-bottom fade"><span class="small badge text-trim no-text inline-block light green">idle</span> byzan10</li>
+                        <li class="no-margin-bottom fade"><span class="small badge text-trim no-text inline-block light green">idle</span> hazel</li>
+                    </ul>
+                </div>
+                <div class="grid-width-twelve no-margin-bottom">
+                    <div class="grid gap-padding text-padding no-margin-bottom">
+                        <input type="text" class="grid-width-nine monospace">
+                        <button class="grid-width-three bright tetrad no-border flatten">Chat</button>
+                    </div>
+                </div>
+                <div class="hide">
+        
+                </div>
+            </div>
+        </div>         <div id="chat_example3" class="tablet overlay margin-bottom gutter responsive">
+            <div class="dark cool black text-margin-bottom">
+                <div id="chat_window" class="serif no-margins padding responsive overflow-scroll">
+                    <p class="placeholder"></p>
+                    <p class="placeholder"></p>
+                    <p class="placeholder"></p>
+                    <p><strong>new2css:</strong> okay but what if</p>
+                    <p><strong>new2css:</strong> i never use the inner-text-width class?</p>
+                    <p><strong>new2css:</strong> but my CSS still has it?</p>
+                    <p><strong>tenfourover:</strong> it's fine. it'll be fine.</p>
+                    <p><strong>new2css:</strong> but it's wasted bandwidth</p>
+                    <p><strong>tenfourover:</strong> delete it from the css file</p>
+                    <p><strong>new2css:</strong> yes, that. how do I do that in my workflow?</p>
+                    <p><strong>tenfourover:</strong> edit the asset</p>
+                    <p><strong>tenfourover:</strong> there's no workflow!</p>
+                    <p><strong>hazel:</strong> there's a workflow if you use less</p>
+                    <p><strong>tenfourover:</strong> don't encourage him</p>
+                </div>
+            </div>
+            <div class="padding responsive small light warm second split shadow top right card-width margin hide mobile">
+                <h6 class="no-margin-top text-margin-bottom big text-trim">Who's here?</h6>
+                <ul class="no-list-style no-margin-bottom warm second split inset padding">
+                    <li class="no-margin-bottom"><span class="small badge em-width text-trim no-text inline-block green">active</span> tenfourover</li>
+                    <li class="no-margin-bottom"><span class="small badge em-width text-trim no-text inline-block green">active</span> hazel</li>
+                    <li class="no-margin-bottom"><span class="small badge em-width text-trim no-text inline-block green">active</span> new2css</li>
+                    <li class="no-margin-bottom fade"><span class="small badge em-width text-trim no-text inline-block blue dim">idle</span> byzan10</li>
+                    <li class="no-margin-bottom fade"><span class="small badge em-width text-trim no-text inline-block blue dim">idle</span> johnnee</li>
+                </ul>
+            </div>
+            <div class="">
+                <div class="grid gap-text-padding no-margin-bottom">
+                    <input type="text" class="grid-width-nine monospace">
+                    <button class="grid-width-three bright action">Chat</button>
+                </div>
+            </div>
+            <div class="hide">
+        
+            </div>
+        </div>         <div id="chat_example4" class="two-column golden tablet gutter responsive">
+            <div class="white margin-auto no-margin-bottom">
+                <div id="chat_window" class="no-margins padding responsive overflow-scroll">
+                    <p class="placeholder"></p>
+                    <p class="placeholder"></p>
+                    <p class="placeholder"></p>
+                    <p class="placeholder"></p>
+                    <p class="placeholder"></p>
+                    <p><strong>new2css:</strong> less sounds perfect</p>
+                    <p><strong>new2css:</strong> complicated enough for a professional project</p>
+                    <p><strong>hazel:</strong> it is but</p>
+                    <p><strong>hazel:</strong> use the css version of cavepaint as long as you can</p>
+                    <p><strong>hazel:</strong> switch over whenever</p>
+                    <p><strong>hazel:</strong> usually you want to do that when your project is big enough to have its own designer</p>
+                    <p><strong>new2css:</strong> i'm a designer</p>
+                    <p><strong>new2css:</strong> i downloaded photoshop last week</p>
+                    
+                </div>
+                
+            </div>
+            <div class="padding responsive hide mobile">
+                <h6 class="no-margin-top text-margin-bottom big">Who's here?</h6>
+                <ul class="no-list-style no-margin-bottom">
+                    
+                    <li class="no-margin-bottom"><span class="small badge border thick text-trim no-text inline-block thin border shadow deep light green">active</span> hazel</li>
+                    <li class="no-margin-bottom"><span class="small badge border thick text-trim no-text inline-block thin border shadow deep light green">active</span> new2css</li>
+                    <li class="no-margin-bottom fade"><span class="small badge border thick text-trim no-text inline-block thin border shadow deep light dull blue">idle</span> byzan10</li>
+                    <li class="no-margin-bottom fade"><span class="small badge border thick text-trim no-text inline-block thin border shadow deep light dull blue">idle</span> tenfourover</li>
+                    <li class="no-margin-bottom fade"><span class="small badge border thick text-trim no-text inline-block thin border shadow deep border dashed">gone</span> johnnee</li>
+                    
+                </ul>
+            </div>
+            <div class="margin-left margin-right">
+                <div class="grid gap-padding no-margin-bottom text-margin">
+                    <input type="text" class="grid-width-nine monospace">
+                    <button class="grid-width-three red">Chat</button>
+                </div>
+            </div>
+            <div class="hide">
+        
+            </div>
+        </div>       </div>
+      
+    </div>
+
     <div class="white border-radius shadow margin-auto page-width padding margin-bottom">
       <h2 class="text-center gutter-top gutter-bottom">Which projects are good for Cavepaint?</h2>
       <div class="gutter">
@@ -11838,18 +13195,79 @@ pre > code {
             </div>
         </div>      </div>
     </div>
+
+    <div class="inner-page-width margin-bottom">
+      <h2>Modal examples</h2>
+
+      <div class="grid responsive tablet">
+        <div class="grid-width-three padding responsive">
+            <button onclick="document.getElementById('modal1').classList.remove('hide')" class="base-color block margin-auto gutter responsive">Example #1</button>
+        </div>
+        
+        <div class="grid-width-three padding responsive">
+            <button onclick="document.getElementById('modal2').classList.remove('hide')" class="base-color block margin-auto gutter responsive">Example #2</button>
+        </div>
+
+        <div class="grid-width-three padding responsive">
+            <button onclick="document.getElementById('modal3').classList.remove('hide')" class="base-color block margin-auto gutter responsive">Example #3</button>
+        </div>
+
+        <div class="grid-width-three padding responsive">
+            <button onclick="document.getElementById('modal4').classList.remove('hide')" class="base-color block margin-auto gutter responsive">Example #4</button>
+        </div>
+      </div>
+      <div id="modal1" class="modal padding responsive vertical-center gutter-bottom hide dark transparent">
+          <div class="container white border shadow">
+              <h2 class="text-trim">Modals support the rest of Cavepaint.</h2>
+              <div class="two-column golden">
+                  <div class="placeholder four-to-three black">
+      
+                  </div>
+                  <div>
+                      <p>Layout, typography and color composables all work inside of modals.</p>
+                      <footer class="">
+                          <button class="big warm second tetrad block force full-width" onclick="document.getElementById('modal1').classList.add('hide')">
+                              Close
+                          </button>
+                      </footer>
+                  </div>
+              </div>
+          </div>
+      </div>      <div id="modal2" class="modal padding responsive light transparent hide vertical-center gutter-bottom">
+          <div class="container warm dull red page-width margin-auto">
+              <h2 class="text-trim">The modal class composes too.</h2>
+              <p>The <strong>modal</strong> class composes with other composables, so it can be any color.</p>
+              <div class="placeholder sixteen-to-nine dark dull red margin-bottom"></div>
+              <button class="warm black float-right no-border big" onclick="document.getElementById('modal2').classList.add('hide')">
+                  Close
+              </button>
+          </div>
+      </div>      <div id="modal3" class="modal padding responsive black hide vertical-center gutter-bottom">
+          <div class="border current-color thick card-width padding responsive margin-auto">
+              <h2 class="text-trim">Modals can be <em>very</em> modal.</h2>
+              <p>The composable phrases <strong>dark transparent</strong> and <strong>light transparent</strong> both make great semi-transparent backdrops for a modal. But the normal colors can be used too, completely covering the page behind and making for a stark new mode.</p>
+              <button class="white float-right no-border flatten big" onclick="document.getElementById('modal3').classList.add('hide')">
+                  Close
+              </button>
+          </div>
+      </div>      <div id="modal4" class="modal padding responsive bright red hide vertical-center gutter-bottom inner-page-width">
+          <div class="huge">
+              <h2 class="text-trim text-center no-margin-top">Communicate urgency with a bright red modal</h2>
+              <p class="inner-text-width">Nothing says "something went wrong" like making the whole screen red.</p>
+              <button class="force card-width block warm black margin-auto no-border padding responsive" onclick="document.getElementById('modal4').classList.add('hide')">
+                  Close
+              </button>
+          </div>
+      </div>    </div>
     
     <div class="white border-radius shadow margin-auto page-width padding margin-bottom">
-
       <div class="text-width margin-auto">
         <h2>Some sites using Cavepaint</h2>
-
         <ul class="">
           <li>This site, which only uses cavepaint.css and no other styles.</li>
           <li><a href="http://www.hyperhyperspace.org">Hyper Hyper Space | A distributed data layer for a new internet</a></li>
           <li><a href="http://www.4thly.com">4thly | Accelerating entrepreneurs worldwide</a></li>
           <li><a href="http://www.rexriepe.com/philosophy-of-emotion/">Eristics: Philosophy of Emotion | A book about how emotion works</a></li>
-          <li><a href="http://www.rexriepe.com">rexriepe.com | Cavepaint creator's website (doubtless running an old version)</a></li>
         </ul>
       </div>
     </div>
