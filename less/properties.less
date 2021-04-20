@@ -1,13 +1,12 @@
-@mobile: (@text-width)*.5 + @gutter;
-@tablet: (@page-width)*.5 + @gutter;
-@desktop: (@feature-width)*.5 + @gutter;
-@text-width: @text-base * .6rem;
-@card-width: @text-width * .6;
-@page-width: @text-width * 1.6;
-@feature-width: @page-width * 1.6;
-@font-size-mobile: calc(@font-size - 2);
-@font-size-tablet: calc(@font-size - 1);
-@font-size-desktop: @font-size;
+@tablet: calc(@text-width + @gutter);
+@desktop: calc(@page-width + @gutter);
+@text-width: @text-base * .618rem;
+@card-width: @text-width * .618;
+@page-width: @text-width * 1.618;
+@feature-width: @text-width * 2.618;
+@font-size-mobile: calc(var(--font-size-base) - 2px);
+@font-size-tablet: calc(var(--font-size-base) - 1px);
+@font-size-desktop: var(--font-size-base);
 
 /* This project uses Cavepaint (MIT License) by Rex Riepe */ 
 /* https://github.com/cavepaint/cavepaintCSS */
@@ -44,17 +43,15 @@
     --border-thick: calc(var(--border-width) * 2);
     --border-radius: var(--text-padding);
     --text-measure: @text-base;
-    --text-width: calc(var(--text-measure) * .6rem);
-    --card-width: calc(var(--text-width) / var(--golden));
-    --page-width: calc(var(--text-width) * var(--golden));
-    --feature-width: calc(var(--page-width) * var(--golden));
+    --text-width: calc(var(--text-measure) * .618rem);
+    --card-width: calc(var(--text-width) * .618);
+    --page-width: calc(var(--text-width) * 1.618);
+    --feature-width: calc(var(--page-width) * 1.618);
     --box-shadow: var(--shadow-position) var(--shadow-position) var(--shadow-blur) var(--shadow-color);
     --shadow-position: 1px;
     --shadow-blur: 1px;
     --shadow-color: fade(@black, 20%);
     --direction: 180deg;
-    --white: @white;
-    --black: @black;
     --warm: @warm-rgba;
     --cool: @cool-rgba;
     --neutral: @neutral-rgba;
@@ -62,12 +59,44 @@
     --monospace: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, "DejaVu Sans Mono", Courier, monospace;
     --serif: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "Droid Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
     --sans-serif: "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, sans-serif;
+    --ambient: @ambient;
+    --white: @white;
+    --black: @black;
+    --red: @red;
+    --orange: @orange;
+    --yellow: @yellow;
+    --green: @green;
+    --teal: @teal;
+    --cyan: @cyan;
+    --blue: @blue;
+    --purple: @purple;
+    --magenta: @magenta;
+    --gray: @gray;
+    --base-color: @action;
+    --complement: @complement;
+    --accent: @accent;
+    --second-accent: @inverted-accent;
+    --split: @split;
+    --second-split: @inverted-split;
+    --triad: @triad;
+    --second-triad: var(--complement);
+    --third-triad: @third-triad;
+    --tetrad: @tetrad;
+    --second-tetrad: @second-tetrad;
+    --third-tetrad: @third-tetrad;
+    --fourth-tetrad: @fourth-tetrad;
+    --action: @action;
+    --reaction: @reaction;
+    --info: var(--cyan);
+    --warning: var(--orange);
+    --success: var(--green);
+    --failure: var(--red);
 
     .on-mobile({
         --padding: calc(.6 * var(--spacer));
         --margin: calc(.6 * var(--margin-base));
         --gutter: calc(1.2 * var(--margin-base));
-        --font-size: calc(@font-size - 2);
+        --font-size: @font-size-mobile;
         --headline-base: 1em;
     });
 
@@ -75,7 +104,7 @@
         --padding: calc(.8 * var(--spacer));
         --margin: calc(.8 * var(--margin-base));
         --gutter: calc(1.6 * var(--margin-base));
-        --font-size: calc(@font-size - 1);
+        --font-size: @font-size-tablet;
         --headline-base: 1.1em;
     });
 
@@ -83,7 +112,7 @@
         --padding: calc(1 * var(--spacer));
         --margin: calc(1 * var(--margin-base));
         --gutter: calc(2 * var(--margin-base));
-        --font-size: @font-size;
+        --font-size: @font-size-desktop;
         --headline-base: 1.2em;
     });
 }
@@ -98,6 +127,10 @@
 
 .on-desktop(@rules) {
     @media screen and (min-width: @desktop) { @rules();}
+}
+
+.under-tablet(@rules) {
+    @media screen and (max-width: calc(@tablet - 1px)) { @rules();}
 }
 
 .under-desktop(@rules) {

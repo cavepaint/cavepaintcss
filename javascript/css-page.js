@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function() {
 function renderLess() {
     // var lessInput = document.getElementById("less_textarea").value;
     var headlessLessInput = document.getElementById("headless_less_textarea").value;
+    var headlessLessInputBasic = document.getElementById("headless_less_basic_textarea").value;
     var baseColor = document.getElementById("baseColor").value;
     var baseLighting = document.getElementById("baseLighting").value + '%';
     var textBase = document.getElementById("textBase").value;
@@ -29,6 +30,7 @@ function renderLess() {
     var lessTheme = "@base-color: " + baseColor + ";\n" + "@ambient-mix: " + baseLighting + ";\n" + "@font-size: " + baseFontSize + ";\n" + "@font-family: " + fontFamily + ";\n" + "@text-base: " + textBase + ";\n" + "@padding: " + basePadding + ";\n" + "@margin: " + baseMargin + ";\n" + "@gutter: " + "(2 * @padding)" + ";\n" + "@line-height: " + baseLineHeight + ";\n" + "@lighten-by: " + baseLightenBy + ";\n" + "@darken-by: " + baseDarkenBy + ";\n";
 
     var lessInputTheme = lessTheme + headlessLessInput;
+    var lessInputBasic = lessTheme + headlessLessInputBasic;
 
     var less_options = {
         env: "production",
@@ -53,10 +55,28 @@ function renderLess() {
         function(error) {
             console.log('something went wrong: ' + error);
         });
+
+    // it does it again for the basic palette
+    less.render(lessInputBasic, less_options)
+        .then(function(output) {
+            // output.css = string of css
+            var theBasicCSS = output.css;
+            document.getElementById("basic_css_textarea").innerHTML = theBasicCSS;
+        },
+        function(error) {
+            console.log('something went wrong: ' + error);
+        });
 }
 
 function copyCSS() {
     var textToCopy = document.getElementById("css_textarea");
+    textToCopy.select();
+    textToCopy.setSelectionRange(0, 99999);
+    document.execCommand("copy");
+}
+
+function copyBasicCSS() {
+    var textToCopy = document.getElementById("basic_css_textarea");
     textToCopy.select();
     textToCopy.setSelectionRange(0, 99999);
     document.execCommand("copy");
@@ -203,6 +223,22 @@ function copyColorStringNoHide(id) {
         document.execCommand("copy");
         showMessageNoHide("Copied <span class='text-padding rounded " + theStringItself + "'>'" + theStringItself + "'</span> to clipboard.");
     }
+}
+
+function showCSS() {
+    document.getElementById("css_output_container").classList.remove("hide");
+    document.getElementById("palette").classList.add("hide");
+
+    document.getElementById("css_button").classList.remove("dim", "fade");
+    document.getElementById("palette_button").classList.add("dim", "fade");
+}
+
+function showPalette() {
+    document.getElementById("css_output_container").classList.add("hide");
+    document.getElementById("palette").classList.remove("hide");
+
+    document.getElementById("css_button").classList.add("dim", "fade");
+    document.getElementById("palette_button").classList.remove("dim", "fade");
 }
 
 function showMessage(string) {

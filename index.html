@@ -43,17 +43,15 @@
   --border-thick: calc(var(--border-width) * 2);
   --border-radius: var(--text-padding);
   --text-measure: 48;
-  --text-width: calc(var(--text-measure) * 0.6rem);
-  --card-width: calc(var(--text-width) / var(--golden));
-  --page-width: calc(var(--text-width) * var(--golden));
-  --feature-width: calc(var(--page-width) * var(--golden));
+  --text-width: calc(var(--text-measure) * 0.618rem);
+  --card-width: calc(var(--text-width) * 0.618);
+  --page-width: calc(var(--text-width) * 1.618);
+  --feature-width: calc(var(--page-width) * 1.618);
   --box-shadow: var(--shadow-position) var(--shadow-position) var(--shadow-blur) var(--shadow-color);
   --shadow-position: 1px;
   --shadow-blur: 1px;
   --shadow-color: rgba(6, 30, 35, 0.2);
   --direction: 180deg;
-  --white: #f2fdff;
-  --black: #061e23;
   --warm: rgba(218.9, 105.5, 112, var(--a));
   --cool: rgba(13.4, 214.5, 215.5, var(--a));
   --neutral: rgba(48.8, 145.7, 208.2, var(--a));
@@ -61,31 +59,63 @@
   --monospace: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, "DejaVu Sans Mono", Courier, monospace;
   --serif: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "Droid Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
   --sans-serif: "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, sans-serif;
+  --ambient: #2ed6fb;
+  --white: #f2fdff;
+  --black: #061e23;
+  --red: #da1e25;
+  --orange: #f7a80c;
+  --yellow: #efff18;
+  --green: #29ae4a;
+  --teal: #2fadae;
+  --cyan: #0df2f3;
+  --blue: #3455fb;
+  --purple: #913aad;
+  --magenta: #ca30eb;
+  --gray: #7c8486;
+  --base-color: #2d95d8;
+  --complement: #d17537;
+  --accent: #2c46da;
+  --second-accent: #2cd9c8;
+  --split: #bf34da;
+  --second-split: #3dd937;
+  --triad: #6c34da;
+  --second-triad: var(--complement);
+  --third-triad: #2cd977;
+  --tetrad: #4334da;
+  --second-tetrad: #d13471;
+  --third-tetrad: #bad937;
+  --fourth-tetrad: #2cd9a0;
+  --action: #2d95d8;
+  --reaction: #a35b2a;
+  --info: var(--cyan);
+  --warning: var(--orange);
+  --success: var(--green);
+  --failure: var(--red);
 }
 @media screen and (min-width: 1px) {
   :root {
     --padding: calc(0.6 * var(--spacer));
     --margin: calc(0.6 * var(--margin-base));
     --gutter: calc(1.2 * var(--margin-base));
-    --font-size: calc(16px - 2);
+    --font-size: calc(var(--font-size-base) - 2px);
     --headline-base: 1em;
   }
 }
-@media screen and (min-width: 25.04rem) {
+@media screen and (min-width: calc(29.664rem + 2rem)) {
   :root {
     --padding: calc(0.8 * var(--spacer));
     --margin: calc(0.8 * var(--margin-base));
     --gutter: calc(1.6 * var(--margin-base));
-    --font-size: calc(16px - 1);
+    --font-size: calc(var(--font-size-base) - 1px);
     --headline-base: 1.1em;
   }
 }
-@media screen and (min-width: 38.864rem) {
+@media screen and (min-width: calc(47.996352rem + 2rem)) {
   :root {
     --padding: calc(1 * var(--spacer));
     --margin: calc(1 * var(--margin-base));
     --gutter: calc(2 * var(--margin-base));
-    --font-size: 16px;
+    --font-size: var(--font-size-base);
     --headline-base: 1.2em;
   }
 }
@@ -93,7 +123,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-size: calc(var(--font-size-base) * var(--font-size-mod));
+  font-size: calc(var(--font-size) * var(--font-size-mod));
 }
 *::before,
 *::after {
@@ -222,6 +252,208 @@ pre.word-break {
 pre > code {
   background: transparent;
   padding: 0;
+}
+.grid,
+.one-column,
+.two-column,
+.three-column,
+.four-column,
+.five-column,
+.six-column,
+.seven-column,
+.eight-column,
+.nine-column,
+.ten-column,
+.eleven-column,
+.twelve-column {
+  --grid-columns: 12;
+  display: grid;
+  gap: var(--gap);
+  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+}
+.mobile,
+.tablet,
+.mobile.tablet,
+.desktop {
+  grid-template-columns: minmax(0, 1fr);
+}
+@media screen and (min-width: 1px) {
+  .mobile {
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  }
+}
+@media screen and (min-width: calc(29.664rem + 2rem)) {
+  .mobile {
+    --grid-columns: 1;
+  }
+}
+@media screen and (max-width: calc(calc(29.664rem + 2rem) - 1px)) {
+  .tablet {
+    --grid-columns: 1;
+  }
+}
+@media screen and (min-width: calc(29.664rem + 2rem)) {
+  .tablet {
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  }
+}
+.mobile.tablet {
+  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+}
+@media screen and (min-width: calc(47.996352rem + 2rem)) {
+  .mobile.tablet {
+    --grid-columns: 1;
+  }
+}
+@media screen and (min-width: calc(47.996352rem + 2rem)) {
+  .desktop {
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  }
+}
+@media screen and (max-width: calc(calc(47.996352rem + 2rem) - 1px)) {
+  .desktop {
+    --grid-columns: 1;
+  }
+}
+.one-column {
+  --grid-columns: 1;
+}
+.two-column {
+  --grid-columns: 2;
+}
+.three-column {
+  --grid-columns: 3;
+}
+.four-column {
+  --grid-columns: 4;
+}
+.five-column {
+  --grid-columns: 5;
+}
+.six-column {
+  --grid-columns: 6;
+}
+.seven-column {
+  --grid-columns: 7;
+}
+.eight-column {
+  --grid-columns: 8;
+}
+.nine-column {
+  --grid-columns: 9;
+}
+.ten-column {
+  --grid-columns: 10;
+}
+.eleven-column {
+  --grid-columns: 11;
+}
+.twelve-column {
+  --grid-columns: 12;
+}
+.grid-width-one {
+  grid-column: auto / span 1;
+}
+.grid-width-two {
+  grid-column: auto / span 2;
+}
+.grid-width-three {
+  grid-column: auto / span 3;
+}
+.grid-width-four {
+  grid-column: auto / span 4;
+}
+.grid-width-five {
+  grid-column: auto / span 5;
+}
+.grid-width-six {
+  grid-column: auto / span 6;
+}
+.grid-width-seven {
+  grid-column: auto / span 7;
+}
+.grid-width-eight {
+  grid-column: auto / span 8;
+}
+.grid-width-nine {
+  grid-column: auto / span 9;
+}
+.grid-width-ten {
+  grid-column: auto / span 10;
+}
+.grid-width-eleven {
+  grid-column: auto / span 11;
+}
+.grid-width-twelve {
+  grid-column: auto / span 12;
+}
+.two-column.golden {
+  grid-template-columns: 1.618fr 1fr;
+}
+.two-column.golden.mobile,
+.two-column.golden.tablet,
+.two-column.golden.mobile.tablet,
+.two-column.golden.desktop {
+  grid-template-columns: 1fr;
+}
+@media screen and (min-width: 1px) {
+  .two-column.golden.mobile {
+    grid-template-columns: 1.618fr 1fr;
+  }
+}
+@media screen and (min-width: calc(29.664rem + 2rem)) {
+  .two-column.golden.mobile {
+    grid-template-columns: 1fr;
+  }
+}
+@media screen and (min-width: calc(29.664rem + 2rem)) {
+  .two-column.golden.tablet {
+    grid-template-columns: 1.618fr 1fr;
+  }
+}
+@media screen and (max-width: calc(calc(47.996352rem + 2rem) - 1px)) {
+  .two-column.golden.mobile.tablet {
+    grid-template-columns: 1.618fr 1fr;
+  }
+}
+@media screen and (min-width: calc(47.996352rem + 2rem)) {
+  .two-column.golden.desktop {
+    grid-template-columns: 1.618fr 1fr;
+  }
+}
+.two-column.golden.reverse {
+  grid-template-columns: 1fr 1.618fr;
+}
+.two-column.golden.reverse.mobile,
+.two-column.golden.reverse.tablet,
+.two-column.golden.reverse.mobile.tablet,
+.two-column.golden.reverse.desktop {
+  grid-template-columns: 1fr;
+}
+@media screen and (min-width: 1px) {
+  .two-column.golden.reverse.mobile {
+    grid-template-columns: 1fr 1.618fr;
+  }
+}
+@media screen and (min-width: calc(29.664rem + 2rem)) {
+  .two-column.golden.reverse.mobile {
+    grid-template-columns: 1fr;
+  }
+}
+@media screen and (min-width: calc(29.664rem + 2rem)) {
+  .two-column.golden.reverse.tablet {
+    grid-template-columns: 1fr 1.618fr;
+  }
+}
+@media screen and (max-width: calc(calc(47.996352rem + 2rem) - 1px)) {
+  .two-column.golden.reverse.mobile.tablet {
+    grid-template-columns: 1fr 1.618fr;
+  }
+}
+@media screen and (min-width: calc(47.996352rem + 2rem)) {
+  .two-column.golden.reverse.desktop {
+    grid-template-columns: 1fr 1.618fr;
+  }
 }
 .button,
 button {
@@ -467,10 +699,10 @@ button:active {
   height: 100vh;
 }
 .golden-height {
-  min-height: 100%;
+  min-height: 62%;
 }
 .golden-height.force {
-  height: 100%;
+  height: 62%;
 }
 .overflow-scroll {
   overflow-y: auto;
@@ -552,7 +784,7 @@ button:active {
 .huge {
   --font-size-mod: 1.2;
 }
-@media screen and (min-width: 25.04rem) {
+@media screen and (min-width: calc(29.664rem + 2rem)) {
   .small {
     --font-size-mod: 0.9;
   }
@@ -566,7 +798,7 @@ button:active {
     --font-size-mod: 1.4;
   }
 }
-@media screen and (min-width: 38.864rem) {
+@media screen and (min-width: calc(47.996352rem + 2rem)) {
   .small {
     --font-size-mod: 0.9;
   }
@@ -881,464 +1113,8 @@ button:active {
 .placeholder::after {
   content: " ";
 }
-.grid,
-.two-column,
-.three-column,
-.four-column,
-.five-column,
-.six-column,
-.seven-column,
-.eight-column,
-.nine-column,
-.ten-column,
-.eleven-column,
-.twelve-column {
-  --grid-columns: 12;
-  display: grid;
-  gap: var(--gap);
-  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
-}
-.two-column.mobile,
-.three-column.mobile,
-.four-column.mobile,
-.five-column.mobile,
-.six-column.mobile,
-.seven-column.mobile,
-.eight-column.mobile,
-.nine-column.mobile,
-.ten-column.mobile,
-.eleven-column.mobile,
-.twelve-column.mobile,
-.two-column.tablet,
-.three-column.tablet,
-.four-column.tablet,
-.five-column.tablet,
-.six-column.tablet,
-.seven-column.tablet,
-.eight-column.tablet,
-.nine-column.tablet,
-.ten-column.tablet,
-.eleven-column.tablet,
-.twelve-column.tablet,
-.two-column.desktop,
-.three-column.desktop,
-.four-column.desktop,
-.five-column.desktop,
-.six-column.desktop,
-.seven-column.desktop,
-.eight-column.desktop,
-.nine-column.desktop,
-.ten-column.desktop,
-.eleven-column.desktop,
-.twelve-column.desktop {
-  grid-template-columns: minmax(0, 1fr);
-}
-.two-column.tablet,
-.two-column.desktop {
-  --grid-columns: 1;
-}
-.two-column.golden {
-  grid-template-columns: 1.618fr 1fr;
-}
-.two-column.golden.reverse {
-  grid-template-columns: 1fr 1.618fr;
-}
-.mobile {
-  --grid-columns: 1;
-}
-.mobile.two-column.golden {
-  grid-template-columns: minmax(0, 1fr);
-}
-.mobile.two-column.golden.reverse {
-  grid-template-columns: minmax(0, 1fr);
-}
-@media screen and (min-width: 1px) {
-  .grid,
-  .two-column.mobile,
-  .three-column.mobile,
-  .four-column.mobile,
-  .five-column.mobile,
-  .six-column.mobile,
-  .seven-column.mobile,
-  .eight-column.mobile,
-  .nine-column.mobile,
-  .ten-column.mobile,
-  .eleven-column.mobile,
-  .twelve-column.mobile,
-  .two-column,
-  .three-column,
-  .four-column,
-  .five-column,
-  .six-column,
-  .seven-column,
-  .eight-column,
-  .nine-column,
-  .ten-column,
-  .eleven-column,
-  .twelve-column {
-    --grid-columns: 12;
-    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
-  }
-  .two-column {
-    --grid-columns: 2;
-  }
-  .three-column {
-    --grid-columns: 3;
-  }
-  .four-column {
-    --grid-columns: 4;
-  }
-  .five-column {
-    --grid-columns: 5;
-  }
-  .six-column {
-    --grid-columns: 6;
-  }
-  .seven-column {
-    --grid-columns: 7;
-  }
-  .eight-column {
-    --grid-columns: 8;
-  }
-  .nine-column {
-    --grid-columns: 9;
-  }
-  .ten-column {
-    --grid-columns: 10;
-  }
-  .eleven-column {
-    --grid-columns: 11;
-  }
-  .twelve-column {
-    --grid-columns: 12;
-  }
-  .mobile.two-column.golden {
-    grid-template-columns: 1.618fr 1fr;
-  }
-  .mobile.two-column.golden.reverse {
-    grid-template-columns: 1fr 1.618fr;
-  }
-}
-.tablet {
-  --grid-columns: 1;
-}
-.tablet.two-column.golden {
-  grid-template-columns: minmax(0, 1fr);
-}
-.tablet.two-column.golden.reverse {
-  grid-template-columns: minmax(0, 1fr);
-}
-@media screen and (min-width: 25.04rem) {
-  .grid,
-  .two-column.tablet,
-  .three-column.tablet,
-  .four-column.tablet,
-  .five-column.tablet,
-  .six-column.tablet,
-  .seven-column.tablet,
-  .eight-column.tablet,
-  .nine-column.tablet,
-  .ten-column.tablet,
-  .eleven-column.tablet,
-  .twelve-column.tablet,
-  .two-column,
-  .three-column,
-  .four-column,
-  .five-column,
-  .six-column,
-  .seven-column,
-  .eight-column,
-  .nine-column,
-  .ten-column,
-  .eleven-column,
-  .twelve-column {
-    --grid-columns: 12;
-    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
-  }
-  .two-column.tablet {
-    --grid-columns: 2;
-  }
-  .three-column.tablet {
-    --grid-columns: 3;
-  }
-  .four-column.tablet {
-    --grid-columns: 4;
-  }
-  .five-column.tablet {
-    --grid-columns: 5;
-  }
-  .six-column.tablet {
-    --grid-columns: 6;
-  }
-  .seven-column.tablet {
-    --grid-columns: 7;
-  }
-  .eight-column.tablet {
-    --grid-columns: 8;
-  }
-  .nine-column.tablet {
-    --grid-columns: 9;
-  }
-  .ten-column.tablet {
-    --grid-columns: 10;
-  }
-  .eleven-column.tablet {
-    --grid-columns: 11;
-  }
-  .twelve-column.tablet {
-    --grid-columns: 12;
-  }
-  .tablet.two-column.golden {
-    grid-template-columns: 1.618fr 1fr;
-  }
-  .tablet.two-column.golden.reverse {
-    grid-template-columns: 1fr 1.618fr;
-  }
-}
-.mobile.tablet {
-  --grid-columns: 1;
-}
-.mobile.tablet.two-column.golden {
-  grid-template-columns: minmax(0, 1fr);
-}
-.mobile.tablet.two-column.golden.reverse {
-  grid-template-columns: minmax(0, 1fr);
-}
-@media screen and (max-width: calc(38.864rem - 1px)) {
-  .grid,
-  .two-column.mobile.tablet,
-  .three-column.mobile.tablet,
-  .four-column.mobile.tablet,
-  .five-column.mobile.tablet,
-  .six-column.mobile.tablet,
-  .seven-column.mobile.tablet,
-  .eight-column.mobile.tablet,
-  .nine-column.mobile.tablet,
-  .ten-column.mobile.tablet,
-  .eleven-column.mobile.tablet,
-  .twelve-column.mobile.tablet,
-  .two-column,
-  .three-column,
-  .four-column,
-  .five-column,
-  .six-column,
-  .seven-column,
-  .eight-column,
-  .nine-column,
-  .ten-column,
-  .eleven-column,
-  .twelve-column {
-    --grid-columns: 12;
-    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
-  }
-  .two-column.mobile.tablet {
-    --grid-columns: 2;
-  }
-  .three-column.mobile.tablet {
-    --grid-columns: 3;
-  }
-  .four-column.mobile.tablet {
-    --grid-columns: 4;
-  }
-  .five-column.mobile.tablet {
-    --grid-columns: 5;
-  }
-  .six-column.mobile.tablet {
-    --grid-columns: 6;
-  }
-  .seven-column.mobile.tablet {
-    --grid-columns: 7;
-  }
-  .eight-column.mobile.tablet {
-    --grid-columns: 8;
-  }
-  .nine-column.mobile.tablet {
-    --grid-columns: 9;
-  }
-  .ten-column.mobile.tablet {
-    --grid-columns: 10;
-  }
-  .eleven-column.mobile.tablet {
-    --grid-columns: 11;
-  }
-  .twelve-column.mobile.tablet {
-    --grid-columns: 12;
-  }
-  .mobile.tablet.two-column.golden {
-    grid-template-columns: 1.618fr 1fr;
-  }
-  .mobile.tablet.two-column.golden.reverse {
-    grid-template-columns: 1fr 1.618fr;
-  }
-}
-.desktop {
-  --grid-columns: 1;
-}
-.desktop.two-column.golden {
-  grid-template-columns: minmax(0, 1fr);
-}
-.desktop.two-column.golden.reverse {
-  grid-template-columns: minmax(0, 1fr);
-}
-@media screen and (min-width: 38.864rem) {
-  .grid,
-  .two-column.desktop,
-  .three-column.desktop,
-  .four-column.desktop,
-  .five-column.desktop,
-  .six-column.desktop,
-  .seven-column.desktop,
-  .eight-column.desktop,
-  .nine-column.desktop,
-  .ten-column.desktop,
-  .eleven-column.desktop,
-  .twelve-column.desktop,
-  .two-column,
-  .three-column,
-  .four-column,
-  .five-column,
-  .six-column,
-  .seven-column,
-  .eight-column,
-  .nine-column,
-  .ten-column,
-  .eleven-column,
-  .twelve-column {
-    --grid-columns: 12;
-    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
-  }
-  .two-column.desktop {
-    --grid-columns: 2;
-  }
-  .three-column.desktop {
-    --grid-columns: 3;
-  }
-  .four-column.desktop {
-    --grid-columns: 4;
-  }
-  .five-column.desktop {
-    --grid-columns: 5;
-  }
-  .six-column.desktop {
-    --grid-columns: 6;
-  }
-  .seven-column.desktop {
-    --grid-columns: 7;
-  }
-  .eight-column.desktop {
-    --grid-columns: 8;
-  }
-  .nine-column.desktop {
-    --grid-columns: 9;
-  }
-  .ten-column.desktop {
-    --grid-columns: 10;
-  }
-  .eleven-column.desktop {
-    --grid-columns: 11;
-  }
-  .twelve-column.desktop {
-    --grid-columns: 12;
-  }
-  .desktop.two-column.golden {
-    grid-template-columns: 1.618fr 1fr;
-  }
-  .desktop.two-column.golden.reverse {
-    grid-template-columns: 1fr 1.618fr;
-  }
-}
-.grid-width-one {
-  grid-column: auto / span 1;
-}
-.grid-width-two {
-  grid-column: auto / span 2;
-}
-.grid-width-three {
-  grid-column: auto / span 3;
-}
-.grid-width-four {
-  grid-column: auto / span 4;
-}
-.grid-width-five {
-  grid-column: auto / span 5;
-}
-.grid-width-six {
-  grid-column: auto / span 6;
-}
-.grid-width-seven {
-  grid-column: auto / span 7;
-}
-.grid-width-eight {
-  grid-column: auto / span 8;
-}
-.grid-width-nine {
-  grid-column: auto / span 9;
-}
-.grid-width-ten {
-  grid-column: auto / span 10;
-}
-.grid-width-eleven {
-  grid-column: auto / span 11;
-}
-.grid-width-twelve {
-  grid-column: auto / span 12;
-}
-.first-column {
-  grid-column-start: 1;
-}
-.second-column {
-  grid-column-start: 2;
-}
-.two-column {
-  --grid-columns: 2;
-}
-.three-column {
-  --grid-columns: 3;
-}
-.four-column {
-  --grid-columns: 4;
-}
-.five-column {
-  --grid-columns: 5;
-}
-.six-column {
-  --grid-columns: 6;
-}
-.seven-column {
-  --grid-columns: 7;
-}
-.eight-column {
-  --grid-columns: 8;
-}
-.nine-column {
-  --grid-columns: 9;
-}
-.ten-column {
-  --grid-columns: 10;
-}
-.eleven-column {
-  --grid-columns: 11;
-}
-.twelve-column {
-  --grid-columns: 12;
-}
 .rem-width {
   width: 1rem;
-}
-.half-width {
-  width: 50%;
-}
-.third-width {
-  width: 33.33%;
-}
-.fourth-width {
-  width: 25%;
-}
-.fifth-width {
-  width: 20%;
-}
-.sixth-width {
-  width: 16.66%;
 }
 .golden-width {
   max-width: calc(62% - var(--spacer));
@@ -1355,7 +1131,7 @@ button:active {
 .card-width {
   max-width: var(--card-width);
 }
-@media screen and (min-width: 25.04rem) {
+@media screen and (min-width: calc(29.664rem + 2rem)) {
   .text-width {
     max-width: var(--text-width);
   }
@@ -1382,40 +1158,36 @@ button:active {
   width: 100%;
 }
 .inner-card-width {
-  padding-left: calc(50% - (var(--card-width) * 0.5));
-  padding-right: calc(50% - (var(--card-width) * 0.5));
+  padding-left: max(var(--spacer), calc(50% - (var(--card-width) * 0.5)));
+  padding-right: max(var(--spacer), calc(50% - (var(--card-width) * 0.5)));
 }
 .inner-card-width.padding {
-  padding-left: calc(50% - ((var(--card-width) * 0.5) + var(--spacer)));
-  padding-right: calc(50% - ((var(--card-width) * 0.5) + var(--spacer)));
+  padding-left: max(var(--spacer), calc(50% - (var(--card-width) * 0.5) + var(--spacer)));
+  padding-right: max(var(--spacer), calc(50% - (var(--card-width) * 0.5) + var(--spacer)));
 }
-@media screen and (min-width: 25.04rem) {
-  .inner-text-width {
-    padding-left: calc(50% - (var(--text-width) * 0.5));
-    padding-right: calc(50% - (var(--text-width) * 0.5));
-  }
-  .inner-text-width.padding {
-    padding-left: calc(50% - (var(--text-width) * 0.5) + var(--spacer));
-    padding-right: calc(50% - (var(--text-width) * 0.5) + var(--spacer));
-  }
+.inner-text-width {
+  padding-left: calc(50% - (var(--text-width) * 0.5));
+  padding-right: calc(50% - (var(--text-width) * 0.5));
 }
-@media screen and (min-width: 38.864rem) {
-  .inner-page-width {
-    padding-left: calc(50% - (var(--page-width) * 0.5));
-    padding-right: calc(50% - (var(--page-width) * 0.5));
-  }
-  .inner-page-width.padding {
-    padding-left: calc(50% - (var(--page-width) * 0.5) + var(--spacer));
-    padding-right: calc(50% - (var(--page-width) * 0.5) + var(--spacer));
-  }
-  .inner-feature-width {
-    padding-left: calc(50% - (var(--feature-width) * 0.5));
-    padding-right: calc(50% - (var(--feature-width) * 0.5));
-  }
-  .inner-feature-width.padding {
-    padding-left: calc(50% - (var(--feature-width) * 0.5) + var(--spacer));
-    padding-right: calc(50% - (var(--feature-width) * 0.5) + var(--spacer));
-  }
+.inner-text-width.padding {
+  padding-left: max(var(--spacer), calc(50% - (var(--text-width) * 0.5) + var(--spacer)));
+  padding-right: max(var(--spacer), calc(50% - (var(--text-width) * 0.5) + var(--spacer)));
+}
+.inner-page-width {
+  padding-left: calc(50% - (var(--page-width) * 0.5));
+  padding-right: calc(50% - (var(--page-width) * 0.5));
+}
+.inner-page-width.padding {
+  padding-left: max(var(--spacer), calc(50% - (var(--page-width) * 0.5) + var(--spacer)));
+  padding-right: max(var(--spacer), calc(50% - (var(--page-width) * 0.5) + var(--spacer)));
+}
+.inner-feature-width {
+  padding-left: calc(50% - (var(--feature-width) * 0.5));
+  padding-right: calc(50% - (var(--feature-width) * 0.5));
+}
+.inner-feature-width.padding {
+  padding-left: max(var(--spacer), calc(50% - (var(--feature-width) * 0.5) + var(--spacer)));
+  padding-right: max(var(--spacer), calc(50% - (var(--feature-width) * 0.5) + var(--spacer)));
 }
 .hide {
   display: none;
@@ -1429,7 +1201,7 @@ button:active {
 .hide.mobile {
   display: none;
 }
-@media screen and (min-width: 25.04rem) {
+@media screen and (min-width: calc(29.664rem + 2rem)) {
   .hide.mobile {
     display: initial;
   }
@@ -1437,7 +1209,7 @@ button:active {
     display: none;
   }
 }
-@media screen and (min-width: 38.864rem) {
+@media screen and (min-width: calc(47.996352rem + 2rem)) {
   .hide.desktop {
     display: none;
   }
@@ -1457,7 +1229,7 @@ button:active {
 .fixed.mobile {
   position: fixed;
 }
-@media screen and (min-width: 25.04rem) {
+@media screen and (min-width: calc(29.664rem + 2rem)) {
   .fixed.mobile {
     position: initial;
   }
@@ -1465,7 +1237,7 @@ button:active {
     position: fixed;
   }
 }
-@media screen and (min-width: 38.864rem) {
+@media screen and (min-width: calc(47.996352rem + 2rem)) {
   .fixed.desktop {
     position: fixed;
   }
@@ -2283,17 +2055,15 @@ button:active {
   --border-thick: calc(var(--border-width) * 2);
   --border-radius: var(--text-padding);
   --text-measure: 48;
-  --text-width: calc(var(--text-measure) * 0.6rem);
-  --card-width: calc(var(--text-width) / var(--golden));
-  --page-width: calc(var(--text-width) * var(--golden));
-  --feature-width: calc(var(--page-width) * var(--golden));
+  --text-width: calc(var(--text-measure) * 0.618rem);
+  --card-width: calc(var(--text-width) * 0.618);
+  --page-width: calc(var(--text-width) * 1.618);
+  --feature-width: calc(var(--page-width) * 1.618);
   --box-shadow: var(--shadow-position) var(--shadow-position) var(--shadow-blur) var(--shadow-color);
   --shadow-position: 1px;
   --shadow-blur: 1px;
   --shadow-color: rgba(6, 30, 35, 0.2);
   --direction: 180deg;
-  --white: #f2fdff;
-  --black: #061e23;
   --warm: rgba(218.9, 105.5, 112, var(--a));
   --cool: rgba(13.4, 214.5, 215.5, var(--a));
   --neutral: rgba(48.8, 145.7, 208.2, var(--a));
@@ -2301,31 +2071,63 @@ button:active {
   --monospace: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, "DejaVu Sans Mono", Courier, monospace;
   --serif: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "Droid Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
   --sans-serif: "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, sans-serif;
+  --ambient: #2ed6fb;
+  --white: #f2fdff;
+  --black: #061e23;
+  --red: #da1e25;
+  --orange: #f7a80c;
+  --yellow: #efff18;
+  --green: #29ae4a;
+  --teal: #2fadae;
+  --cyan: #0df2f3;
+  --blue: #3455fb;
+  --purple: #913aad;
+  --magenta: #ca30eb;
+  --gray: #7c8486;
+  --base-color: #2d95d8;
+  --complement: #d17537;
+  --accent: #2c46da;
+  --second-accent: #2cd9c8;
+  --split: #bf34da;
+  --second-split: #3dd937;
+  --triad: #6c34da;
+  --second-triad: var(--complement);
+  --third-triad: #2cd977;
+  --tetrad: #4334da;
+  --second-tetrad: #d13471;
+  --third-tetrad: #bad937;
+  --fourth-tetrad: #2cd9a0;
+  --action: #2d95d8;
+  --reaction: #a35b2a;
+  --info: var(--cyan);
+  --warning: var(--orange);
+  --success: var(--green);
+  --failure: var(--red);
 }
 @media screen and (min-width: 1px) {
   :root {
     --padding: calc(0.6 * var(--spacer));
     --margin: calc(0.6 * var(--margin-base));
     --gutter: calc(1.2 * var(--margin-base));
-    --font-size: calc(16px - 2);
+    --font-size: calc(var(--font-size-base) - 2px);
     --headline-base: 1em;
   }
 }
-@media screen and (min-width: 25.04rem) {
+@media screen and (min-width: calc(29.664rem + 2rem)) {
   :root {
     --padding: calc(0.8 * var(--spacer));
     --margin: calc(0.8 * var(--margin-base));
     --gutter: calc(1.6 * var(--margin-base));
-    --font-size: calc(16px - 1);
+    --font-size: calc(var(--font-size-base) - 1px);
     --headline-base: 1.1em;
   }
 }
-@media screen and (min-width: 38.864rem) {
+@media screen and (min-width: calc(47.996352rem + 2rem)) {
   :root {
     --padding: calc(1 * var(--spacer));
     --margin: calc(1 * var(--margin-base));
     --gutter: calc(2 * var(--margin-base));
-    --font-size: 16px;
+    --font-size: var(--font-size-base);
     --headline-base: 1.2em;
   }
 }
@@ -2333,7 +2135,7 @@ button:active {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-size: calc(var(--font-size-base) * var(--font-size-mod));
+  font-size: calc(var(--font-size) * var(--font-size-mod));
 }
 *::before,
 *::after {
@@ -2462,6 +2264,208 @@ pre.word-break {
 pre > code {
   background: transparent;
   padding: 0;
+}
+.grid,
+.one-column,
+.two-column,
+.three-column,
+.four-column,
+.five-column,
+.six-column,
+.seven-column,
+.eight-column,
+.nine-column,
+.ten-column,
+.eleven-column,
+.twelve-column {
+  --grid-columns: 12;
+  display: grid;
+  gap: var(--gap);
+  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+}
+.mobile,
+.tablet,
+.mobile.tablet,
+.desktop {
+  grid-template-columns: minmax(0, 1fr);
+}
+@media screen and (min-width: 1px) {
+  .mobile {
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  }
+}
+@media screen and (min-width: calc(29.664rem + 2rem)) {
+  .mobile {
+    --grid-columns: 1;
+  }
+}
+@media screen and (max-width: calc(calc(29.664rem + 2rem) - 1px)) {
+  .tablet {
+    --grid-columns: 1;
+  }
+}
+@media screen and (min-width: calc(29.664rem + 2rem)) {
+  .tablet {
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  }
+}
+.mobile.tablet {
+  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+}
+@media screen and (min-width: calc(47.996352rem + 2rem)) {
+  .mobile.tablet {
+    --grid-columns: 1;
+  }
+}
+@media screen and (min-width: calc(47.996352rem + 2rem)) {
+  .desktop {
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  }
+}
+@media screen and (max-width: calc(calc(47.996352rem + 2rem) - 1px)) {
+  .desktop {
+    --grid-columns: 1;
+  }
+}
+.one-column {
+  --grid-columns: 1;
+}
+.two-column {
+  --grid-columns: 2;
+}
+.three-column {
+  --grid-columns: 3;
+}
+.four-column {
+  --grid-columns: 4;
+}
+.five-column {
+  --grid-columns: 5;
+}
+.six-column {
+  --grid-columns: 6;
+}
+.seven-column {
+  --grid-columns: 7;
+}
+.eight-column {
+  --grid-columns: 8;
+}
+.nine-column {
+  --grid-columns: 9;
+}
+.ten-column {
+  --grid-columns: 10;
+}
+.eleven-column {
+  --grid-columns: 11;
+}
+.twelve-column {
+  --grid-columns: 12;
+}
+.grid-width-one {
+  grid-column: auto / span 1;
+}
+.grid-width-two {
+  grid-column: auto / span 2;
+}
+.grid-width-three {
+  grid-column: auto / span 3;
+}
+.grid-width-four {
+  grid-column: auto / span 4;
+}
+.grid-width-five {
+  grid-column: auto / span 5;
+}
+.grid-width-six {
+  grid-column: auto / span 6;
+}
+.grid-width-seven {
+  grid-column: auto / span 7;
+}
+.grid-width-eight {
+  grid-column: auto / span 8;
+}
+.grid-width-nine {
+  grid-column: auto / span 9;
+}
+.grid-width-ten {
+  grid-column: auto / span 10;
+}
+.grid-width-eleven {
+  grid-column: auto / span 11;
+}
+.grid-width-twelve {
+  grid-column: auto / span 12;
+}
+.two-column.golden {
+  grid-template-columns: 1.618fr 1fr;
+}
+.two-column.golden.mobile,
+.two-column.golden.tablet,
+.two-column.golden.mobile.tablet,
+.two-column.golden.desktop {
+  grid-template-columns: 1fr;
+}
+@media screen and (min-width: 1px) {
+  .two-column.golden.mobile {
+    grid-template-columns: 1.618fr 1fr;
+  }
+}
+@media screen and (min-width: calc(29.664rem + 2rem)) {
+  .two-column.golden.mobile {
+    grid-template-columns: 1fr;
+  }
+}
+@media screen and (min-width: calc(29.664rem + 2rem)) {
+  .two-column.golden.tablet {
+    grid-template-columns: 1.618fr 1fr;
+  }
+}
+@media screen and (max-width: calc(calc(47.996352rem + 2rem) - 1px)) {
+  .two-column.golden.mobile.tablet {
+    grid-template-columns: 1.618fr 1fr;
+  }
+}
+@media screen and (min-width: calc(47.996352rem + 2rem)) {
+  .two-column.golden.desktop {
+    grid-template-columns: 1.618fr 1fr;
+  }
+}
+.two-column.golden.reverse {
+  grid-template-columns: 1fr 1.618fr;
+}
+.two-column.golden.reverse.mobile,
+.two-column.golden.reverse.tablet,
+.two-column.golden.reverse.mobile.tablet,
+.two-column.golden.reverse.desktop {
+  grid-template-columns: 1fr;
+}
+@media screen and (min-width: 1px) {
+  .two-column.golden.reverse.mobile {
+    grid-template-columns: 1fr 1.618fr;
+  }
+}
+@media screen and (min-width: calc(29.664rem + 2rem)) {
+  .two-column.golden.reverse.mobile {
+    grid-template-columns: 1fr;
+  }
+}
+@media screen and (min-width: calc(29.664rem + 2rem)) {
+  .two-column.golden.reverse.tablet {
+    grid-template-columns: 1fr 1.618fr;
+  }
+}
+@media screen and (max-width: calc(calc(47.996352rem + 2rem) - 1px)) {
+  .two-column.golden.reverse.mobile.tablet {
+    grid-template-columns: 1fr 1.618fr;
+  }
+}
+@media screen and (min-width: calc(47.996352rem + 2rem)) {
+  .two-column.golden.reverse.desktop {
+    grid-template-columns: 1fr 1.618fr;
+  }
 }
 .button,
 button {
@@ -2707,10 +2711,10 @@ button:active {
   height: 100vh;
 }
 .golden-height {
-  min-height: 100%;
+  min-height: 62%;
 }
 .golden-height.force {
-  height: 100%;
+  height: 62%;
 }
 .overflow-scroll {
   overflow-y: auto;
@@ -2792,7 +2796,7 @@ button:active {
 .huge {
   --font-size-mod: 1.2;
 }
-@media screen and (min-width: 25.04rem) {
+@media screen and (min-width: calc(29.664rem + 2rem)) {
   .small {
     --font-size-mod: 0.9;
   }
@@ -2806,7 +2810,7 @@ button:active {
     --font-size-mod: 1.4;
   }
 }
-@media screen and (min-width: 38.864rem) {
+@media screen and (min-width: calc(47.996352rem + 2rem)) {
   .small {
     --font-size-mod: 0.9;
   }
@@ -3121,464 +3125,8 @@ button:active {
 .placeholder::after {
   content: " ";
 }
-.grid,
-.two-column,
-.three-column,
-.four-column,
-.five-column,
-.six-column,
-.seven-column,
-.eight-column,
-.nine-column,
-.ten-column,
-.eleven-column,
-.twelve-column {
-  --grid-columns: 12;
-  display: grid;
-  gap: var(--gap);
-  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
-}
-.two-column.mobile,
-.three-column.mobile,
-.four-column.mobile,
-.five-column.mobile,
-.six-column.mobile,
-.seven-column.mobile,
-.eight-column.mobile,
-.nine-column.mobile,
-.ten-column.mobile,
-.eleven-column.mobile,
-.twelve-column.mobile,
-.two-column.tablet,
-.three-column.tablet,
-.four-column.tablet,
-.five-column.tablet,
-.six-column.tablet,
-.seven-column.tablet,
-.eight-column.tablet,
-.nine-column.tablet,
-.ten-column.tablet,
-.eleven-column.tablet,
-.twelve-column.tablet,
-.two-column.desktop,
-.three-column.desktop,
-.four-column.desktop,
-.five-column.desktop,
-.six-column.desktop,
-.seven-column.desktop,
-.eight-column.desktop,
-.nine-column.desktop,
-.ten-column.desktop,
-.eleven-column.desktop,
-.twelve-column.desktop {
-  grid-template-columns: minmax(0, 1fr);
-}
-.two-column.tablet,
-.two-column.desktop {
-  --grid-columns: 1;
-}
-.two-column.golden {
-  grid-template-columns: 1.618fr 1fr;
-}
-.two-column.golden.reverse {
-  grid-template-columns: 1fr 1.618fr;
-}
-.mobile {
-  --grid-columns: 1;
-}
-.mobile.two-column.golden {
-  grid-template-columns: minmax(0, 1fr);
-}
-.mobile.two-column.golden.reverse {
-  grid-template-columns: minmax(0, 1fr);
-}
-@media screen and (min-width: 1px) {
-  .grid,
-  .two-column.mobile,
-  .three-column.mobile,
-  .four-column.mobile,
-  .five-column.mobile,
-  .six-column.mobile,
-  .seven-column.mobile,
-  .eight-column.mobile,
-  .nine-column.mobile,
-  .ten-column.mobile,
-  .eleven-column.mobile,
-  .twelve-column.mobile,
-  .two-column,
-  .three-column,
-  .four-column,
-  .five-column,
-  .six-column,
-  .seven-column,
-  .eight-column,
-  .nine-column,
-  .ten-column,
-  .eleven-column,
-  .twelve-column {
-    --grid-columns: 12;
-    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
-  }
-  .two-column {
-    --grid-columns: 2;
-  }
-  .three-column {
-    --grid-columns: 3;
-  }
-  .four-column {
-    --grid-columns: 4;
-  }
-  .five-column {
-    --grid-columns: 5;
-  }
-  .six-column {
-    --grid-columns: 6;
-  }
-  .seven-column {
-    --grid-columns: 7;
-  }
-  .eight-column {
-    --grid-columns: 8;
-  }
-  .nine-column {
-    --grid-columns: 9;
-  }
-  .ten-column {
-    --grid-columns: 10;
-  }
-  .eleven-column {
-    --grid-columns: 11;
-  }
-  .twelve-column {
-    --grid-columns: 12;
-  }
-  .mobile.two-column.golden {
-    grid-template-columns: 1.618fr 1fr;
-  }
-  .mobile.two-column.golden.reverse {
-    grid-template-columns: 1fr 1.618fr;
-  }
-}
-.tablet {
-  --grid-columns: 1;
-}
-.tablet.two-column.golden {
-  grid-template-columns: minmax(0, 1fr);
-}
-.tablet.two-column.golden.reverse {
-  grid-template-columns: minmax(0, 1fr);
-}
-@media screen and (min-width: 25.04rem) {
-  .grid,
-  .two-column.tablet,
-  .three-column.tablet,
-  .four-column.tablet,
-  .five-column.tablet,
-  .six-column.tablet,
-  .seven-column.tablet,
-  .eight-column.tablet,
-  .nine-column.tablet,
-  .ten-column.tablet,
-  .eleven-column.tablet,
-  .twelve-column.tablet,
-  .two-column,
-  .three-column,
-  .four-column,
-  .five-column,
-  .six-column,
-  .seven-column,
-  .eight-column,
-  .nine-column,
-  .ten-column,
-  .eleven-column,
-  .twelve-column {
-    --grid-columns: 12;
-    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
-  }
-  .two-column.tablet {
-    --grid-columns: 2;
-  }
-  .three-column.tablet {
-    --grid-columns: 3;
-  }
-  .four-column.tablet {
-    --grid-columns: 4;
-  }
-  .five-column.tablet {
-    --grid-columns: 5;
-  }
-  .six-column.tablet {
-    --grid-columns: 6;
-  }
-  .seven-column.tablet {
-    --grid-columns: 7;
-  }
-  .eight-column.tablet {
-    --grid-columns: 8;
-  }
-  .nine-column.tablet {
-    --grid-columns: 9;
-  }
-  .ten-column.tablet {
-    --grid-columns: 10;
-  }
-  .eleven-column.tablet {
-    --grid-columns: 11;
-  }
-  .twelve-column.tablet {
-    --grid-columns: 12;
-  }
-  .tablet.two-column.golden {
-    grid-template-columns: 1.618fr 1fr;
-  }
-  .tablet.two-column.golden.reverse {
-    grid-template-columns: 1fr 1.618fr;
-  }
-}
-.mobile.tablet {
-  --grid-columns: 1;
-}
-.mobile.tablet.two-column.golden {
-  grid-template-columns: minmax(0, 1fr);
-}
-.mobile.tablet.two-column.golden.reverse {
-  grid-template-columns: minmax(0, 1fr);
-}
-@media screen and (max-width: calc(38.864rem - 1px)) {
-  .grid,
-  .two-column.mobile.tablet,
-  .three-column.mobile.tablet,
-  .four-column.mobile.tablet,
-  .five-column.mobile.tablet,
-  .six-column.mobile.tablet,
-  .seven-column.mobile.tablet,
-  .eight-column.mobile.tablet,
-  .nine-column.mobile.tablet,
-  .ten-column.mobile.tablet,
-  .eleven-column.mobile.tablet,
-  .twelve-column.mobile.tablet,
-  .two-column,
-  .three-column,
-  .four-column,
-  .five-column,
-  .six-column,
-  .seven-column,
-  .eight-column,
-  .nine-column,
-  .ten-column,
-  .eleven-column,
-  .twelve-column {
-    --grid-columns: 12;
-    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
-  }
-  .two-column.mobile.tablet {
-    --grid-columns: 2;
-  }
-  .three-column.mobile.tablet {
-    --grid-columns: 3;
-  }
-  .four-column.mobile.tablet {
-    --grid-columns: 4;
-  }
-  .five-column.mobile.tablet {
-    --grid-columns: 5;
-  }
-  .six-column.mobile.tablet {
-    --grid-columns: 6;
-  }
-  .seven-column.mobile.tablet {
-    --grid-columns: 7;
-  }
-  .eight-column.mobile.tablet {
-    --grid-columns: 8;
-  }
-  .nine-column.mobile.tablet {
-    --grid-columns: 9;
-  }
-  .ten-column.mobile.tablet {
-    --grid-columns: 10;
-  }
-  .eleven-column.mobile.tablet {
-    --grid-columns: 11;
-  }
-  .twelve-column.mobile.tablet {
-    --grid-columns: 12;
-  }
-  .mobile.tablet.two-column.golden {
-    grid-template-columns: 1.618fr 1fr;
-  }
-  .mobile.tablet.two-column.golden.reverse {
-    grid-template-columns: 1fr 1.618fr;
-  }
-}
-.desktop {
-  --grid-columns: 1;
-}
-.desktop.two-column.golden {
-  grid-template-columns: minmax(0, 1fr);
-}
-.desktop.two-column.golden.reverse {
-  grid-template-columns: minmax(0, 1fr);
-}
-@media screen and (min-width: 38.864rem) {
-  .grid,
-  .two-column.desktop,
-  .three-column.desktop,
-  .four-column.desktop,
-  .five-column.desktop,
-  .six-column.desktop,
-  .seven-column.desktop,
-  .eight-column.desktop,
-  .nine-column.desktop,
-  .ten-column.desktop,
-  .eleven-column.desktop,
-  .twelve-column.desktop,
-  .two-column,
-  .three-column,
-  .four-column,
-  .five-column,
-  .six-column,
-  .seven-column,
-  .eight-column,
-  .nine-column,
-  .ten-column,
-  .eleven-column,
-  .twelve-column {
-    --grid-columns: 12;
-    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
-  }
-  .two-column.desktop {
-    --grid-columns: 2;
-  }
-  .three-column.desktop {
-    --grid-columns: 3;
-  }
-  .four-column.desktop {
-    --grid-columns: 4;
-  }
-  .five-column.desktop {
-    --grid-columns: 5;
-  }
-  .six-column.desktop {
-    --grid-columns: 6;
-  }
-  .seven-column.desktop {
-    --grid-columns: 7;
-  }
-  .eight-column.desktop {
-    --grid-columns: 8;
-  }
-  .nine-column.desktop {
-    --grid-columns: 9;
-  }
-  .ten-column.desktop {
-    --grid-columns: 10;
-  }
-  .eleven-column.desktop {
-    --grid-columns: 11;
-  }
-  .twelve-column.desktop {
-    --grid-columns: 12;
-  }
-  .desktop.two-column.golden {
-    grid-template-columns: 1.618fr 1fr;
-  }
-  .desktop.two-column.golden.reverse {
-    grid-template-columns: 1fr 1.618fr;
-  }
-}
-.grid-width-one {
-  grid-column: auto / span 1;
-}
-.grid-width-two {
-  grid-column: auto / span 2;
-}
-.grid-width-three {
-  grid-column: auto / span 3;
-}
-.grid-width-four {
-  grid-column: auto / span 4;
-}
-.grid-width-five {
-  grid-column: auto / span 5;
-}
-.grid-width-six {
-  grid-column: auto / span 6;
-}
-.grid-width-seven {
-  grid-column: auto / span 7;
-}
-.grid-width-eight {
-  grid-column: auto / span 8;
-}
-.grid-width-nine {
-  grid-column: auto / span 9;
-}
-.grid-width-ten {
-  grid-column: auto / span 10;
-}
-.grid-width-eleven {
-  grid-column: auto / span 11;
-}
-.grid-width-twelve {
-  grid-column: auto / span 12;
-}
-.first-column {
-  grid-column-start: 1;
-}
-.second-column {
-  grid-column-start: 2;
-}
-.two-column {
-  --grid-columns: 2;
-}
-.three-column {
-  --grid-columns: 3;
-}
-.four-column {
-  --grid-columns: 4;
-}
-.five-column {
-  --grid-columns: 5;
-}
-.six-column {
-  --grid-columns: 6;
-}
-.seven-column {
-  --grid-columns: 7;
-}
-.eight-column {
-  --grid-columns: 8;
-}
-.nine-column {
-  --grid-columns: 9;
-}
-.ten-column {
-  --grid-columns: 10;
-}
-.eleven-column {
-  --grid-columns: 11;
-}
-.twelve-column {
-  --grid-columns: 12;
-}
 .rem-width {
   width: 1rem;
-}
-.half-width {
-  width: 50%;
-}
-.third-width {
-  width: 33.33%;
-}
-.fourth-width {
-  width: 25%;
-}
-.fifth-width {
-  width: 20%;
-}
-.sixth-width {
-  width: 16.66%;
 }
 .golden-width {
   max-width: calc(62% - var(--spacer));
@@ -3595,7 +3143,7 @@ button:active {
 .card-width {
   max-width: var(--card-width);
 }
-@media screen and (min-width: 25.04rem) {
+@media screen and (min-width: calc(29.664rem + 2rem)) {
   .text-width {
     max-width: var(--text-width);
   }
@@ -3622,40 +3170,36 @@ button:active {
   width: 100%;
 }
 .inner-card-width {
-  padding-left: calc(50% - (var(--card-width) * 0.5));
-  padding-right: calc(50% - (var(--card-width) * 0.5));
+  padding-left: max(var(--spacer), calc(50% - (var(--card-width) * 0.5)));
+  padding-right: max(var(--spacer), calc(50% - (var(--card-width) * 0.5)));
 }
 .inner-card-width.padding {
-  padding-left: calc(50% - ((var(--card-width) * 0.5) + var(--spacer)));
-  padding-right: calc(50% - ((var(--card-width) * 0.5) + var(--spacer)));
+  padding-left: max(var(--spacer), calc(50% - (var(--card-width) * 0.5) + var(--spacer)));
+  padding-right: max(var(--spacer), calc(50% - (var(--card-width) * 0.5) + var(--spacer)));
 }
-@media screen and (min-width: 25.04rem) {
-  .inner-text-width {
-    padding-left: calc(50% - (var(--text-width) * 0.5));
-    padding-right: calc(50% - (var(--text-width) * 0.5));
-  }
-  .inner-text-width.padding {
-    padding-left: calc(50% - (var(--text-width) * 0.5) + var(--spacer));
-    padding-right: calc(50% - (var(--text-width) * 0.5) + var(--spacer));
-  }
+.inner-text-width {
+  padding-left: calc(50% - (var(--text-width) * 0.5));
+  padding-right: calc(50% - (var(--text-width) * 0.5));
 }
-@media screen and (min-width: 38.864rem) {
-  .inner-page-width {
-    padding-left: calc(50% - (var(--page-width) * 0.5));
-    padding-right: calc(50% - (var(--page-width) * 0.5));
-  }
-  .inner-page-width.padding {
-    padding-left: calc(50% - (var(--page-width) * 0.5) + var(--spacer));
-    padding-right: calc(50% - (var(--page-width) * 0.5) + var(--spacer));
-  }
-  .inner-feature-width {
-    padding-left: calc(50% - (var(--feature-width) * 0.5));
-    padding-right: calc(50% - (var(--feature-width) * 0.5));
-  }
-  .inner-feature-width.padding {
-    padding-left: calc(50% - (var(--feature-width) * 0.5) + var(--spacer));
-    padding-right: calc(50% - (var(--feature-width) * 0.5) + var(--spacer));
-  }
+.inner-text-width.padding {
+  padding-left: max(var(--spacer), calc(50% - (var(--text-width) * 0.5) + var(--spacer)));
+  padding-right: max(var(--spacer), calc(50% - (var(--text-width) * 0.5) + var(--spacer)));
+}
+.inner-page-width {
+  padding-left: calc(50% - (var(--page-width) * 0.5));
+  padding-right: calc(50% - (var(--page-width) * 0.5));
+}
+.inner-page-width.padding {
+  padding-left: max(var(--spacer), calc(50% - (var(--page-width) * 0.5) + var(--spacer)));
+  padding-right: max(var(--spacer), calc(50% - (var(--page-width) * 0.5) + var(--spacer)));
+}
+.inner-feature-width {
+  padding-left: calc(50% - (var(--feature-width) * 0.5));
+  padding-right: calc(50% - (var(--feature-width) * 0.5));
+}
+.inner-feature-width.padding {
+  padding-left: max(var(--spacer), calc(50% - (var(--feature-width) * 0.5) + var(--spacer)));
+  padding-right: max(var(--spacer), calc(50% - (var(--feature-width) * 0.5) + var(--spacer)));
 }
 .hide {
   display: none;
@@ -3669,7 +3213,7 @@ button:active {
 .hide.mobile {
   display: none;
 }
-@media screen and (min-width: 25.04rem) {
+@media screen and (min-width: calc(29.664rem + 2rem)) {
   .hide.mobile {
     display: initial;
   }
@@ -3677,7 +3221,7 @@ button:active {
     display: none;
   }
 }
-@media screen and (min-width: 38.864rem) {
+@media screen and (min-width: calc(47.996352rem + 2rem)) {
   .hide.desktop {
     display: none;
   }
@@ -3697,7 +3241,7 @@ button:active {
 .fixed.mobile {
   position: fixed;
 }
-@media screen and (min-width: 25.04rem) {
+@media screen and (min-width: calc(29.664rem + 2rem)) {
   .fixed.mobile {
     position: initial;
   }
@@ -3705,7 +3249,7 @@ button:active {
     position: fixed;
   }
 }
-@media screen and (min-width: 38.864rem) {
+@media screen and (min-width: calc(47.996352rem + 2rem)) {
   .fixed.desktop {
     position: fixed;
   }
@@ -4412,17 +3956,15 @@ button:active {
   --border-thick: calc(var(--border-width) * 2);
   --border-radius: var(--text-padding);
   --text-measure: 48;
-  --text-width: calc(var(--text-measure) * 0.6rem);
-  --card-width: calc(var(--text-width) / var(--golden));
-  --page-width: calc(var(--text-width) * var(--golden));
-  --feature-width: calc(var(--page-width) * var(--golden));
+  --text-width: calc(var(--text-measure) * 0.618rem);
+  --card-width: calc(var(--text-width) * 0.618);
+  --page-width: calc(var(--text-width) * 1.618);
+  --feature-width: calc(var(--page-width) * 1.618);
   --box-shadow: var(--shadow-position) var(--shadow-position) var(--shadow-blur) var(--shadow-color);
   --shadow-position: 1px;
   --shadow-blur: 1px;
   --shadow-color: rgba(6, 30, 35, 0.2);
   --direction: 180deg;
-  --white: #f2fdff;
-  --black: #061e23;
   --warm: rgba(218.9, 105.5, 112, var(--a));
   --cool: rgba(13.4, 214.5, 215.5, var(--a));
   --neutral: rgba(48.8, 145.7, 208.2, var(--a));
@@ -4430,31 +3972,63 @@ button:active {
   --monospace: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, "DejaVu Sans Mono", Courier, monospace;
   --serif: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "Droid Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
   --sans-serif: "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, sans-serif;
+  --ambient: #2ed6fb;
+  --white: #f2fdff;
+  --black: #061e23;
+  --red: #da1e25;
+  --orange: #f7a80c;
+  --yellow: #efff18;
+  --green: #29ae4a;
+  --teal: #2fadae;
+  --cyan: #0df2f3;
+  --blue: #3455fb;
+  --purple: #913aad;
+  --magenta: #ca30eb;
+  --gray: #7c8486;
+  --base-color: #2d95d8;
+  --complement: #d17537;
+  --accent: #2c46da;
+  --second-accent: #2cd9c8;
+  --split: #bf34da;
+  --second-split: #3dd937;
+  --triad: #6c34da;
+  --second-triad: var(--complement);
+  --third-triad: #2cd977;
+  --tetrad: #4334da;
+  --second-tetrad: #d13471;
+  --third-tetrad: #bad937;
+  --fourth-tetrad: #2cd9a0;
+  --action: #2d95d8;
+  --reaction: #a35b2a;
+  --info: var(--cyan);
+  --warning: var(--orange);
+  --success: var(--green);
+  --failure: var(--red);
 }
 @media screen and (min-width: 1px) {
   :root {
     --padding: calc(0.6 * var(--spacer));
     --margin: calc(0.6 * var(--margin-base));
     --gutter: calc(1.2 * var(--margin-base));
-    --font-size: calc(16px - 2);
+    --font-size: calc(var(--font-size-base) - 2px);
     --headline-base: 1em;
   }
 }
-@media screen and (min-width: 25.04rem) {
+@media screen and (min-width: calc(29.664rem + 2rem)) {
   :root {
     --padding: calc(0.8 * var(--spacer));
     --margin: calc(0.8 * var(--margin-base));
     --gutter: calc(1.6 * var(--margin-base));
-    --font-size: calc(16px - 1);
+    --font-size: calc(var(--font-size-base) - 1px);
     --headline-base: 1.1em;
   }
 }
-@media screen and (min-width: 38.864rem) {
+@media screen and (min-width: calc(47.996352rem + 2rem)) {
   :root {
     --padding: calc(1 * var(--spacer));
     --margin: calc(1 * var(--margin-base));
     --gutter: calc(2 * var(--margin-base));
-    --font-size: 16px;
+    --font-size: var(--font-size-base);
     --headline-base: 1.2em;
   }
 }
@@ -4462,7 +4036,7 @@ button:active {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-size: calc(var(--font-size-base) * var(--font-size-mod));
+  font-size: calc(var(--font-size) * var(--font-size-mod));
 }
 *::before,
 *::after {
@@ -4591,6 +4165,208 @@ pre.word-break {
 pre > code {
   background: transparent;
   padding: 0;
+}
+.grid,
+.one-column,
+.two-column,
+.three-column,
+.four-column,
+.five-column,
+.six-column,
+.seven-column,
+.eight-column,
+.nine-column,
+.ten-column,
+.eleven-column,
+.twelve-column {
+  --grid-columns: 12;
+  display: grid;
+  gap: var(--gap);
+  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+}
+.mobile,
+.tablet,
+.mobile.tablet,
+.desktop {
+  grid-template-columns: minmax(0, 1fr);
+}
+@media screen and (min-width: 1px) {
+  .mobile {
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  }
+}
+@media screen and (min-width: calc(29.664rem + 2rem)) {
+  .mobile {
+    --grid-columns: 1;
+  }
+}
+@media screen and (max-width: calc(calc(29.664rem + 2rem) - 1px)) {
+  .tablet {
+    --grid-columns: 1;
+  }
+}
+@media screen and (min-width: calc(29.664rem + 2rem)) {
+  .tablet {
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  }
+}
+.mobile.tablet {
+  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+}
+@media screen and (min-width: calc(47.996352rem + 2rem)) {
+  .mobile.tablet {
+    --grid-columns: 1;
+  }
+}
+@media screen and (min-width: calc(47.996352rem + 2rem)) {
+  .desktop {
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  }
+}
+@media screen and (max-width: calc(calc(47.996352rem + 2rem) - 1px)) {
+  .desktop {
+    --grid-columns: 1;
+  }
+}
+.one-column {
+  --grid-columns: 1;
+}
+.two-column {
+  --grid-columns: 2;
+}
+.three-column {
+  --grid-columns: 3;
+}
+.four-column {
+  --grid-columns: 4;
+}
+.five-column {
+  --grid-columns: 5;
+}
+.six-column {
+  --grid-columns: 6;
+}
+.seven-column {
+  --grid-columns: 7;
+}
+.eight-column {
+  --grid-columns: 8;
+}
+.nine-column {
+  --grid-columns: 9;
+}
+.ten-column {
+  --grid-columns: 10;
+}
+.eleven-column {
+  --grid-columns: 11;
+}
+.twelve-column {
+  --grid-columns: 12;
+}
+.grid-width-one {
+  grid-column: auto / span 1;
+}
+.grid-width-two {
+  grid-column: auto / span 2;
+}
+.grid-width-three {
+  grid-column: auto / span 3;
+}
+.grid-width-four {
+  grid-column: auto / span 4;
+}
+.grid-width-five {
+  grid-column: auto / span 5;
+}
+.grid-width-six {
+  grid-column: auto / span 6;
+}
+.grid-width-seven {
+  grid-column: auto / span 7;
+}
+.grid-width-eight {
+  grid-column: auto / span 8;
+}
+.grid-width-nine {
+  grid-column: auto / span 9;
+}
+.grid-width-ten {
+  grid-column: auto / span 10;
+}
+.grid-width-eleven {
+  grid-column: auto / span 11;
+}
+.grid-width-twelve {
+  grid-column: auto / span 12;
+}
+.two-column.golden {
+  grid-template-columns: 1.618fr 1fr;
+}
+.two-column.golden.mobile,
+.two-column.golden.tablet,
+.two-column.golden.mobile.tablet,
+.two-column.golden.desktop {
+  grid-template-columns: 1fr;
+}
+@media screen and (min-width: 1px) {
+  .two-column.golden.mobile {
+    grid-template-columns: 1.618fr 1fr;
+  }
+}
+@media screen and (min-width: calc(29.664rem + 2rem)) {
+  .two-column.golden.mobile {
+    grid-template-columns: 1fr;
+  }
+}
+@media screen and (min-width: calc(29.664rem + 2rem)) {
+  .two-column.golden.tablet {
+    grid-template-columns: 1.618fr 1fr;
+  }
+}
+@media screen and (max-width: calc(calc(47.996352rem + 2rem) - 1px)) {
+  .two-column.golden.mobile.tablet {
+    grid-template-columns: 1.618fr 1fr;
+  }
+}
+@media screen and (min-width: calc(47.996352rem + 2rem)) {
+  .two-column.golden.desktop {
+    grid-template-columns: 1.618fr 1fr;
+  }
+}
+.two-column.golden.reverse {
+  grid-template-columns: 1fr 1.618fr;
+}
+.two-column.golden.reverse.mobile,
+.two-column.golden.reverse.tablet,
+.two-column.golden.reverse.mobile.tablet,
+.two-column.golden.reverse.desktop {
+  grid-template-columns: 1fr;
+}
+@media screen and (min-width: 1px) {
+  .two-column.golden.reverse.mobile {
+    grid-template-columns: 1fr 1.618fr;
+  }
+}
+@media screen and (min-width: calc(29.664rem + 2rem)) {
+  .two-column.golden.reverse.mobile {
+    grid-template-columns: 1fr;
+  }
+}
+@media screen and (min-width: calc(29.664rem + 2rem)) {
+  .two-column.golden.reverse.tablet {
+    grid-template-columns: 1fr 1.618fr;
+  }
+}
+@media screen and (max-width: calc(calc(47.996352rem + 2rem) - 1px)) {
+  .two-column.golden.reverse.mobile.tablet {
+    grid-template-columns: 1fr 1.618fr;
+  }
+}
+@media screen and (min-width: calc(47.996352rem + 2rem)) {
+  .two-column.golden.reverse.desktop {
+    grid-template-columns: 1fr 1.618fr;
+  }
 }
 .button,
 button {
@@ -4836,10 +4612,10 @@ button:active {
   height: 100vh;
 }
 .golden-height {
-  min-height: 100%;
+  min-height: 62%;
 }
 .golden-height.force {
-  height: 100%;
+  height: 62%;
 }
 .overflow-scroll {
   overflow-y: auto;
@@ -4921,7 +4697,7 @@ button:active {
 .huge {
   --font-size-mod: 1.2;
 }
-@media screen and (min-width: 25.04rem) {
+@media screen and (min-width: calc(29.664rem + 2rem)) {
   .small {
     --font-size-mod: 0.9;
   }
@@ -4935,7 +4711,7 @@ button:active {
     --font-size-mod: 1.4;
   }
 }
-@media screen and (min-width: 38.864rem) {
+@media screen and (min-width: calc(47.996352rem + 2rem)) {
   .small {
     --font-size-mod: 0.9;
   }
@@ -5250,464 +5026,8 @@ button:active {
 .placeholder::after {
   content: " ";
 }
-.grid,
-.two-column,
-.three-column,
-.four-column,
-.five-column,
-.six-column,
-.seven-column,
-.eight-column,
-.nine-column,
-.ten-column,
-.eleven-column,
-.twelve-column {
-  --grid-columns: 12;
-  display: grid;
-  gap: var(--gap);
-  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
-}
-.two-column.mobile,
-.three-column.mobile,
-.four-column.mobile,
-.five-column.mobile,
-.six-column.mobile,
-.seven-column.mobile,
-.eight-column.mobile,
-.nine-column.mobile,
-.ten-column.mobile,
-.eleven-column.mobile,
-.twelve-column.mobile,
-.two-column.tablet,
-.three-column.tablet,
-.four-column.tablet,
-.five-column.tablet,
-.six-column.tablet,
-.seven-column.tablet,
-.eight-column.tablet,
-.nine-column.tablet,
-.ten-column.tablet,
-.eleven-column.tablet,
-.twelve-column.tablet,
-.two-column.desktop,
-.three-column.desktop,
-.four-column.desktop,
-.five-column.desktop,
-.six-column.desktop,
-.seven-column.desktop,
-.eight-column.desktop,
-.nine-column.desktop,
-.ten-column.desktop,
-.eleven-column.desktop,
-.twelve-column.desktop {
-  grid-template-columns: minmax(0, 1fr);
-}
-.two-column.tablet,
-.two-column.desktop {
-  --grid-columns: 1;
-}
-.two-column.golden {
-  grid-template-columns: 1.618fr 1fr;
-}
-.two-column.golden.reverse {
-  grid-template-columns: 1fr 1.618fr;
-}
-.mobile {
-  --grid-columns: 1;
-}
-.mobile.two-column.golden {
-  grid-template-columns: minmax(0, 1fr);
-}
-.mobile.two-column.golden.reverse {
-  grid-template-columns: minmax(0, 1fr);
-}
-@media screen and (min-width: 1px) {
-  .grid,
-  .two-column.mobile,
-  .three-column.mobile,
-  .four-column.mobile,
-  .five-column.mobile,
-  .six-column.mobile,
-  .seven-column.mobile,
-  .eight-column.mobile,
-  .nine-column.mobile,
-  .ten-column.mobile,
-  .eleven-column.mobile,
-  .twelve-column.mobile,
-  .two-column,
-  .three-column,
-  .four-column,
-  .five-column,
-  .six-column,
-  .seven-column,
-  .eight-column,
-  .nine-column,
-  .ten-column,
-  .eleven-column,
-  .twelve-column {
-    --grid-columns: 12;
-    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
-  }
-  .two-column {
-    --grid-columns: 2;
-  }
-  .three-column {
-    --grid-columns: 3;
-  }
-  .four-column {
-    --grid-columns: 4;
-  }
-  .five-column {
-    --grid-columns: 5;
-  }
-  .six-column {
-    --grid-columns: 6;
-  }
-  .seven-column {
-    --grid-columns: 7;
-  }
-  .eight-column {
-    --grid-columns: 8;
-  }
-  .nine-column {
-    --grid-columns: 9;
-  }
-  .ten-column {
-    --grid-columns: 10;
-  }
-  .eleven-column {
-    --grid-columns: 11;
-  }
-  .twelve-column {
-    --grid-columns: 12;
-  }
-  .mobile.two-column.golden {
-    grid-template-columns: 1.618fr 1fr;
-  }
-  .mobile.two-column.golden.reverse {
-    grid-template-columns: 1fr 1.618fr;
-  }
-}
-.tablet {
-  --grid-columns: 1;
-}
-.tablet.two-column.golden {
-  grid-template-columns: minmax(0, 1fr);
-}
-.tablet.two-column.golden.reverse {
-  grid-template-columns: minmax(0, 1fr);
-}
-@media screen and (min-width: 25.04rem) {
-  .grid,
-  .two-column.tablet,
-  .three-column.tablet,
-  .four-column.tablet,
-  .five-column.tablet,
-  .six-column.tablet,
-  .seven-column.tablet,
-  .eight-column.tablet,
-  .nine-column.tablet,
-  .ten-column.tablet,
-  .eleven-column.tablet,
-  .twelve-column.tablet,
-  .two-column,
-  .three-column,
-  .four-column,
-  .five-column,
-  .six-column,
-  .seven-column,
-  .eight-column,
-  .nine-column,
-  .ten-column,
-  .eleven-column,
-  .twelve-column {
-    --grid-columns: 12;
-    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
-  }
-  .two-column.tablet {
-    --grid-columns: 2;
-  }
-  .three-column.tablet {
-    --grid-columns: 3;
-  }
-  .four-column.tablet {
-    --grid-columns: 4;
-  }
-  .five-column.tablet {
-    --grid-columns: 5;
-  }
-  .six-column.tablet {
-    --grid-columns: 6;
-  }
-  .seven-column.tablet {
-    --grid-columns: 7;
-  }
-  .eight-column.tablet {
-    --grid-columns: 8;
-  }
-  .nine-column.tablet {
-    --grid-columns: 9;
-  }
-  .ten-column.tablet {
-    --grid-columns: 10;
-  }
-  .eleven-column.tablet {
-    --grid-columns: 11;
-  }
-  .twelve-column.tablet {
-    --grid-columns: 12;
-  }
-  .tablet.two-column.golden {
-    grid-template-columns: 1.618fr 1fr;
-  }
-  .tablet.two-column.golden.reverse {
-    grid-template-columns: 1fr 1.618fr;
-  }
-}
-.mobile.tablet {
-  --grid-columns: 1;
-}
-.mobile.tablet.two-column.golden {
-  grid-template-columns: minmax(0, 1fr);
-}
-.mobile.tablet.two-column.golden.reverse {
-  grid-template-columns: minmax(0, 1fr);
-}
-@media screen and (max-width: calc(38.864rem - 1px)) {
-  .grid,
-  .two-column.mobile.tablet,
-  .three-column.mobile.tablet,
-  .four-column.mobile.tablet,
-  .five-column.mobile.tablet,
-  .six-column.mobile.tablet,
-  .seven-column.mobile.tablet,
-  .eight-column.mobile.tablet,
-  .nine-column.mobile.tablet,
-  .ten-column.mobile.tablet,
-  .eleven-column.mobile.tablet,
-  .twelve-column.mobile.tablet,
-  .two-column,
-  .three-column,
-  .four-column,
-  .five-column,
-  .six-column,
-  .seven-column,
-  .eight-column,
-  .nine-column,
-  .ten-column,
-  .eleven-column,
-  .twelve-column {
-    --grid-columns: 12;
-    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
-  }
-  .two-column.mobile.tablet {
-    --grid-columns: 2;
-  }
-  .three-column.mobile.tablet {
-    --grid-columns: 3;
-  }
-  .four-column.mobile.tablet {
-    --grid-columns: 4;
-  }
-  .five-column.mobile.tablet {
-    --grid-columns: 5;
-  }
-  .six-column.mobile.tablet {
-    --grid-columns: 6;
-  }
-  .seven-column.mobile.tablet {
-    --grid-columns: 7;
-  }
-  .eight-column.mobile.tablet {
-    --grid-columns: 8;
-  }
-  .nine-column.mobile.tablet {
-    --grid-columns: 9;
-  }
-  .ten-column.mobile.tablet {
-    --grid-columns: 10;
-  }
-  .eleven-column.mobile.tablet {
-    --grid-columns: 11;
-  }
-  .twelve-column.mobile.tablet {
-    --grid-columns: 12;
-  }
-  .mobile.tablet.two-column.golden {
-    grid-template-columns: 1.618fr 1fr;
-  }
-  .mobile.tablet.two-column.golden.reverse {
-    grid-template-columns: 1fr 1.618fr;
-  }
-}
-.desktop {
-  --grid-columns: 1;
-}
-.desktop.two-column.golden {
-  grid-template-columns: minmax(0, 1fr);
-}
-.desktop.two-column.golden.reverse {
-  grid-template-columns: minmax(0, 1fr);
-}
-@media screen and (min-width: 38.864rem) {
-  .grid,
-  .two-column.desktop,
-  .three-column.desktop,
-  .four-column.desktop,
-  .five-column.desktop,
-  .six-column.desktop,
-  .seven-column.desktop,
-  .eight-column.desktop,
-  .nine-column.desktop,
-  .ten-column.desktop,
-  .eleven-column.desktop,
-  .twelve-column.desktop,
-  .two-column,
-  .three-column,
-  .four-column,
-  .five-column,
-  .six-column,
-  .seven-column,
-  .eight-column,
-  .nine-column,
-  .ten-column,
-  .eleven-column,
-  .twelve-column {
-    --grid-columns: 12;
-    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
-  }
-  .two-column.desktop {
-    --grid-columns: 2;
-  }
-  .three-column.desktop {
-    --grid-columns: 3;
-  }
-  .four-column.desktop {
-    --grid-columns: 4;
-  }
-  .five-column.desktop {
-    --grid-columns: 5;
-  }
-  .six-column.desktop {
-    --grid-columns: 6;
-  }
-  .seven-column.desktop {
-    --grid-columns: 7;
-  }
-  .eight-column.desktop {
-    --grid-columns: 8;
-  }
-  .nine-column.desktop {
-    --grid-columns: 9;
-  }
-  .ten-column.desktop {
-    --grid-columns: 10;
-  }
-  .eleven-column.desktop {
-    --grid-columns: 11;
-  }
-  .twelve-column.desktop {
-    --grid-columns: 12;
-  }
-  .desktop.two-column.golden {
-    grid-template-columns: 1.618fr 1fr;
-  }
-  .desktop.two-column.golden.reverse {
-    grid-template-columns: 1fr 1.618fr;
-  }
-}
-.grid-width-one {
-  grid-column: auto / span 1;
-}
-.grid-width-two {
-  grid-column: auto / span 2;
-}
-.grid-width-three {
-  grid-column: auto / span 3;
-}
-.grid-width-four {
-  grid-column: auto / span 4;
-}
-.grid-width-five {
-  grid-column: auto / span 5;
-}
-.grid-width-six {
-  grid-column: auto / span 6;
-}
-.grid-width-seven {
-  grid-column: auto / span 7;
-}
-.grid-width-eight {
-  grid-column: auto / span 8;
-}
-.grid-width-nine {
-  grid-column: auto / span 9;
-}
-.grid-width-ten {
-  grid-column: auto / span 10;
-}
-.grid-width-eleven {
-  grid-column: auto / span 11;
-}
-.grid-width-twelve {
-  grid-column: auto / span 12;
-}
-.first-column {
-  grid-column-start: 1;
-}
-.second-column {
-  grid-column-start: 2;
-}
-.two-column {
-  --grid-columns: 2;
-}
-.three-column {
-  --grid-columns: 3;
-}
-.four-column {
-  --grid-columns: 4;
-}
-.five-column {
-  --grid-columns: 5;
-}
-.six-column {
-  --grid-columns: 6;
-}
-.seven-column {
-  --grid-columns: 7;
-}
-.eight-column {
-  --grid-columns: 8;
-}
-.nine-column {
-  --grid-columns: 9;
-}
-.ten-column {
-  --grid-columns: 10;
-}
-.eleven-column {
-  --grid-columns: 11;
-}
-.twelve-column {
-  --grid-columns: 12;
-}
 .rem-width {
   width: 1rem;
-}
-.half-width {
-  width: 50%;
-}
-.third-width {
-  width: 33.33%;
-}
-.fourth-width {
-  width: 25%;
-}
-.fifth-width {
-  width: 20%;
-}
-.sixth-width {
-  width: 16.66%;
 }
 .golden-width {
   max-width: calc(62% - var(--spacer));
@@ -5724,7 +5044,7 @@ button:active {
 .card-width {
   max-width: var(--card-width);
 }
-@media screen and (min-width: 25.04rem) {
+@media screen and (min-width: calc(29.664rem + 2rem)) {
   .text-width {
     max-width: var(--text-width);
   }
@@ -5751,40 +5071,36 @@ button:active {
   width: 100%;
 }
 .inner-card-width {
-  padding-left: calc(50% - (var(--card-width) * 0.5));
-  padding-right: calc(50% - (var(--card-width) * 0.5));
+  padding-left: max(var(--spacer), calc(50% - (var(--card-width) * 0.5)));
+  padding-right: max(var(--spacer), calc(50% - (var(--card-width) * 0.5)));
 }
 .inner-card-width.padding {
-  padding-left: calc(50% - ((var(--card-width) * 0.5) + var(--spacer)));
-  padding-right: calc(50% - ((var(--card-width) * 0.5) + var(--spacer)));
+  padding-left: max(var(--spacer), calc(50% - (var(--card-width) * 0.5) + var(--spacer)));
+  padding-right: max(var(--spacer), calc(50% - (var(--card-width) * 0.5) + var(--spacer)));
 }
-@media screen and (min-width: 25.04rem) {
-  .inner-text-width {
-    padding-left: calc(50% - (var(--text-width) * 0.5));
-    padding-right: calc(50% - (var(--text-width) * 0.5));
-  }
-  .inner-text-width.padding {
-    padding-left: calc(50% - (var(--text-width) * 0.5) + var(--spacer));
-    padding-right: calc(50% - (var(--text-width) * 0.5) + var(--spacer));
-  }
+.inner-text-width {
+  padding-left: calc(50% - (var(--text-width) * 0.5));
+  padding-right: calc(50% - (var(--text-width) * 0.5));
 }
-@media screen and (min-width: 38.864rem) {
-  .inner-page-width {
-    padding-left: calc(50% - (var(--page-width) * 0.5));
-    padding-right: calc(50% - (var(--page-width) * 0.5));
-  }
-  .inner-page-width.padding {
-    padding-left: calc(50% - (var(--page-width) * 0.5) + var(--spacer));
-    padding-right: calc(50% - (var(--page-width) * 0.5) + var(--spacer));
-  }
-  .inner-feature-width {
-    padding-left: calc(50% - (var(--feature-width) * 0.5));
-    padding-right: calc(50% - (var(--feature-width) * 0.5));
-  }
-  .inner-feature-width.padding {
-    padding-left: calc(50% - (var(--feature-width) * 0.5) + var(--spacer));
-    padding-right: calc(50% - (var(--feature-width) * 0.5) + var(--spacer));
-  }
+.inner-text-width.padding {
+  padding-left: max(var(--spacer), calc(50% - (var(--text-width) * 0.5) + var(--spacer)));
+  padding-right: max(var(--spacer), calc(50% - (var(--text-width) * 0.5) + var(--spacer)));
+}
+.inner-page-width {
+  padding-left: calc(50% - (var(--page-width) * 0.5));
+  padding-right: calc(50% - (var(--page-width) * 0.5));
+}
+.inner-page-width.padding {
+  padding-left: max(var(--spacer), calc(50% - (var(--page-width) * 0.5) + var(--spacer)));
+  padding-right: max(var(--spacer), calc(50% - (var(--page-width) * 0.5) + var(--spacer)));
+}
+.inner-feature-width {
+  padding-left: calc(50% - (var(--feature-width) * 0.5));
+  padding-right: calc(50% - (var(--feature-width) * 0.5));
+}
+.inner-feature-width.padding {
+  padding-left: max(var(--spacer), calc(50% - (var(--feature-width) * 0.5) + var(--spacer)));
+  padding-right: max(var(--spacer), calc(50% - (var(--feature-width) * 0.5) + var(--spacer)));
 }
 .hide {
   display: none;
@@ -5798,7 +5114,7 @@ button:active {
 .hide.mobile {
   display: none;
 }
-@media screen and (min-width: 25.04rem) {
+@media screen and (min-width: calc(29.664rem + 2rem)) {
   .hide.mobile {
     display: initial;
   }
@@ -5806,7 +5122,7 @@ button:active {
     display: none;
   }
 }
-@media screen and (min-width: 38.864rem) {
+@media screen and (min-width: calc(47.996352rem + 2rem)) {
   .hide.desktop {
     display: none;
   }
@@ -5826,7 +5142,7 @@ button:active {
 .fixed.mobile {
   position: fixed;
 }
-@media screen and (min-width: 25.04rem) {
+@media screen and (min-width: calc(29.664rem + 2rem)) {
   .fixed.mobile {
     position: initial;
   }
@@ -5834,7 +5150,7 @@ button:active {
     position: fixed;
   }
 }
-@media screen and (min-width: 38.864rem) {
+@media screen and (min-width: calc(47.996352rem + 2rem)) {
   .fixed.desktop {
     position: fixed;
   }
@@ -6516,16 +5832,15 @@ button:active {
 @gutter: @padding * 2;
 @line-height: 1.8;
 @lighten-by: 10%;
-@darken-by: 10%;@mobile: (@text-width)*.5 + @gutter;
-@tablet: (@page-width)*.5 + @gutter;
-@desktop: (@feature-width)*.5 + @gutter;
-@text-width: @text-base * .6rem;
-@card-width: @text-width * .6;
-@page-width: @text-width * 1.6;
-@feature-width: @page-width * 1.6;
-@font-size-mobile: calc(@font-size - 2);
-@font-size-tablet: calc(@font-size - 1);
-@font-size-desktop: @font-size;
+@darken-by: 10%;@tablet: calc(@text-width + @gutter);
+@desktop: calc(@page-width + @gutter);
+@text-width: @text-base * .618rem;
+@card-width: @text-width * .618;
+@page-width: @text-width * 1.618;
+@feature-width: @text-width * 2.618;
+@font-size-mobile: calc(var(--font-size-base) - 2px);
+@font-size-tablet: calc(var(--font-size-base) - 1px);
+@font-size-desktop: var(--font-size-base);
 
 /* This project uses Cavepaint (MIT License) by Rex Riepe */ 
 /* https://github.com/cavepaint/cavepaintCSS */
@@ -6562,17 +5877,15 @@ button:active {
     --border-thick: calc(var(--border-width) * 2);
     --border-radius: var(--text-padding);
     --text-measure: @text-base;
-    --text-width: calc(var(--text-measure) * .6rem);
-    --card-width: calc(var(--text-width) / var(--golden));
-    --page-width: calc(var(--text-width) * var(--golden));
-    --feature-width: calc(var(--page-width) * var(--golden));
+    --text-width: calc(var(--text-measure) * .618rem);
+    --card-width: calc(var(--text-width) * .618);
+    --page-width: calc(var(--text-width) * 1.618);
+    --feature-width: calc(var(--page-width) * 1.618);
     --box-shadow: var(--shadow-position) var(--shadow-position) var(--shadow-blur) var(--shadow-color);
     --shadow-position: 1px;
     --shadow-blur: 1px;
     --shadow-color: fade(@black, 20%);
     --direction: 180deg;
-    --white: @white;
-    --black: @black;
     --warm: @warm-rgba;
     --cool: @cool-rgba;
     --neutral: @neutral-rgba;
@@ -6580,12 +5893,44 @@ button:active {
     --monospace: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, "DejaVu Sans Mono", Courier, monospace;
     --serif: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "Droid Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
     --sans-serif: "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, sans-serif;
+    --ambient: @ambient;
+    --white: @white;
+    --black: @black;
+    --red: @red;
+    --orange: @orange;
+    --yellow: @yellow;
+    --green: @green;
+    --teal: @teal;
+    --cyan: @cyan;
+    --blue: @blue;
+    --purple: @purple;
+    --magenta: @magenta;
+    --gray: @gray;
+    --base-color: @action;
+    --complement: @complement;
+    --accent: @accent;
+    --second-accent: @inverted-accent;
+    --split: @split;
+    --second-split: @inverted-split;
+    --triad: @triad;
+    --second-triad: var(--complement);
+    --third-triad: @third-triad;
+    --tetrad: @tetrad;
+    --second-tetrad: @second-tetrad;
+    --third-tetrad: @third-tetrad;
+    --fourth-tetrad: @fourth-tetrad;
+    --action: @action;
+    --reaction: @reaction;
+    --info: var(--cyan);
+    --warning: var(--orange);
+    --success: var(--green);
+    --failure: var(--red);
 
     .on-mobile({
         --padding: calc(.6 * var(--spacer));
         --margin: calc(.6 * var(--margin-base));
         --gutter: calc(1.2 * var(--margin-base));
-        --font-size: calc(@font-size - 2);
+        --font-size: @font-size-mobile;
         --headline-base: 1em;
     });
 
@@ -6593,7 +5938,7 @@ button:active {
         --padding: calc(.8 * var(--spacer));
         --margin: calc(.8 * var(--margin-base));
         --gutter: calc(1.6 * var(--margin-base));
-        --font-size: calc(@font-size - 1);
+        --font-size: @font-size-tablet;
         --headline-base: 1.1em;
     });
 
@@ -6601,7 +5946,7 @@ button:active {
         --padding: calc(1 * var(--spacer));
         --margin: calc(1 * var(--margin-base));
         --gutter: calc(2 * var(--margin-base));
-        --font-size: @font-size;
+        --font-size: @font-size-desktop;
         --headline-base: 1.2em;
     });
 }
@@ -6618,13 +5963,17 @@ button:active {
     @media screen and (min-width: @desktop) { @rules();}
 }
 
+.under-tablet(@rules) {
+    @media screen and (max-width: calc(@tablet - 1px)) { @rules();}
+}
+
 .under-desktop(@rules) {
     @media screen and (max-width: calc(@desktop - 1px)) { @rules();}
 }* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-size: calc(var(--font-size-base) * var(--font-size-mod));
+    font-size: calc(var(--font-size) * var(--font-size-mod));
 }
 
 *::before, *::after {
@@ -6748,7 +6097,155 @@ pre.white-space, pre.word-break {
 pre > code {
     background: transparent;
     padding: 0;
-}.button, button {
+}.grid {
+  --grid-columns: 12;
+  display: grid;
+  gap: var(--gap);
+  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+}
+
+.mobile, .tablet, .mobile.tablet, .desktop {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.mobile {
+  .on-mobile({
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  });
+
+  .on-tablet({
+    // grid-template-columns: minmax(0, 1fr);
+    --grid-columns: 1;
+  });
+}
+
+.tablet {
+  .under-tablet({
+    // grid-template-columns: minmax(0, 1fr);
+    --grid-columns: 1;
+  });
+  .on-tablet({
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  });
+}
+
+.mobile.tablet {
+  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+
+  .on-desktop({
+    // grid-template-columns: minmax(0, 1fr);
+    --grid-columns: 1;
+  });
+}
+
+.desktop {
+  .on-desktop({
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  });
+
+  .under-desktop({
+    // grid-template-columns: minmax(0, 1fr);
+    --grid-columns: 1;
+  });
+}
+
+.one-column { --grid-columns: 1; &:extend(.grid all);}
+.two-column { --grid-columns: 2; &:extend(.grid all);}
+.three-column { --grid-columns: 3; &:extend(.grid all);}
+.four-column { --grid-columns: 4; &:extend(.grid all);}
+.five-column { --grid-columns: 5; &:extend(.grid all);}
+.six-column { --grid-columns: 6; &:extend(.grid all);}
+.seven-column { --grid-columns: 7; &:extend(.grid all);}
+.eight-column { --grid-columns: 8; &:extend(.grid all);}
+.nine-column { --grid-columns: 9; &:extend(.grid all);}
+.ten-column { --grid-columns: 10; &:extend(.grid all);}
+.eleven-column { --grid-columns: 11; &:extend(.grid all);}
+.twelve-column { --grid-columns: 12; &:extend(.grid all);}
+
+.grid-width-one { grid-column: auto / span 1;}
+.grid-width-two { grid-column: auto / span 2;}
+.grid-width-three { grid-column: auto / span 3;}
+.grid-width-four { grid-column: auto / span 4;}
+.grid-width-five { grid-column: auto / span 5;}
+.grid-width-six { grid-column: auto / span 6;}
+.grid-width-seven { grid-column: auto / span 7;}
+.grid-width-eight { grid-column: auto / span 8;}
+.grid-width-nine { grid-column: auto / span 9;}
+.grid-width-ten { grid-column: auto / span 10;}
+.grid-width-eleven { grid-column: auto / span 11;}
+.grid-width-twelve { grid-column: auto / span 12;}
+
+.two-column.golden {
+  grid-template-columns: 1.618fr 1fr;
+
+  &.mobile, &.tablet, &.mobile.tablet, &.desktop {
+    grid-template-columns: 1fr;
+  }
+
+  &.mobile {
+    .on-mobile({
+      grid-template-columns: 1.618fr 1fr;
+    });
+    .on-tablet({
+      grid-template-columns: 1fr;
+    });
+  }
+
+  &.tablet {
+    .on-tablet({
+      grid-template-columns: 1.618fr 1fr;
+    });
+  }
+
+  &.mobile.tablet {
+    .under-desktop({
+      grid-template-columns: 1.618fr 1fr;
+    });
+  }
+
+  &.desktop {
+    .on-desktop({
+      grid-template-columns: 1.618fr 1fr;
+    });
+  }
+}
+
+.two-column.golden.reverse {
+  grid-template-columns: 1fr 1.618fr;
+
+  &.mobile, &.tablet, &.mobile.tablet, &.desktop {
+    grid-template-columns: 1fr;
+  }
+
+  &.mobile {
+    .on-mobile({
+      grid-template-columns: 1fr 1.618fr;
+    });
+    .on-tablet({
+      grid-template-columns: 1fr;
+    });
+  }
+
+  &.tablet {
+    .on-tablet({
+      grid-template-columns: 1fr 1.618fr;
+    });
+  }
+
+  &.mobile.tablet {
+    .under-desktop({
+      grid-template-columns: 1fr 1.618fr;
+    });
+  }
+
+  &.desktop {
+    .on-desktop({
+      grid-template-columns: 1fr 1.618fr;
+    });
+  }
+}
+
+.button, button {
   display: inline;
   // border: var(--border);
   border-width: 0;
@@ -6965,10 +6462,10 @@ pre > code {
 }
 
 .golden-height {
-  min-height: 100%;
+  min-height: 62%;
 
   &.force {
-    height: 100%;
+    height: 62%;
   }
 }
 
@@ -7392,295 +6889,8 @@ pre > code {
   content: " ";
 }
 
-.grid {
-  --grid-columns: 12;
-  display: grid;
-  gap: var(--gap);
-  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
-}
-
-.two-column,
-.three-column,
-.four-column,
-.five-column,
-.six-column,
-.seven-column,
-.eight-column,
-.nine-column,
-.ten-column,
-.eleven-column,
-.twelve-column {
-  &:extend(.grid);
-
-  &.mobile, &.tablet, &.desktop {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
-
-.two-column.tablet,
-.two-column.desktop {
-  --grid-columns: 1;
-}
-
-.two-column.golden { grid-template-columns: 1.618fr 1fr;}
-.two-column.golden.reverse { grid-template-columns: 1fr 1.618fr;}
-
-.mobile {
-  --grid-columns: 1;
-}
-
-.mobile.two-column.golden { grid-template-columns: minmax(0, 1fr);}
-.mobile.two-column.golden.reverse { grid-template-columns: minmax(0, 1fr);}
-
-.on-mobile({
-
-  .grid {
-    --grid-columns: 12;
-    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
-  }
-
-  .two-column.mobile,
-  .three-column.mobile,
-  .four-column.mobile,
-  .five-column.mobile,
-  .six-column.mobile,
-  .seven-column.mobile,
-  .eight-column.mobile,
-  .nine-column.mobile,
-  .ten-column.mobile,
-  .eleven-column.mobile,
-  .twelve-column.mobile {
-    &:extend(.grid);
-  }
-
-  .two-column { --grid-columns: 2;}
-  .three-column { --grid-columns: 3;}
-  .four-column { --grid-columns: 4;}
-  .five-column { --grid-columns: 5;}
-  .six-column { --grid-columns: 6;}
-  .seven-column { --grid-columns: 7;}
-  .eight-column { --grid-columns: 8;}
-  .nine-column { --grid-columns: 9;}
-  .ten-column { --grid-columns: 10;}
-  .eleven-column { --grid-columns: 11;}
-  .twelve-column { --grid-columns: 12;}
-
-  .mobile.two-column.golden { grid-template-columns: 1.618fr 1fr;}
-  .mobile.two-column.golden.reverse { grid-template-columns: 1fr 1.618fr;}
-});
-
-.tablet {
-  --grid-columns: 1;
-}
-
-.tablet.two-column.golden { grid-template-columns: minmax(0, 1fr);}
-.tablet.two-column.golden.reverse { grid-template-columns: minmax(0, 1fr);}
-
-.on-tablet({
-
-  .grid {
-    --grid-columns: 12;
-    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
-  }
-
-  .two-column.tablet,
-  .three-column.tablet,
-  .four-column.tablet,
-  .five-column.tablet,
-  .six-column.tablet,
-  .seven-column.tablet,
-  .eight-column.tablet,
-  .nine-column.tablet,
-  .ten-column.tablet,
-  .eleven-column.tablet,
-  .twelve-column.tablet {
-    &:extend(.grid);
-  }
-
-  .two-column.tablet { --grid-columns: 2;}
-  .three-column.tablet { --grid-columns: 3;}
-  .four-column.tablet { --grid-columns: 4;}
-  .five-column.tablet { --grid-columns: 5;}
-  .six-column.tablet { --grid-columns: 6;}
-  .seven-column.tablet { --grid-columns: 7;}
-  .eight-column.tablet { --grid-columns: 8;}
-  .nine-column.tablet { --grid-columns: 9;}
-  .ten-column.tablet { --grid-columns: 10;}
-  .eleven-column.tablet { --grid-columns: 11;}
-  .twelve-column.tablet { --grid-columns: 12;}
-
-  .tablet.two-column.golden { grid-template-columns: 1.618fr 1fr;}
-  .tablet.two-column.golden.reverse { grid-template-columns: 1fr 1.618fr;}
-});
-
-.mobile.tablet {
-  --grid-columns: 1;
-}
-
-.mobile.tablet.two-column.golden { grid-template-columns: minmax(0, 1fr);}
-.mobile.tablet.two-column.golden.reverse { grid-template-columns: minmax(0, 1fr);}
-
-.under-desktop({
-
-  .grid {
-    --grid-columns: 12;
-    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
-  }
-
-  .two-column.mobile.tablet,
-  .three-column.mobile.tablet,
-  .four-column.mobile.tablet,
-  .five-column.mobile.tablet,
-  .six-column.mobile.tablet,
-  .seven-column.mobile.tablet,
-  .eight-column.mobile.tablet,
-  .nine-column.mobile.tablet,
-  .ten-column.mobile.tablet,
-  .eleven-column.mobile.tablet,
-  .twelve-column.mobile.tablet {
-    &:extend(.grid);
-  }
-
-  .two-column.mobile.tablet { --grid-columns: 2;}
-  .three-column.mobile.tablet { --grid-columns: 3;}
-  .four-column.mobile.tablet { --grid-columns: 4;}
-  .five-column.mobile.tablet { --grid-columns: 5;}
-  .six-column.mobile.tablet { --grid-columns: 6;}
-  .seven-column.mobile.tablet { --grid-columns: 7;}
-  .eight-column.mobile.tablet { --grid-columns: 8;}
-  .nine-column.mobile.tablet { --grid-columns: 9;}
-  .ten-column.mobile.tablet { --grid-columns: 10;}
-  .eleven-column.mobile.tablet { --grid-columns: 11;}
-  .twelve-column.mobile.tablet { --grid-columns: 12;}
-
-  .mobile.tablet.two-column.golden { grid-template-columns: 1.618fr 1fr;}
-  .mobile.tablet.two-column.golden.reverse { grid-template-columns: 1fr 1.618fr;}
-});
-
-
-.desktop {
-  --grid-columns: 1;
-}
-
-.desktop.two-column.golden { grid-template-columns: minmax(0, 1fr);}
-.desktop.two-column.golden.reverse { grid-template-columns: minmax(0, 1fr);}
-
-.on-desktop({
-
-  .grid {
-    --grid-columns: 12;
-    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
-  }
-
-  .two-column.desktop,
-  .three-column.desktop,
-  .four-column.desktop,
-  .five-column.desktop,
-  .six-column.desktop,
-  .seven-column.desktop,
-  .eight-column.desktop,
-  .nine-column.desktop,
-  .ten-column.desktop,
-  .eleven-column.desktop,
-  .twelve-column.desktop {
-    &:extend(.grid);
-  }
-
-  .two-column.desktop { --grid-columns: 2;}
-  .three-column.desktop { --grid-columns: 3;}
-  .four-column.desktop { --grid-columns: 4;}
-  .five-column.desktop { --grid-columns: 5;}
-  .six-column.desktop { --grid-columns: 6;}
-  .seven-column.desktop { --grid-columns: 7;}
-  .eight-column.desktop { --grid-columns: 8;}
-  .nine-column.desktop { --grid-columns: 9;}
-  .ten-column.desktop { --grid-columns: 10;}
-  .eleven-column.desktop { --grid-columns: 11;}
-  .twelve-column.desktop { --grid-columns: 12;}
-
-  .desktop.two-column.golden { grid-template-columns: 1.618fr 1fr;}
-  .desktop.two-column.golden.reverse { grid-template-columns: 1fr 1.618fr;}
-});
-
-.grid-width-one {
-  grid-column: auto / span 1;
-}
-.grid-width-two {
-  grid-column: auto / span 2;
-}
-.grid-width-three {
-  grid-column: auto / span 3;
-}
-.grid-width-four {
-  grid-column: auto / span 4;
-}
-.grid-width-five {
-  grid-column: auto / span 5;
-}
-.grid-width-six {
-  grid-column: auto / span 6;
-}
-.grid-width-seven {
-  grid-column: auto / span 7;
-}
-.grid-width-eight {
-  grid-column: auto / span 8;
-}
-.grid-width-nine {
-  grid-column: auto / span 9;
-}
-.grid-width-ten {
-  grid-column: auto / span 10;
-}
-.grid-width-eleven {
-  grid-column: auto / span 11;
-}
-.grid-width-twelve {
-  grid-column: auto / span 12;
-}
-
-.first-column {
-  grid-column-start: 1;
-}
-
-.second-column {
-  grid-column-start: 2;
-}
-
-.two-column { --grid-columns: 2;}
-.three-column { --grid-columns: 3;}
-.four-column { --grid-columns: 4;}
-.five-column { --grid-columns: 5;}
-.six-column { --grid-columns: 6;}
-.seven-column { --grid-columns: 7;}
-.eight-column { --grid-columns: 8;}
-.nine-column { --grid-columns: 9;}
-.ten-column { --grid-columns: 10;}
-.eleven-column { --grid-columns: 11;}
-.twelve-column { --grid-columns: 12;}
-
 .rem-width { 
   width: 1rem;
-}
-
-.half-width {
-  width: 50%;
-}
-
-.third-width {
-  width: 33.33%;
-}
-
-.fourth-width {
-  width: 25%;
-}
-
-.fifth-width {
-  width: 20%;
-}
-
-.sixth-width {
-  width: 16.66%;
 }
 
 .golden-width { max-width: calc(62% - var(--spacer));}
@@ -7721,49 +6931,45 @@ pre > code {
 .full-width.force { width: 100%;}
 
 .inner-card-width {
-  padding-left: calc(50% - (var(--card-width) * .5));
-  padding-right: calc(50% - (var(--card-width) * .5));
+  padding-left: max(var(--spacer), calc(50% - (var(--card-width) * .5)));
+  padding-right: max(var(--spacer), calc(50% - (var(--card-width) * .5)));
 
   &.padding {
-    padding-left: calc(50% - ((var(--card-width) * .5) + var(--spacer)));
-    padding-right: calc(50% - ((var(--card-width) * .5) + var(--spacer)));
+    padding-left: max(var(--spacer), calc(50% - (var(--card-width) * .5) + var(--spacer)));
+    padding-right: max(var(--spacer), calc(50% - (var(--card-width) * .5) + var(--spacer)));
   }
 }
 
-.on-tablet({
-  .inner-text-width {
-      padding-left: calc(50% - (var(--text-width) * .5));
-      padding-right: calc(50% - (var(--text-width) * .5));
+.inner-text-width {
+    padding-left: calc(50% - (var(--text-width) * .5));
+    padding-right: calc(50% - (var(--text-width) * .5));
 
-      &.padding {
-        padding-left: calc(50% - (var(--text-width) * .5) + var(--spacer));
-        padding-right: calc(50% - (var(--text-width) * .5) + var(--spacer));
-      }
-  }  
-});
-
-.on-desktop({
-  .inner-page-width {
-      padding-left: calc(50% - (var(--page-width) * .5));
-      padding-right: calc(50% - (var(--page-width) * .5));
-
-      &.padding {
-          
-          padding-left: calc(50% - (var(--page-width) * .5) + var(--spacer));
-          padding-right: calc(50% - (var(--page-width) * .5) + var(--spacer));
-      }
-  }
-
-  .inner-feature-width {
-    padding-left: calc(50% - (var(--feature-width) * .5));
-    padding-right: calc(50% - (var(--feature-width) * .5));
-    
     &.padding {
-      padding-left: calc(50% - (var(--feature-width) * .5) + var(--spacer));
-      padding-right: calc(50% - (var(--feature-width) * .5) + var(--spacer));
+      padding-left: max(var(--spacer), calc(50% - (var(--text-width) * .5) + var(--spacer)));
+      padding-right: max(var(--spacer), calc(50% - (var(--text-width) * .5) + var(--spacer)));
+    }
+}  
+
+.inner-page-width {
+    padding-left: calc(50% - (var(--page-width) * .5));
+    padding-right: calc(50% - (var(--page-width) * .5));
+
+    &.padding {
+        
+        padding-left: max(var(--spacer), calc(50% - (var(--page-width) * .5) + var(--spacer)));
+        padding-right: max(var(--spacer), calc(50% - (var(--page-width) * .5) + var(--spacer)));
     }
 }
-});
+
+.inner-feature-width {
+  padding-left: calc(50% - (var(--feature-width) * .5));
+  padding-right: calc(50% - (var(--feature-width) * .5));
+  
+  &.padding {
+    padding-left: max(var(--spacer), calc(50% - (var(--feature-width) * .5) + var(--spacer)));
+    padding-right: max(var(--spacer), calc(50% - (var(--feature-width) * .5) + var(--spacer)));
+  }
+}
 
 .hide {
   display: none;
@@ -8193,11 +7399,11 @@ pre > code {
 	.@{color-name} when (@outputs = true) {
 		.color-helpers(@color);
   }
-  
+
   @ambient-adjusted: (@ambient-mix * @ambient-modifier);
 
 	// apply ambient lighting
-	@color: mix(@color-base, overlay(@ambient, @color-base), @ambient-adjusted);	
+	@color: mix(@color-base, overlay(@ambient, @color-base), @ambient-adjusted);
 }
 
 // sets variable @contrast-ratio to contrast ratio between two colors
@@ -8280,16 +7486,15 @@ pre > code {
         </div>
         <div class="inner-text-width margin-bottom hidden">
           <h5>or compile this HEADLESS Less</h5>
-          <textarea readonly name="" class="full-width no-padding-bottom force black monospace text-padding no-margin" id="headless_less_textarea" cols="30" rows="10">@mobile: (@text-width)*.5 + @gutter;
-@tablet: (@page-width)*.5 + @gutter;
-@desktop: (@feature-width)*.5 + @gutter;
-@text-width: @text-base * .6rem;
-@card-width: @text-width * .6;
-@page-width: @text-width * 1.6;
-@feature-width: @page-width * 1.6;
-@font-size-mobile: calc(@font-size - 2);
-@font-size-tablet: calc(@font-size - 1);
-@font-size-desktop: @font-size;
+          <textarea readonly name="" class="full-width no-padding-bottom force black monospace text-padding no-margin" id="headless_less_textarea" cols="30" rows="10">@tablet: calc(@text-width + @gutter);
+@desktop: calc(@page-width + @gutter);
+@text-width: @text-base * .618rem;
+@card-width: @text-width * .618;
+@page-width: @text-width * 1.618;
+@feature-width: @text-width * 2.618;
+@font-size-mobile: calc(var(--font-size-base) - 2px);
+@font-size-tablet: calc(var(--font-size-base) - 1px);
+@font-size-desktop: var(--font-size-base);
 
 /* This project uses Cavepaint (MIT License) by Rex Riepe */ 
 /* https://github.com/cavepaint/cavepaintCSS */
@@ -8326,17 +7531,15 @@ pre > code {
     --border-thick: calc(var(--border-width) * 2);
     --border-radius: var(--text-padding);
     --text-measure: @text-base;
-    --text-width: calc(var(--text-measure) * .6rem);
-    --card-width: calc(var(--text-width) / var(--golden));
-    --page-width: calc(var(--text-width) * var(--golden));
-    --feature-width: calc(var(--page-width) * var(--golden));
+    --text-width: calc(var(--text-measure) * .618rem);
+    --card-width: calc(var(--text-width) * .618);
+    --page-width: calc(var(--text-width) * 1.618);
+    --feature-width: calc(var(--page-width) * 1.618);
     --box-shadow: var(--shadow-position) var(--shadow-position) var(--shadow-blur) var(--shadow-color);
     --shadow-position: 1px;
     --shadow-blur: 1px;
     --shadow-color: fade(@black, 20%);
     --direction: 180deg;
-    --white: @white;
-    --black: @black;
     --warm: @warm-rgba;
     --cool: @cool-rgba;
     --neutral: @neutral-rgba;
@@ -8344,12 +7547,44 @@ pre > code {
     --monospace: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, "DejaVu Sans Mono", Courier, monospace;
     --serif: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "Droid Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
     --sans-serif: "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, sans-serif;
+    --ambient: @ambient;
+    --white: @white;
+    --black: @black;
+    --red: @red;
+    --orange: @orange;
+    --yellow: @yellow;
+    --green: @green;
+    --teal: @teal;
+    --cyan: @cyan;
+    --blue: @blue;
+    --purple: @purple;
+    --magenta: @magenta;
+    --gray: @gray;
+    --base-color: @action;
+    --complement: @complement;
+    --accent: @accent;
+    --second-accent: @inverted-accent;
+    --split: @split;
+    --second-split: @inverted-split;
+    --triad: @triad;
+    --second-triad: var(--complement);
+    --third-triad: @third-triad;
+    --tetrad: @tetrad;
+    --second-tetrad: @second-tetrad;
+    --third-tetrad: @third-tetrad;
+    --fourth-tetrad: @fourth-tetrad;
+    --action: @action;
+    --reaction: @reaction;
+    --info: var(--cyan);
+    --warning: var(--orange);
+    --success: var(--green);
+    --failure: var(--red);
 
     .on-mobile({
         --padding: calc(.6 * var(--spacer));
         --margin: calc(.6 * var(--margin-base));
         --gutter: calc(1.2 * var(--margin-base));
-        --font-size: calc(@font-size - 2);
+        --font-size: @font-size-mobile;
         --headline-base: 1em;
     });
 
@@ -8357,7 +7592,7 @@ pre > code {
         --padding: calc(.8 * var(--spacer));
         --margin: calc(.8 * var(--margin-base));
         --gutter: calc(1.6 * var(--margin-base));
-        --font-size: calc(@font-size - 1);
+        --font-size: @font-size-tablet;
         --headline-base: 1.1em;
     });
 
@@ -8365,7 +7600,7 @@ pre > code {
         --padding: calc(1 * var(--spacer));
         --margin: calc(1 * var(--margin-base));
         --gutter: calc(2 * var(--margin-base));
-        --font-size: @font-size;
+        --font-size: @font-size-desktop;
         --headline-base: 1.2em;
     });
 }
@@ -8382,13 +7617,17 @@ pre > code {
     @media screen and (min-width: @desktop) { @rules();}
 }
 
+.under-tablet(@rules) {
+    @media screen and (max-width: calc(@tablet - 1px)) { @rules();}
+}
+
 .under-desktop(@rules) {
     @media screen and (max-width: calc(@desktop - 1px)) { @rules();}
 }* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-size: calc(var(--font-size-base) * var(--font-size-mod));
+    font-size: calc(var(--font-size) * var(--font-size-mod));
 }
 
 *::before, *::after {
@@ -8512,7 +7751,155 @@ pre.white-space, pre.word-break {
 pre > code {
     background: transparent;
     padding: 0;
-}.button, button {
+}.grid {
+  --grid-columns: 12;
+  display: grid;
+  gap: var(--gap);
+  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+}
+
+.mobile, .tablet, .mobile.tablet, .desktop {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.mobile {
+  .on-mobile({
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  });
+
+  .on-tablet({
+    // grid-template-columns: minmax(0, 1fr);
+    --grid-columns: 1;
+  });
+}
+
+.tablet {
+  .under-tablet({
+    // grid-template-columns: minmax(0, 1fr);
+    --grid-columns: 1;
+  });
+  .on-tablet({
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  });
+}
+
+.mobile.tablet {
+  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+
+  .on-desktop({
+    // grid-template-columns: minmax(0, 1fr);
+    --grid-columns: 1;
+  });
+}
+
+.desktop {
+  .on-desktop({
+    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
+  });
+
+  .under-desktop({
+    // grid-template-columns: minmax(0, 1fr);
+    --grid-columns: 1;
+  });
+}
+
+.one-column { --grid-columns: 1; &:extend(.grid all);}
+.two-column { --grid-columns: 2; &:extend(.grid all);}
+.three-column { --grid-columns: 3; &:extend(.grid all);}
+.four-column { --grid-columns: 4; &:extend(.grid all);}
+.five-column { --grid-columns: 5; &:extend(.grid all);}
+.six-column { --grid-columns: 6; &:extend(.grid all);}
+.seven-column { --grid-columns: 7; &:extend(.grid all);}
+.eight-column { --grid-columns: 8; &:extend(.grid all);}
+.nine-column { --grid-columns: 9; &:extend(.grid all);}
+.ten-column { --grid-columns: 10; &:extend(.grid all);}
+.eleven-column { --grid-columns: 11; &:extend(.grid all);}
+.twelve-column { --grid-columns: 12; &:extend(.grid all);}
+
+.grid-width-one { grid-column: auto / span 1;}
+.grid-width-two { grid-column: auto / span 2;}
+.grid-width-three { grid-column: auto / span 3;}
+.grid-width-four { grid-column: auto / span 4;}
+.grid-width-five { grid-column: auto / span 5;}
+.grid-width-six { grid-column: auto / span 6;}
+.grid-width-seven { grid-column: auto / span 7;}
+.grid-width-eight { grid-column: auto / span 8;}
+.grid-width-nine { grid-column: auto / span 9;}
+.grid-width-ten { grid-column: auto / span 10;}
+.grid-width-eleven { grid-column: auto / span 11;}
+.grid-width-twelve { grid-column: auto / span 12;}
+
+.two-column.golden {
+  grid-template-columns: 1.618fr 1fr;
+
+  &.mobile, &.tablet, &.mobile.tablet, &.desktop {
+    grid-template-columns: 1fr;
+  }
+
+  &.mobile {
+    .on-mobile({
+      grid-template-columns: 1.618fr 1fr;
+    });
+    .on-tablet({
+      grid-template-columns: 1fr;
+    });
+  }
+
+  &.tablet {
+    .on-tablet({
+      grid-template-columns: 1.618fr 1fr;
+    });
+  }
+
+  &.mobile.tablet {
+    .under-desktop({
+      grid-template-columns: 1.618fr 1fr;
+    });
+  }
+
+  &.desktop {
+    .on-desktop({
+      grid-template-columns: 1.618fr 1fr;
+    });
+  }
+}
+
+.two-column.golden.reverse {
+  grid-template-columns: 1fr 1.618fr;
+
+  &.mobile, &.tablet, &.mobile.tablet, &.desktop {
+    grid-template-columns: 1fr;
+  }
+
+  &.mobile {
+    .on-mobile({
+      grid-template-columns: 1fr 1.618fr;
+    });
+    .on-tablet({
+      grid-template-columns: 1fr;
+    });
+  }
+
+  &.tablet {
+    .on-tablet({
+      grid-template-columns: 1fr 1.618fr;
+    });
+  }
+
+  &.mobile.tablet {
+    .under-desktop({
+      grid-template-columns: 1fr 1.618fr;
+    });
+  }
+
+  &.desktop {
+    .on-desktop({
+      grid-template-columns: 1fr 1.618fr;
+    });
+  }
+}
+
+.button, button {
   display: inline;
   // border: var(--border);
   border-width: 0;
@@ -8729,10 +8116,10 @@ pre > code {
 }
 
 .golden-height {
-  min-height: 100%;
+  min-height: 62%;
 
   &.force {
-    height: 100%;
+    height: 62%;
   }
 }
 
@@ -9156,295 +8543,8 @@ pre > code {
   content: " ";
 }
 
-.grid {
-  --grid-columns: 12;
-  display: grid;
-  gap: var(--gap);
-  grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
-}
-
-.two-column,
-.three-column,
-.four-column,
-.five-column,
-.six-column,
-.seven-column,
-.eight-column,
-.nine-column,
-.ten-column,
-.eleven-column,
-.twelve-column {
-  &:extend(.grid);
-
-  &.mobile, &.tablet, &.desktop {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
-
-.two-column.tablet,
-.two-column.desktop {
-  --grid-columns: 1;
-}
-
-.two-column.golden { grid-template-columns: 1.618fr 1fr;}
-.two-column.golden.reverse { grid-template-columns: 1fr 1.618fr;}
-
-.mobile {
-  --grid-columns: 1;
-}
-
-.mobile.two-column.golden { grid-template-columns: minmax(0, 1fr);}
-.mobile.two-column.golden.reverse { grid-template-columns: minmax(0, 1fr);}
-
-.on-mobile({
-
-  .grid {
-    --grid-columns: 12;
-    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
-  }
-
-  .two-column.mobile,
-  .three-column.mobile,
-  .four-column.mobile,
-  .five-column.mobile,
-  .six-column.mobile,
-  .seven-column.mobile,
-  .eight-column.mobile,
-  .nine-column.mobile,
-  .ten-column.mobile,
-  .eleven-column.mobile,
-  .twelve-column.mobile {
-    &:extend(.grid);
-  }
-
-  .two-column { --grid-columns: 2;}
-  .three-column { --grid-columns: 3;}
-  .four-column { --grid-columns: 4;}
-  .five-column { --grid-columns: 5;}
-  .six-column { --grid-columns: 6;}
-  .seven-column { --grid-columns: 7;}
-  .eight-column { --grid-columns: 8;}
-  .nine-column { --grid-columns: 9;}
-  .ten-column { --grid-columns: 10;}
-  .eleven-column { --grid-columns: 11;}
-  .twelve-column { --grid-columns: 12;}
-
-  .mobile.two-column.golden { grid-template-columns: 1.618fr 1fr;}
-  .mobile.two-column.golden.reverse { grid-template-columns: 1fr 1.618fr;}
-});
-
-.tablet {
-  --grid-columns: 1;
-}
-
-.tablet.two-column.golden { grid-template-columns: minmax(0, 1fr);}
-.tablet.two-column.golden.reverse { grid-template-columns: minmax(0, 1fr);}
-
-.on-tablet({
-
-  .grid {
-    --grid-columns: 12;
-    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
-  }
-
-  .two-column.tablet,
-  .three-column.tablet,
-  .four-column.tablet,
-  .five-column.tablet,
-  .six-column.tablet,
-  .seven-column.tablet,
-  .eight-column.tablet,
-  .nine-column.tablet,
-  .ten-column.tablet,
-  .eleven-column.tablet,
-  .twelve-column.tablet {
-    &:extend(.grid);
-  }
-
-  .two-column.tablet { --grid-columns: 2;}
-  .three-column.tablet { --grid-columns: 3;}
-  .four-column.tablet { --grid-columns: 4;}
-  .five-column.tablet { --grid-columns: 5;}
-  .six-column.tablet { --grid-columns: 6;}
-  .seven-column.tablet { --grid-columns: 7;}
-  .eight-column.tablet { --grid-columns: 8;}
-  .nine-column.tablet { --grid-columns: 9;}
-  .ten-column.tablet { --grid-columns: 10;}
-  .eleven-column.tablet { --grid-columns: 11;}
-  .twelve-column.tablet { --grid-columns: 12;}
-
-  .tablet.two-column.golden { grid-template-columns: 1.618fr 1fr;}
-  .tablet.two-column.golden.reverse { grid-template-columns: 1fr 1.618fr;}
-});
-
-.mobile.tablet {
-  --grid-columns: 1;
-}
-
-.mobile.tablet.two-column.golden { grid-template-columns: minmax(0, 1fr);}
-.mobile.tablet.two-column.golden.reverse { grid-template-columns: minmax(0, 1fr);}
-
-.under-desktop({
-
-  .grid {
-    --grid-columns: 12;
-    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
-  }
-
-  .two-column.mobile.tablet,
-  .three-column.mobile.tablet,
-  .four-column.mobile.tablet,
-  .five-column.mobile.tablet,
-  .six-column.mobile.tablet,
-  .seven-column.mobile.tablet,
-  .eight-column.mobile.tablet,
-  .nine-column.mobile.tablet,
-  .ten-column.mobile.tablet,
-  .eleven-column.mobile.tablet,
-  .twelve-column.mobile.tablet {
-    &:extend(.grid);
-  }
-
-  .two-column.mobile.tablet { --grid-columns: 2;}
-  .three-column.mobile.tablet { --grid-columns: 3;}
-  .four-column.mobile.tablet { --grid-columns: 4;}
-  .five-column.mobile.tablet { --grid-columns: 5;}
-  .six-column.mobile.tablet { --grid-columns: 6;}
-  .seven-column.mobile.tablet { --grid-columns: 7;}
-  .eight-column.mobile.tablet { --grid-columns: 8;}
-  .nine-column.mobile.tablet { --grid-columns: 9;}
-  .ten-column.mobile.tablet { --grid-columns: 10;}
-  .eleven-column.mobile.tablet { --grid-columns: 11;}
-  .twelve-column.mobile.tablet { --grid-columns: 12;}
-
-  .mobile.tablet.two-column.golden { grid-template-columns: 1.618fr 1fr;}
-  .mobile.tablet.two-column.golden.reverse { grid-template-columns: 1fr 1.618fr;}
-});
-
-
-.desktop {
-  --grid-columns: 1;
-}
-
-.desktop.two-column.golden { grid-template-columns: minmax(0, 1fr);}
-.desktop.two-column.golden.reverse { grid-template-columns: minmax(0, 1fr);}
-
-.on-desktop({
-
-  .grid {
-    --grid-columns: 12;
-    grid-template-columns: repeat(var(--grid-columns), minmax(0, 1fr));
-  }
-
-  .two-column.desktop,
-  .three-column.desktop,
-  .four-column.desktop,
-  .five-column.desktop,
-  .six-column.desktop,
-  .seven-column.desktop,
-  .eight-column.desktop,
-  .nine-column.desktop,
-  .ten-column.desktop,
-  .eleven-column.desktop,
-  .twelve-column.desktop {
-    &:extend(.grid);
-  }
-
-  .two-column.desktop { --grid-columns: 2;}
-  .three-column.desktop { --grid-columns: 3;}
-  .four-column.desktop { --grid-columns: 4;}
-  .five-column.desktop { --grid-columns: 5;}
-  .six-column.desktop { --grid-columns: 6;}
-  .seven-column.desktop { --grid-columns: 7;}
-  .eight-column.desktop { --grid-columns: 8;}
-  .nine-column.desktop { --grid-columns: 9;}
-  .ten-column.desktop { --grid-columns: 10;}
-  .eleven-column.desktop { --grid-columns: 11;}
-  .twelve-column.desktop { --grid-columns: 12;}
-
-  .desktop.two-column.golden { grid-template-columns: 1.618fr 1fr;}
-  .desktop.two-column.golden.reverse { grid-template-columns: 1fr 1.618fr;}
-});
-
-.grid-width-one {
-  grid-column: auto / span 1;
-}
-.grid-width-two {
-  grid-column: auto / span 2;
-}
-.grid-width-three {
-  grid-column: auto / span 3;
-}
-.grid-width-four {
-  grid-column: auto / span 4;
-}
-.grid-width-five {
-  grid-column: auto / span 5;
-}
-.grid-width-six {
-  grid-column: auto / span 6;
-}
-.grid-width-seven {
-  grid-column: auto / span 7;
-}
-.grid-width-eight {
-  grid-column: auto / span 8;
-}
-.grid-width-nine {
-  grid-column: auto / span 9;
-}
-.grid-width-ten {
-  grid-column: auto / span 10;
-}
-.grid-width-eleven {
-  grid-column: auto / span 11;
-}
-.grid-width-twelve {
-  grid-column: auto / span 12;
-}
-
-.first-column {
-  grid-column-start: 1;
-}
-
-.second-column {
-  grid-column-start: 2;
-}
-
-.two-column { --grid-columns: 2;}
-.three-column { --grid-columns: 3;}
-.four-column { --grid-columns: 4;}
-.five-column { --grid-columns: 5;}
-.six-column { --grid-columns: 6;}
-.seven-column { --grid-columns: 7;}
-.eight-column { --grid-columns: 8;}
-.nine-column { --grid-columns: 9;}
-.ten-column { --grid-columns: 10;}
-.eleven-column { --grid-columns: 11;}
-.twelve-column { --grid-columns: 12;}
-
 .rem-width { 
   width: 1rem;
-}
-
-.half-width {
-  width: 50%;
-}
-
-.third-width {
-  width: 33.33%;
-}
-
-.fourth-width {
-  width: 25%;
-}
-
-.fifth-width {
-  width: 20%;
-}
-
-.sixth-width {
-  width: 16.66%;
 }
 
 .golden-width { max-width: calc(62% - var(--spacer));}
@@ -9485,49 +8585,45 @@ pre > code {
 .full-width.force { width: 100%;}
 
 .inner-card-width {
-  padding-left: calc(50% - (var(--card-width) * .5));
-  padding-right: calc(50% - (var(--card-width) * .5));
+  padding-left: max(var(--spacer), calc(50% - (var(--card-width) * .5)));
+  padding-right: max(var(--spacer), calc(50% - (var(--card-width) * .5)));
 
   &.padding {
-    padding-left: calc(50% - ((var(--card-width) * .5) + var(--spacer)));
-    padding-right: calc(50% - ((var(--card-width) * .5) + var(--spacer)));
+    padding-left: max(var(--spacer), calc(50% - (var(--card-width) * .5) + var(--spacer)));
+    padding-right: max(var(--spacer), calc(50% - (var(--card-width) * .5) + var(--spacer)));
   }
 }
 
-.on-tablet({
-  .inner-text-width {
-      padding-left: calc(50% - (var(--text-width) * .5));
-      padding-right: calc(50% - (var(--text-width) * .5));
+.inner-text-width {
+    padding-left: calc(50% - (var(--text-width) * .5));
+    padding-right: calc(50% - (var(--text-width) * .5));
 
-      &.padding {
-        padding-left: calc(50% - (var(--text-width) * .5) + var(--spacer));
-        padding-right: calc(50% - (var(--text-width) * .5) + var(--spacer));
-      }
-  }  
-});
-
-.on-desktop({
-  .inner-page-width {
-      padding-left: calc(50% - (var(--page-width) * .5));
-      padding-right: calc(50% - (var(--page-width) * .5));
-
-      &.padding {
-          
-          padding-left: calc(50% - (var(--page-width) * .5) + var(--spacer));
-          padding-right: calc(50% - (var(--page-width) * .5) + var(--spacer));
-      }
-  }
-
-  .inner-feature-width {
-    padding-left: calc(50% - (var(--feature-width) * .5));
-    padding-right: calc(50% - (var(--feature-width) * .5));
-    
     &.padding {
-      padding-left: calc(50% - (var(--feature-width) * .5) + var(--spacer));
-      padding-right: calc(50% - (var(--feature-width) * .5) + var(--spacer));
+      padding-left: max(var(--spacer), calc(50% - (var(--text-width) * .5) + var(--spacer)));
+      padding-right: max(var(--spacer), calc(50% - (var(--text-width) * .5) + var(--spacer)));
+    }
+}  
+
+.inner-page-width {
+    padding-left: calc(50% - (var(--page-width) * .5));
+    padding-right: calc(50% - (var(--page-width) * .5));
+
+    &.padding {
+        
+        padding-left: max(var(--spacer), calc(50% - (var(--page-width) * .5) + var(--spacer)));
+        padding-right: max(var(--spacer), calc(50% - (var(--page-width) * .5) + var(--spacer)));
     }
 }
-});
+
+.inner-feature-width {
+  padding-left: calc(50% - (var(--feature-width) * .5));
+  padding-right: calc(50% - (var(--feature-width) * .5));
+  
+  &.padding {
+    padding-left: max(var(--spacer), calc(50% - (var(--feature-width) * .5) + var(--spacer)));
+    padding-right: max(var(--spacer), calc(50% - (var(--feature-width) * .5) + var(--spacer)));
+  }
+}
 
 .hide {
   display: none;
@@ -9957,11 +9053,11 @@ pre > code {
 	.@{color-name} when (@outputs = true) {
 		.color-helpers(@color);
   }
-  
+
   @ambient-adjusted: (@ambient-mix * @ambient-modifier);
 
 	// apply ambient lighting
-	@color: mix(@color-base, overlay(@ambient, @color-base), @ambient-adjusted);	
+	@color: mix(@color-base, overlay(@ambient, @color-base), @ambient-adjusted);
 }
 
 // sets variable @contrast-ratio to contrast ratio between two colors
@@ -10129,593 +9225,626 @@ pre > code {
     </div>
 
     
-
-    
-            <section id="cheatsheet" class="white feature-width margin-auto border-radius shadow padding gutter">
-                <h3 class="text-center">The Cavepaint CSS&nbsp;cheatsheet</h3>
+    <div class="margin padding white">
       
-                  <div class="grid-width-twelve text-align-center margin-bottom">
-                    <h5>two-column</h5>
-                    <div class="three-column tablet no-margin-bottom gap-gutter">
-                      <div>
-                        <h6>two-column</h6>
-                        <div class="two-column responsive gap-border-width no-margin-bottom">
-                          <div class="base-color placeholder">
-                          </div>
-      
-                          <div class="base-color placeholder">
+              <section id="cheatsheet" class="feature-width margin-auto">
+                  <h3 class="text-center">The Cavepaint CSS&nbsp;cheatsheet</h3>
+        
+                    <div class="grid-width-twelve text-align-center margin-bottom">
+                      <h5>two-column</h5>
+                      <div class="three-column tablet no-margin-bottom gap-gutter">
+                        <div>
+                          <h6>two-column</h6>
+                          <div class="two-column responsive gap-border-width no-margin-bottom">
+                            <div class="base-color placeholder">
+                            </div>
+        
+                            <div class="base-color placeholder">
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div>
-                        <h6>two-column golden</h6>
-                        <div class="two-column golden responsive gap-border-width no-margin-bottom">
-                          <div class="base-color placeholder">
-                          </div>
-      
-                          <div class="base-color placeholder">
+                        <div>
+                          <h6>two-column golden</h6>
+                          <div class="two-column golden responsive gap-border-width no-margin-bottom">
+                            <div class="base-color placeholder">
+                            </div>
+        
+                            <div class="base-color placeholder">
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div>
-                        <h6>two-column golden reverse</h6>
-                        <div class="two-column golden reverse responsive gap-border-width no-margin-bottom">
-                          <div class="base-color placeholder">
-                          </div>
-      
-                          <div class="base-color placeholder">
+                        <div>
+                          <h6>two-column golden reverse</h6>
+                          <div class="two-column golden reverse responsive gap-border-width no-margin-bottom">
+                            <div class="base-color placeholder">
+                            </div>
+        
+                            <div class="base-color placeholder">
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="grid-width-twelve text-align-center gutter-bottom">
-                    <h5 class="gutter-top">More columns (up to twelve)</h5>
-                    <div class="two-column gap-gutter tablet no-margin-bottom">
-                      <div>
-                        <h6>three-column</h6>
-                        <div class="three-column responsive gap-border-width no-margin-bottom">
-                          <div class="base-color placeholder no-margin-bottom">
+                    <div class="grid-width-twelve text-align-center gutter-bottom">
+                      <h5 class="gutter-top">More columns (up to twelve)</h5>
+                      <div class="two-column gap-gutter tablet no-margin-bottom">
+                        <div>
+                          <h6>three-column</h6>
+                          <div class="three-column responsive gap-border-width no-margin-bottom">
+                            <div class="base-color placeholder no-margin-bottom">
+                            </div>
+                            <div class="base-color placeholder no-margin-bottom">
+                            </div>
+                            <div class="base-color placeholder no-margin-bottom">
+                            </div>
                           </div>
-                          <div class="base-color placeholder no-margin-bottom">
-                          </div>
-                          <div class="base-color placeholder no-margin-bottom">
+                        </div>
+                        <div>
+                          <h6>four-column</h6>
+                          <div class="four-column responsive gap-border-width no-margin-bottom">
+                            <div class="base-color placeholder no-margin-bottom">
+                            </div>
+                            <div class="base-color placeholder no-margin-bottom">
+                            </div>
+                            <div class="base-color placeholder no-margin-bottom">
+                            </div>
+                            <div class="base-color placeholder no-margin-bottom">
+                            </div>
                           </div>
                         </div>
                       </div>
-                      <div>
-                        <h6>four-column</h6>
-                        <div class="four-column responsive gap-border-width no-margin-bottom">
-                          <div class="base-color placeholder no-margin-bottom">
+                      <div class="two-column gap-gutter tablet no-margin-bottom">
+                        <div>
+                          <h6>five-column</h6>
+                          <div class="five-column responsive gap-border-width no-margin-bottom">
+                            <div class="base-color placeholder no-margin-bottom">
+                            </div>
+                            <div class="base-color placeholder no-margin-bottom">
+                            </div>
+                            <div class="base-color placeholder no-margin-bottom">
+                            </div>
+                            <div class="base-color placeholder no-margin-bottom">
+                            </div>
+                            <div class="base-color placeholder no-margin-bottom">
+                            </div>
                           </div>
-                          <div class="base-color placeholder no-margin-bottom">
+                        </div>
+                        <div>
+                          <h6>seven-column</h6>
+                          <div class="seven-column golden responsive gap-border-width no-margin-bottom">
+                            <div class="base-color placeholder no-margin-bottom">
+                            </div>
+                            <div class="base-color placeholder no-margin-bottom">
+                            </div>
+                            <div class="base-color placeholder no-margin-bottom">
+                            </div>
+                            <div class="base-color placeholder no-margin-bottom">
+                            </div>
+                            <div class="base-color placeholder no-margin-bottom">
+                            </div>
+                            <div class="base-color placeholder no-margin-bottom">
+                            </div>
+                            <div class="base-color placeholder no-margin-bottom">
+                            </div>
                           </div>
-                          <div class="base-color placeholder no-margin-bottom">
+                        </div>
+                      </div>
+                      
+                    </div>
+      
+                    <div class="grid-width-twelve text-align-center">
+                      <h6 class="gutter-top">Color helpers</h6>
+                      <div class="grid twelve-column tablet">
+                        <div class="grid-width-three vertical-center">
+                          <div class="text-padding border rounded text-margin-bottom warm red">warm red</div>
+                        </div>
+                        <div class="grid-width-three vertical-center">
+                          <div class="text-padding border rounded text-margin-bottom neutral red">neutral red</div>
+                        </div>
+                        <div class="grid-width-three vertical-center">
+                          <div class="text-padding border rounded text-margin-bottom cool red">cool red</div>
+                        </div>
+                        <div class="grid-width-three vertical-center">
+                          <div class="text-padding border rounded text-margin-bottom dull red">dull red</div>
+                        </div>
+                      </div>
+                    </div>
+      
+      
+                    <div class="grid-width-twelve text-align-center margin-top">
+                      <h6>Color alternates</h6>
+                      <div class="grid twelve-column tablet">
+                        <div class="grid-width-three vertical-center">
+                          <div class="text-padding border rounded text-margin-bottom light red">light red</div>
+                        </div>
+                        <div class="grid-width-three vertical-center">
+                          <div class="text-padding border rounded text-margin-bottom dark red">dark red</div>
+                        </div>
+                        <div class="grid-width-three vertical-center">
+                          <div class="text-padding border rounded text-margin-bottom bright red">bright red</div>
+                        </div>
+                        <div class="grid-width-three vertical-center">
+                          <div class="text-padding border rounded text-margin-bottom dim red">dim red</div>
+                        </div>
+                      </div>
+                    </div>
+      
+                    <div class="grid-width-twelve text-align-center margin-top">
+                      <h6>Gradient alternates</h6>
+                      <div class="grid twelve-column tablet">
+                        <div class="grid-width-two hide mobile">
+      
+                        </div>
+                        <div class="grid-width-four vertical-center">
+                          <div class="border rounded text-margin-bottom dim red">
+                            <div class="text-padding rounded vertical red gradient">vertical red gradient</div>
                           </div>
-                          <div class="base-color placeholder no-margin-bottom">
+                        </div>
+                        <div class="grid-width-four vertical-center">
+                          <div class="border rounded text-margin-bottom dim red">
+                            <div class="text-padding rounded horizontal red gradient">horizontal red gradient</div>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div class="two-column gap-gutter tablet no-margin-bottom">
-                      <div>
-                        <h6>five-column</h6>
-                        <div class="five-column responsive gap-border-width no-margin-bottom">
-                          <div class="base-color placeholder no-margin-bottom">
-                          </div>
-                          <div class="base-color placeholder no-margin-bottom">
-                          </div>
-                          <div class="base-color placeholder no-margin-bottom">
-                          </div>
-                          <div class="base-color placeholder no-margin-bottom">
-                          </div>
-                          <div class="base-color placeholder no-margin-bottom">
-                          </div>
-                        </div>
+      
+                    <div class="grid-width-two hide mobile placeholder">
+                    </div>
+      
+                    <div class="grid-width-four text-align-center trim gutter-top">
+                      <h6 class="">Wheel colors</h6>
+                      <div class="grid twelve-column margin-bottom tablet">
+                        <div class="grid-width-three text-padding border rounded text-margin-bottom base-color">base-color</div>
+                        <div class="grid-width-three text-padding border rounded text-margin-bottom triad">triad</div>
+                        <div class="grid-width-three text-padding border rounded text-margin-bottom complement">complement</div>
+                        <div class="grid-width-three text-padding border rounded text-margin-bottom third triad">third triad</div>  
                       </div>
-                      <div>
-                        <h6>seven-column</h6>
-                        <div class="seven-column golden responsive gap-border-width no-margin-bottom">
-                          <div class="base-color placeholder no-margin-bottom">
-                          </div>
-                          <div class="base-color placeholder no-margin-bottom">
-                          </div>
-                          <div class="base-color placeholder no-margin-bottom">
-                          </div>
-                          <div class="base-color placeholder no-margin-bottom">
-                          </div>
-                          <div class="base-color placeholder no-margin-bottom">
-                          </div>
-                          <div class="base-color placeholder no-margin-bottom">
-                          </div>
-                          <div class="base-color placeholder no-margin-bottom">
-                          </div>
-                        </div>
+                      <div class="grid twelve-column margin-bottom tablet">
+                        <div class="grid-width-three text-padding border rounded text-margin-bottom accent">accent</div>
+                        <div class="grid-width-three text-padding border rounded text-margin-bottom second accent">second accent</div>
+                        <div class="grid-width-three text-padding border rounded text-margin-bottom split">split</div>
+                        <div class="grid-width-three text-padding border rounded text-margin-bottom second split">second split</div>  
+                      </div>
+                      <div class="grid twelve-column margin-bottom tablet">
+                        <div class="grid-width-three text-padding border rounded text-margin-bottom tetrad">tetrad</div>
+                        <div class="grid-width-three text-padding border rounded text-margin-bottom second tetrad">second tetrad</div>
+                        <div class="grid-width-three text-padding border rounded text-margin-bottom third tetrad">third tetrad</div>
+                        <div class="grid-width-three text-padding border rounded text-margin-bottom fourth tetrad">fourth tetrad</div>  
+                      </div>
+                    </div>
+      
+      
+                    <h6 class="grid-width-twelve text-center gutter-top">Palette colors</h6>
+                    <div class="grid twelve-column tablet">
+                      <div class="grid-width-three text-align-center margin-bottom">
+                        <div class="text-padding border rounded text-margin-bottom red">red</div>
+                        <div class="text-padding border rounded text-margin-bottom orange">orange</div>
+                        <div class="text-padding border rounded text-margin-bottom yellow">yellow</div>
+                      </div>
+      
+                      <div class="grid-width-three text-align-center margin-bottom">
+                        <div class="text-padding border rounded text-margin-bottom green">green</div>
+                        <div class="text-padding border rounded text-margin-bottom teal">teal</div>
+                        <div class="text-padding border rounded text-margin-bottom cyan">cyan</div>
+                      </div>
+      
+                      <div class="grid-width-three text-align-center margin-bottom">
+                        <div class="text-padding border rounded text-margin-bottom blue">blue</div>
+                        <div class="text-padding border rounded text-margin-bottom purple">purple</div>
+                        <div class="text-padding border rounded text-margin-bottom magenta">magenta</div>
+                      </div>
+      
+                      <div class="grid-width-three text-align-center margin-bottom">
+                        <div class="text-padding border rounded text-margin-bottom white">white</div>
+                        <div class="text-padding border rounded text-margin-bottom gray">gray</div>
+                        <div class="text-padding border rounded text-margin-bottom black">black</div>
+                      </div>
+                    </div>
+      
+                    <h6 class="grid-width-twelve text-center gutter-top">text-color (composes with any color)</h6>
+                    <div class="grid twelve-column tablet">
+                      <div class="grid-width-three text-align-center margin-bottom">
+                        <div class="text-padding border rounded text-margin-bottom text-color red">text-color red</div>
+                        <div class="text-padding border rounded text-margin-bottom text-color orange">text-color orange</div>
+                        <div class="text-padding border rounded text-margin-bottom text-color yellow">text-color yellow</div>
+                      </div>
+      
+                      <div class="grid-width-three text-align-center margin-bottom">
+                        <div class="text-padding border rounded text-margin-bottom text-color green">text-color green</div>
+                        <div class="text-padding border rounded text-margin-bottom text-color teal">text-color teal</div>
+                        <div class="text-padding border rounded text-margin-bottom text-color cyan">text-color cyan</div>
+                      </div>
+      
+                      <div class="grid-width-three text-align-center margin-bottom">
+                        <div class="text-padding border rounded text-margin-bottom text-color blue">text-color blue</div>
+                        <div class="text-padding border rounded text-margin-bottom text-color purple">text-color purple</div>
+                        <div class="text-padding border rounded text-margin-bottom text-color magenta">text-color magenta</div>
+                      </div>
+      
+                      <div class="grid-width-three text-align-center margin-bottom">
+                        <div class="text-padding border rounded text-margin-bottom text-color base-color">text-color base-color</div>
+                        <div class="text-padding border rounded text-margin-bottom text-color gray">text-color gray</div>
+                        <div class="text-padding border rounded text-margin-bottom text-color black">text-color black</div>
                       </div>
                     </div>
                     
-                  </div>
-    
-                  <div class="grid-width-twelve text-align-center">
-                    <h6 class="gutter-top">Color helpers</h6>
-                    <div class="grid twelve-column tablet">
-                      <div class="grid-width-three vertical-center">
-                        <div class="text-padding border rounded text-margin-bottom warm red">warm red</div>
-                      </div>
-                      <div class="grid-width-three vertical-center">
-                        <div class="text-padding border rounded text-margin-bottom neutral red">neutral red</div>
-                      </div>
-                      <div class="grid-width-three vertical-center">
-                        <div class="text-padding border rounded text-margin-bottom cool red">cool red</div>
-                      </div>
-                      <div class="grid-width-three vertical-center">
-                        <div class="text-padding border rounded text-margin-bottom dull red">dull red</div>
-                      </div>
-                    </div>
-                  </div>
-    
-    
-                  <div class="grid-width-twelve text-align-center margin-top">
-                    <h6>Color alternates</h6>
-                    <div class="grid twelve-column tablet">
-                      <div class="grid-width-three vertical-center">
-                        <div class="text-padding border rounded text-margin-bottom light red">light red</div>
-                      </div>
-                      <div class="grid-width-three vertical-center">
-                        <div class="text-padding border rounded text-margin-bottom dark red">dark red</div>
-                      </div>
-                      <div class="grid-width-three vertical-center">
-                        <div class="text-padding border rounded text-margin-bottom bright red">bright red</div>
-                      </div>
-                      <div class="grid-width-three vertical-center">
-                        <div class="text-padding border rounded text-margin-bottom dim red">dim red</div>
-                      </div>
-                    </div>
-                  </div>
-    
-                  <div class="grid-width-twelve text-align-center margin-top">
-                    <h6>Gradient alternates</h6>
-                    <div class="grid twelve-column tablet">
-                      <div class="grid-width-two hide mobile">
-    
-                      </div>
-                      <div class="grid-width-four vertical-center">
-                        <div class="border rounded text-margin-bottom dim red">
-                          <div class="text-padding rounded vertical red gradient">vertical red gradient</div>
-                        </div>
-                      </div>
-                      <div class="grid-width-four vertical-center">
-                        <div class="border rounded text-margin-bottom dim red">
-                          <div class="text-padding rounded horizontal red gradient">horizontal red gradient</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-    
-                  <div class="grid-width-two hide mobile placeholder">
-                  </div>
-    
-                  <div class="grid-width-four text-align-center trim gutter-top">
-                    <h6 class="">Wheel colors</h6>
-                    <div class="grid twelve-column margin-bottom tablet">
-                      <div class="grid-width-three text-padding border rounded text-margin-bottom base-color">base-color</div>
-                      <div class="grid-width-three text-padding border rounded text-margin-bottom triad">triad</div>
-                      <div class="grid-width-three text-padding border rounded text-margin-bottom complement">complement</div>
-                      <div class="grid-width-three text-padding border rounded text-margin-bottom third triad">third triad</div>  
-                    </div>
-                    <div class="grid twelve-column margin-bottom tablet">
-                      <div class="grid-width-three text-padding border rounded text-margin-bottom accent">accent</div>
-                      <div class="grid-width-three text-padding border rounded text-margin-bottom second accent">second accent</div>
-                      <div class="grid-width-three text-padding border rounded text-margin-bottom split">split</div>
-                      <div class="grid-width-three text-padding border rounded text-margin-bottom second split">second split</div>  
-                    </div>
-                    <div class="grid twelve-column margin-bottom tablet">
-                      <div class="grid-width-three text-padding border rounded text-margin-bottom tetrad">tetrad</div>
-                      <div class="grid-width-three text-padding border rounded text-margin-bottom second tetrad">second tetrad</div>
-                      <div class="grid-width-three text-padding border rounded text-margin-bottom third tetrad">third tetrad</div>
-                      <div class="grid-width-three text-padding border rounded text-margin-bottom fourth tetrad">fourth tetrad</div>  
-                    </div>
-                  </div>
-    
-    
-                  <h6 class="grid-width-twelve text-center gutter-top">Palette colors</h6>
-                  <div class="grid twelve-column tablet">
-                    <div class="grid-width-three text-align-center margin-bottom">
-                      <div class="text-padding border rounded text-margin-bottom red">red</div>
-                      <div class="text-padding border rounded text-margin-bottom orange">orange</div>
-                      <div class="text-padding border rounded text-margin-bottom yellow">yellow</div>
-                    </div>
-    
-                    <div class="grid-width-three text-align-center margin-bottom">
-                      <div class="text-padding border rounded text-margin-bottom green">green</div>
-                      <div class="text-padding border rounded text-margin-bottom teal">teal</div>
-                      <div class="text-padding border rounded text-margin-bottom cyan">cyan</div>
-                    </div>
-    
-                    <div class="grid-width-three text-align-center margin-bottom">
-                      <div class="text-padding border rounded text-margin-bottom blue">blue</div>
-                      <div class="text-padding border rounded text-margin-bottom purple">purple</div>
-                      <div class="text-padding border rounded text-margin-bottom magenta">magenta</div>
-                    </div>
-    
-                    <div class="grid-width-three text-align-center margin-bottom">
-                      <div class="text-padding border rounded text-margin-bottom white">white</div>
-                      <div class="text-padding border rounded text-margin-bottom gray">gray</div>
-                      <div class="text-padding border rounded text-margin-bottom black">black</div>
-                    </div>
-                  </div>
-    
-                  <h6 class="grid-width-twelve text-center gutter-top">text-color (composes with any color)</h6>
-                  <div class="grid twelve-column tablet">
-                    <div class="grid-width-three text-align-center margin-bottom">
-                      <div class="text-padding border rounded text-margin-bottom text-color red">text-color red</div>
-                      <div class="text-padding border rounded text-margin-bottom text-color orange">text-color orange</div>
-                      <div class="text-padding border rounded text-margin-bottom text-color yellow">text-color yellow</div>
-                    </div>
-    
-                    <div class="grid-width-three text-align-center margin-bottom">
-                      <div class="text-padding border rounded text-margin-bottom text-color green">text-color green</div>
-                      <div class="text-padding border rounded text-margin-bottom text-color teal">text-color teal</div>
-                      <div class="text-padding border rounded text-margin-bottom text-color cyan">text-color cyan</div>
-                    </div>
-    
-                    <div class="grid-width-three text-align-center margin-bottom">
-                      <div class="text-padding border rounded text-margin-bottom text-color blue">text-color blue</div>
-                      <div class="text-padding border rounded text-margin-bottom text-color purple">text-color purple</div>
-                      <div class="text-padding border rounded text-margin-bottom text-color magenta">text-color magenta</div>
-                    </div>
-    
-                    <div class="grid-width-three text-align-center margin-bottom">
-                      <div class="text-padding border rounded text-margin-bottom text-color base-color">text-color base-color</div>
-                      <div class="text-padding border rounded text-margin-bottom text-color gray">text-color gray</div>
-                      <div class="text-padding border rounded text-margin-bottom text-color black">text-color black</div>
-                    </div>
-                  </div>
-                  
-    
-                  <div class="grid-width-twelve text-align-center">
-                    <h6 class="gutter-top">Widths</h6>
-                    <ul class="no-list-style">
-                      <li>card-width</li>
-                      <li>
-                      
-                        <div class="grid">
-                          <div class="grid-width-five"></div>
-                          <div class="grid-width-two border thick current-color placeholder">
-                          </div>
-                        </div>
-                      
-                      </li>
-                      <li>text-width</li>
-                      <li>
-    
-                        <div class="grid">
-                          <div class="grid-width-four"></div>
-                          <div class="grid-width-four border thick current-color placeholder">
-                          </div>
-                        </div>
-                      
-                       
-                      
-                      </li>
-                      <li>page-width</li>
-                      <li>
-                      
-                        <div class="grid">
-                          <div class="grid-width-two"></div>
-                          <div class="grid-width-eight border thick current-color placeholder">
-                          </div>
-                        </div>
-                      
-                      </li>
-    
-                      <li>feature-width</li>
-                      <li>
-                      
-                        <div class="grid">
-                          <div class="grid-width-twelve border thick current-color placeholder">
-                          </div>
-                        </div>
-                      
-                      </li>
-                    </ul>
-                  </div>
       
-                  <div class="grid-width-twelve text-align-center gutter-top">
-                    <h6 class="">Inner widths</h6>
-                    <ul class="no-list-style">
-                      <li>inner-card-width</li>
-                      <li>
-                      
-                        <div class="grid border thick current-color text-padding-top text-padding-bottom">
-                          <div class="grid-width-five"></div>
-                          <div class="grid-width-two dashed border thick current-color placeholder">
+                    <div class="grid-width-twelve text-align-center">
+                      <h6 class="gutter-top">Widths</h6>
+                      <ul class="no-list-style">
+                        <li>card-width</li>
+                        <li>
+                        
+                          <div class="grid">
+                            <div class="grid-width-five"></div>
+                            <div class="grid-width-two border thick current-color placeholder">
+                            </div>
                           </div>
-                        </div>
-                      
-                      </li>
-                      <li>inner-text-width</li>
-                      <li>
-    
-                        <div class="grid border thick current-color text-padding-top text-padding-bottom">
-                          <div class="grid-width-four"></div>
-                          <div class="grid-width-four dashed border thick current-color placeholder">
+                        
+                        </li>
+                        <li>text-width</li>
+                        <li>
+      
+                          <div class="grid">
+                            <div class="grid-width-four"></div>
+                            <div class="grid-width-four border thick current-color placeholder">
+                            </div>
                           </div>
-                        </div>
-                      
-                       
-                      
-                      </li>
-                      <li>inner-page-width</li>
-                      <li>
-                      
-                        <div class="grid border thick current-color text-padding-top text-padding-bottom">
-                          <div class="grid-width-two"></div>
-                          <div class="grid-width-eight dashed border thick current-color placeholder">
+                        
+                         
+                        
+                        </li>
+                        <li>page-width</li>
+                        <li>
+                        
+                          <div class="grid">
+                            <div class="grid-width-two"></div>
+                            <div class="grid-width-eight border thick current-color placeholder">
+                            </div>
                           </div>
-                        </div>
-                      
-                      </li>
-    
-                      <li>inner-feature-width</li>
-                      <li>
-                      
-                        <div class="grid border thick current-color text-padding-top text-padding-bottom">
-                          <div class="grid-width-twelve dashed border thick current-color placeholder">
+                        
+                        </li>
+      
+                        <li>feature-width</li>
+                        <li>
+                        
+                          <div class="grid">
+                            <div class="grid-width-twelve border thick current-color placeholder">
+                            </div>
                           </div>
-                        </div>
-                      
-                      </li>
-                    </ul>
-                  </div>
-    
-                  <div class="grid-width-two hide mobile"></div>
-    
-                  <div class="grid">
-                    <div class="grid-width-six text-padding text-align-center margin-bottom gutter-top">
-                      <h6 class="">Shadows</h6>
-                      <ul class="no-list-style no-margin-bottom">
-                        <li class="padding margin-bottom rounded box-shadow clover">box-shadow</li>
-                        <li class="padding margin-bottom rounded inset clover">inset</li>
-                        <li class="padding margin-bottom rounded shallow box-shadow clover">shallow box-shadow</li>
-                        <li class="padding margin-bottom rounded deep box-shadow clover">deep box-shadow</li>
+                        
+                        </li>
                       </ul>
                     </div>
         
-                    <div class="grid-width-six text-padding text-align-center margin-bottom gutter-top">
-                      <h6 class="">Border helpers</h6>
-                      <ul class="no-list-style no-margin-bottom">
-                        <li class="padding margin-bottom rounded border current-color border ">current-color border</li>
-                        <li class="padding margin-bottom rounded border thick border ">thick border</li>
-                        <li class="padding margin-bottom rounded border dashed border ">dashed border</li>
-                        <li class="padding margin-bottom rounded border dotted border ">dotted border</li>
+                    <div class="grid-width-twelve text-align-center gutter-top">
+                      <h6 class="">Inner widths</h6>
+                      <ul class="no-list-style">
+                        <li>inner-card-width</li>
+                        <li>
+                        
+                          <div class="grid border thick current-color text-padding-top text-padding-bottom">
+                            <div class="grid-width-five"></div>
+                            <div class="grid-width-two dashed border thick current-color placeholder">
+                            </div>
+                          </div>
+                        
+                        </li>
+                        <li>inner-text-width</li>
+                        <li>
+      
+                          <div class="grid border thick current-color text-padding-top text-padding-bottom">
+                            <div class="grid-width-four"></div>
+                            <div class="grid-width-four dashed border thick current-color placeholder">
+                            </div>
+                          </div>
+                        
+                         
+                        
+                        </li>
+                        <li>inner-page-width</li>
+                        <li>
+                        
+                          <div class="grid border thick current-color text-padding-top text-padding-bottom">
+                            <div class="grid-width-two"></div>
+                            <div class="grid-width-eight dashed border thick current-color placeholder">
+                            </div>
+                          </div>
+                        
+                        </li>
+      
+                        <li>inner-feature-width</li>
+                        <li>
+                        
+                          <div class="grid border thick current-color text-padding-top text-padding-bottom">
+                            <div class="grid-width-twelve dashed border thick current-color placeholder">
+                            </div>
+                          </div>
+                        
+                        </li>
                       </ul>
                     </div>
-                  </div>
-    
-                  <div class="grid-width-two hide mobile"></div>
-    
-                  <div class="grid-width-twelve text-align-center">
-                    <h5>Font families</h5>
-                    <div class="grid tablet no-margin-bottom">
-                      <div class="grid-width-four">
-                        <h6>sans-serif</h6>
-                        <ul class="no-list-style">
-                          <li class="small text-align-left sans-serif">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+      
+                    <div class="grid-width-two hide mobile"></div>
+      
+                    <div class="grid">
+                      <div class="grid-width-six text-padding text-align-center margin-bottom gutter-top">
+                        <h6 class="">Shadows</h6>
+                        <ul class="no-list-style no-margin-bottom">
+                          <li class="padding margin-bottom rounded box-shadow clover">box-shadow</li>
+                          <li class="padding margin-bottom rounded inset clover">inset</li>
+                          <li class="padding margin-bottom rounded shallow box-shadow clover">shallow box-shadow</li>
+                          <li class="padding margin-bottom rounded deep box-shadow clover">deep box-shadow</li>
                         </ul>
                       </div>
-      
-                      <div class="grid-width-four">
-                        <h6>serif</h6>
-                        <ul class="no-list-style">
-                          <li class="small text-align-left serif">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
-                        </ul>
-                      </div>
-      
-                      <div class="grid-width-four">
-                        <h6>monospace</h6>
-                        <ul class="no-list-style">
-                          <li class="small text-align-left monospace">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+          
+                      <div class="grid-width-six text-padding text-align-center margin-bottom gutter-top">
+                        <h6 class="">Border helpers</h6>
+                        <ul class="no-list-style no-margin-bottom">
+                          <li class="padding margin-bottom rounded border current-color border ">current-color border</li>
+                          <li class="padding margin-bottom rounded border thick border ">thick border</li>
+                          <li class="padding margin-bottom rounded border dashed border ">dashed border</li>
+                          <li class="padding margin-bottom rounded border dotted border ">dotted border</li>
                         </ul>
                       </div>
                     </div>
-                    
-                  </div>
       
-                  <div class="grid-width-twelve text-align-center font-size margin-top" no-margin-bottom>
-                    <h5 class="">Font sizes</h5>
-                    <div class="grid tablet no-margin-bottom">
-                      <div class="grid-width-four">
-                        <h6 class="small">small</h6>
-                        <p class="small">Hello, world.</p>
-                      </div>
-                      <div class="grid-width-four">
-                        <h6 class="small">big</h6>
-                        <p class="big">Hello, world.</p>
-                      </div>
-                      <div class="grid-width-four">
-                        <h6 class="small">huge</h6>
-                        <p class="huge">Hello, world.</p>
-                      </div>
-                    </div>
-                  </div>
+                    <div class="grid-width-two hide mobile"></div>
       
-                  <div class="grid-width-twelve text-align-center">
-                    <h5>Spacing</h5>
-                    <div class="grid tablet">
-                      <div class="grid-width-four margin-bottom">
-                        <h6>padding</h6>
-                        <div class="border thick padding responsive base-color">
-                          <div class="border current-color dashed placeholder trim">
-                          </div>
+                    <div class="grid-width-twelve text-align-center">
+                      <h5>Font families</h5>
+                      <div class="grid tablet no-margin-bottom">
+                        <div class="grid-width-four">
+                          <h6>sans-serif</h6>
+                          <ul class="no-list-style">
+                            <li class="small text-align-left sans-serif">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                          </ul>
+                        </div>
+        
+                        <div class="grid-width-four">
+                          <h6>serif</h6>
+                          <ul class="no-list-style">
+                            <li class="small text-align-left serif">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                          </ul>
+                        </div>
+        
+                        <div class="grid-width-four">
+                          <h6>monospace</h6>
+                          <ul class="no-list-style">
+                            <li class="small text-align-left monospace">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                          </ul>
                         </div>
                       </div>
-                      <div class="grid-width-four margin-bottom">
-                        <h6>margin</h6>
-                        <div class="border current-color dashed">
-                          <div class="border base-color thick margin responsive placeholder">
-                          </div>
-                        </div>
-                      </div>
-                      <div class="grid-width-four margin-bottom">
-                        <h6>gutter</h6>
-                        <div class="border current-color dashed">
-                          <div class="border base-color thick gutter responsive placeholder">
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-      
-                  <div class="grid-width-twelve text-align-center hide mobile margin-bottom">
-                    <h5>Grid child classes</h5>
-                    <p><strong>grid-width-</strong></p>
-                    <div class="grid tablet gap-border-width">
-                      <div class="base-color text-padding grid-width-one">one</div>
-                      <div class="base-color text-padding grid-width-eleven">eleven</div>
-                      <div class="base-color text-padding grid-width-two">two</div>
-                      <div class="base-color text-padding grid-width-ten">ten</div>
-                      <div class="base-color text-padding grid-width-three">three</div>
-                      <div class="base-color text-padding grid-width-nine">nine</div>
-                      <div class="base-color text-padding grid-width-four">four</div>
-                      <div class="base-color text-padding grid-width-eight">eight</div>
-                      <div class="base-color text-padding grid-width-five">five</div>
-                      <div class="base-color text-padding grid-width-seven">seven</div>
-                      <div class="base-color text-padding grid-width-six">six</div>
-                      <div class="base-color text-padding grid-width-six">six</div>
-                      <div class="base-color text-padding grid-width-twelve">twelve</div>
-                    </div>
-                  </div>
-      
-                  <div class="grid-width-twelve text-align-center gutter-top no-margin-bottom">
-                    <h5>Centering</h5>
-                    <div class="three-column golden trailing tablet no-margin-bottom">
-                      <div>
-                        <h6>text-align-center</h6>
-                        <div class="text-align-center">
-                          <p>This is centered text.</p>
-                        </div>
-                      </div>
-                      <div>
-                        <h6>margin-auto</h6>
-                        <div class="">
-                          <div class="margin-auto inline-block base-color text-padding">
-                            div
-                          </div>
-                        </div>
-                      </div>
-                      <div class="no-margin-bottom">
-                        <h6>vertical-center</h6>
-                        <div class="two-column golden">
-                        <div class="text-align-left">
-                          <p>Center vertically with the .vertical-center composable on an element that has children.</p>
-                        </div>
-      
-                        <div class="flex flex-direction justify-content">
-                          <div class="margin-auto base-color text-padding">
-                            div
-                          </div>
-                        </div>
-                        </div>
-                        
-                      </div>
-                    </div>
-                  </div>
-      
-                  <div class="grid-width-twelve text-align-center gutter-bottom">
-                    <h5>Two-column, three-column and grid responsive helpers</h5>
-                    <div class="two-column tablet no-margin-bottom">
-      
-                      <div class="grid gap-border-width no-margins text-align-center">
-                        <div class="grid-width-twelve no-margin-bottom">
-                          <p class="no-margin-bottom">(no classes)</p>
-                        </div>
-                        <div class="grid-width-three light green rounded">
-                          &check;
-                        </div>
-                        <div class="grid-width-four light green rounded">
-                          &check;
-                        </div>
-                        <div class="grid-width-five light green rounded">
-                          &check;
-                        </div>
-                      </div>
-                      <div></div>
-                    </div>
-                    <div class="two-column tablet no-margin-bottom">
                       
-                      <div class="grid gap-border-width no-margins text-align-center">
-                        <div class="grid-width-twelve no-margin-bottom">
-                          <p class="no-margin-bottom">mobile</p>
+                    </div>
+        
+                    <div class="grid-width-twelve text-align-center font-size margin-top" no-margin-bottom>
+                      <h5 class="">Font sizes</h5>
+                      <div class="grid tablet no-margin-bottom">
+                        <div class="grid-width-four">
+                          <h6 class="small">small</h6>
+                          <p class="small">Hello, world.</p>
                         </div>
-                        <div class="grid-width-three light green rounded">
-                          &check;
+                        <div class="grid-width-four">
+                          <h6 class="small">big</h6>
+                          <p class="big">Hello, world.</p>
                         </div>
-                        <div class="grid-width-four red rounded">
-                          &cross;
-                        </div>
-                        <div class="grid-width-five red rounded">
-                          &cross;
-                        </div>
-                      </div>
-      
-                      <div class="grid gap-border-width no-margins text-align-center">
-                        <div class="grid-width-twelve no-margin-bottom">
-                          <p class="no-margin-bottom">tablet</p>
-                        </div>
-                        <div class="grid-width-three red rounded">
-                          &cross;
-                        </div>
-                        <div class="grid-width-four light green rounded">
-                          &check;
-                        </div>
-                        <div class="grid-width-five light green rounded">
-                          &check;
+                        <div class="grid-width-four">
+                          <h6 class="small">huge</h6>
+                          <p class="huge">Hello, world.</p>
                         </div>
                       </div>
                     </div>
-                    <div class="two-column tablet">
-      
-                      <div class="grid gap-border-width no-margins text-align-center">
-                        <div class="grid-width-twelve no-margin-bottom">
-                          <p class="no-margin-bottom">mobile tablet</p>
+        
+                    <div class="grid-width-twelve text-align-center">
+                      <h5>Spacing</h5>
+                      <div class="grid tablet">
+                        <div class="grid-width-four margin-bottom">
+                          <h6>padding</h6>
+                          <div class="border thick padding responsive base-color">
+                            <div class="border current-color dashed placeholder trim">
+                            </div>
+                          </div>
                         </div>
-                        <div class="grid-width-three light green rounded">
-                          &check;
+                        <div class="grid-width-four margin-bottom">
+                          <h6>margin</h6>
+                          <div class="border current-color dashed">
+                            <div class="border base-color thick margin responsive placeholder">
+                            </div>
+                          </div>
                         </div>
-                        <div class="grid-width-four light green rounded">
-                          &check;
-                        </div>
-                        <div class="grid-width-five red rounded">
-                          &cross;
-                        </div>
-                      </div>
-      
-                      <div class="grid gap-border-width no-margins text-align-center">
-                        <div class="grid-width-twelve">
-                          <p class="no-margin-bottom">desktop</p>
-                        </div>
-                        <div class="grid-width-three red rounded">
-                          &cross;
-                        </div>
-                        <div class="grid-width-four red rounded">
-                          &cross;
-                        </div>
-                        <div class="grid-width-five light green rounded">
-                          &check;
+                        <div class="grid-width-four margin-bottom">
+                          <h6>gutter</h6>
+                          <div class="border current-color dashed">
+                            <div class="border base-color thick gutter responsive placeholder">
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
-                    
-      
-                    <h5 class="gutter-top">hide visibility helpers</h5>
+        
+                    <div class="grid-width-twelve text-align-center hide mobile margin-bottom">
+                      <h5>Grid child classes</h5>
+                      <p><strong>grid-width-</strong></p>
+                      <div class="grid tablet gap-border-width">
+                        <div class="base-color text-padding grid-width-one">one</div>
+                        <div class="base-color text-padding grid-width-eleven">eleven</div>
+                        <div class="base-color text-padding grid-width-two">two</div>
+                        <div class="base-color text-padding grid-width-ten">ten</div>
+                        <div class="base-color text-padding grid-width-three">three</div>
+                        <div class="base-color text-padding grid-width-nine">nine</div>
+                        <div class="base-color text-padding grid-width-four">four</div>
+                        <div class="base-color text-padding grid-width-eight">eight</div>
+                        <div class="base-color text-padding grid-width-five">five</div>
+                        <div class="base-color text-padding grid-width-seven">seven</div>
+                        <div class="base-color text-padding grid-width-six">six</div>
+                        <div class="base-color text-padding grid-width-six">six</div>
+                        <div class="base-color text-padding grid-width-twelve">twelve</div>
+                      </div>
+                    </div>
+        
+                    <div class="grid-width-twelve text-align-center gutter-top no-margin-bottom">
+                      <h5>Centering</h5>
+                      <div class="three-column golden trailing tablet no-margin-bottom">
+                        <div>
+                          <h6>text-align-center</h6>
+                          <div class="text-align-center">
+                            <p>This is centered text.</p>
+                          </div>
+                        </div>
+                        <div>
+                          <h6>margin-auto</h6>
+                          <div class="">
+                            <div class="margin-auto inline-block base-color text-padding">
+                              div
+                            </div>
+                          </div>
+                        </div>
+                        <div class="no-margin-bottom">
+                          <h6>vertical-center</h6>
+                          <div class="two-column golden">
+                          <div class="text-align-left">
+                            <p>Center vertically with the .vertical-center composable on an element that has children.</p>
+                          </div>
+        
+                          <div class="flex flex-direction justify-content">
+                            <div class="margin-auto base-color text-padding">
+                              div
+                            </div>
+                          </div>
+                          </div>
+                          
+                        </div>
+                      </div>
+                    </div>
+        
+                    <div class="grid-width-twelve text-align-center gutter-bottom">
+                      <h5>Two-column, three-column and grid responsive helpers</h5>
+                      <div class="two-column tablet no-margin-bottom">
+        
+                        <div class="grid gap-border-width no-margins text-align-center">
+                          <div class="grid-width-twelve no-margin-bottom">
+                            <p class="no-margin-bottom">(no classes)</p>
+                          </div>
+                          <div class="grid-width-three light green rounded">
+                            &check;
+                          </div>
+                          <div class="grid-width-four light green rounded">
+                            &check;
+                          </div>
+                          <div class="grid-width-five light green rounded">
+                            &check;
+                          </div>
+                        </div>
+                        <div></div>
+                      </div>
+                      <div class="two-column tablet no-margin-bottom">
+                        
+                        <div class="grid gap-border-width no-margins text-align-center">
+                          <div class="grid-width-twelve no-margin-bottom">
+                            <p class="no-margin-bottom">mobile</p>
+                          </div>
+                          <div class="grid-width-three light green rounded">
+                            &check;
+                          </div>
+                          <div class="grid-width-four red rounded">
+                            &cross;
+                          </div>
+                          <div class="grid-width-five red rounded">
+                            &cross;
+                          </div>
+                        </div>
+        
+                        <div class="grid gap-border-width no-margins text-align-center">
+                          <div class="grid-width-twelve no-margin-bottom">
+                            <p class="no-margin-bottom">tablet</p>
+                          </div>
+                          <div class="grid-width-three red rounded">
+                            &cross;
+                          </div>
+                          <div class="grid-width-four light green rounded">
+                            &check;
+                          </div>
+                          <div class="grid-width-five light green rounded">
+                            &check;
+                          </div>
+                        </div>
+                      </div>
+                      <div class="two-column tablet">
+        
+                        <div class="grid gap-border-width no-margins text-align-center">
+                          <div class="grid-width-twelve no-margin-bottom">
+                            <p class="no-margin-bottom">mobile tablet</p>
+                          </div>
+                          <div class="grid-width-three light green rounded">
+                            &check;
+                          </div>
+                          <div class="grid-width-four light green rounded">
+                            &check;
+                          </div>
+                          <div class="grid-width-five red rounded">
+                            &cross;
+                          </div>
+                        </div>
+        
+                        <div class="grid gap-border-width no-margins text-align-center">
+                          <div class="grid-width-twelve">
+                            <p class="no-margin-bottom">desktop</p>
+                          </div>
+                          <div class="grid-width-three red rounded">
+                            &cross;
+                          </div>
+                          <div class="grid-width-four red rounded">
+                            &cross;
+                          </div>
+                          <div class="grid-width-five light green rounded">
+                            &check;
+                          </div>
+                        </div>
+                      </div>
+                      
+        
+                      <h5 class="gutter-top">hide visibility helpers</h5>
+                      <div class="two-column tablet no-margin-bottom">
+                        <div class="grid gap-border-width no-margins text-align-center">
+                          <div class="grid-width-twelve no-margin-bottom">
+                            <p class="no-margin-bottom">hide</p>
+                          </div>
+                          <div class="grid-width-three red rounded">
+                            &cross;
+                          </div>
+                          <div class="grid-width-four red rounded">
+                            &cross;
+                          </div>
+                          <div class="grid-width-five red rounded">
+                            &cross;
+                          </div>
+                        </div>
+                    </div>
+        
                     <div class="two-column tablet no-margin-bottom">
+        
                       <div class="grid gap-border-width no-margins text-align-center">
                         <div class="grid-width-twelve no-margin-bottom">
-                          <p class="no-margin-bottom">hide</p>
+                          <p class="no-margin-bottom">hide mobile</p>
                         </div>
                         <div class="grid-width-three red rounded">
                           &cross;
+                        </div>
+                        <div class="grid-width-four light green rounded">
+                          &check;
+                        </div>
+                        <div class="grid-width-five light green rounded">
+                          &check;
+                        </div>
+                      </div>
+        
+                      <div class="grid gap-border-width no-margins text-align-center">
+                        <div class="grid-width-twelve no-margin-bottom">
+                          <p class="no-margin-bottom">hide tablet</p>
+                        </div>
+                        <div class="grid-width-three light green rounded">
+                          &check;
                         </div>
                         <div class="grid-width-four red rounded">
                           &cross;
@@ -10724,80 +9853,49 @@ pre > code {
                           &cross;
                         </div>
                       </div>
+                    </div>
+        
+                    <div class="two-column tablet">
+        
+                      <div class="grid gap-border-width no-margins text-align-center">
+                        <div class="grid-width-twelve no-margin-bottom">
+                          <p class="no-margin-bottom">hide mobile tablet</p>
+                        </div>
+                        <div class="grid-width-three red rounded">
+                          &cross;
+                        </div>
+                        <div class="grid-width-four red rounded">
+                          &cross;
+                        </div>
+                        <div class="grid-width-five light green rounded">
+                          &check;
+                        </div>
+                      </div>
+        
+                      <div class="grid gap-border-width no-margins text-align-center">
+                        <div class="grid-width-twelve no-margin-bottom">
+                          <p class="no-margin-bottom">hide desktop</p>
+                        </div>
+                        <div class="grid-width-three light green rounded">
+                          &check;
+                        </div>
+                        <div class="grid-width-four light green rounded">
+                          &check;
+                        </div>
+                        <div class="grid-width-five red rounded">
+                          &cross;
+                        </div>
+                      </div>
+                    </div>
+        
                   </div>
       
-                  <div class="two-column tablet no-margin-bottom">
+                </section>
       
-                    <div class="grid gap-border-width no-margins text-align-center">
-                      <div class="grid-width-twelve no-margin-bottom">
-                        <p class="no-margin-bottom">hide mobile</p>
-                      </div>
-                      <div class="grid-width-three red rounded">
-                        &cross;
-                      </div>
-                      <div class="grid-width-four light green rounded">
-                        &check;
-                      </div>
-                      <div class="grid-width-five light green rounded">
-                        &check;
-                      </div>
-                    </div>
       
-                    <div class="grid gap-border-width no-margins text-align-center">
-                      <div class="grid-width-twelve no-margin-bottom">
-                        <p class="no-margin-bottom">hide tablet</p>
-                      </div>
-                      <div class="grid-width-three light green rounded">
-                        &check;
-                      </div>
-                      <div class="grid-width-four red rounded">
-                        &cross;
-                      </div>
-                      <div class="grid-width-five red rounded">
-                        &cross;
-                      </div>
-                    </div>
-                  </div>
-      
-                  <div class="two-column tablet">
-      
-                    <div class="grid gap-border-width no-margins text-align-center">
-                      <div class="grid-width-twelve no-margin-bottom">
-                        <p class="no-margin-bottom">hide mobile tablet</p>
-                      </div>
-                      <div class="grid-width-three red rounded">
-                        &cross;
-                      </div>
-                      <div class="grid-width-four red rounded">
-                        &cross;
-                      </div>
-                      <div class="grid-width-five light green rounded">
-                        &check;
-                      </div>
-                    </div>
-      
-                    <div class="grid gap-border-width no-margins text-align-center">
-                      <div class="grid-width-twelve no-margin-bottom">
-                        <p class="no-margin-bottom">hide desktop</p>
-                      </div>
-                      <div class="grid-width-three light green rounded">
-                        &check;
-                      </div>
-                      <div class="grid-width-four light green rounded">
-                        &check;
-                      </div>
-                      <div class="grid-width-five red rounded">
-                        &cross;
-                      </div>
-                    </div>
-                  </div>
-      
-                </div>
-    
-              </section>
-    
-    
-              
+                
+
+    </div>
 
     <div class="inner-feature-width margin-bottom">
       <h2>Form examples</h2>
@@ -13199,7 +12297,7 @@ pre > code {
     <div class="inner-page-width margin-bottom">
       <h2>Modal examples</h2>
 
-      <div class="grid responsive tablet">
+      <div class="grid tablet">
         <div class="grid-width-three padding responsive">
             <button onclick="document.getElementById('modal1').classList.remove('hide')" class="base-color block margin-auto gutter responsive">Example #1</button>
         </div>
@@ -13265,9 +12363,10 @@ pre > code {
         <h2>Some sites using Cavepaint</h2>
         <ul class="">
           <li>This site, which only uses cavepaint.css and no other styles.</li>
+          <li><a href="http://www.eristicstest.com">The Eristic Duality Profile</a></li>
           <li><a href="http://www.hyperhyperspace.org">Hyper Hyper Space | A distributed data layer for a new internet</a></li>
           <li><a href="http://www.4thly.com">4thly | Accelerating entrepreneurs worldwide</a></li>
-          <li><a href="http://www.rexriepe.com/philosophy-of-emotion/">Eristics: Philosophy of Emotion | A book about how emotion works</a></li>
+          <li><a href="http://www.rexriepe.com/">rexriepe.com</a></li>
         </ul>
       </div>
     </div>
