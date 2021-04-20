@@ -8,7 +8,9 @@ document.addEventListener("DOMContentLoaded", function() {
 function renderLess() {
     // var lessInput = document.getElementById("less_textarea").value;
     var headlessLessInput = document.getElementById("headless_less_textarea").value;
-    var headlessLessInputBasic = document.getElementById("headless_less_basic_textarea").value;
+    if (document.getElementById("headless_less_basic_textarea")) {
+        var headlessLessInputBasic = document.getElementById("headless_less_basic_textarea").value;
+    }
     var baseColor = document.getElementById("baseColor").value;
     var baseLighting = document.getElementById("baseLighting").value + '%';
     var textBase = document.getElementById("textBase").value;
@@ -29,8 +31,13 @@ function renderLess() {
 
     var lessTheme = "@base-color: " + baseColor + ";\n" + "@ambient-mix: " + baseLighting + ";\n" + "@font-size: " + baseFontSize + ";\n" + "@font-family: " + fontFamily + ";\n" + "@text-base: " + textBase + ";\n" + "@padding: " + basePadding + ";\n" + "@margin: " + baseMargin + ";\n" + "@gutter: " + "(2 * @padding)" + ";\n" + "@line-height: " + baseLineHeight + ";\n" + "@lighten-by: " + baseLightenBy + ";\n" + "@darken-by: " + baseDarkenBy + ";\n";
 
+
+    if (document.getElementById("headless_less_basic_textarea")) {
+        var lessInputBasic = lessTheme + headlessLessInputBasic;
+    } else {
+        var lessInputBasic = lessTheme + headlessLessInput;
+    }
     var lessInputTheme = lessTheme + headlessLessInput;
-    var lessInputBasic = lessTheme + headlessLessInputBasic;
 
     var less_options = {
         env: "production",
@@ -56,8 +63,10 @@ function renderLess() {
             console.log('something went wrong: ' + error);
         });
 
-    // it does it again for the basic palette
-    less.render(lessInputBasic, less_options)
+    
+    if (document.getElementById("headless_less_basic_textarea")) {
+        // it does it again for the basic palette
+        less.render(lessInputBasic, less_options)
         .then(function(output) {
             // output.css = string of css
             var theBasicCSS = output.css;
@@ -66,6 +75,7 @@ function renderLess() {
         function(error) {
             console.log('something went wrong: ' + error);
         });
+    }
 }
 
 function copyCSS() {
