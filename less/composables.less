@@ -76,6 +76,30 @@
 .grid-width-eleven { grid-column: auto / span 11;}
 .grid-width-twelve { grid-column: auto / span 12;}
 
+.grid.mobile > * {
+  .on-tablet({
+    grid-column: auto / span 1;
+  });
+}
+
+.grid.mobile.tablet > * {
+  .on-desktop({
+    grid-column: auto / span 1;
+  });
+}
+
+.grid.tablet > * {
+  .under-tablet({
+    grid-column: auto / span 1;
+  });
+}
+
+.grid.desktop > * {
+  .under-desktop({
+    grid-column: auto / span 1;
+  });
+}
+
 .two-column.golden {
   grid-template-columns: 1.618fr 1fr;
 
@@ -363,10 +387,10 @@
 }
 
 .golden-height {
-  min-height: 62%;
+  min-height: 62vh;
 
   &.force {
-    height: 62%;
+    height: 62vh;
   }
 }
 
@@ -529,7 +553,7 @@
 }
 
 .text-crunch {
-  line-height: calc((var(--line-height) + 1) * .5);
+  line-height: calc(var(--line-height) * .65);
 }
 
 .text-align-center, .text-center {
@@ -623,22 +647,6 @@
   --direction: 90deg;
 }
 
-.trim {
-  margin-bottom: 0;
-}
-
-.trim-inner * {
-  margin-bottom: 0;
-}
-
-.trim-all {
-  margin-bottom: 0;
-}
-
-.trim-all * {
-  margin-bottom: 0;
-}
-
 .bump {
   position: relative;
 }
@@ -710,7 +718,7 @@
   list-style-type: disc;
 }
 .text-indent {
-  text-indent: 2ch;
+  text-indent: var(--text-indent);
 }
 .text-justify {
   text-justify: justify;
@@ -783,21 +791,44 @@
 }
 
 .placeholder {
-  min-height: var(--spacer);
+  min-height: var(--pad);
 }
 
 .placeholder::after { 
   content: " ";
 }
 
+.square::after, .one-to-one::after, .four-to-three::after, .sixteen-to-nine::after, .two-to-one::after {
+  content: ""; display: block; width: 0;
+}
+
+.square::after, .one-to-one::after {
+  padding-top: 100%;
+}
+
+.four-to-three::after {
+  // prop to maintain image dimensions of 4:3
+  padding-top: 75%;
+}
+
+.sixteen-to-nine::after {
+  // prop to maintain video dimensions of 16:9
+  padding-top: 56.25%;
+}
+
+.two-to-one::after {
+  // prop to maintain video dimensions of 2:1
+  padding-top: 50%;
+}
+
 .rem-width { 
   width: 1rem;
 }
 
-.golden-width { max-width: calc(62% - var(--spacer));}
-.golden-width.force { width: calc(62% - var(--spacer));}
-.golden-width.switch { max-width: calc(38% - var(--spacer));}
-.golden-width.switch.force { width: calc(38% - var(--spacer));}
+.golden-width { max-width: calc(62% - var(--pad));}
+.golden-width.force { width: calc(62% - var(--pad));}
+.golden-width.switch { max-width: calc(38% - var(--pad));}
+.golden-width.switch.force { width: calc(38% - var(--pad));}
 
 .card-width { 
   max-width: var(--card-width);
@@ -832,12 +863,12 @@
 .full-width.force { width: 100%;}
 
 .inner-card-width {
-  padding-left: max(var(--spacer), calc(50% - (var(--card-width) * .5)));
-  padding-right: max(var(--spacer), calc(50% - (var(--card-width) * .5)));
+  padding-left: max(var(--pad), calc(50% - (var(--card-width) * .5)));
+  padding-right: max(var(--pad), calc(50% - (var(--card-width) * .5)));
 
   &.padding {
-    padding-left: max(var(--spacer), calc(50% - (var(--card-width) * .5) + var(--spacer)));
-    padding-right: max(var(--spacer), calc(50% - (var(--card-width) * .5) + var(--spacer)));
+    padding-left: max(var(--pad), calc(50% - (var(--card-width) * .5) + var(--pad)));
+    padding-right: max(var(--pad), calc(50% - (var(--card-width) * .5) + var(--pad)));
   }
 }
 
@@ -846,8 +877,8 @@
     padding-right: calc(50% - (var(--text-width) * .5));
 
     &.padding {
-      padding-left: max(var(--spacer), calc(50% - (var(--text-width) * .5) + var(--spacer)));
-      padding-right: max(var(--spacer), calc(50% - (var(--text-width) * .5) + var(--spacer)));
+      padding-left: max(var(--pad), calc(50% - (var(--text-width) * .5) + var(--pad)));
+      padding-right: max(var(--pad), calc(50% - (var(--text-width) * .5) + var(--pad)));
     }
 }  
 
@@ -857,8 +888,8 @@
 
     &.padding {
         
-        padding-left: max(var(--spacer), calc(50% - (var(--page-width) * .5) + var(--spacer)));
-        padding-right: max(var(--spacer), calc(50% - (var(--page-width) * .5) + var(--spacer)));
+        padding-left: max(var(--pad), calc(50% - (var(--page-width) * .5) + var(--pad)));
+        padding-right: max(var(--pad), calc(50% - (var(--page-width) * .5) + var(--pad)));
     }
 }
 
@@ -867,8 +898,8 @@
   padding-right: calc(50% - (var(--feature-width) * .5));
   
   &.padding {
-    padding-left: max(var(--spacer), calc(50% - (var(--feature-width) * .5) + var(--spacer)));
-    padding-right: max(var(--spacer), calc(50% - (var(--feature-width) * .5) + var(--spacer)));
+    padding-left: max(var(--pad), calc(50% - (var(--feature-width) * .5) + var(--pad)));
+    padding-right: max(var(--pad), calc(50% - (var(--feature-width) * .5) + var(--pad)));
   }
 }
 

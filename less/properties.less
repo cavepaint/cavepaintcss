@@ -18,13 +18,16 @@
     --line-height: @line-height;
     --headline-base: 1em;
     --headline-mod: 1;
-    --spacer: @padding;
-    --margin-base: @margin;
+    --pad: @padding;
+    --padding: var(--pad);
+    --margin: var(--pad);
+    --gutter: calc(2 * var(--pad));
     --text-padding: .28em;
     --text-margin: var(--text-padding);
+    --text-indent: var(--text-padding);
     --text-border-radius: var(--text-padding);
     --text-shadow: var(--box-shadow);
-    --gap: var(--spacer);
+    --gap: var(--pad);
     --grid-columns: 12;
     --golden: 1.618;
     --h: round(hue(@white), 1);
@@ -93,25 +96,19 @@
     --failure: var(--red);
 
     .on-mobile({
-        --padding: calc(.6 * var(--spacer));
-        --margin: calc(.6 * var(--margin-base));
-        --gutter: calc(1.2 * var(--margin-base));
+        --pad: calc(.6 * @padding);
         --font-size: @font-size-mobile;
         --headline-base: 1em;
     });
 
     .on-tablet({
-        --padding: calc(.8 * var(--spacer));
-        --margin: calc(.8 * var(--margin-base));
-        --gutter: calc(1.6 * var(--margin-base));
+        --pad: calc(.8 * @padding);
         --font-size: @font-size-tablet;
         --headline-base: 1.1em;
     });
 
     .on-desktop({
-        --padding: calc(1 * var(--spacer));
-        --margin: calc(1 * var(--margin-base));
-        --gutter: calc(2 * var(--margin-base));
+        --pad: @padding;
         --font-size: @font-size-desktop;
         --headline-base: 1.2em;
     });
